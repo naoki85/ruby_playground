@@ -1,0 +1,11 @@
+nav.nav-extended
+  .nav-wrapper.container
+    = link_to 'BookRecorder', root_path, class: 'brand-logo'
+    a[data-activates="slide-out" class="button-collapse hide-on-large-only"]
+      i.material-icons menu
+    -# ヘッダー要素は5個が限界
+    ul.right.hide-on-med-and-down
+      li = link_to 'LogOut', destroy_user_session_path, method: :delete
+    -# サイドナビ
+    ul#slide-out.side-nav
+      li = link_to 'LogOut', destroy_user_session_path, method: :delete
