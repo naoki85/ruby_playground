@@ -37,12 +37,15 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'dotenv-rails'
+gem 'ridgepole'
+
+gem 'devise'
+gem 'amazon-ecs'
 
 gem 'jquery-rails'
 gem 'slim-rails'
 gem 'materialize-sass'
 gem 'material_icons'
-gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,14 @@
+- @response.items.each do |item|
+  - item_attributes = item.get_element('ItemAttributes')
+  .row
+    .col.s12.m7
+      .card.horizontal
+        .card-image
+          - small_image = item.get_hash('MediumImage')
+          img[src="#{small_image['URL']}"]
+        .card-stacked
+          .card-content
+            p = item_attributes.get('Title')
+            p = item_attributes.get('Author')
+          .card-action
+            = link_to '追加する', '#', asin: item.get('ASIN')

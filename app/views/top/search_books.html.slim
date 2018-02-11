@@ -1,0 +1,12 @@
+h1 SearchBooks
+= form_with url: search_books_by_keyword_path, method: :get, html: { class: 'js-form-ajax' } do |f|
+
+  .row
+    .input-field
+      = f.label :keyword
+      = f.text_field :keyword, autofocus: true
+
+  .row
+    = f.submit 'Search', class: 'waves-effect waves-light btn'
+
+#result-search-books.ajax-replace-field
