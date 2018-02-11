@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   # Top
   get 'search_books' => 'top#search_books'
   get 'search_books_by_keyword' => 'top#search_books_by_keyword'
+
+  # UserBook
+  resources :user_books
 end
