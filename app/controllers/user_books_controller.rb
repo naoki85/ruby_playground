@@ -2,6 +2,7 @@ class UserBooksController < ApplicationController
   before_action :set_user_book, only: [:show, :edit, :update, :destroy]
 
   def index
+    @user_books = UserBook.where(user_id: current_user.id)
   end
 
   def show
@@ -43,7 +44,7 @@ class UserBooksController < ApplicationController
   private
 
   def set_user_book
-    @user_book = UserBook.find(params[:id])
+    @user_book = UserBook.where(id: params[:id], user_id: current_user.id).first
   end
 
   def user_book_params

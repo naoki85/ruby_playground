@@ -1,0 +1,18 @@
+h1 Your Book History
+.row
+  img[src="#{@user_book.image_url}"]
+
+.row
+  = link_to 'New', new_hst_user_read_book_path(user_book_id: @user_book.id), class: 'waves-effect waves-light btn'
+
+- if @hst_user_read_books.present?
+  ul.collection
+    - @hst_user_read_books.each do |book|
+      li.collection-item
+        p = book.date.strftime('%Y年%m月%d日')
+        p = book.comment
+        p
+          = link_to 'Edit', edit_hst_user_read_book_path(book), class: 'waves-effect waves-light btn'
+          = link_to 'Delete', hst_user_read_book_path(book), class: 'waves-effect waves-light btn', method: :delete
+- else
+  p Comment Not Present

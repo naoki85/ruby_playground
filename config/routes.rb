@@ -8,4 +8,10 @@ Rails.application.routes.draw do
 
   # UserBook
   resources :user_books
+
+  # HstUserReadBook
+  resources :hst_user_read_books, except: [:show]
+
+  # View Routing Errors
+  match '*path' => 'application#render_404', via: :all
 end

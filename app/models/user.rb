@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :user_books
+  has_many :hst_user_read_books
 end

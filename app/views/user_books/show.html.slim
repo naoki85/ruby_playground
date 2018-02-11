@@ -1,0 +1,10 @@
+h1 Your Books
+.row
+  .col.s12.m7
+    .card.horizontal
+      .card-image
+        img[src="#{@user_book.image_url}"]
+      .card-stacked
+        .card-content
+          p = @user_book.title
+        .card-action
