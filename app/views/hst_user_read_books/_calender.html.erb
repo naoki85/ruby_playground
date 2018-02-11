@@ -1,0 +1,41 @@
+<table class="table-calender">
+  <thead>
+    <th>Sun</th>
+    <th>Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thr</th>
+    <th>Fri</th>
+    <th>Sat</th>
+  </thead>
+  <tbody>
+    <% month.each_with_index do |day, index| %>
+      <%= "<tr>".html_safe if index == 0 || day.wday == 0 %>
+      <% if index == 0 %>
+        <% day.wday.times do %>
+          <%= "<td></td>".html_safe %>
+        <% end %>
+      <% end %>
+      <td>
+        <p><%= day.day %></p>
+        <% if hst_user_read_books.key?(day.strftime('%Y-%m-%d')) %>
+          <% hst_user_read_books[day.strftime('%Y-%m-%d')].each do |hst_user_read_book| %>
+            <p><%= hst_user_read_book.comment %></p>
+            <p><%= link_to 'Edit', edit_hst_user_read_book_path(hst_user_read_book),
+                           class: 'waves-effect waves-light btn' %></p>
+            <p><%= link_to 'Delete', hst_user_read_book_path(hst_user_read_book),
+                           class: 'waves-effect waves-light btn', method: :delete %></p>
+          <% end %>
+        <% end %>
+      </td>
+      <% if @month.count == index + 1 %>
+        <% (6-day.wday).times do %>
+          <%= "<td></td>".html_safe %>
+        <% end %>
+        <%= "</tr>".html_safe %>
+        <% break %>
+      <% end %>
+      <%= "</tr>".html_safe if day.wday == 6 %>
+    <% end %>
+  </tbody>
+</table>
