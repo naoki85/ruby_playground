@@ -6,7 +6,8 @@ class HstUserReadBooksController < ApplicationController
     @user_book = UserBook.where(id: params[:user_book_id], user_id: current_user.id).first
     raise InvalidParameter unless @user_book
     @hst_user_read_books = HstUserReadBook.
-        where(user_id: current_user.id, user_book_id: params[:user_book_id]).order('date DESC')
+        all_by_date({user_id: current_user.id, user_book_id: params[:user_book_id]})
+    @month = Month.days
   end
 
   def new

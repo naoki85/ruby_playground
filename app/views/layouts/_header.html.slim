@@ -5,7 +5,11 @@ nav.nav-extended
       i.material-icons menu
     -# ヘッダー要素は5個が限界
     ul.right.hide-on-med-and-down
+      li = link_to 'SearchBooks', search_books_path
+      li = link_to 'YourBooks', user_books_path
       li = link_to 'LogOut', destroy_user_session_path, method: :delete
     -# サイドナビ
     ul#slide-out.side-nav
+      li = link_to 'SearchBooks', search_books_path
+      li = link_to 'YourBooks', user_books_path
       li = link_to 'LogOut', destroy_user_session_path, method: :delete

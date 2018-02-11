@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'search_books_by_keyword' => 'top#search_books_by_keyword'
 
   # UserBook
-  resources :user_books
+  resources :user_books, only: [:index, :create, :destroy]
 
   # HstUserReadBook
   resources :hst_user_read_books, except: [:show]
