@@ -2,16 +2,14 @@ class HstUserReadBooksController < ApplicationController
   before_action :set_hst_user_read_book, only: [:edit, :update, :destroy]
 
   def index
-    raise InvalidParameter unless params[:user_book_id].present?
-    @user_book = UserBook.where(id: params[:user_book_id], user_id: current_user.id).first
-    raise InvalidParameter unless @user_book
+    raise InvalidParameter unless valid_user_book_id?
     @hst_user_read_books = HstUserReadBook.
         all_by_date({user_id: current_user.id, user_book_id: params[:user_book_id]})
     @month = Month.days
   end
 
   def new
-    raise InvalidParameter unless params[:user_book_id].present?
+    raise InvalidParameter unless valid_user_book_id?
     @hst_user_read_book = HstUserReadBook.new
     @hst_user_read_book.user_book_id = params[:user_book_id]
   end
@@ -55,6 +53,13 @@ class HstUserReadBooksController < ApplicationController
     params.fetch(:hst_user_read_book, {}).permit(
         :user_book_id, :date, :comment
     )
+  end
+
+  def valid_user_book_id?
+    return false unless params[:user_book_id].present?
+    @user_book = UserBook.where(id: params[:user_book_id], user_id: current_user.id).first
+    return false unless @user_book
+    return true
   end
 end
 

@@ -1,2 +1,12 @@
-h1 Top#index
-p Find me in app/views/top/index.html.slim
+h1 Recently Added Books
+- @user_books.each do |user_book|
+  .row
+    .col.s12.m7
+      .card.horizontal
+        .card-image
+          img[src="#{user_book.image_url}"]
+        .card-stacked
+          .card-content
+            p = user_book.title
+          .card-action
+            = link_to 'Amazonで確認', '#', class: 'waves-effect waves-light btn'
