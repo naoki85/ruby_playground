@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ff317358-53d5-4ee0-a77e-a569a7edf356" name="Default" comment="Delete Ridgepole and create UserBook">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/errors/error_404.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/hst_user_read_books/index.html.slim" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/errors/error_400.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/hst_user_read_books_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20180211035058_create_hst_user_read_books.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/models/hst_user_read_book_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/hst_user_read_books/edit.html.slim" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/user_books/show.html.slim" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/hst_user_read_book.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/errors/error_500.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/hst_user_read_books/new.html.slim" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/hst_user_read_books/show.html.slim" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/hst_user_read_books/_form.html.slim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/user_books/index.html.slim" afterPath="$PROJECT_DIR$/app/views/user_books/index.html.slim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/materialize/init.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/materialize/init.js" />
+    <list default="true" id="ff317358-53d5-4ee0-a77e-a569a7edf356" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/book_recorder.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/user_books_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/user_books_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -133,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <caret line="28" column="6" lean-forward="false" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -189,7 +176,6 @@
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/views/top/_result_search_books.html.slim" />
         <option value="$PROJECT_DIR$/app/models/user_book.rb" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/models/hst_user_read_book.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20180211035058_create_hst_user_read_books.rb" />
         <option value="$PROJECT_DIR$/app/views/user_books/show.html.slim" />
@@ -204,6 +190,7 @@
         <option value="$PROJECT_DIR$/app/views/hst_user_read_books/_form.html.slim" />
         <option value="$PROJECT_DIR$/app/controllers/hst_user_read_books_controller.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -566,11 +553,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518354183871</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add Calender">
+      <created>1518420785020</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1518420785020</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30489000" />
+    <option name="totallyTimeSpent" value="30549000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -618,9 +612,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Install Devise" />
     <MESSAGE value="Install AmazonEcs and Ridgepole" />
-    <MESSAGE value="Delete Ridgepole and create UserBook" />
     <MESSAGE value="Add HstUserReadBook" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add HstUserReadBook" />
+    <MESSAGE value="Delete Ridgepole and create UserBook" />
+    <MESSAGE value="Add Calender" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Calender" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -833,7 +828,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <caret line="28" column="6" lean-forward="false" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
           <folding />
         </state>
       </provider>
