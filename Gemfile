@@ -9,6 +9,7 @@ gem 'rails', '~> 5.2.0.rc1'
 gem 'mysql2', '~> 0.4.4'
 # Use Puma as the app server
 # gem 'puma', '~> 3.11'
+gem 'unicorn'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -50,7 +51,6 @@ gem 'material_icons'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'unicorn'
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
