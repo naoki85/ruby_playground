@@ -1,24 +1,44 @@
-# README
+# BookRecorder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Prepare
+1 Clone this repository  
+2 [Install Docker](https://docs.docker.com/engine/installation/)  
+3 Create your "database.yml"  
 
-Things you may want to cover:
+```yml
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: root
+  host: db
 
-* Ruby version
+development:
+  <<: *default
+  database: book_recorder_development
 
-* System dependencies
+test:
+  <<: *default
+  database: book_recorder_test
+```
+4 Start docker
 
-* Configuration
+```
+$ docker-compose build
+$ docker-compose up -d
+```
+5 Setup Database
 
-* Database creation
+```
+$ docker-compose run ruby rake db:create
+$ docker-compose run ruby rake db:migrate
+```
+6 Access  
+[http://localhost:3000](http://localhost:3000)
 
-* Database initialization
+## Stop Docker
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ docker-compose stop
+```
