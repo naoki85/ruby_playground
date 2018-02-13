@@ -8,3 +8,6 @@ h1 Your Books
         .card-content
           p = @user_book.title
         .card-action
+
+.row
+  = link_to 'Back', user_books_path, class: default_btn_class

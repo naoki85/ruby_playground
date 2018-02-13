@@ -9,6 +9,6 @@ h2 Forgot your password?
       = f.email_field :email, autofocus: true, autocomplete: 'email'
 
   .row
-    = f.submit 'Send me reset password instructions', class: 'waves-effect waves-light btn'
+    = f.submit 'Send me reset password instructions', class: session_btn_class
 
 == render 'devise/shared/links'

@@ -3,6 +3,6 @@ h1 Your Book History
   img[src="#{@user_book.image_url}"]
 
 .row
-  = link_to 'New', new_hst_user_read_book_path(user_book_id: @user_book.id), class: 'waves-effect waves-light btn'
+  = link_to 'New', new_hst_user_read_book_path(user_book_id: @user_book.id), class: create_btn_class
 
 == render 'hst_user_read_books/calender', month: @month, hst_user_read_books: @hst_user_read_books

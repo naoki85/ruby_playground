@@ -30,6 +30,9 @@ body {
   font-family: 'Noto Sans Japanese';
 }
 
+/* Layout */
+@import "layout/typography";
+
 /* Module */
 @import "module/alert";
 @import "module/calender";

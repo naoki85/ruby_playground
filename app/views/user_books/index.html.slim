@@ -10,6 +10,6 @@ h1 Your Books
             p = user_book.title
           .card-action
             = link_to 'Show', hst_user_read_books_path(user_book_id: user_book.id),
-                    class: 'waves-effect waves-light btn'
+                    class: default_btn_class
             = link_to 'Delete', user_book_path(user_book),
-                    class: 'waves-effect waves-light btn', method: :delete
+                    class: danger_btn_class, method: :delete

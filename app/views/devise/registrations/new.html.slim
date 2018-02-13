@@ -21,6 +21,6 @@ h2 Sign up
       = f.password_field :password_confirmation, autocomplete: 'off'
 
   .row
-    = f.submit 'Sign up', class: 'waves-effect waves-light btn'
+    = f.submit 'Sign up', class: session_btn_class
 
 == render 'devise/shared/links'
