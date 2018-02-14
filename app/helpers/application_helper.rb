@@ -24,4 +24,13 @@ module ApplicationHelper
   def session_btn_class
     'waves-effect waves-teal btn'
   end
+
+  def week_day_class(wday)
+    case wday
+    when 0 then 'wday-holiday'
+    when 6 then 'wday-sat'
+    else
+      'wday'
+    end
+  end
 end

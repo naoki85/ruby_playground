@@ -1,41 +1,25 @@
-<table class="table-calender">
-  <thead>
-    <th>Sun</th>
-    <th>Mon</th>
-    <th>Tue</th>
-    <th>Wed</th>
-    <th>Thr</th>
-    <th>Fri</th>
-    <th>Sat</th>
-  </thead>
-  <tbody>
-    <% month.each_with_index do |day, index| %>
-      <%= "<tr>".html_safe if index == 0 || day.wday == 0 %>
-      <% if index == 0 %>
-        <% day.wday.times do %>
-          <%= "<td></td>".html_safe %>
-        <% end %>
-      <% end %>
-      <td>
-        <p><%= day.day %></p>
-        <% if hst_user_read_books.key?(day.strftime('%Y-%m-%d')) %>
-          <% hst_user_read_books[day.strftime('%Y-%m-%d')].each do |hst_user_read_book| %>
-            <p><%= hst_user_read_book.comment %></p>
-            <p><%= link_to 'Edit', edit_hst_user_read_book_path(hst_user_read_book),
-                           class: 'waves-effect waves-light btn' %></p>
-            <p><%= link_to 'Delete', hst_user_read_book_path(hst_user_read_book),
-                           class: 'waves-effect waves-light btn', method: :delete %></p>
+<ul class="calender-collection">
+  <li class="calender-collection-header"><h2><%= @month[0].strftime('%B') %></h2></li>
+  <% month.each do |day| %>
+    <% link_path = if hst_user_read_books.key?(day.strftime('%Y-%m-%d'))
+                     hst_user_read_book_path(hst_user_read_books[day.strftime('%Y-%m-%d')])
+                   else
+                     new_hst_user_read_book_path(user_book_id: user_book_id, date: day.strftime('%Y-%m-%d').to_s)
+                   end %>
+    <%= link_to link_path, class: 'calender-collection-item' do %>
+      <div class="row margin-none-bottom">
+        <div class="col s2 center">
+          <div class="<%= week_day_class(day.wday) %>"><%= day.day %></div>
+          <div class="<%= week_day_class(day.wday) %>"><%= day.strftime('%a') %></div>
+        </div>
+        <div class="col s10">
+          <% if hst_user_read_books.key?(day.strftime('%Y-%m-%d')) %>
+            <% hst_user_read_books[day.strftime('%Y-%m-%d')].each do |hst_user_read_book| %>
+              <%= hst_user_read_book.comment %>
+            <% end %>
           <% end %>
-        <% end %>
-      </td>
-      <% if @month.count == index + 1 %>
-        <% (6-day.wday).times do %>
-          <%= "<td></td>".html_safe %>
-        <% end %>
-        <%= "</tr>".html_safe %>
-        <% break %>
-      <% end %>
-      <%= "</tr>".html_safe if day.wday == 6 %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+</ul>
