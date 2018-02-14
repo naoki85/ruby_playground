@@ -15,4 +15,4 @@
               = f.hidden_field :asin, value: item.get('ASIN')
               = f.hidden_field :title, value: item_attributes.get('Title')
               = f.hidden_field :image_url, value: small_image['URL']
-              = f.submit 'Add', class: 'waves-effect waves-light btn'
+              = f.submit 'Add', class: create_btn_class
