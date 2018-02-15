@@ -1,0 +1,4 @@
+.btn {
+  @extend .btn !optional;
+  margin: 5px;
+}

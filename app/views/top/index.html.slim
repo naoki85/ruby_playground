@@ -1,7 +1,17 @@
 h1 Recently Added Books
-- @user_books.each do |user_book|
-  .row
-    .col.s12.m7
+.row
+  | Let's add your read book, and comment!!
+.row
+  - if user_signed_in?
+    = link_to 'SearchBooks', search_books_path, class: default_btn_class
+    = link_to 'YourBooks', user_books_path, class: default_btn_class
+  - else
+    = link_to 'Signup', new_user_registration_path, class: session_btn_class
+    = link_to 'Login', new_user_session_path, class: session_btn_class
+
+.row
+  - @user_books.each do |user_book|
+    .col.s12.m6
       .card.horizontal
         .card-image
           img[src="#{user_book.image_url}"]

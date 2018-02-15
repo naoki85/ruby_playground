@@ -7,17 +7,17 @@ module ApplicationHelper
 
   # For new, create
   def create_btn_class
-    'waves-effect waves-light btn green accent-2 black-text'
+    'waves-effect waves-light btn green accent-3'
   end
 
   # For edit, update
   def update_btn_class
-    'waves-effect waves-light btn orange accent-2 black-text'
+    'waves-effect waves-light btn orange accent-3'
   end
 
   # For delete, alert
   def danger_btn_class
-    'waves-effect waves-light btn red accent-2 black-text'
+    'waves-effect waves-light btn red accent-3'
   end
 
   # For signup, login

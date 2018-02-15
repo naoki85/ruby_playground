@@ -1,14 +1,11 @@
 class HstUserReadBooksController < ApplicationController
-  before_action :set_hst_user_read_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_hst_user_read_book, only: [:edit, :update, :destroy]
 
   def index
     raise InvalidParameter unless valid_user_book_id?
     @hst_user_read_books = HstUserReadBook.
         all_by_date({user_id: current_user.id, user_book_id: params[:user_book_id]})
     @month = Month.new.days
-  end
-
-  def show
   end
 
   def new

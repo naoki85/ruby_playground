@@ -10,4 +10,5 @@ $(document).on('ready turbolinks:load', function() {
     format: 'yyyy-mm-dd'
   });
   $('.materialize-textarea').val();
+  Materialize.updateTextFields();
 });

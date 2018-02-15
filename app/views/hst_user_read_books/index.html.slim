@@ -2,4 +2,7 @@ h1 Your Book History
 .row.center
   img[src="#{@user_book.image_url}"]
 
+.row
+  | Click day in below calender, and enter your comment!!
+
 == render 'hst_user_read_books/calender', month: @month, user_book_id: @user_book.id, hst_user_read_books: @hst_user_read_books
