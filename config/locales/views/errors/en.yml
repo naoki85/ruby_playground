@@ -1,0 +1,8 @@
+ja:
+  errors:
+    error_400:
+      title: "Invalid Parameters"
+    error_404:
+      title: "Not Found"
+    error_500:
+      title: "Server Error"

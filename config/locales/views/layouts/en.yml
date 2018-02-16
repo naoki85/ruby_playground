@@ -1,0 +1,5 @@
+en:
+  layouts:
+    header:
+      search_books: "Search books"
+      your_books: "Bookshelf"

@@ -1,4 +1,4 @@
-h2 Sign up
+h2 = t('devise.views.signup')
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
@@ -21,6 +21,6 @@ h2 Sign up
       = f.password_field :password_confirmation, autocomplete: 'off'
 
   .row
-    = f.submit 'Sign up', class: session_btn_class
+    = f.submit t('devise.views.signup'), class: session_btn_class
 
 == render 'devise/shared/links'

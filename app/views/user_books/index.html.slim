@@ -1,4 +1,4 @@
-h1 Your Books
+h1 = t('.title')
 - @user_books.each do |user_book|
   .row
     .col.s12
@@ -9,7 +9,7 @@ h1 Your Books
           .card-content
             p = user_book.title
           .card-action
-            = link_to 'Show', hst_user_read_books_path(user_book_id: user_book.id),
+            = link_to t('button.show'), hst_user_read_books_path(user_book_id: user_book.id),
                     class: default_btn_class
-            = link_to 'Delete', user_book_path(user_book),
+            = link_to t('button.delete'), user_book_path(user_book),
                     class: danger_btn_class, method: :delete

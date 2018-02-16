@@ -23,7 +23,7 @@ class HstUserReadBooksController < ApplicationController
 
     if @hst_user_read_book.save
       redirect_to hst_user_read_books_path(user_book_id: @hst_user_read_book.user_book_id),
-                  notice: 'HstUserReadBook was successfully created.'
+                  notice: t("#{I18N_PREFIX}.notice.created")
     else
       render :new
     end
@@ -32,7 +32,7 @@ class HstUserReadBooksController < ApplicationController
   def update
     if @hst_user_read_book.update(hst_user_read_book_params)
       redirect_to hst_user_read_books_path(user_book_id: @hst_user_read_book.user_book_id),
-                  notice: 'HstUserReadBook was successfully updated.'
+                  notice: t("#{I18N_PREFIX}.notice.updated")
     else
       render :edit
     end
@@ -41,7 +41,8 @@ class HstUserReadBooksController < ApplicationController
   def destroy
     user_book_id = @hst_user_read_book.user_book_id
     @hst_user_read_book.destroy!
-    redirect_to hst_user_read_books_path(user_book_id: user_book_id), notice: 'HstUserReadBook was successfully deleted.'
+    redirect_to hst_user_read_books_path(user_book_id: user_book_id),
+                notice: t("#{I18N_PREFIX}.notice.deleted")
   end
 
   private

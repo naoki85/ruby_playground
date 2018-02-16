@@ -1,13 +1,12 @@
-h1 Recently Added Books
-.row
-  | Let's add your read book, and comment!!
+h1 = t('.title')
+.row = t('.description')
 .row
   - if user_signed_in?
-    = link_to 'SearchBooks', search_books_path, class: default_btn_class
-    = link_to 'YourBooks', user_books_path, class: default_btn_class
+    = link_to t('.search_books'), search_books_path, class: default_btn_class
+    = link_to t('.your_books'), user_books_path, class: default_btn_class
   - else
-    = link_to 'Signup', new_user_registration_path, class: session_btn_class
-    = link_to 'Login', new_user_session_path, class: session_btn_class
+    = link_to t('.signup'), new_user_registration_path, class: session_btn_class
+    = link_to t('.login'), new_user_session_path, class: session_btn_class
 
 .row
   - @user_books.each do |user_book|
@@ -19,4 +18,4 @@ h1 Recently Added Books
           .card-content
             p = user_book.title
           .card-action
-            = link_to 'Amazonで確認', '#', class: default_btn_class
+            = link_to t('.amazon_link'), '#', class: default_btn_class

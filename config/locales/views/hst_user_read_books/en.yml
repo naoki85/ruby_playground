@@ -1,0 +1,13 @@
+en:
+  hst_user_read_books:
+    index:
+      title: "Your comments"
+      description: "Click day below calendar and comment!!"
+    new:
+      title: "New"
+    form:
+      submit: "Save"
+    edit:
+      title: "Edit"
+    result_search_books:
+      add: "Add"

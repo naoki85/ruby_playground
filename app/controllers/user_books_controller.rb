@@ -1,5 +1,7 @@
 class UserBooksController < ApplicationController
 
+  I18N_PREFIX = 'user_books_controller'
+
   def index
     @user_books = UserBook.where(user_id: current_user.id)
   end
@@ -8,16 +10,16 @@ class UserBooksController < ApplicationController
     @user_book = current_user.user_books.build(user_book_params)
 
     if @user_book.save
-      redirect_to user_books_path, notice: 'UserBook was successfully created.'
+      redirect_to user_books_path, notice: t("#{I18N_PREFIX}.notice.created")
     else
-      redirect_to user_books_path, alert: 'UserBook was not created.'
+      redirect_to user_books_path, alert: t("#{I18N_PREFIX}.alert.not_created")
     end
   end
 
   def destroy
     set_user_book
     @user_book.destroy!
-    redirect_to user_books_path, notice: 'UserBook was deleted.'
+    redirect_to user_books_path, notice: t("#{I18N_PREFIX}.notice.deleted")
   end
 
   private

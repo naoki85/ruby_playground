@@ -1,0 +1,12 @@
+en:
+  user_books_controller:
+    notice:
+      created: "Created!!"
+      deleted: "Deleted!!"
+    alert:
+      not_created: "Could not create..."
+  hst_user_read_books_controller:
+    notice:
+      created: "Created!!"
+      updated: "Updated!!"
+      deleted: "Deleted!!"

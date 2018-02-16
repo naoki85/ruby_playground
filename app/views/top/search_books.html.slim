@@ -1,4 +1,4 @@
-h1 SearchBooks
+h1 = t('.title')
 = form_with url: search_books_by_keyword_path, method: :get, html: { class: 'js-form-ajax' } do |f|
 
   .row
@@ -7,6 +7,6 @@ h1 SearchBooks
       = f.text_field :keyword, autofocus: true
 
   .row
-    = f.submit 'Search', class: default_btn_class
+    = f.submit t('.submit'), class: default_btn_class
 
 #result-search-books.ajax-replace-field

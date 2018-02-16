@@ -1,0 +1,13 @@
+ja:
+  hst_user_read_books:
+    index:
+      title: "コメント"
+      description: "カレンダーの日付を選択して、コメントを残そう!!"
+    new:
+      title: "新規追加"
+    form:
+      submit: "保存"
+    edit:
+      title: "新規追加"
+    result_search_books:
+      add: "本棚に追加"
