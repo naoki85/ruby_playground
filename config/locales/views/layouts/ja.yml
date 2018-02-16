@@ -3,3 +3,7 @@ ja:
     header:
       search_books: "本を探す"
       your_books: "本棚"
+    footer:
+      footer_comment: "Book Recorder は naoki85 によってメンテナンスされています。ご意見などございましたら Twitter からお願い致します。"
+      user_policy: "利用規約"
+      privacy_policy: "プライバシーポリシー"

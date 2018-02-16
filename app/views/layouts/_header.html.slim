@@ -3,7 +3,7 @@ nav.nav-extended
     = link_to 'BookRecorder', root_path, class: 'brand-logo'
     a[data-activates="slide-out" class="button-collapse hide-on-large-only"]
       i.material-icons menu
-    -# ヘッダー要素は5個が限界
+    -# ヘッダー要素
     ul.right.hide-on-med-and-down
       - if user_signed_in?
         li = link_to t('.search_books'), search_books_path

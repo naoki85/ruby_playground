@@ -3,3 +3,7 @@ en:
     header:
       search_books: "Search books"
       your_books: "Bookshelf"
+    footer:
+      footer_comment: "Book Recorder is maintained by naoki85. If you have any comments, please do so from Twitter."
+      user_policy: "User Policy"
+      privacy_policy: "Privacy Policy"

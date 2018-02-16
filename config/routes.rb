@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # Top
   get 'search_books' => 'top#search_books'
   get 'search_books_by_keyword' => 'top#search_books_by_keyword'
+  get 'user_policy' => 'top#user_policy'
+  get 'privacy_policy' => 'top#privacy_policy'
 
   # UserBook
   resources :user_books, only: [:index, :create, :destroy]
