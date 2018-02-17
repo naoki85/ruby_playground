@@ -211,3 +211,11 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  button:
+    index: "Index"
+    show: "Show"
+    edit: "Edit"
+    delete: "Delete"
+    back: "Back"
+  messages:
+    are_you_sure: "Are you sure?"

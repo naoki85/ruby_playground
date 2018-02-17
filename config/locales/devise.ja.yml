@@ -8,8 +8,8 @@ ja:
       send_paranoid_instructions: "ご登録のメールアドレスが保存されている場合、アカウントの確認方法をメールでご連絡します。"
     failure:
       already_authenticated: "既にログインしています。"
-      inactive: "Your account is not activated yet."
-      invalid: "Invalid email or password."
+      inactive: "アカウントが有効になっていません。"
+      invalid: "メールアドレスかパスワードが間違っています。"
       locked: "アカウントがロックされています。"
       last_attempt: "あなたのアカウントがロックされる前に、もう1つの試みを持っています。"
       not_found_in_database: "メールアドレスまたはパスワードが無効です。"
@@ -52,6 +52,8 @@ ja:
       logout: "ログアウト"
       signup: "新規登録"
       forgot_password: "パスワードをお忘れですか？"
+      password_minimum: "パスワードは最低 %{minimum_password_length} 文字必要です。"
+      cancel_my_account: "退会する"
   errors:
     messages:
       already_confirmed: "は既に登録済みです。ログインしてください"

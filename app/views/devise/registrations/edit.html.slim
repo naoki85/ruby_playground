@@ -6,16 +6,17 @@ h2 = "Edit #{resource_name.to_s.humanize}"
   .row
     .input-field
       = f.label :email
-      = f.email_field :email, autofocus: true, autocomplete: 'email'
+      = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'validate'
 
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       div = "Currently waiting confirmation for: #{resource.unconfirmed_email} %>"
 
+  - if @minimum_password_length
+    .row = t('devise.views.password_minimum', minimum_password_length: @minimum_password_length)
+
   .row
     .input-field
       = f.label :password
-      - if @minimum_password_length
-        em = "(#{@minimum_password_length} characters minimum)"
       = f.password_field :password, autocomplete: 'off'
 
   .row
@@ -32,9 +33,9 @@ h2 = "Edit #{resource_name.to_s.humanize}"
   .row
     = f.submit 'Update', class: session_btn_class
 
-h3 Cancel my account
+h3 = t('devise.views.cancel_my_account')
 
-p Unhappy?
-= button_to 'Cancel my account', registration_path(resource_name), data: { confirm: 'Are you sure?' }, method: :delete
+= button_to t('devise.views.cancel_my_account'), registration_path(resource_name),
+        data: { confirm: t('messages.are_you_sure') }, method: :delete
 
-= link_to 'Back', :back
+= link_to t('button.back'), :back

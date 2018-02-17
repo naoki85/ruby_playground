@@ -6,13 +6,14 @@ h2 = t('devise.views.signup')
   .row
     .input-field
       = f.label :email
-      = f.email_field :email, autofocus: true, autocomplete: 'email'
+      = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'validate'
+
+  - if @minimum_password_length
+    .row = t('devise.views.password_minimum', minimum_password_length: @minimum_password_length)
 
   .row
     .input-field
       = f.label :password
-      - if @minimum_password_length
-        em = "(#{@minimum_password_length} characters minimum)"
       = f.password_field :password, autocomplete: 'off'
 
   .row

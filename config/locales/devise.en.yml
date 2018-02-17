@@ -57,6 +57,8 @@ en:
       logout: "Log out"
       signup: "Sign up"
       forgot_password: "Forgot your password?"
+      password_minimum: "Password is required %{minimum_password_length} characters minimum"
+      cancel_my_account: "Cancel my account"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"
