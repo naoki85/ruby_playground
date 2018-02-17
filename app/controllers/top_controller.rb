@@ -1,5 +1,5 @@
 class TopController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :user_policy, :privacy_policy]
   def index
     @user_books = UserBook.order('id desc').limit(10)
   end

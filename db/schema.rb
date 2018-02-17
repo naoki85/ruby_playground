@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_11_035058) do
+ActiveRecord::Schema.define(version: 2018_02_17_093737) do
 
   create_table "hst_user_read_books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2018_02_11_035058) do
     t.string "asin", default: "", null: false
     t.string "title", default: "", null: false
     t.string "image_url", default: "", null: false
+    t.string "detail_page_url", limit: 1020, default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asin"], name: "index_user_books_on_asin"

@@ -11,8 +11,9 @@
             p = item_attributes.get('Title')
             p = item_attributes.get('Author')
           .card-action
-            = form_with model:UserBook.new, url: user_books_path, local: true do |f|
+            = form_with model: UserBook.new, url: user_books_path, local: true do |f|
               = f.hidden_field :asin, value: item.get('ASIN')
               = f.hidden_field :title, value: item_attributes.get('Title')
               = f.hidden_field :image_url, value: small_image['URL']
+              = f.hidden_field :detail_page_url, value: item.get('DetailPageURL')
               = f.submit t('.add'), class: create_btn_class

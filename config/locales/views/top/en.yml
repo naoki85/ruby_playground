@@ -5,7 +5,6 @@ en:
       description: "Add books and comment!!"
       search_books: "Search books"
       your_books: "Bookshelf"
-      amazon_link: "Amazon"
     search_books:
       title: "Search books"
       submit: "Search"

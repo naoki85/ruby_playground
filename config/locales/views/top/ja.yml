@@ -7,7 +7,6 @@ ja:
       your_books: "本棚"
       signup: "新規登録"
       login: "ログイン"
-      amazon_link: "Amazonで確認"
     search_books:
       title: "本を探す"
       submit: "探す"

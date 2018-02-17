@@ -30,7 +30,7 @@ class UserBooksController < ApplicationController
 
   def user_book_params
     params.fetch(:user_book, {}).permit(
-        :asin, :title, :image_url
+        :asin, :title, :image_url, :detail_page_url
     )
   end
 end
