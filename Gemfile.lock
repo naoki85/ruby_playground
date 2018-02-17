@@ -143,6 +143,8 @@ GEM
       railties (>= 3.2)
     materialize-sass (0.100.2)
       sass (~> 3.3)
+    meta-tags (2.7.1)
+      actionpack (>= 3.2.0, < 5.3)
     method_source (0.9.0)
     mimemagic (0.3.2)
     mini_mime (1.0.0)
@@ -231,6 +233,8 @@ GEM
       rubyzip (~> 1.2)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
+    sitemap_generator (6.0.1)
+      builder (~> 3.0)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
@@ -306,12 +310,14 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   material_icons
   materialize-sass
+  meta-tags
   mysql2 (~> 0.4.4)
   rails (~> 5.2.0.rc1)
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda-matchers
+  sitemap_generator
   slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)
