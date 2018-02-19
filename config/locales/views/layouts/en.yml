@@ -1,6 +1,7 @@
 en:
   layouts:
     header:
+      edit_account: "Edit account"
       search_books: "Search books"
       your_books: "Bookshelf"
     footer:

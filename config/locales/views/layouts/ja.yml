@@ -1,6 +1,7 @@
 ja:
   layouts:
     header:
+      edit_account: "アカウント編集"
       search_books: "本を探す"
       your_books: "本棚"
     footer:

@@ -59,6 +59,8 @@ en:
       forgot_password: "Forgot your password?"
       password_minimum: "Password is required %{minimum_password_length} characters minimum"
       cancel_my_account: "Cancel my account"
+      need_your_current_password: "We need your current password to confirm your changes"
+      edit_account: "Edit Account"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"

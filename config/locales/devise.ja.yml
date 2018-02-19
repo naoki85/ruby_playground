@@ -54,6 +54,8 @@ ja:
       forgot_password: "パスワードをお忘れですか？"
       password_minimum: "パスワードは最低 %{minimum_password_length} 文字必要です。"
       cancel_my_account: "退会する"
+      need_your_current_password: "確認のため、現在のパスワードを入力してください。"
+      edit_account: "アカウント編集"
   errors:
     messages:
       already_confirmed: "は既に登録済みです。ログインしてください"
