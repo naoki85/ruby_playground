@@ -1,6 +1,8 @@
 class HstUserReadBooksController < ApplicationController
   before_action :set_hst_user_read_book, only: [:edit, :update, :destroy]
 
+  I18N_PREFIX = 'hst_user_read_books_controller'
+
   def index
     raise InvalidParameter unless valid_user_book_id?
     @hst_user_read_books = HstUserReadBook.
