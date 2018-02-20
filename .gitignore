@@ -30,5 +30,4 @@
 config/deploy/staging.rb
 config/deploy/production.rb
 config/id_rsa
-config/database.yml
 config/secrets.yml

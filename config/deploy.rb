@@ -26,7 +26,7 @@ set :pty, true
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", "config/secrets.yml"
-set :linked_files, %w{ .env config/database.yml config/secrets.yml }
+set :linked_files, %w{ .env config/secrets.yml }
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -49,6 +49,9 @@ set :rbenv_roles, :all # default value
 
 # bundle installの並列実行数
 set :bundle_jobs, 4
+
+# whenever
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
