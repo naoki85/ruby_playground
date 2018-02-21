@@ -10,5 +10,3 @@ namespace :sitemap do
     end
   end
 end
-
-before 'deploy:finishing', 'sitemap:refresh'
