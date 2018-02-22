@@ -1,0 +1,5 @@
+en:
+  base_service:
+    error:
+      standard: "Unexpected error"
+      save: "Fail to Save. Check your input"

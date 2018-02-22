@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UserBook, type: :model do
+RSpec.describe Book, type: :model do
   describe 'validate' do
     context '#asin' do
       it { should validate_length_of(:asin).is_at_most(255) }

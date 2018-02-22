@@ -1,6 +1,6 @@
 <% if @response.present? %>
   $('#result-search-books').hide();
-  $('#result-search-books').html("<%= escape_javascript(render('top/result_search_books')) %>");
+  $('#result-search-books').html("<%= escape_javascript(render('books/result_search')) %>");
   $('#result-search-books').show();
 <% else %>
   $('#result-search-books').html("<%= t('.no_results') %>");

@@ -3,16 +3,19 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Top
-  get 'search_books' => 'top#search_books'
-  get 'search_books_by_keyword' => 'top#search_books_by_keyword'
   get 'user_policy' => 'top#user_policy'
   get 'privacy_policy' => 'top#privacy_policy'
+
+  # Book
+  resources :books, only: [:index, :create, :destroy]
+  get 'books/search' => 'books#search'
+  get 'books/search_by_keyword' => 'books#search_by_keyword'
 
   # UserBook
   resources :user_books, only: [:index, :create, :destroy]
 
-  # HstUserReadBook
-  resources :hst_user_read_books, except: [:show]
+  # UserBookComment
+  resources :user_book_comments, except: [:show]
 
   # View Routing Errors
   match '*path' => 'application#render_404', via: :all

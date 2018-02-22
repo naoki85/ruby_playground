@@ -5,8 +5,10 @@ en:
       deleted: "Deleted!!"
     alert:
       not_created: "Could not create..."
-  hst_user_read_books_controller:
+  user_book_comments_controller:
     notice:
       created: "Created!!"
       updated: "Updated!!"
       deleted: "Deleted!!"
+    alert:
+      not_permitted: "Not permitted!!"

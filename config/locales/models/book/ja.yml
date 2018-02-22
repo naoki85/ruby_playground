@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      book: "本"
+    attributes:
+      book:
+        asin: "ASIN"
+        title: "タイトル"
+        image_url: "画像URL"
+        detail_page_url: "詳細ページ"

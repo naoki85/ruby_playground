@@ -1,0 +1,9 @@
+ja:
+  books:
+    search:
+      title: "本を探す"
+      submit: "探す"
+    search_by_keyword:
+      no_results: "検索結果を取得できませんでした"
+    result_search:
+      add: "本棚に追加"

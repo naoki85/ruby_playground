@@ -3,13 +3,11 @@ class UserBooksController < ApplicationController
   I18N_PREFIX = 'user_books_controller'
 
   def index
-    @user_books = UserBook.where(user_id: current_user.id)
+    @user_books = UserBook.includes([:book]).where(user_id: current_user.id)
   end
 
   def create
-    @user_book = current_user.user_books.build(user_book_params)
-
-    if @user_book.save
+    if UserAddBookService.add(current_user.id, user_book_params)
       redirect_to user_books_path, notice: t("#{I18N_PREFIX}.notice.created")
     else
       redirect_to user_books_path, alert: t("#{I18N_PREFIX}.alert.not_created")

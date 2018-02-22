@@ -7,10 +7,3 @@ ja:
       your_books: "本棚"
       signup: "新規登録"
       login: "ログイン"
-    search_books:
-      title: "本を探す"
-      submit: "探す"
-    search_books_by_keyword:
-      no_results: "検索結果を取得できませんでした"
-    result_search_books:
-      add: "本棚に追加"

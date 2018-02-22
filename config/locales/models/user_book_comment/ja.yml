@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      user_book_comment: "本へのコメント"
+    attributes:
+      user_book_comment:
+        date: "日付"
+        comment: "コメント"

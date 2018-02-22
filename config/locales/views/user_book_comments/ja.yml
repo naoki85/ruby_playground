@@ -1,5 +1,5 @@
 ja:
-  hst_user_read_books:
+  user_book_comments:
     index:
       title: "コメント"
       description: "カレンダーの日付を選択して、コメントを残そう!!"

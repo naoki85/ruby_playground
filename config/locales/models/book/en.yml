@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      book: "Book"
+    attributes:
+      book:
+        asin: "ASIN"
+        title: "Title"
+        image_url: "Image URL"
+        detail_page_url: "Detail page URL"

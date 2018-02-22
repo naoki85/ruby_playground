@@ -5,10 +5,3 @@ en:
       description: "Add books and comment!!"
       search_books: "Search books"
       your_books: "Bookshelf"
-    search_books:
-      title: "Search books"
-      submit: "Search"
-    search_books_by_keyword:
-      no_results: "Could not get results..."
-    result_search_books:
-      add: "Add"

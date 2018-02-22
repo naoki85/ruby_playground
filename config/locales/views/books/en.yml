@@ -1,0 +1,9 @@
+en:
+  books:
+    search:
+      title: "Search books"
+      submit: "Search"
+    search_by_keyword:
+      no_results: "Could not get results..."
+    result_search:
+      add: "Add"

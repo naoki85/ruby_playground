@@ -5,8 +5,10 @@ ja:
       deleted: "削除しました"
     alert:
       not_created: "保存に失敗しました"
-  hst_user_read_books_controller:
+  user_book_comments_controller:
     notice:
       created: "保存しました"
       updated: "編集しました"
       deleted: "削除しました"
+    alert:
+      not_permitted: "許可されていません"

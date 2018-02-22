@@ -1,10 +1,10 @@
 <ul class="calender-collection">
   <li class="calender-collection-header"><h2><%= t('date.month_names')[month[0].strftime('%-m').to_i] %></h2></li>
   <% month.each do |day| %>
-    <% link_path = if hst_user_read_books.key?(day.strftime('%Y-%m-%d'))
-                     edit_hst_user_read_book_path(hst_user_read_books[day.strftime('%Y-%m-%d')])
+    <% link_path = if user_book_comments.key?(day.strftime('%Y-%m-%d'))
+                     edit_user_book_comment_path(user_book_comments[day.strftime('%Y-%m-%d')])
                    else
-                     new_hst_user_read_book_path(user_book_id: user_book_id, date: day.strftime('%Y-%m-%d').to_s)
+                     new_user_book_comment_path(user_book_id: user_book_id, date: day.strftime('%Y-%m-%d').to_s)
                    end %>
     <%= link_to link_path, class: 'calender-collection-item' do %>
       <div class="row margin-none-bottom">
@@ -13,9 +13,9 @@
           <div class="<%= week_day_class(day.wday) %>"><%= day.strftime('%a') %></div>
         </div>
         <div class="col s10">
-          <% if hst_user_read_books.key?(day.strftime('%Y-%m-%d')) %>
-            <% hst_user_read_books[day.strftime('%Y-%m-%d')].each do |hst_user_read_book| %>
-              <%= hst_user_read_book.comment %>
+          <% if user_book_comments.key?(day.strftime('%Y-%m-%d')) %>
+            <% user_book_comments[day.strftime('%Y-%m-%d')].each do |user_book_comment| %>
+              <%= user_book_comment.comment %>
             <% end %>
           <% end %>
         </div>

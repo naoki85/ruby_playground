@@ -2,21 +2,21 @@ h1 = t('.title')
 .row = t('.description')
 .row
   - if user_signed_in?
-    = link_to t('.search_books'), search_books_path, class: default_btn_class
+    = link_to t('.search_books'), books_search_path, class: default_btn_class
     = link_to t('.your_books'), user_books_path, class: default_btn_class
   - else
     = link_to t('.signup'), new_user_registration_path, class: session_btn_class
     = link_to t('.login'), new_user_session_path, class: session_btn_class
 
 .row
-  - @user_books.each do |user_book|
+  - @books.each do |book|
     .col.s12.m6
       .card.horizontal
         .card-image
-          img[src="#{user_book.image_url}"]
+          img[src="#{book.image_url}"]
         .card-stacked
           .card-content
-            p = user_book.title
+            p = book.title
           .card-action
-            = link_to user_book.detail_page_url do
+            = link_to book.detail_page_url do
               = image_tag 'commons/btn_amazon.png'

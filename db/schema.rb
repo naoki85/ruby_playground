@@ -10,28 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_17_093737) do
+ActiveRecord::Schema.define(version: 2018_02_21_125905) do
 
-  create_table "hst_user_read_books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "user_book_id", null: false
-    t.date "date"
-    t.string "comment", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_book_id"], name: "index_hst_user_read_books_on_user_book_id"
-    t.index ["user_id"], name: "index_hst_user_read_books_on_user_id"
-  end
-
-  create_table "user_books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id", null: false
+  create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "asin", default: "", null: false
     t.string "title", default: "", null: false
     t.string "image_url", default: "", null: false
     t.string "detail_page_url", limit: 1020, default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["asin"], name: "index_user_books_on_asin"
+    t.index ["asin"], name: "index_books_on_asin"
+  end
+
+  create_table "user_book_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_book_id", null: false
+    t.date "date"
+    t.string "comment", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_book_id"], name: "index_user_book_comments_on_user_book_id"
+  end
+
+  create_table "user_books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_user_books_on_book_id"
     t.index ["user_id"], name: "index_user_books_on_user_id"
   end
 

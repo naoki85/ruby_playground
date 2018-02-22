@@ -1,5 +1,5 @@
 en:
-  hst_user_read_books:
+  user_book_comments:
     index:
       title: "Your comments"
       description: "Click day below calendar and comment!!"

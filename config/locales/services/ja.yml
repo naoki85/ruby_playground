@@ -1,0 +1,5 @@
+ja:
+  base_service:
+    error:
+      standard: "予期せぬエラーが発生しました"
+      save: "保存に失敗しました。入力した内容をご確認ください"

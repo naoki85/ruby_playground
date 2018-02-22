@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    models:
+      user_book_comment: "Comment for book"
+    attributes:
+      user_book_comment:
+        date: "Date"
+        comment: "Comment"

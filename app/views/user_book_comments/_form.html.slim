@@ -1,5 +1,5 @@
-= form_with model: hst_user_read_book, local: true do |f|
-  = f.hidden_field :user_book_id, value: hst_user_read_book.user_book_id
+= form_with model: user_book_comment, local: true do |f|
+  = f.hidden_field :user_book_id, value: user_book_comment.user_book_id
   .row
     = f.label :date
     = f.text_field :date, class: 'datepicker'

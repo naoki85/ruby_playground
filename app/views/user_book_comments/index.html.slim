@@ -1,0 +1,7 @@
+h1 = t('.title')
+.row.center
+  img[src="#{@user_book.book.image_url}"]
+
+.row = t('.description')
+
+== render 'user_book_comments/calender', month: @month, user_book_id: @user_book.id, user_book_comments: @user_book_comments

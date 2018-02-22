@@ -7,7 +7,7 @@ nav.nav-extended
     ul.right.hide-on-med-and-down
       - if user_signed_in?
         li = link_to t('.edit_account'), edit_user_registration_path
-        li = link_to t('.search_books'), search_books_path
+        li = link_to t('.search_books'), books_search_path
         li = link_to t('.your_books'), user_books_path
         li = link_to t('devise.views.logout'), destroy_user_session_path, method: :delete
       - else
@@ -16,7 +16,7 @@ nav.nav-extended
     ul#slide-out.side-nav
       - if user_signed_in?
         li = link_to t('.edit_account'), edit_user_registration_path
-        li = link_to t('.search_books'), search_books_path
+        li = link_to t('.search_books'), books_search_path
         li = link_to t('.your_books'), user_books_path
         li = link_to t('devise.views.logout'), destroy_user_session_path, method: :delete
       - else
