@@ -61,6 +61,7 @@ en:
       cancel_my_account: "Cancel my account"
       need_your_current_password: "We need your current password to confirm your changes"
       edit_account: "Edit Account"
+      sign_in_with_twitter: "Sign in with Twitter"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"

@@ -42,6 +42,7 @@ gem 'therubyracer'
 
 gem 'devise'
 gem 'amazon-ecs'
+gem 'omniauth-twitter'
 
 gem 'jquery-rails'
 gem 'slim-rails'

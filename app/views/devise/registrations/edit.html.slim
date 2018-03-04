@@ -24,13 +24,14 @@ h2 = t('devise.views.edit_account')
       = f.label :password_confirmation
       = f.password_field :password_confirmation, autocomplete: 'off'
 
-  .div
-    = t('devise.views.need_your_current_password')
+  - unless current_user.from_social?
+    .div
+      = t('devise.views.need_your_current_password')
 
-  .row
-    .input-field
-      = f.label :current_password
-      = f.password_field :current_password, autocomplete: 'off'
+    .row
+      .input-field
+        = f.label :current_password
+        = f.password_field :current_password, autocomplete: 'off'
 
   .row
     = f.submit t('button.edit'), class: session_btn_class
