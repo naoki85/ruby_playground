@@ -10,7 +10,7 @@ h2 = t('devise.views.edit_account')
 
   - if current_user.avatar_image?
     .row
-      = image_tag current_user.avatar_image_path
+      = image_tag current_user.avatar_image_path(resize: '100x100')
 
   .row
     = f.label :image
