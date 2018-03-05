@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:user) { create(:user) }
   describe '#from_social?' do
-    let(:user) { create(:user) }
     context 'when provider and uid do\'nt exist' do
       it { expect(user.from_social?).to eq false }
     end
@@ -14,6 +14,18 @@ RSpec.describe User, type: :model do
         user.save!
       end
       it { expect(user.from_social?).to eq true }
+    end
+  end
+
+  describe '#attach_image' do
+    it 'when params do\'t contain image, should return true' do
+      params = { }
+      expect(user.attach_image(params)).to eq true
+    end
+
+    it 'when params contain image, should return ActiveStorage::Attachment' do
+      params = { image: fixture_file_upload('test.png', 'image/png', true) }
+      expect(user.attach_image(params).present?).to eq true
     end
   end
 end

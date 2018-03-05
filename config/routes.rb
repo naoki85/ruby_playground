@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   resources :user_book_comments, except: [:show]
 
   # View Routing Errors
-  match '*path' => 'application#render_404', via: :all
+  # match '*path' => 'application#render_404', via: :all
 end

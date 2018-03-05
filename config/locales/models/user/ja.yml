@@ -8,3 +8,5 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         current_password: "現在のパスワード"
+        username: "ユーザー名"
+        image: "ユーザー画像"
