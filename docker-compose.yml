@@ -4,21 +4,35 @@ services:
     build:
       context: .
       dockerfile: ./docker/web/Dockerfile
-    command: >
-      bash -c "if [ -e tmp/pids/server.pid ]; then rm tmp/pids/server.pid ;fi \
-        && ./bin/bundle install \
-        && ./bin/bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bundle exec unicorn -p 3000 -c /book_recorder/config/unicorn/development.rb
     ports:
       - 3000:3000
     volumes:
       - .:/book_recorder
+      - ./tmp/share:/share
+      - ./tmp/mysql:/var/lib/mysql
     depends_on:
       - db
+    links:
+      - db
+      - db:database
+      - db:mysql
   db:
     build:
       context: .
       dockerfile: ./docker/db/Dockerfile
     ports:
       - 3306:3306
+    volumes:
+      - ./tmp/share:/share
+      - ./tmp/mysql:/var/lib/mysql
     env_file: ./docker/db/.mysql_env
-
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./tmp/share:/share
+      - ./tmp/mysql:/var/lib/mysql
