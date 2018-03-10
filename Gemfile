@@ -43,6 +43,7 @@ gem 'therubyracer'
 gem 'devise'
 gem 'amazon-ecs'
 gem 'omniauth-twitter'
+gem 'ridgepole'
 
 gem 'jquery-rails'
 gem 'slim-rails'
@@ -62,6 +63,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
+  gem 'capistrano3-ridgepole'
 end
 
 group :development do

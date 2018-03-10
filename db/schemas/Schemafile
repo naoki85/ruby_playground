@@ -1,0 +1,8 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+require 'active_storage_attachments.schema'
+require 'active_storage_blobs.schema'
+require 'books.schema'
+require 'user_book_comments.schema'
+require 'user_books.schema'
+require 'users.schema'

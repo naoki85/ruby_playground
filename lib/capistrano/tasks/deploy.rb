@@ -31,3 +31,11 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
+
+after 'deploy:publishing', 'ridgepole:ridgepole_apply'
+namespace :ridgepole do
+  desc 'ridgepole apply'
+  task :ridgepole_apply do
+    invoke 'ridgepole:apply'
+  end
+end
