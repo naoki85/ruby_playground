@@ -78,6 +78,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  config.logger = Logger.new('log/production.log', 14, 10 * 1024 * 1024)
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
