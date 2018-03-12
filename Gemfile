@@ -64,6 +64,7 @@ group :development, :test do
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
   gem 'capistrano3-ridgepole'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -83,7 +84,6 @@ group :test do
   gem 'chromedriver-helper'
   gem 'rspec-rails'
   gem 'shoulda-matchers', require: false
-  gem 'factory_bot_rails'
 end
 
 group :production do
