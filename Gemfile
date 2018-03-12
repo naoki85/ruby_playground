@@ -43,7 +43,7 @@ gem 'therubyracer'
 gem 'devise'
 gem 'amazon-ecs'
 gem 'omniauth-twitter'
-gem 'ridgepole'
+gem 'ridgepole', '>= 0.7.2.beta'
 
 gem 'jquery-rails'
 gem 'slim-rails'

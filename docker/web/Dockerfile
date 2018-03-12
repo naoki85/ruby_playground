@@ -1,5 +1,5 @@
 FROM ruby:2.5.0
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs apt-utils mysql-client
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs apt-utils mysql-client vim
  
 ENV ROOT_PATH /book_recorder
 RUN mkdir $ROOT_PATH

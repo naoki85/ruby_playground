@@ -227,7 +227,7 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    ridgepole (0.7.1)
+    ridgepole (0.7.2.beta)
       activerecord (>= 5.0.1, < 6)
       diffy
     rspec-core (3.7.1)
@@ -353,7 +353,7 @@ DEPENDENCIES
   mysql2 (~> 0.4.4)
   omniauth-twitter
   rails (~> 5.2.0.rc1)
-  ridgepole
+  ridgepole (>= 0.7.2.beta)
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
