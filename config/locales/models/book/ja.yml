@@ -4,6 +4,7 @@ ja:
       book: "本"
     attributes:
       book:
+        publisher_id: "出版社"
         asin: "ASIN"
         title: "タイトル"
         image_url: "画像URL"

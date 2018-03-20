@@ -1,0 +1,32 @@
+.image-slide-box {
+  @extend .row !optional;
+  height: 250px;
+  .image-list {
+    position: absolute;
+    left: 0px;
+    width: 2000px;
+    height: 200px;
+    overflow: hidden;
+    animation: slide-image-list 20s linear 0s 1 normal none running;
+    .image {
+      float: left;
+      padding: 10px;
+      img {
+        width: 100px;
+        max-height: 200px;
+      }
+    }
+  }
+}
+
+@keyframes slide-image-list {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: -1000px;
+  }
+  100% {
+    left: -2000px;
+  }
+}

@@ -2,7 +2,7 @@ class TopController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @books = Book.order('id desc').limit(10)
+    @books = Book.order('id asc').limit(10)
   end
 
   def user_policy

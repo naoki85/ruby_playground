@@ -2,6 +2,7 @@ class Book < ApplicationRecord
 
   has_many :user_books, dependent: :destroy
   has_many :users, through: :user_books
+  belongs_to :publisher
 
   validates :asin,            length: { maximum: 255 }
   validates :title,           length: { maximum: 255 }

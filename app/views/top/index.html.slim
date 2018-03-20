@@ -8,15 +8,9 @@ h1 = t('.title')
     = link_to t('.signup'), new_user_registration_path, class: session_btn_class
     = link_to t('.login'), new_user_session_path, class: session_btn_class
 
-.row
-  - @books.each do |book|
-    .col.s12.m6
-      .card.horizontal
-        .card-image
-          img[src="#{book.image_url}"]
-        .card-stacked
-          .card-content
-            p = book.title
-          .card-action
-            = link_to book.detail_page_url do
-              = image_tag 'commons/btn_amazon.png'
+.image-slide-box
+  .image-list
+    - @books.each do |book|
+      .image
+        = link_to book.detail_page_url do
+          = image_tag book.image_url

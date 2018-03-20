@@ -44,6 +44,10 @@ gem 'devise'
 gem 'amazon-ecs'
 gem 'omniauth-twitter'
 gem 'ridgepole', '>= 0.7.2.beta'
+gem 'selenium-webdriver'
+# Easy installation and use of chromedriver to run system tests with Chrome
+gem 'chromedriver-helper'
+gem 'pkg-config', '~> 1.1.7'
 
 gem 'jquery-rails'
 gem 'slim-rails'
@@ -79,9 +83,6 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
   gem 'rspec-rails'
   gem 'shoulda-matchers', require: false
 end

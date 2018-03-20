@@ -190,6 +190,7 @@ GEM
       omniauth-oauth (~> 1.1)
       rack
     orm_adapter (0.5.0)
+    pkg-config (1.1.9)
     public_suffix (3.0.1)
     rack (2.0.4)
     rack-test (0.8.2)
@@ -352,6 +353,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   mysql2 (~> 0.4.4)
   omniauth-twitter
+  pkg-config (~> 1.1.7)
   rails (~> 5.2.0.rc1)
   ridgepole (>= 0.7.2.beta)
   rspec-rails

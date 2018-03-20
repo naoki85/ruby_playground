@@ -4,6 +4,7 @@ en:
       book: "Book"
     attributes:
       book:
+        publisher_id: "Publisher"
         asin: "ASIN"
         title: "Title"
         image_url: "Image URL"
