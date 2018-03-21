@@ -1,9 +1,6 @@
 FROM ruby:2.5.0
 RUN apt-get update -qq && \
-    apt-get install -y build-essential libpq-dev nodejs apt-utils mysql-client vim && \
-    apt --fix-broken install -y && \
-    curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb
+    apt-get install -y build-essential libpq-dev nodejs apt-utils mysql-client vim
  
 ENV ROOT_PATH /book_recorder
 RUN mkdir $ROOT_PATH
