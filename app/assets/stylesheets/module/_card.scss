@@ -1,0 +1,11 @@
+.card.horizontal {
+  .card-image {
+    max-width: 20%;
+    @media (min-width: 601px) {
+      max-width: 15%;
+    }
+    @media (min-width: 993px) {
+      max-width: 10%;
+    }
+  }
+}

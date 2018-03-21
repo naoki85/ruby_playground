@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   # UserBookComment
   resources :user_book_comments, except: [:show]
 
+  # Publisher
+  resources :publishers, only: [:show]
+
   # View Routing Errors
   # match '*path' => 'application#render_404', via: :all
 end

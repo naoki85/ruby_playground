@@ -1,0 +1,14 @@
+= paginate @books, :remote => true
+
+- @books.each do |book|
+  .col.s12
+    .card.horizontal
+      .card-image
+        = image_tag book.image_url
+      .card-stacked
+        .card-content
+          p = book.title
+        .card-action
+          = link_to t('.detail_page'), book.detail_page_url
+
+= paginate @books, :remote => true
