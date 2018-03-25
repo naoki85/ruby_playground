@@ -3,6 +3,7 @@
 require 'active_storage_attachments.schema'
 require 'active_storage_blobs.schema'
 require 'books.schema'
+require 'book_categories.schema'
 require 'publishers.schema'
 require 'user_book_comments.schema'
 require 'user_books.schema'

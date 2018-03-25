@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      book_category: "カテゴリ"
+    attributes:
+      book_category:
+        name: "カテゴリ名"

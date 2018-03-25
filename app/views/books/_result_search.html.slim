@@ -16,4 +16,5 @@
               = f.hidden_field :title, value: item_attributes.get('Title')
               = f.hidden_field :image_url, value: small_image['URL']
               = f.hidden_field :detail_page_url, value: item.get('DetailPageURL')
+              = f.hidden_field :publisher_name, value: item_attributes.get('Publisher')
               = f.submit t('.add'), class: create_btn_class

@@ -1,7 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-  t.integer "publisher_id", null: false
+  t.integer "publisher_id", default: 0, null: false
+  t.integer "book_category_id", default: 0, null: false
   t.string "asin", default: "", null: false
   t.string "title", default: "", null: false
   t.string "image_url", default: "", null: false

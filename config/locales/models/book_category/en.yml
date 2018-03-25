@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      book_category: "Category"
+    attributes:
+      book_category:
+        name: "Category name"

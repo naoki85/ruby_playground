@@ -8,6 +8,7 @@ h1 = t('.title')
         .card-stacked
           .card-content
             p = user_book.book.title
+            p = user_book.book.book_category.name
           .card-action
             = link_to t('button.show'), user_book_comments_path(user_book_id: user_book.id),
                     class: default_btn_class
