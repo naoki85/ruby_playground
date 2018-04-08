@@ -1,0 +1,69 @@
+<h1><%= t('.title') %></h1>
+<div class="row"><%= t('.description') %></div>
+<div class="row">
+  <% if user_signed_in? %>
+    <%= link_to t('.search_books'), books_search_path, class: default_btn_class %>
+    <%= link_to t('.your_books'), user_books_path, class: default_btn_class %>
+  <% else %>
+    <%= link_to t('.signup'), new_user_registration_path, class: session_btn_class %>
+    <%= link_to t('.login'), new_user_session_path, class: session_btn_class %>
+  <% end %>
+</div>
+
+<% unless user_signed_in? %>
+  <% @publishers.each do |publisher| %>
+    <% if @books.key?(publisher.id) %>
+      <h2>
+        <%= link_to publisher_path(publisher) do %>
+          <%= publisher.name %>
+          <i class="material-icons keyboard_arrow_right"></i>
+        <% end %>
+      </h2>
+      <div class="image-slide-box">
+        <div class="image-list">
+          <% @books[publisher.id].each do |book| %>
+            <div class="image">
+              <%= link_to book.detail_page_url do %>
+                <%= image_tag book.image_url %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <canvas id="myChart" width="400" height="400"></canvas>
+  <script>
+    var labels = [];
+    var data = [];
+    <% @book_by_category.each do |category_name, count| %>
+      labels.push("<%= category_name %>")
+      data.push("<%= count %>")
+    <% end %>
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Your books',
+          data: data,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+          pointBackgroundColor: 'rgba(75, 192, 192, 0.2)',
+          pointBorderColor: 'rgba(75, 192, 192, 0.2)',
+          pointBorderWidth: 2,
+          pointStyle: 'circle',
+          pointHitRadius: 1,
+          pointHoverBackgroundColor: '#1de9b6'
+        }]
+      },
+      options: {
+        scales: false
+      }
+    });
+  </script>
+<% end %>
