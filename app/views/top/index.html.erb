@@ -24,9 +24,7 @@
             <p><%= user_book.book.title %></p>
           </div>
           <div class="card-action">
-            <%= link_to user_book.book.detail_page_url do %>
-              <%= image_tag 'commons/btn_amazon' %>
-            <% end %>
+            <%= link_to_detail_page(user_book.book.detail_page_url) %>
           </div>
         </div>
       </div>

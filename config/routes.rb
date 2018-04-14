@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   get 'privacy_policy' => 'top#privacy_policy'
 
   # Book
-  resources :books, only: [:index, :show, :create, :destroy]
   get 'books/search' => 'books#search'
   get 'books/search_by_keyword' => 'books#search_by_keyword'
+  resources :books, only: [:index, :show, :create, :destroy]
 
   # UserBook
   resources :user_books, only: [:index, :create, :destroy]

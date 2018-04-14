@@ -18,5 +18,4 @@
             p = book.title
             p = book.book_category.name
           .card-action
-            = link_to book.detail_page_url do
-              = image_tag 'commons/btn_amazon'
+            = link_to_detail_page(book.detail_page_url)
