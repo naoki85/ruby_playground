@@ -10,7 +10,7 @@ h1 = t('.title')
             p = user_book.book.title
             p = user_book.book.book_category.name
           .card-action
-            = link_to t('button.show'), user_book_comments_path(user_book_id: user_book.id),
+            = link_to t('button.show'), book_path(user_book.book_id),
                     class: default_btn_class
             = link_to t('button.delete'), user_book_path(user_book),
                     class: danger_btn_class, method: :delete

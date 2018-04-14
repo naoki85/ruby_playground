@@ -17,7 +17,7 @@ module UserDecorator
     elsif image_url.present?
       image_url
     else
-      ''
+      'commons/default_user_icon.png'
     end
   end
 end

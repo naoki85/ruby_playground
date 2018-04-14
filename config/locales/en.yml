@@ -213,6 +213,7 @@ en:
     pm: pm
   button:
     index: "Index"
+    create: "Create"
     show: "Show"
     edit: "Edit"
     delete: "Delete"

@@ -1,10 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 create_table "user_book_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-  t.integer "user_book_id", null: false
-  t.date "date"
+  t.integer "user_id", null: false
+  t.integer "book_id", null: false
   t.string "comment", default: "", null: false
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
-  t.index ["user_book_id"], name: "index_user_book_comments_on_user_book_id"
+  t.index ["user_id"], name: "index_user_book_comments_on_user_id"
+  t.index ["book_id"], name: "index_user_book_comments_on_book_id"
 end

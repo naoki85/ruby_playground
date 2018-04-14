@@ -11,22 +11,21 @@ class UserBookCommentsController < ApplicationController
   end
 
   def new
-    raise InvalidParameter unless valid_user_book_id?
+    raise InvalidParameter unless valid_book_id?
     @user_book_comment = UserBookComment.new
-    @user_book_comment.user_book_id = params[:user_book_id]
-    @user_book_comment.date = params[:date] if params[:date].present?
+    @user_book_comment.book_id = @book.id
   end
 
   def edit
   end
 
   def create
-    @user_book = UserBook.where(id: user_book_comment_params[:user_book_id], user_id: current_user.id).first
-    redirect_to root_url, alert: t("#{I18N_PREFIX}.alert.not_permitted") unless @user_book
-    @user_book_comment = UserBookComment.new(user_book_comment_params)
+    @book = Book.find(user_book_comment_params[:book_id])
+    redirect_to root_url, alert: t("#{I18N_PREFIX}.alert.not_permitted") unless @book
+    @user_book_comment = current_user.user_book_comments.new(user_book_comment_params)
 
     if @user_book_comment.save
-      redirect_to user_book_comments_path(user_book_id: @user_book_comment.user_book_id),
+      redirect_to book_path(@user_book_comment.book_id),
                   notice: t("#{I18N_PREFIX}.notice.created")
     else
       render :new
@@ -35,7 +34,7 @@ class UserBookCommentsController < ApplicationController
 
   def update
     if @user_book_comment.update(user_book_comment_params)
-      redirect_to user_book_comments_path(user_book_id: @user_book_comment.user_book_id),
+      redirect_to book_path(@user_book_comment.book_id),
                   notice: t("#{I18N_PREFIX}.notice.updated")
     else
       render :edit
@@ -43,9 +42,9 @@ class UserBookCommentsController < ApplicationController
   end
 
   def destroy
-    user_book_id = @user_book_comment.user_book_id
+    book_id = @user_book_comment.book_id
     @user_book_comment.destroy!
-    redirect_to user_book_comments_path(user_book_id: user_book_id),
+    redirect_to book_path(book_id),
                 notice: t("#{I18N_PREFIX}.notice.deleted")
   end
 
@@ -53,21 +52,21 @@ class UserBookCommentsController < ApplicationController
 
   def set_user_book_comment
     @user_book_comment = UserBookComment.find(params[:id])
-    unless @user_book_comment.user_book.user_id == current_user.id
+    unless @user_book_comment.user_id == current_user.id
       raise InvalidParameter
     end
   end
 
   def user_book_comment_params
     params.fetch(:user_book_comment, {}).permit(
-        :user_book_id, :date, :comment
+        :book_id, :comment
     )
   end
 
-  def valid_user_book_id?
-    return false unless params[:user_book_id].present?
-    @user_book = UserBook.where(id: params[:user_book_id], user_id: current_user.id).first
-    return false unless @user_book
+  def valid_book_id?
+    return false unless params[:book_id].present?
+    @book = Book.find(params[:book_id])
+    return false unless @book
     return true
   end
 end

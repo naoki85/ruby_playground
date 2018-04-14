@@ -205,6 +205,7 @@ ja:
     pm: 午後
   button:
     index: "一覧"
+    create: "作成"
     show: "確認"
     edit: "編集"
     delete: "削除"

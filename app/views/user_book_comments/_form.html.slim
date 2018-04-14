@@ -1,8 +1,5 @@
 = form_with model: user_book_comment, local: true do |f|
-  = f.hidden_field :user_book_id, value: user_book_comment.user_book_id
-  .row
-    = f.label :date
-    = f.text_field :date, class: 'datepicker'
+  = f.hidden_field :book_id, value: user_book_comment.book_id
   .row
     .input-field
       = f.label :comment
