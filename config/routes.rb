@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       registrations: 'users/registrations',
       omniauth_callbacks: 'users/omniauth_callbacks'
   }
+  resources :users, only: :show
 
   # Top
   get 'user_policy' => 'top#user_policy'

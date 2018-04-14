@@ -20,4 +20,12 @@ module UserDecorator
       'commons/default_user_icon.png'
     end
   end
+
+  def name
+    if username.present?
+      username
+    else
+      'No name'
+    end
+  end
 end
