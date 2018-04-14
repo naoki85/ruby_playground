@@ -66,7 +66,7 @@ module ApplicationHelper
   def link_to_detail_page(detail_page_url)
     if detail_page_url =~ /www\.amazon\.co\.jp/
       link_to detail_page_url do
-        image_tag 'commons/btn_amazon'
+        image_tag 'commons/btn_amazon.png'
       end
     else
       link_to t('button.show'), detail_page_url, class: default_btn_class
