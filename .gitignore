@@ -33,3 +33,8 @@ config/deploy/production.rb
 config/id_rsa
 config/secrets.yml
 config/storage.yml
+/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity
