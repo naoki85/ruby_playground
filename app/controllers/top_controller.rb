@@ -2,7 +2,7 @@ class TopController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @user_books = UserBook.includes([:book]).order('id desc').limit(10)
+    @user_book_comments = UserBookComment.includes([:book, :user]).order('created_at desc').limit(10)
   end
 
   def user_policy
