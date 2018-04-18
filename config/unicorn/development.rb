@@ -1,4 +1,4 @@
-worker_processes 8
+worker_processes 2
 timeout 30
 
 pid "/var/run/unicorn.pid"
