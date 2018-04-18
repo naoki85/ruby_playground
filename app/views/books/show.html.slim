@@ -12,7 +12,7 @@ h1 = @book.title
 
 - @book.user_book_comments.each do |user_book_comment|
   .col.s12.m8.offset-m2.l6.offset-l3
-    .card-panel.grey.lighten-5.z-depth-1
+    .card-panel.z-depth-1
       .row.valign-wrapper
         .col.s2
           = link_to user_path(user_book_comment.user_id) do
@@ -20,6 +20,7 @@ h1 = @book.title
         .col.s9
           span.black-text
             = user_book_comment.comment
+          p.margin-default-top.right-align.grey-text = user_book_comment.created_at.strftime('%Y-%m-%d')
         .col.s1
           - if user_signed_in? && current_user.id == user_book_comment.user_id
             .row
