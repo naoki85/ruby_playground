@@ -24,6 +24,12 @@ Rails.application.routes.draw do
   # Publisher
   resources :publishers, only: [:show]
 
+  # API
+  namespace :v1, format: 'json' do
+    resource :login, only: [:create], controller: :sessions
+    resource :users, only: [:create]
+  end
+
   # View Routing Errors
   # match '*path' => 'application#render_404', via: :all
 end

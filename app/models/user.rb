@@ -11,6 +11,14 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
+  after_create :update_authentication_token!
+
+  # @return bool
+  def update_authentication_token!
+    self.authentication_token = "#{self.id}:#{Devise.friendly_token}"
+    save
+  end
+
   # @return bool
   def from_social?
     provider.present? && uid.present?

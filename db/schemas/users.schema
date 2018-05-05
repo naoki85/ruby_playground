@@ -22,11 +22,14 @@ create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :
   t.string "provider", default: ""
   t.string "uid", default: ""
   t.string "image_url", default: ""
+  t.string "authentication_token", default: "", null: false
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
   t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   t.index ["email"], name: "index_users_on_email", unique: true
   t.index ["provider", "uid"], name: "index_users_on_provider_and_uid"
   t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  # TODO: カラムを整理する
   t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
 end

@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
           }
           format.json {
             @return_code = 500
-            render 'api/errors/error', status: 500
+            render 'v1/errors/error', status: 500
           }
           format.all {
             render :text => 'Not Acceptable', status: 406
@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
           }
           format.json {
             @return_code = 400
-            render 'api/errors/error', status: 400
+            render 'v1/errors/error', status: 400
           }
           format.all {
             render :text => 'Not Acceptable', status: 406
@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
           }
           format.json {
             @return_code = 404
-            render 'api/errors/error', status: 404
+            render 'v1/errors/error', status: 404
           }
           format.all {
             render :text => 'Not Acceptable', status: 406
