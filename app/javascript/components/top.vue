@@ -15,7 +15,7 @@
             <div class="card-action avatar-below-card">
               <span class="grey-text left-align">{{ comment.created_at }}</span>
               <a :href="'/users/' + comment.user.id">
-                <img class="circle responsive-img" :src="comment.user.avatar_image" :alt="comment.user.username">
+                <img class="circle responsive-img" :src="comment.user.avatar_image_path" :alt="comment.user.name">
               </a>
             </div>
           </div>

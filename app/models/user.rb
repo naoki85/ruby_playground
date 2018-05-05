@@ -34,20 +34,4 @@ class User < ApplicationRecord
       return true
     end
   end
-
-  # @return string
-  def avatar_image(**options)
-    return '' unless avatar_image?
-    if image.attached?
-      if options.present? && options.key?(:resize)
-        url_for(image.variant(resize: options[:resize]))
-      else
-        url_for(image)
-      end
-    elsif image_url.present?
-      image_url
-    else
-      'commons/default_user_icon.png'
-    end
-  end
 end

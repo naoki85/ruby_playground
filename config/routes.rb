@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   # API
   namespace :v1, format: 'json' do
     resource :login, only: [:create], controller: :sessions
-    resource :users, only: [:create]
+    resources :users, only: [:show, :create]
     resources :user_book_comments, only: [:index]
   end
 

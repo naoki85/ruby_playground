@@ -7,12 +7,11 @@ module UserDecorator
 
   # @return string
   def avatar_image_path(**options)
-    return '' unless avatar_image?
     if image.attached?
       if options.present? && options.key?(:resize)
-        image.variant(resize: options[:resize])
+        url_for(image.variant(resize: options[:resize]))
       else
-        image
+        url_for(image)
       end
     elsif image_url.present?
       image_url
