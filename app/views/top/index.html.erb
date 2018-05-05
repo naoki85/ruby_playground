@@ -1,3 +1,4 @@
+<%= javascript_pack_tag 'top' %>
 <h1><%= t('.title') %></h1>
 <div class="row"><%= t('.description') %></div>
 <div class="row">
@@ -10,27 +11,6 @@
   <% end %>
 </div>
 
-<% @user_book_comments.each do |user_book_comment| %>
-  <div class="row">
-    <div class="col s12">
-      <div class="card horizontal">
-        <div class="card-image">
-          <%= link_to book_path(user_book_comment.book_id) do %>
-            <%= image_tag user_book_comment.book.image_url %>
-          <% end %>
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <p><%= user_book_comment.comment %></p>
-          </div>
-          <div class="card-action avatar-below-card">
-            <span class="grey-text left-align"><%= user_book_comment.created_at.strftime('%Y-%m-%d') %></span>
-            <%= link_to user_path(user_book_comment.user_id) do %>
-              <%= image_tag user_book_comment.user.avatar_image_path, class: 'circle responsive-img' %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
+<div id="app">
+  <top></top>
+</div>
