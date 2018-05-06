@@ -12,7 +12,7 @@ var router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: Top },
-    { path: '/user/:id', component: User },
+    { path: '/users/:id', component: User },
     { path: '/users/sign_up', component: UserCreate },
     { path: '/users/sign_in', component: Login }
   ]

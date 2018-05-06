@@ -20,7 +20,7 @@
             </div>
             <div class="card-action avatar-below-card">
               <span class="grey-text left-align">{{ comment.created_at }}</span>
-              <router-link to="'/users/' + comment.user.id">
+              <router-link :to="'/users/' + comment.user.id">
                 <img class="circle responsive-img" :src="comment.user.avatar_image_path" :alt="comment.user.name">
               </router-link>
             </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import request from '../utils/requests'
 
   export default {
     data: function() {
@@ -41,14 +41,13 @@
       }
     },
     mounted: function() {
-      console.log(this.$store.getters.auth);
       document.getElementsByClassName('turbolinks-loading')[0].classList.add('active')
       this.fetchComments();
       document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active')
     },
     methods: {
       fetchComments: function() {
-        axios.get('/v1/user_book_comments').then((response) => {
+        request.get('/v1/user_book_comments').then((response) => {
           for(var i = 0; i < response.data.user_book_comments.length; i++) {
             console.log(response.data.user_book_comments[i]);
             this.comments.push(response.data.user_book_comments[i]);

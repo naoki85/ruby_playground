@@ -9,8 +9,8 @@ export default {
     } else if (method === 'post') {
       promise = axios.post(url, params)
     }
-    promise.catch(function () {
-      return alert('エラーが発生しました')
+    promise.catch(function() {
+      return console.log(error);
     });
     return promise;
   },

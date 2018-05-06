@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import request from '../utils/requests'
 
   export default {
     data: function() {
@@ -48,15 +48,12 @@
     },
     mounted: function() {
       document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
-      var pathes = this.$route.path.split('/');
-      var userId = pathes[pathes.length - 1];
-      console.log($route.params.id);
-      this.fetchUser(userId);
+      this.fetchUser(this.$route.params.id);
       document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
     },
     methods: {
       fetchUser: function(userId) {
-        axios.get('/v1/users/' + userId).then((response) => {
+        request.get('/v1/users/' + userId, {}).then((response) => {
           this.user = response.data.user;
         }, (error) => {
           console.log(error);

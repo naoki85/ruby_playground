@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import request from '../utils/requests'
   import { mapActions } from 'vuex'
 
   export default {
@@ -42,7 +42,7 @@
           email: this.email,
           password: this.password
         };
-        axios.post('/v1/login', params).then((response) => {
+        request.post('/v1/login', params).then((response) => {
           console.log(response.data.user);
           localStorage.setItem('bookRecorderAccessToken', response.data.user.authentication_token);
           var self = this;

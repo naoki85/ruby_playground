@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import request from '../utils/requests'
 
   export default {
     data: function() {
@@ -41,8 +41,7 @@
             password: this.password
           }
         };
-        axios.post('/v1/users', params).then((response) => {
-          console.log(response);
+        request.post('/v1/users', params).then((response) => {
           document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
           this.isSuccess = true;
         }, (error) => {
