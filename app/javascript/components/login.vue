@@ -44,7 +44,7 @@
         };
         request.post('/v1/login', params).then((response) => {
           console.log(response.data.user);
-          localStorage.setItem('bookRecorderAccessToken', response.data.user.authentication_token);
+          localStorage.setItem('bookRecorderAuthenticationToken', response.data.user.authentication_token);
           var self = this;
           document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
           self.login({
