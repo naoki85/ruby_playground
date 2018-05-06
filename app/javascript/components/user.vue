@@ -8,7 +8,7 @@
         <h1>{{ user.name }}</h1>
       </div>
     </div>
-    <div class="row" v-for="book in user.books">
+    <div class="row" v-for="book in user.book">
       <div class="row">
         <div class="col s12">
           <div class="card horizontal">

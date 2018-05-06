@@ -1,5 +1,5 @@
 class UserBooksController < ApplicationController
-
+  skip_before_action :authenticate_user!
   I18N_PREFIX = 'user_books_controller'
 
   def index

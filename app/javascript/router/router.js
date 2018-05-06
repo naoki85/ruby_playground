@@ -7,6 +7,7 @@ import Top from '../components/top'
 import User from '../components/user'
 import UserCreate from '../components/user_create'
 import Login from '../components/login'
+import UserBooksIndex from '../components/user_books_index'
 
 Vue.use(VueRouter)
 
@@ -16,7 +17,8 @@ var router = new VueRouter({
     { path: '/', component: Top },
     { path: '/users/sign_up', component: UserCreate },
     { path: '/users/sign_in', component: Login },
-    { path: '/users/:id', component: User }
+    { path: '/users/:id', component: User },
+    { path: '/user_books', component: UserBooksIndex, meta: { requiresAuth: true } }
   ]
 });
 
@@ -27,7 +29,16 @@ router.beforeEach((to, from, next) => {
   } else {
     Auth.state.loggedIn = false;
   }
-  next();
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!Auth.state.loggedIn) {
+      next({ path: '/'});
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router

@@ -4,7 +4,7 @@
     <div class="row">本を追加してコメントを残そう!!</div>
     <div v-if="loggedIn" class="row">
       <a href="/books/search" class="waves-effect btn grey lighten-5 black-text">本を探す</a>
-      <a to="/user_books" class="waves-effect btn grey lighten-5 black-text">本棚</a>
+      <router-link to="/user_books" class="waves-effect btn grey lighten-5 black-text">本棚</router-link>
     </div>
     <div v-else class="row">
       <router-link to="/users/sign_up" class="waves-effect waves-teal btn">新規登録</router-link>
