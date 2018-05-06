@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>新規登録</h2>
     <p v-if="isError" class="alert alert-danger">登録に失敗しました。登録内容を確認してください。</p>
     <p v-if="isError" class="alert alert-danger">登録が完了しました。</p>
     <div class="row">
@@ -14,7 +15,7 @@
       <input type="password" autocomplete="off" class="validate" v-model="password">
     </div>
     <div class="row">
-      <input type="button" value="LOGIN" @click="onCreate" class="waves-effect waves-teal btn">
+      <input type="button" value="登録" @click="onCreate" class="waves-effect waves-teal btn">
     </div>
   </div>
 </template>

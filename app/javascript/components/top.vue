@@ -1,5 +1,11 @@
 <template>
   <div>
+    <h1>最近追加された本</h1>
+    <div class="row">本を追加してコメントを残そう!!</div>
+    <div class="row">
+      <router-link to="/users/sign_up" class="waves-effect waves-teal btn">新規登録</router-link>
+      <router-link to="/users/sign_in" class="waves-effect waves-teal btn">ログイン</router-link>
+    </div>
     <div class="row" v-for="comment in comments">
       <div class="col s12">
         <div class="card horizontal">
@@ -14,9 +20,9 @@
             </div>
             <div class="card-action avatar-below-card">
               <span class="grey-text left-align">{{ comment.created_at }}</span>
-              <a :href="'/users/' + comment.user.id">
+              <router-link to="'/users/' + comment.user.id">
                 <img class="circle responsive-img" :src="comment.user.avatar_image_path" :alt="comment.user.name">
-              </a>
+              </router-link>
             </div>
           </div>
         </div>

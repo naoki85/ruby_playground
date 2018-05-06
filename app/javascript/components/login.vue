@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>ログイン</h2>
     <p v-if="isError" class="alert alert-danger">ログインに失敗しました。</p>
     <div class="row">
       <div class="input-field">
@@ -14,7 +15,7 @@
       </div>
     </div>
     <div class="row">
-      <input type="button" value="LOGIN" @click="onLogin" class="waves-effect waves-teal btn">
+      <input type="button" value="ログイン" @click="onLogin" class="waves-effect waves-teal btn">
     </div>
   </div>
 </template>
