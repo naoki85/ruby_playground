@@ -50,6 +50,7 @@
       document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
       var pathes = this.$route.path.split('/');
       var userId = pathes[pathes.length - 1];
+      console.log($route.params.id);
       this.fetchUser(userId);
       document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
     },

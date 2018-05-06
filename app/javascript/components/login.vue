@@ -21,6 +21,7 @@
 
 <script>
   import axios from 'axios'
+  import { mapActions } from 'vuex'
 
   export default {
     data: function() {
@@ -31,6 +32,9 @@
       }
     },
     methods: {
+      ...mapActions('auth', [
+        'login'
+      ]),
       onLogin: function () {
         document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
         var params = {
@@ -40,7 +44,12 @@
         axios.post('/v1/login', params).then((response) => {
           console.log(response.data.user);
           localStorage.setItem('bookRecorderAccessToken', response.data.user.authentication_token);
-          this.login;
+          var self = this;
+          self.login({
+            //mail: this.$data.id,
+            //pass: this.$data.password,
+            router: self.$router
+          });
           document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
           location.href = '/';
         }, (error) => {

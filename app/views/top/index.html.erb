@@ -1,4 +1,4 @@
-<%= javascript_pack_tag 'top' %>
+<%= javascript_pack_tag 'main' %>
 <h1><%= t('.title') %></h1>
 <div class="row"><%= t('.description') %></div>
 <div class="row">
@@ -12,5 +12,5 @@
 </div>
 
 <div id="app">
-  <top></top>
+  <router-view></router-view>
 </div>

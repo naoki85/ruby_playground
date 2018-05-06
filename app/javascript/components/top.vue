@@ -35,6 +35,7 @@
       }
     },
     mounted: function() {
+      console.log(this.$store.getters.auth);
       document.getElementsByClassName('turbolinks-loading')[0].classList.add('active')
       this.fetchComments();
       document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active')

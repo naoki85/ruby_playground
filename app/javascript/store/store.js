@@ -1,18 +1,11 @@
 import Vue from 'vue/dist/vue.esm.js'
 import Vuex from 'vuex'
+import auth from './modules/auth'
 
 Vue.use(Vuex)
 
-export default {
-  state: {
-    loggedIn: false
-  },
-  mutations: {
-    login (state) {
-      state.loggedIn = true
-    },
-    logout (state) {
-      state.loggedIn = false
-    }
+export default new Vuex.Store({
+  modules: {
+    auth
   }
-}
+})
