@@ -1,5 +1,5 @@
 import Vue from 'vue/dist/vue.esm'
-import Top from '../components/top.vue'
+import Login from '../components/login.vue'
 import store from '../store/store.js'
 import TurbolinksAdapter from 'vue-turbolinks'
 
@@ -10,7 +10,7 @@ document.addEventListener('turbolinks:load', () => {
     el: '#app',
     store,
     components: {
-      'top': Top
+      'login': Login
     }
   })
 });

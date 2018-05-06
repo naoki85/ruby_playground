@@ -47,11 +47,11 @@
       }
     },
     mounted: function() {
-      document.getElementsByClassName('turbolinks-loading')[0].classList.add('active')
+      document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
       var pathes = this.$route.path.split('/');
       var userId = pathes[pathes.length - 1];
       this.fetchUser(userId);
-      document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active')
+      document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
     },
     methods: {
       fetchUser: function(userId) {
