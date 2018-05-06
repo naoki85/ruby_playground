@@ -47,15 +47,16 @@
       }
     },
     mounted: function() {
+      document.getElementsByClassName('turbolinks-loading')[0].classList.add('active')
       var pathes = this.$route.path.split('/');
       var userId = pathes[pathes.length - 1];
       this.fetchUser(userId);
+      document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active')
     },
     methods: {
       fetchUser: function(userId) {
         axios.get('/v1/users/' + userId).then((response) => {
           this.user = response.data.user;
-        console.log(this.user);
         }, (error) => {
           console.log(error);
         });
