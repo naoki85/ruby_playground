@@ -10,7 +10,7 @@ export default {
       promise = axios.post(url, params)
     }
     promise.catch(function() {
-      return console.log(error);
+      return console.log(promise);
     });
     return promise;
   },

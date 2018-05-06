@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h2>新規登録</h2>
     <p v-if="isError" class="alert alert-danger">登録に失敗しました。登録内容を確認してください。</p>
     <p v-if="isError" class="alert alert-danger">登録が完了しました。</p>

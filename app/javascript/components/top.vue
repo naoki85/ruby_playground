@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div class="container">
     <h1>最近追加された本</h1>
     <div class="row">本を追加してコメントを残そう!!</div>
-    <div class="row">
+    <div v-if="loggedIn" class="row">
+      <a href="/books/search" class="waves-effect btn grey lighten-5 black-text">本を探す</a>
+      <a to="/user_books" class="waves-effect btn grey lighten-5 black-text">本棚</a>
+    </div>
+    <div v-else class="row">
       <router-link to="/users/sign_up" class="waves-effect waves-teal btn">新規登録</router-link>
       <router-link to="/users/sign_in" class="waves-effect waves-teal btn">ログイン</router-link>
     </div>
@@ -33,12 +37,18 @@
 
 <script>
   import request from '../utils/requests'
+  import { mapState } from 'vuex'
 
   export default {
     data: function() {
       return {
         comments: []
       }
+    },
+    computed: {
+      ...mapState('auth', [
+        'loggedIn'
+      ])
     },
     mounted: function() {
       document.getElementsByClassName('turbolinks-loading')[0].classList.add('active')

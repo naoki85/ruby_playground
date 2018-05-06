@@ -15,12 +15,7 @@ export default {
     login ({ commit }, payload) {
       // ログイン後、リダイレクト
       commit('login');
-      //payload.router.push('/member');
-    }
-  },
-  getters: {
-    isLoggedIn: state => {
-      return state.loggedIn;
+      payload.router.push('/');
     }
   }
 }

@@ -11,22 +11,13 @@ html[lang='ja']
     = display_meta_tags(default_meta_tags)
 
   body
-    == render 'layouts/header'
-    .container
-      - if notice
-        p.alert.alert-success = notice
-      - if alert
-        p.alert.alert-danger = alert
+    == yield
 
-      == yield
-
-      .preloader-wrapper.small.turbolinks-loading
-        .spinner-layer.spinner-green-only
-          .circle-clipper.left
-            .circle
-          .gap-patch
-            .circle
-          .circle-clipper.right
-            .circle
-
-    == render 'layouts/footer'
+    .preloader-wrapper.small.turbolinks-loading
+      .spinner-layer.spinner-green-only
+        .circle-clipper.left
+          .circle
+        .gap-patch
+          .circle
+        .circle-clipper.right
+          .circle

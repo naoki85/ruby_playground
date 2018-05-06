@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="row margin-default-top">
       <div class="col s4">
         <img :src="user.avatar_image_path" width="100%">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h2>ログイン</h2>
     <p v-if="isError" class="alert alert-danger">ログインに失敗しました。</p>
     <div class="row">
@@ -46,13 +46,10 @@
           console.log(response.data.user);
           localStorage.setItem('bookRecorderAccessToken', response.data.user.authentication_token);
           var self = this;
+          document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
           self.login({
-            //mail: this.$data.id,
-            //pass: this.$data.password,
             router: self.$router
           });
-          document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
-          location.href = '/';
         }, (error) => {
           console.log(error);
           document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
