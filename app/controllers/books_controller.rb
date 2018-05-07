@@ -9,6 +9,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.includes([user_book_comments: [:user]]).find(params[:id])
+    @book = Book.select(:title).find(params[:id])
   end
 end

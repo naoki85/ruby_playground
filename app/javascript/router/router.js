@@ -8,6 +8,7 @@ import User from '../components/user'
 import UserCreate from '../components/user_create'
 import Login from '../components/login'
 import UserBooksIndex from '../components/user_books_index'
+import Book from '../components/book'
 
 Vue.use(VueRouter)
 
@@ -18,7 +19,8 @@ var router = new VueRouter({
     { path: '/users/sign_up', component: UserCreate },
     { path: '/users/sign_in', component: Login },
     { path: '/users/:id', component: User },
-    { path: '/user_books', component: UserBooksIndex, meta: { requiresAuth: true } }
+    { path: '/user_books', component: UserBooksIndex, meta: { requiresAuth: true } },
+    { path: '/books/:id', component: Book }
   ]
 });
 

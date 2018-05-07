@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :create]
     resources :user_book_comments, only: [:index]
     delete 'user_books' => 'user_books#destroy'
+    resources :books, only: [:show]
   end
 
   # View Routing Errors

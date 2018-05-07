@@ -14,9 +14,9 @@
       <div class="col s12">
         <div class="card horizontal">
           <div class="card-image">
-            <a :href="'/books/' + comment.book.id">
+            <router-link :to="'/books/' + comment.book.id">
               <img :src="comment.book.image_url" :alt="comment.book.title">
-            </a>
+            </router-link>
           </div>
           <div class="card-stacked">
             <div class="card-content">
@@ -59,7 +59,6 @@
       fetchComments: function() {
         request.get('/v1/user_book_comments', {}).then((response) => {
           for(var i = 0; i < response.data.user_book_comments.length; i++) {
-            console.log(response.data.user_book_comments[i]);
             this.comments.push(response.data.user_book_comments[i]);
           }
         }, (error) => {

@@ -14,7 +14,7 @@
               <p>{{ book.book_category }}</p>
             </div>
             <div class="card-action">
-              <a :href="'/books/' + book.id" class="waves-effect btn grey lighten-5 black-text">確認</a>
+              <router-link :to="'/books/' + book.id" class="waves-effect btn grey lighten-5 black-text">確認</router-link>
               <button @click="deleteUserBook(book.id)" class="waves-effect waves-light btn red accent-3">削除</button>
             </div>
           </div>
