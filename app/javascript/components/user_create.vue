@@ -35,13 +35,15 @@
     methods: {
       onCreate: function () {
         document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
-        var params = {
-          user: {
-            email: this.email,
-            password: this.password
+        var options = {
+          params: {
+            user: {
+              email: this.email,
+              password: this.password
+            }
           }
         };
-        request.post('/v1/users', params).then((response) => {
+        request.post('/v1/users', options).then((response) => {
           document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
           this.isSuccess = true;
         }, (error) => {

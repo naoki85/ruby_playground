@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show, :create, :destroy]
 
   # UserBook
-  resources :user_books, only: [:index, :create, :destroy]
+  resources :user_books, only: [:index, :create]
 
   # UserBookComment
   resources :user_book_comments, except: [:show]
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resource :login, only: [:create], controller: :sessions
     resources :users, only: [:show, :create]
     resources :user_book_comments, only: [:index]
+    delete 'user_books' => 'user_books#destroy'
   end
 
   # View Routing Errors

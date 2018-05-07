@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>本棚</h1>
+    <p v-if="isDeleted" class="alert alert-success">削除しました。</p>
     <div v-for="book in user.books" class="row">
       <div class="col s12">
         <div class="card horizontal">
@@ -14,8 +15,7 @@
             </div>
             <div class="card-action">
               <a :href="'/books/' + book.id" class="waves-effect btn grey lighten-5 black-text">確認</a>
-              <!-- TODO: 削除する場合は、book.idから削除する -->
-              <!--<a :href="'/user_books/' + userBook.id" class="waves-effect waves-light btn red accent-3" rel="nofollow" data-method="delete">削除</a>-->
+              <button @click="deleteUserBook(book.id)" class="waves-effect waves-light btn red accent-3">削除</button>
             </div>
           </div>
         </div>
@@ -26,18 +26,13 @@
 
 <script>
   import request from '../utils/requests'
-  import { mapState } from 'vuex'
 
   export default {
     data: function() {
       return {
-        user: []
+        user: [],
+        isDeleted: false
       }
-    },
-    computed: {
-      ...mapState('auth', [
-        'loggedIn'
-      ])
     },
     mounted: function() {
       document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
@@ -54,12 +49,24 @@
         });
       },
       getUserId: function() {
-        var authentication_token = localStorage.getItem('bookRecorderAuthenticationToken');
-        if (authentication_token) {
-          return authentication_token.split(':')[0];
+        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
+        if (authenticateToken) {
+          return authenticateToken.split(':')[0];
         } else {
           location.href('/');
         }
+      },
+      deleteUserBook: function(bookId) {
+        document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
+        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
+        request.delete('/v1/user_books', { params: { book_id: bookId }, headers: { Authorization: authenticateToken } }).then((response) => {
+          this.isDeleted = true;
+          var userId = this.getUserId();
+          this.fetchUser(userId);
+        }, (error) => {
+          console.log(error);
+        });
+        document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
       }
     }
   }

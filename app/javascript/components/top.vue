@@ -57,7 +57,7 @@
     },
     methods: {
       fetchComments: function() {
-        request.get('/v1/user_book_comments').then((response) => {
+        request.get('/v1/user_book_comments', {}).then((response) => {
           for(var i = 0; i < response.data.user_book_comments.length; i++) {
             console.log(response.data.user_book_comments[i]);
             this.comments.push(response.data.user_book_comments[i]);

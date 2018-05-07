@@ -1,23 +1,35 @@
 import axios from 'axios'
 
 export default {
-  request (method, url, params) {
+  request (method, url, options) {
     var promise = null;
-
-    if (method === 'get') {
-      promise = axios.get(url, { params: params })
-    } else if (method === 'post') {
-      promise = axios.post(url, params)
+    var params = {};
+    var headers = {};
+    if (options.params) {
+      params = options.params;
     }
+    if (options.headers) {
+      headers = options.headers;
+    }
+
+    promise = axios({
+      method: method,
+      url: url,
+      data: params,
+      headers: headers
+    });
     promise.catch(function() {
       return console.log(promise);
     });
     return promise;
   },
-  get (url, params) {
-    return this.request('get', url, params);
+  get (url, options) {
+    return this.request('get', url, options);
   },
-  post (url, params) {
-    return this.request('post', url, params);
+  post (url, options) {
+    return this.request('post', url, options);
+  },
+  delete (url, options) {
+    return this.request('delete', url, options);
   }
 }

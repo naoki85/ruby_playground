@@ -38,11 +38,13 @@
       ]),
       onLogin: function () {
         document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
-        var params = {
-          email: this.email,
-          password: this.password
+        var options = {
+          params: {
+            email: this.email,
+            password: this.password
+          }
         };
-        request.post('/v1/login', params).then((response) => {
+        request.post('/v1/login', options).then((response) => {
           console.log(response.data.user);
           localStorage.setItem('bookRecorderAuthenticationToken', response.data.user.authentication_token);
           var self = this;
