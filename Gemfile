@@ -71,6 +71,7 @@ group :development, :test do
   gem 'capistrano3-unicorn'
   gem 'capistrano3-ridgepole'
   gem 'factory_bot_rails'
+  gem 'foreman'
 end
 
 group :development do

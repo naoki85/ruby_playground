@@ -4,9 +4,10 @@ services:
     build:
       context: .
       dockerfile: ./docker/web/Dockerfile
-    command: bundle exec unicorn -p 3000 -c /book_recorder/config/unicorn/development.rb
+    command: foreman start
     ports:
       - 3000:3000
+      - 8080:8080
     volumes:
       - .:/book_recorder
       - ./tmp/share:/share
@@ -27,12 +28,12 @@ services:
       - ./tmp/share:/share
       - ./tmp/mysql:/var/lib/mysql
     env_file: ./docker/db/.mysql_env
-  nginx:
-    build:
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
-    ports:
-      - 80:80
-    volumes:
-      - ./tmp/share:/share
-      - ./tmp/mysql:/var/lib/mysql
+#  nginx:
+#    build:
+#      context: .
+#      dockerfile: ./docker/nginx/Dockerfile
+#    ports:
+#      - 80:80
+#    volumes:
+#      - ./tmp/share:/share
+#      - ./tmp/mysql:/var/lib/mysql
