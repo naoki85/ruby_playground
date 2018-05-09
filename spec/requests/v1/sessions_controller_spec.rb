@@ -20,4 +20,21 @@ RSpec.describe V1::SessionsController, type: :request do
       expect(response.status).to eq 400
     end
   end
+
+  describe '#destroy' do
+    let(:request_url) { '/v1/logout' }
+    let(:user) { create(:user) }
+
+    before do
+      user_id = user.id
+      token = 'aaaaaaa'
+      user.authentication_token = user_id.to_s + ':' + token
+      user.save!
+    end
+
+    it 'enable logout' do
+      delete request_url, headers: { 'Authorization' => user.id.to_s + ':aaaaaaa' }
+      expect(response.status).to eq 200
+    end
+  end
 end

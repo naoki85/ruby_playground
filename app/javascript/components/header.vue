@@ -9,7 +9,7 @@
         <li><a href="/users/edit">アカウント編集</a></li>
         <li><a href="/books/search">本を探す</a></li>
         <li><router-link to="/user_books">本棚</router-link></li>
-        <li><a href="/users/sign_out" data-method="delete">ログアウト</a></li>
+        <li><a href="javascript:void(0)" @click="onLogout">ログアウト</a></li>
       </ul>
       <ul v-else class="right hide-on-med-and-down">
         <li><router-link to="/users/sign_in">ログイン</router-link></li>
@@ -18,8 +18,8 @@
         <li><a href="/users/edit">アカウント編集</a></li>
         <li><a href="/books/search">本を探す</a></li>
         <li><router-link to="/user_books">本棚</router-link></li>
-        <li><a href="/users/sign_out" data-method="delete">ログアウト</a></li>
-        <li><a href="#" @click="hiddenSidenav">サイドバーを閉じる</a></li>
+        <li><a href="javascript:void(0)" @click="onLogout">ログアウト</a></li>
+        <li><a href="javascript:void(0)" @click="hiddenSidenav">サイドバーを閉じる</a></li>
       </ul>
       <ul v-else id="slide-out" class="side-nav">
         <li><router-link to="/users/sign_in">ログイン</router-link></li>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+  import request from '../utils/requests'
   import { mapState } from 'vuex'
 
   export default {
@@ -45,6 +46,15 @@
       },
       hiddenSidenav: function() {
         document.getElementById("slide-out").style.transform = "translateX(-100%)";
+      },
+      onLogout: function() {
+        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
+        request.delete('/v1/logout', { headers: { Authorization: authenticateToken } }).then((response) => {
+          localStorage.removeItem('bookRecorderAuthenticationToken');
+          location.href = '/';
+        }, (error) => {
+          console.log(error);
+        });
       }
     }
   }
