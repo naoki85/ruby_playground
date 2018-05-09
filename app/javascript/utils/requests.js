@@ -29,6 +29,9 @@ export default {
   post (url, options) {
     return this.request('post', url, options);
   },
+  patch (url, options) {
+    return this.request('patch', url, options);
+  },
   delete (url, options) {
     return this.request('delete', url, options);
   }

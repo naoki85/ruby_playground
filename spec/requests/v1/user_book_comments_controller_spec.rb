@@ -46,6 +46,35 @@ RSpec.describe V1::UserBookCommentsController, type: :request do
     end
   end
 
+  describe '#update' do
+    let(:request_url) { '/v1/user_book_comments/' }
+    let(:user_book_comment) { create(:user_book_comment, user_id: user.id) }
+    let(:user) { create(:user) }
+
+    before do
+      user_id = user.id
+      token = 'aaaaaaa'
+      user.authentication_token = user_id.to_s + ':' + token
+      user.save!
+    end
+
+    context 'normal pattern' do
+      it 'create user_book_comment' do
+        patch request_url + user_book_comment.id.to_s, params: { comment: 'testtest' },
+             headers: { 'Authorization' => user.id.to_s + ':aaaaaaa' }
+        expect(response.status).to eq 200
+        after_user_book_comment = UserBookComment.find(user_book_comment.id)
+        expect(after_user_book_comment.comment).to eq 'testtest'
+      end
+
+      it 'when user don\'t have target user_book_comment return 400' do
+        patch request_url + (user_book_comment.id + 1).to_s, params: { comment: 'testtest' },
+               headers: { 'Authorization' => user.id.to_s + ':aaaaaaa' }
+        expect(response.status).to eq 400
+      end
+    end
+  end
+
   describe '#destroy' do
     let(:request_url) { '/v1/user_book_comments/' }
     let(:user) { create(:user) }
@@ -65,7 +94,7 @@ RSpec.describe V1::UserBookCommentsController, type: :request do
       expect(UserBookComment.where(id: user_book_comment.id).size).to eq 0
     end
 
-    it 'when user don\'t have target user_book return 400' do
+    it 'when user don\'t have target user_book_comment return 400' do
       delete request_url + (user_book_comment.id + 1).to_s,
              headers: { 'Authorization' => user.id.to_s + ':aaaaaaa' }
       expect(response.status).to eq 400
