@@ -1,7 +1,7 @@
 <template>
   <nav class="nav-extended">
     <div class="nav-wrapper container">
-      <a href="/" class="brand-logo">BookRecorder</a>
+      <router-link to="/" class="brand-logo">BookRecorder</router-link>
       <a data-activates="slide-out" class="button-collapse hide-on-large-only" @click="showSidenav">
         <i class="material-icons">menu</i>
       </a>
@@ -23,7 +23,7 @@
       </ul>
       <ul v-else id="slide-out" class="side-nav">
         <li><router-link to="/users/sign_in">ログイン</router-link></li>
-        <li><a href="#" @click="hiddenSidenav">サイドバーを閉じる</a></li>
+        <li><a href="javascript:void(0)" @click="hiddenSidenav">サイドバーを閉じる</a></li>
       </ul>
     </div>
   </nav>

@@ -7,8 +7,8 @@
         </div>
         <div class="col m4 offset-m2 s12">
           <ul>
-            <li><a href="/user_policy" class="white-text">利用規約</a></li>
-            <li><a href="/privacy_policy" class="white-text">プライバシーポリシー</a></li>
+            <li><router-link to="/user_policy" class="white-text">利用規約</router-link></li>
+            <li><router-link to="/privacy_policy" class="white-text">プライバシーポリシー</router-link></li>
             <li><a href="https://twitter.com/tony_201612" class="white-text">Twitter</a></li>
           </ul>
         </div>
