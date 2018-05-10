@@ -12,7 +12,6 @@ Rails.application.routes.draw do
 
   # Book
   get 'books/search' => 'books#search'
-  get 'books/search_by_keyword' => 'books#search_by_keyword'
   resources :books, only: [:index, :show, :create, :destroy]
 
   # UserBook
@@ -30,7 +29,9 @@ Rails.application.routes.draw do
     delete 'logout' => 'sessions#destroy'
     resources :users, only: [:show, :create]
     resources :user_book_comments, only: [:index, :create, :update, :destroy]
+    resources :user_books, only: [:create]
     delete 'user_books' => 'user_books#destroy'
+    get 'books/search' => 'books#search'
     resources :books, only: [:show]
   end
 

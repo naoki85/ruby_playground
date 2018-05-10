@@ -7,7 +7,7 @@
       </a>
       <ul v-if="loggedIn" class="right hide-on-med-and-down">
         <li><a href="/users/edit">アカウント編集</a></li>
-        <li><a href="/books/search">本を探す</a></li>
+        <li><router-link to="/books/search">本を探す</router-link></li>
         <li><router-link to="/user_books">本棚</router-link></li>
         <li><a href="javascript:void(0)" @click="onLogout">ログアウト</a></li>
       </ul>
@@ -16,7 +16,7 @@
       </ul>
       <ul v-if="loggedIn" id="slide-out" class="side-nav">
         <li><a href="/users/edit">アカウント編集</a></li>
-        <li><a href="/books/search">本を探す</a></li>
+        <li><router-link to="/books/search">本を探す</router-link></li>
         <li><router-link to="/user_books">本棚</router-link></li>
         <li><a href="javascript:void(0)" @click="onLogout">ログアウト</a></li>
         <li><a href="javascript:void(0)" @click="hiddenSidenav">サイドバーを閉じる</a></li>
