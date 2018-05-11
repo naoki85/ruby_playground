@@ -2,7 +2,7 @@
 lock "~> 3.10.1"
 
 set :application, "book_recorder"
-set :repo_url, "git@github.com:naoki85/book_recorder.git"
+set :repo_url, "git@bitbucket.org:naoki_yoneyama_85/book_recorder.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
