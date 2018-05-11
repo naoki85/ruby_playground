@@ -11,6 +11,11 @@ export default {
     if (options.headers) {
       headers = options.headers;
     }
+    if (options.auth) {
+      var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
+      var authorization_header = { Authorization: authenticateToken }
+      headers = Object.assign(headers, authorization_header);
+    }
 
     promise = axios({
       method: method,

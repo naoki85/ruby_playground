@@ -6,6 +6,10 @@ module V1
     def show
     end
 
+    def account
+      @user = current_user
+    end
+
     def create
       @user = User.new(user_params)
 
@@ -14,6 +18,10 @@ module V1
       else
         render_400
       end
+    end
+
+    def update
+      @user = current_user
     end
 
     private

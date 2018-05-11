@@ -5,6 +5,7 @@ import Auth from '../store/modules/auth'
 
 import Top from '../components/top'
 import User from '../components/user'
+// import UserEdit from '../components/user_edit'
 import UserCreate from '../components/user_create'
 import Login from '../components/login'
 import UserBooksIndex from '../components/user_books_index'
@@ -21,6 +22,7 @@ var router = new VueRouter({
     { path: '/', component: Top },
     { path: '/users/sign_up', component: UserCreate },
     { path: '/users/sign_in', component: Login },
+    // { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
     { path: '/users/:id', component: User },
     { path: '/user_books', component: UserBooksIndex, meta: { requiresAuth: true } },
     { path: '/books/search', component: Search, meta: { requiresAuth: true } },
