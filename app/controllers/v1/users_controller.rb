@@ -11,9 +11,8 @@ module V1
     end
 
     def create
-      @user = User.new(user_params)
-
-      if @user.save
+      user = User.new(user_params)
+      if user.save
         render :create, status: :ok
       else
         render_400

@@ -1,9 +1,5 @@
 class ApiApplicationController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!
   before_action :authenticate_user_from_token!
-
-  respond_to :json
 
   ##
   # User Authentication
@@ -21,20 +17,20 @@ class ApiApplicationController < ApplicationController
   private
 
   def authenticate_with_authentication_token(authentication_token)
-    unless authentication_token.include?(':')
-      authenticate_error
-      return
-    end
-
-    user_id = authentication_token.split(':').first
-    user = User.where(id: user_id).first
-
-    if user && Devise.secure_compare(user.authentication_token, authentication_token)
-      # User can access
-      sign_in user, store: false
-    else
-      authenticate_error
-    end
+    # unless authentication_token.include?(':')
+    #   authenticate_error
+    #   return
+    # end
+    #
+    # user_id = authentication_token.split(':').first
+    # user = User.where(id: user_id).first
+    #
+    # if user && Devise.secure_compare(user.authentication_token, authentication_token)
+    #   # User can access
+    #   sign_in user, store: false
+    # else
+    #   authenticate_error
+    # end
   end
 
   ##

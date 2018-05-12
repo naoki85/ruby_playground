@@ -26,11 +26,11 @@ module V1
         user_id = authentication_token.split(':').first
         user = User.where(id: user_id).first
 
-        if user && Devise.secure_compare(user.authentication_token, authentication_token)
-          reset_session
-          render :destroy
-          return
-        end
+        # if user && Devise.secure_compare(user.authentication_token, authentication_token)
+        #   reset_session
+        #   render :destroy
+        #   return
+        # end
       end
       authenticate_error
     end

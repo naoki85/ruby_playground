@@ -1,6 +1,51 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe '#validation' do
+    context 'email' do
+      it do
+        user = build(:user)
+        %w(test@example.com).each do |test_mail|
+          user.email = test_mail
+          expect(user.valid?).to eq true
+        end
+        %w(testtest).each do |test_mail|
+          user.email = test_mail
+          expect(user.valid?).to eq false
+        end
+      end
+
+      it 'email is already exist' do
+        create(:user, email: 'test@example.com')
+        user = build(:user, email: 'test@example.com')
+        expect(user.valid?).to eq false
+      end
+    end
+
+    context 'password' do
+      it do
+        user = build(:user)
+        user.password = 'hogehoge'
+        expect(user.valid?).to eq true
+        user.password = 'hoge'
+        expect(user.valid?).to eq false
+      end
+
+      it 'email is already exist' do
+        create(:user, email: 'test@example.com')
+        user = build(:user, email: 'test@example.com')
+        expect(user.valid?).to eq false
+      end
+    end
+  end
+
+  describe '#encrypt_password' do
+    it do
+      user = create(:user)
+      expect(user.encrypted_password.present?).to eq true
+    end
+  end
+
   let(:user) { create(:user) }
   describe '#from_social?' do
     context 'when provider and uid do\'nt exist' do
