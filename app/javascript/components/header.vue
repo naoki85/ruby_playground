@@ -48,9 +48,7 @@
         document.getElementById("slide-out").style.transform = "translateX(-100%)";
       },
       onLogout: function() {
-        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-        request.delete('/v1/logout', { headers: { Authorization: authenticateToken } }).then((response) => {
-          localStorage.removeItem('bookRecorderAuthenticationToken');
+        request.delete('/v1/logout', { auth: true }).then((response) => {
           location.href = '/';
         }, (error) => {
           console.log(error);

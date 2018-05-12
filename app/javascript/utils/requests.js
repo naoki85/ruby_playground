@@ -6,9 +6,6 @@ export default {
     var params = {};
     var headers = {};
 
-    const token = document.getElementsByName('csrf-token')[0].getAttribute('content');
-    headers['X-CSRF-TOKEN'] = token;
-
     if (options.params) {
       params = options.params;
     }
@@ -20,6 +17,9 @@ export default {
       var authorization_header = { Authorization: authenticateToken }
       headers = Object.assign(headers, authorization_header);
     }
+
+    const token = document.getElementsByName('csrf-token')[0].getAttribute('content');
+    headers['X-CSRF-TOKEN'] = token;
 
     promise = axios({
       method: method,

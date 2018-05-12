@@ -22,19 +22,19 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'password' do
+    context 'valid_password' do
       it do
         user = build(:user)
         user.password = 'hogehoge'
         expect(user.valid?).to eq true
-        user.password = 'hoge'
+        user.password = ''
         expect(user.valid?).to eq false
       end
 
-      it 'email is already exist' do
-        create(:user, email: 'test@example.com')
-        user = build(:user, email: 'test@example.com')
-        expect(user.valid?).to eq false
+      it 'should valid registed user is empty password' do
+        user = create(:user, email: 'test@example.com')
+        user.password = ''
+        expect(user.valid?).to eq true
       end
     end
   end
@@ -64,6 +64,15 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#find_by_active_token' do
+    it 'should find user' do
+      create(:user, email: 'test@example.com', password: 'testtest',
+             authentication_token: 'aaaa', authentication_token_expired_at: DateTime.tomorrow)
+      user = User.find_by_active_token('aaaa')
+      expect(user.present?).to eq true
+    end
+  end
+
   describe 'update_authentication_token!' do
     let(:user) { create(:user, email: 'test@example.com', password: 'testtest') }
 
@@ -75,7 +84,20 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'reset_authentication_token!' do
+    let(:user) { create(:user, email: 'test@example.com', password: 'testtest',
+                        authentication_token: 'aaaa', authentication_token_expired_at: DateTime.tomorrow) }
+
+    it 'should update' do
+      expect(user.authentication_token.present?).to eq true
+      user.reset_authentication_token!
+      expect(user.authentication_token.present?).to eq false
+      expect(user.authentication_token_expired_at.present?).to eq false
+    end
+  end
+
   let(:user) { create(:user) }
+
   describe '#from_social?' do
     context 'when provider and uid do\'nt exist' do
       it { expect(user.from_social?).to eq false }

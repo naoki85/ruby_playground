@@ -10,11 +10,11 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
+  validate :valid_password
 
   attr_accessor :password
+
   #after_create :update_authentication_token!
-  before_save :encrypt_password
   before_save :downcase_email
 
   def self.digest(string)
@@ -24,8 +24,8 @@ class User < ApplicationRecord
   end
 
   def self.find_by_email_and_password(email, password)
-    return nil if email.empty? || password.empty?
-    user = User.find_by(email: email)
+    return nil unless email.present? && password.present?
+    user = find_by(email: email)
     if user && correct_password?(user.encrypted_password, password)
       user.password = password
       user
@@ -34,14 +34,26 @@ class User < ApplicationRecord
     end
   end
 
+  def self.find_by_active_token(authentication_token)
+    where(authentication_token: authentication_token).
+        where("authentication_token_expired_at > ?", DateTime.now).first
+  end
+
   def self.correct_password?(encrypted_password, password)
     BCrypt::Password.new(encrypted_password).is_password?(password)
   end
 
-  # @return bool
+  # @return [Bool]
   def update_authentication_token!
     self.authentication_token = generate_token(self.id)
     self.authentication_token_expired_at = DateTime.tomorrow
+    save!
+  end
+
+  # @return [Bool]
+  def reset_authentication_token!
+    self.authentication_token = ''
+    self.authentication_token_expired_at = ''
     save!
   end
 
@@ -67,8 +79,13 @@ class User < ApplicationRecord
     email.downcase!
   end
 
-  def encrypt_password
-    self.encrypted_password = self.class.digest(password)
+  def valid_password
+    return if !new_record? && !password.present?
+    if password.present? && password.length >= 6
+      self.encrypted_password = self.class.digest(password)
+    else
+      errors.add(:password, ': パスワードは6文字以上で指定してください')
+    end
   end
 
   # @param [Integer]

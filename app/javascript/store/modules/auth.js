@@ -11,6 +11,7 @@ export default {
       state.loggedIn = true
     },
     logout (state) {
+      localStorage.removeItem('bookRecorderAuthenticationToken');
       state.loggedIn = false
     }
   },
@@ -28,6 +29,12 @@ export default {
         payload.router.push('/');
       }, (error) => {
         payload.data.isError = true;
+      });
+    },
+    logout({ commit }, payload) {
+      request.delete('/v1/logout', { auth: true }).then((response) => {
+        commit('logout');
+        location.href = '/';
       });
     }
   }

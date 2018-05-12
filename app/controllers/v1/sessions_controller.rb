@@ -15,23 +15,11 @@ module V1
 
     def destroy
       authentication_token = request.headers['Authorization']
+      user = User.find_by_active_token(authentication_token)
+      return render_404 unless user
 
-      if authentication_token
-        unless authentication_token.include?(':')
-          authenticate_error
-          return
-        end
-
-        user_id = authentication_token.split(':').first
-        user = User.where(id: user_id).first
-
-        # if user && Devise.secure_compare(user.authentication_token, authentication_token)
-        #   reset_session
-        #   render :destroy
-        #   return
-        # end
-      end
-      authenticate_error
+      user.reset_authentication_token!
+      render :destroy
     end
   end
 end
