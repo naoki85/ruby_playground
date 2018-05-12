@@ -1,21 +1,7 @@
+-# TODO: メタタグの生成に関わるから、user情報はサーバー側に持たせる？
 - set_meta_tags title: "#{@user.name} | BookRecorder"
 
-.row.margin-default-top
-  .col.s4
-    = image_tag @user.avatar_image_path(resize: '200x200'), width: '100%'
-  .col.s8
-    h1 = @user.name
-
-- @user.books.each do |book|
-  .row
-    .col.s12
-      .card.horizontal
-        .card-image
-          = link_to book_path(book.id) do
-            = image_tag book.image_url
-        .card-stacked
-          .card-content
-            p = book.title
-            p = book.book_category.name
-          .card-action
-            = link_to_detail_page(book.detail_page_url)
+#app
+  app-header
+  router-view
+  app-footer

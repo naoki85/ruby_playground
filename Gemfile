@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
@@ -40,7 +40,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'dotenv-rails'
 gem 'therubyracer'
 
-gem 'devise'
 gem 'amazon-ecs'
 gem 'omniauth-twitter'
 gem 'ridgepole', '>= 0.7.2.beta'
@@ -71,6 +70,7 @@ group :development, :test do
   gem 'capistrano3-unicorn'
   gem 'capistrano3-ridgepole'
   gem 'factory_bot_rails'
+  gem 'foreman'
 end
 
 group :development do

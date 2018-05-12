@@ -1,28 +1,31 @@
 Rails.application.routes.draw do
-  root 'top#index'
-  devise_for :users, controllers: {
-      registrations: 'users/registrations',
-      omniauth_callbacks: 'users/omniauth_callbacks'
-  }
-  resources :users, only: :show
+  root 'web#index'
+  get 'sign_up' => 'web#index'
+  get 'sign_in' => 'web#index'
 
-  # Top
-  get 'user_policy' => 'top#user_policy'
-  get 'privacy_policy' => 'top#privacy_policy'
+  get 'user_policy' => 'web#index'
+  get 'privacy_policy' => 'web#index'
 
-  # Book
-  get 'books/search' => 'books#search'
-  get 'books/search_by_keyword' => 'books#search_by_keyword'
-  resources :books, only: [:index, :show, :create, :destroy]
-
-  # UserBook
-  resources :user_books, only: [:index, :create, :destroy]
-
-  # UserBookComment
-  resources :user_book_comments, except: [:show]
+  get 'users/:id' => 'users#show'
+  # get 'books/search' => 'web#index'
+  get 'books/:id' => 'books#show'
+  get 'user_books' => 'web#index'
 
   # Publisher
-  resources :publishers, only: [:show]
+  # resources :publishers, only: [:show]
+
+  # API
+  namespace :v1, format: 'json' do
+    post 'login' => 'sessions#create'
+    delete 'logout' => 'sessions#destroy'
+    get 'me' => 'users#me'
+    resources :users, only: [:show, :create, :update]
+    resources :user_book_comments, only: [:index, :create, :update, :destroy]
+    resources :user_books, only: [:create]
+    delete 'user_books' => 'user_books#destroy'
+    # get 'books/search' => 'books#search'
+    resources :books, only: [:show]
+  end
 
   # View Routing Errors
   # match '*path' => 'application#render_404', via: :all

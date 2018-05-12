@@ -15,5 +15,6 @@ ADD Gemfile $ROOT_PATH/Gemfile
 ADD Gemfile.lock $ROOT_PATH/Gemfile.lock
 RUN bundle install -j4
 ADD . $ROOT_PATH
+RUN chmod 777 $ROOT_PATH/bin/server && yarn install
 
 EXPOSE 3000

@@ -1,7 +1,9 @@
-ja:
+en:
   errors:
     error_400:
       title: "Invalid Parameters"
+    error_401:
+      title: "Unauthorized"
     error_404:
       title: "Not Found"
     error_500:

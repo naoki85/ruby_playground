@@ -18,8 +18,10 @@ $ docker-compose up -d
 5 Setup Database
 
 ```
-$ docker-compose run web rake db:create
-$ docker-compose run web rake db:migrate
+$ docker exec -it bookrecorder_web_1 /bin/bash
+$ rails db:create
+$ bundle exec ridgepole -c config/database.yml -E development --apply -f db/schemas/Schemafile
+$ bundle exec ridgepole -c config/database.yml -E test --apply -f db/schemas/Schemafile
 ```
 6 Install Google Chrome  
 
