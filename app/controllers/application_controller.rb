@@ -62,6 +62,30 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def render_401(e = nil)
+      if e
+        logger.error "Rendering 401 with exception: #{e.message}"
+        logger.error "#{e.backtrace[0]}" if e.backtrace.present? and e.backtrace.length > 0
+      end
+
+      if request.xhr?
+        render json: { error: '401 errors' }, status: 401
+      else
+        respond_to do |format|
+          format.html {
+            render template: 'errors/error_401', status: 401, layout: 'application', content_type: 'text/html'
+          }
+          format.json {
+            @return_code = 401
+            render 'v1/errors/error', status: 401
+          }
+          format.all {
+            render :text => 'Not Acceptable', status: 406
+          }
+        end
+      end
+    end
+
     def render_404(e = nil)
       if e
         logger.error "Rendering 404 with exception: #{e.message}"

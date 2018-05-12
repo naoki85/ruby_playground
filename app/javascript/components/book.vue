@@ -71,6 +71,7 @@
 <script>
   import request from '../utils/requests'
   import { mapState } from 'vuex'
+  import loading from './commons/loading'
 
   export default {
     data: function() {
@@ -90,9 +91,9 @@
       ])
     },
     mounted: function() {
-      document.getElementsByClassName('turbolinks-loading')[0].classList.add('active')
+      this.showLoading();
       this.fetchBook(this.$route.params.id);
-      document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active')
+      this.hideLoading();
     },
     methods: {
       fetchBook: function(bookId) {
@@ -102,6 +103,7 @@
           console.log(error);
         });
       },
+      // 編集可能にする
       enableEdit: function(userBookCommentId, UserBookCommentComment) {
         var commentArea = document.querySelector('[data-comment-number="' + userBookCommentId + '"]');
         commentArea.querySelector('.show-comment-area').classList.add('hidden');
@@ -109,20 +111,22 @@
         commentArea.querySelector('.edit-comment-area textarea').value = UserBookCommentComment;
         commentArea.querySelector('.edit-comment-area').classList.remove('hidden');
       },
+      // 編集をキャンセルする
       cancelEdit: function(userBookCommentId) {
         var commentArea = document.querySelector('[data-comment-number="' + userBookCommentId + '"]');
         commentArea.querySelector('.show-comment-area').classList.remove('hidden');
         commentArea.querySelector('.s1.col').classList.remove('hidden');
         commentArea.querySelector('.edit-comment-area').classList.add('hidden');
       },
+      // コメントを新規作成する
       onCreateComment: function() {
         this.initializeFlags();
-        document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
+        this.showLoading();
         var bookId = this.$route.params.id;
         var newComment = this.newComment;
         var params = { book_id: bookId, comment: newComment };
-        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-        request.post('/v1/user_book_comments', { params: params, headers: { Authorization: authenticateToken } }).then((response) => {
+        request.post('/v1/user_book_comments', { params: params, auth: true })
+            .then((response) => {
           this.isCreateSuccess = true;
           this.newComment = '';
           this.book = [];
@@ -131,41 +135,37 @@
           this.isCreateFailure = true;
           console.log(error);
         });
-        document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
+        this.hideLoading();
       },
+      // コメントを編集する
       onEditComment: function(userBookCommentId) {
         this.initializeFlags();
-        document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
+        this.showLoading();
         var editComment = this.editComment;
         var params = { comment: editComment };
-        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-        request.patch('/v1/user_book_comments/' + userBookCommentId, { params: params, headers: { Authorization: authenticateToken } }).then((response) => {
+        request.patch('/v1/user_book_comments/' + userBookCommentId, { params: params, auth: true })
+            .then((response) => {
           this.isCreateSuccess = true;
-          this.isEdit = true;
           this.editComment = '';
-          var bookId = this.$route.params.id;
-          this.book = [];
-          this.fetchBook(bookId);
+          this.reloadBook();
         }, (error) => {
           this.isCreateFailure = true;
           console.log(error);
         });
-        document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
+        this.hideLoading();
       },
       onDeleteComment: function(userBookCommentId) {
         this.initializeFlags();
-        document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
-        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-        request.delete('/v1/user_book_comments/' + userBookCommentId, { headers: { Authorization: authenticateToken } }).then((response) => {
+        this.showLoading();
+        request.delete('/v1/user_book_comments/' + userBookCommentId, { auth: true })
+            .then((response) => {
           this.isDeleteSuccess = true;
-          var bookId = this.$route.params.id;
-          this.book = [];
-          this.fetchBook(bookId);
+          this.reloadBook();
         }, (error) => {
           this.isDeleteFailure = true;
           console.log(error);
         });
-        document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
+        this.hideLoading();
       },
       initializeFlags: function() {
         this.isCreateSuccess = false;
@@ -173,17 +173,21 @@
         this.isDeleteSuccess = false;
         this.isDeleteFailure = false;
       },
+      reloadBook: function() {
+        var bookId = this.$route.params.id;
+        this.book = [];
+        this.fetchBook(bookId);
+      },
       canControl: function(commentUserId) {
-        if (this.loggedIn) {
-          var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-          var userId = authenticateToken.split(':')[0];
-          if (userId == commentUserId) {
+        if (this.loggedIn && this.userId) {
+          if (this.userId == commentUserId) {
             return true;
           }
         }
         return false;
       }
-    }
+    },
+    mixins: [loading]
   }
 </script>
 

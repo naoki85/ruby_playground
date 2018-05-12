@@ -39,6 +39,7 @@
 
 <script>
   import request from '../utils/requests'
+  import loading from './commons/loading'
 
   export default {
     data: function() {
@@ -47,9 +48,9 @@
       }
     },
     mounted: function() {
-      document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
+      this.showLoading();
       this.fetchUser(this.$route.params.id);
-      document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
+      this.hideLoading();
     },
     methods: {
       fetchUser: function(userId) {
@@ -59,7 +60,8 @@
           console.log(error);
         });
       }
-    }
+    },
+    mixins: [loading]
   }
 </script>
 

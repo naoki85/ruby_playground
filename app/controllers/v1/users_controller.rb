@@ -6,8 +6,7 @@ module V1
     def show
     end
 
-    def account
-      @user = current_user
+    def me
     end
 
     def create

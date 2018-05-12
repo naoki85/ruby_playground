@@ -34,8 +34,10 @@ var router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   var authentication_token = localStorage.getItem('bookRecorderAuthenticationToken');
+  var user_id = localStorage.getItem('bookRecorderUserId');
   if (authentication_token) {
     Auth.state.loggedIn = true;
+    Auth.state.userId = user_id;
   } else {
     Auth.state.loggedIn = false;
   }

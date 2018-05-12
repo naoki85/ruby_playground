@@ -49,20 +49,13 @@ RSpec.describe V1::UsersController, type: :request do
     end
   end
 
-  describe '#account' do
-    let(:request_url) { '/v1/user/account' }
-    let(:user) { create(:user) }
-
-    before do
-      user_id = user.id
-      token = 'aaaaaaa'
-      user.authentication_token = user_id.to_s + ':' + token
-      user.save!
-    end
+  describe '#me' do
+    let(:request_url) { '/v1/me' }
+    include_context 'user_authenticated'
 
     context 'normal pattern' do
       it 'get user account' do
-        get request_url, headers: { 'Authorization' => user.id.to_s + ':aaaaaaa' }
+        get request_url, headers: { 'Authorization' => 'aaaaaaa' }
         expect(response.status).to eq 200
       end
     end

@@ -1,13 +1,10 @@
 ja:
   errors:
     error_400:
-      title: "コメント"
-      description: "カレンダーの日付を選択して、コメントを残そう!!"
-    new:
-      title: "新規追加"
-    form:
-      submit: "保存"
-    edit:
-      title: "新規追加"
-    result_search_books:
-      add: "本棚に追加"
+      title: "Invalid Parameters"
+    error_401:
+      title: "Unauthorized"
+    error_404:
+      title: "Not Found"
+    error_500:
+      title: "Server Error"

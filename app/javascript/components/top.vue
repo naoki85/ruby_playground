@@ -38,6 +38,7 @@
 <script>
   import request from '../utils/requests'
   import { mapState } from 'vuex'
+  import loading from './commons/loading'
 
   export default {
     data: function() {
@@ -51,21 +52,20 @@
       ])
     },
     mounted: function() {
-      document.getElementsByClassName('turbolinks-loading')[0].classList.add('active')
+      this.showLoading();
       this.fetchComments();
-      document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active')
+      this.hideLoading();
     },
     methods: {
       fetchComments: function() {
         request.get('/v1/user_book_comments', {}).then((response) => {
-          for(var i = 0; i < response.data.user_book_comments.length; i++) {
-            this.comments.push(response.data.user_book_comments[i]);
-          }
+          this.comments = response.data.user_book_comments;
         }, (error) => {
-          console.log(error);
+
         });
       }
-    }
+    },
+    mixins: [loading]
   }
 </script>
 

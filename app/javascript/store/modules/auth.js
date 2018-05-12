@@ -3,16 +3,21 @@ import request from '../../utils/requests'
 export default {
   namespaced: true,
   state: {
-    loggedIn: false
+    loggedIn: false,
+    userId: null
   },
   mutations: {
-    login (state, authenticationToken) {
-      localStorage.setItem('bookRecorderAuthenticationToken', authenticationToken);
-      state.loggedIn = true
+    login(state, user) {
+      localStorage.setItem('bookRecorderAuthenticationToken', user.authentication_token);
+      localStorage.setItem('bookRecorderUserId', user.id);
+      state.loggedIn = true;
+      state.userId = user.id;
     },
-    logout (state) {
+    logout(state) {
       localStorage.removeItem('bookRecorderAuthenticationToken');
-      state.loggedIn = false
+      localStorage.removeItem('bookRecorderUserId');
+      state.loggedIn = false;
+      state.userId = null;
     }
   },
   actions: {
@@ -23,9 +28,8 @@ export default {
           password: payload.data.password
         }
       };
-      console.log(payload);
       request.post('/v1/login', options).then((response) => {
-        commit('login', response.data.user.authentication_token);
+        commit('login', response.data.user);
         payload.router.push('/');
       }, (error) => {
         payload.data.isError = true;

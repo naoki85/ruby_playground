@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   namespace :v1, format: 'json' do
     post 'login' => 'sessions#create'
     delete 'logout' => 'sessions#destroy'
-    get 'user/account' => 'users#account'
+    get 'me' => 'users#me'
     resources :users, only: [:show, :create, :update]
     resources :user_book_comments, only: [:index, :create, :update, :destroy]
     resources :user_books, only: [:create]
