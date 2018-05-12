@@ -57,11 +57,11 @@
         this.isError = false;
         this.isLoading = true;
         this.isCreated = false;
-        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
+
         request.get('/v1/books/search',
-            { params: { keyword: this.keyword }, headers: { Authorization: authenticateToken } }).
+            { params: { keyword: this.keyword }, auth: true }).
         then((response) => {
-          if (response.data.results) {
+          if (response.data.results.length > 0) {
             this.items = response.data.results;
           } else {
             this.isError = true;

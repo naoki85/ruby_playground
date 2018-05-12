@@ -3,7 +3,7 @@
     <h1>最近追加された本</h1>
     <div class="row">本を追加してコメントを残そう!!</div>
     <div v-if="loggedIn" class="row">
-      <router-link to="/books/search" class="waves-effect btn grey lighten-5 black-text">本を探す</router-link>
+      <!--<router-link to="/books/search" class="waves-effect btn grey lighten-5 black-text">本を探す</router-link>-->
       <router-link to="/user_books" class="waves-effect btn grey lighten-5 black-text">本棚</router-link>
     </div>
     <div v-else class="row">
