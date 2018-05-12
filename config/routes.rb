@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  root 'top#index'
-  resources :users, only: :show
+  root 'web#index'
+  get 'users/new' => 'web#index'
+  get 'login' => 'web#index'
 
-  # Top
   get 'user_policy' => 'top#user_policy'
   get 'privacy_policy' => 'top#privacy_policy'
+
+  resources :users, only: :show
 
   # Book
   get 'books/search' => 'books#search'
