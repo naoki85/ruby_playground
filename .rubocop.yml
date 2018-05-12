@@ -1,0 +1,40 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.5.0
+  Exclude:
+    - vendor/bundle/**/*
+    - bin/*
+    - db/**/*
+    - config/**/*
+    - Gemfile
+    - tmp/**/*
+
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# 一行の長さ
+Metrics/LineLength:
+  Max: 160
+
+# メソッド名の長さ
+Metrics/MethodLength:
+  Max: 20
+
+# DateTime の使用
+Style/DateTime:
+  Enabled: false
+
+# ドキュメントの無い public class を許可する
+Style/Documentation:
+  Enabled: false
+
+# !! の使用
+Style/DoubleNegation:
+  Enabled: false
+
+# 文字列リテラルに対し、マジックコメントを使用していること
+Style/FrozenStringLiteralComment:
+  Enabled: false
