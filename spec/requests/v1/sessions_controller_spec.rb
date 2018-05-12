@@ -5,10 +5,10 @@ RSpec.describe V1::SessionsController, type: :request do
     let(:request_url) { '/v1/login' }
 
     before do
-      create(:user, email: 'hoge@example.com', password: 'hogehoge', password_confirmation: 'hogehoge')
+      create(:user, email: 'hoge@example.com', password: 'hogehoge')
     end
 
-    it 'enable login' do
+    it 'should return token' do
       post request_url, params: { email: 'hoge@example.com', password: 'hogehoge' }
       expect(response.status).to eq 200
       json = JSON.parse(response.body)

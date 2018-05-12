@@ -23,10 +23,26 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def self.find_by_email_and_password(email, password)
+    return nil if email.empty? || password.empty?
+    user = User.find_by(email: email)
+    if user && correct_password?(user.encrypted_password, password)
+      user.password = password
+      user
+    else
+      nil
+    end
+  end
+
+  def self.correct_password?(encrypted_password, password)
+    BCrypt::Password.new(encrypted_password).is_password?(password)
+  end
+
   # @return bool
   def update_authentication_token!
-    # self.authentication_token = "#{self.id}:#{Devise.friendly_token}"
-    save
+    self.authentication_token = generate_token(self.id)
+    self.authentication_token_expired_at = DateTime.tomorrow
+    save!
   end
 
   # @return bool
@@ -46,31 +62,6 @@ class User < ApplicationRecord
   end
 
   private
-  # 一意となり得るuser_codeを生成する
-  # @param  [Integer] ユーザID
-  # @return [String]  ユーザコード
-  def generate_user_code(user_id)
-    user_id = user_id || 1
-    trans_map = { 0=>5, 1=>7, 2=>6, 3=>4, 4=>9, 5=>2, 6=>3, 7=>0, 8=>1, 9=>8 }
-
-    user_code = ''
-    base_code = rand(10).to_s + format('%07d', user_id) + rand(10).to_s
-    split_code = base_code.split(//)
-    split_code.each_with_index do |code, i|
-      user_code += trans_map[code.to_i].to_s
-    end
-
-    split_code = user_code.split(//).reverse
-    user_code = ''
-    split_code.each_with_index do |code, i|
-      user_code += rand(10).to_s if i == 5
-      user_code += trans_map[code.to_i].to_s
-    end
-
-    user_code
-  end
-
-  private
 
   def downcase_email
     email.downcase!
@@ -78,5 +69,12 @@ class User < ApplicationRecord
 
   def encrypt_password
     self.encrypted_password = self.class.digest(password)
+  end
+
+  # @param [Integer]
+  # @return [String]
+  def generate_token(user_id)
+    user_id = user_id || 0
+    SecureRandom.alphanumeric(10) + format('%07d', user_id) + SecureRandom.alphanumeric(10)
   end
 end
