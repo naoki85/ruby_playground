@@ -87,7 +87,7 @@
     },
     computed: {
       ...mapState('auth', [
-        'loggedIn'
+        'loggedIn', 'userId'
       ])
     },
     mounted: function() {
@@ -180,6 +180,7 @@
       },
       canControl: function(commentUserId) {
         if (this.loggedIn && this.userId) {
+          console.log(commentUserId);
           if (this.userId == commentUserId) {
             return true;
           }

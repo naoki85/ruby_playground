@@ -9,7 +9,7 @@ module V1
 
     def create
       book = Book.find(params[:book_id])
-      @user_book_comment = current_user.user_book_comments.new
+      @user_book_comment = @user.user_book_comments.new
       @user_book_comment.book_id = book.id
       @user_book_comment.comment = params[:comment]
 
@@ -37,7 +37,7 @@ module V1
     private
 
     def set_user_book_comment
-      @user_book_comment = UserBookComment.where(id: params[:id], user_id: current_user.id).first
+      @user_book_comment = UserBookComment.where(id: params[:id], user_id: @user.id).first
       raise InvalidParameter unless @user_book_comment
     end
   end

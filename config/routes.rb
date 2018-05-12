@@ -3,14 +3,12 @@ Rails.application.routes.draw do
   get 'sign_up' => 'web#index'
   get 'sign_in' => 'web#index'
 
-  get 'user_policy' => 'web#user_policy'
-  get 'privacy_policy' => 'web#privacy_policy'
+  get 'user_policy' => 'web#index'
+  get 'privacy_policy' => 'web#index'
 
-  resources :users, only: :show
-
-  # Book
-  get 'books/search' => 'books#search'
-  resources :books, only: [:index, :show, :create, :destroy]
+  get 'users/:id' => 'users#show'
+  get 'books/search' => 'web#index'
+  get 'books/:id' => 'books#show'
 
   # UserBook
   resources :user_books, only: [:index, :create]
@@ -19,7 +17,7 @@ Rails.application.routes.draw do
   resources :user_book_comments, except: [:show]
 
   # Publisher
-  resources :publishers, only: [:show]
+  # resources :publishers, only: [:show]
 
   # API
   namespace :v1, format: 'json' do

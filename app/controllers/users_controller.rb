@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!
 
   def show
     # TODO: メタタグの生成に関わるから、user情報はサーバー側に持たせる？
