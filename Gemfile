@@ -52,6 +52,7 @@ gem 'jquery-rails'
 gem 'slim-rails'
 gem 'materialize-sass'
 gem 'material_icons'
+gem 'active_decorator'
 
 gem 'whenever', :require => false
 gem 'sitemap_generator'

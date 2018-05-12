@@ -96,40 +96,14 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#avatar_image?' do
-    let(:user) { create(:user) }
-    before {user.image_url = 'test' }
-    it { expect(user.avatar_image?).to eq true }
-  end
-
-  describe '#avatar_image_path' do
-    let(:user) { create(:user) }
-    it do
-      user.image_url = 'test'
-      expect(user.avatar_image_path).to eq 'test'
-      user.image_url = ''
-      expect(user.avatar_image_path.present?).to eq true
-    end
-  end
-
-  describe '#name' do
-    let(:user) { create(:user) }
-    it do
-      user.username = 'test'
-      expect(user.name).to eq 'test'
-      user.username = ''
-      expect(user.name).to eq 'No name'
-    end
-  end
+  let(:user) { create(:user) }
 
   describe '#from_social?' do
-    let(:user) { create(:user) }
     context 'when provider and uid do\'nt exist' do
       it { expect(user.from_social?).to eq false }
     end
 
     context 'when provider or uid exist' do
-      let(:user) { create(:user) }
       before do
         user.provider = 'twitter'
         user.uid = 'aaaaaa'
@@ -140,7 +114,6 @@ RSpec.describe User, type: :model do
   end
 
   describe '#attach_image' do
-    let(:user) { create(:user) }
     it 'when params do\'t contain image, should return true' do
       params = { }
       expect(user.attach_image(params)).to eq true
