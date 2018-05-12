@@ -4,10 +4,10 @@ import VueRouter from 'vue-router'
 import Auth from '../store/modules/auth'
 
 import Top from '../components/top'
+import SignUp from '../components/sign_up'
+import SignIn from '../components/sign_in'
 import User from '../components/user'
 // import UserEdit from '../components/user_edit'
-import UserCreate from '../components/user_create'
-import Login from '../components/login'
 import UserBooksIndex from '../components/user_books_index'
 import Book from '../components/book'
 import PrivacyPolicy from '../components/privacy_policy'
@@ -20,8 +20,8 @@ var router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: Top },
-    { path: '/users/sign_up', component: UserCreate },
-    { path: '/users/sign_in', component: Login },
+    { path: '/sign_up', component: SignUp },
+    { path: '/sign_in', component: SignIn },
     // { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
     { path: '/users/:id', component: User },
     { path: '/user_books', component: UserBooksIndex, meta: { requiresAuth: true } },

@@ -7,8 +7,8 @@
       <router-link to="/user_books" class="waves-effect btn grey lighten-5 black-text">本棚</router-link>
     </div>
     <div v-else class="row">
-      <router-link to="/users/sign_up" class="waves-effect waves-teal btn">新規登録</router-link>
-      <router-link to="/users/sign_in" class="waves-effect waves-teal btn">ログイン</router-link>
+      <router-link to="/sign_up" class="waves-effect waves-teal btn">新規登録</router-link>
+      <router-link to="/sign_in" class="waves-effect waves-teal btn">ログイン</router-link>
     </div>
     <div class="row" v-for="comment in comments">
       <div class="col s12">

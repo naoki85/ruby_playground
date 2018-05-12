@@ -5,6 +5,10 @@ export default {
     var promise = null;
     var params = {};
     var headers = {};
+
+    const token = document.getElementsByName('csrf-token')[0].getAttribute('content');
+    headers['X-CSRF-TOKEN'] = token;
+
     if (options.params) {
       params = options.params;
     }

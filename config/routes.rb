@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   root 'web#index'
-  get 'users/new' => 'web#index'
-  get 'login' => 'web#index'
+  get 'sign_up' => 'web#index'
+  get 'sign_in' => 'web#index'
 
-  get 'user_policy' => 'top#user_policy'
-  get 'privacy_policy' => 'top#privacy_policy'
+  get 'user_policy' => 'web#user_policy'
+  get 'privacy_policy' => 'web#privacy_policy'
 
   resources :users, only: :show
 

@@ -21,8 +21,8 @@
 </template>
 
 <script>
-  import request from '../utils/requests'
   import { mapActions } from 'vuex'
+  import loading from './commons/loading'
 
   export default {
     data: function() {
@@ -37,28 +37,15 @@
         'login'
       ]),
       onLogin: function () {
-        document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
-        var options = {
-          params: {
-            email: this.email,
-            password: this.password
-          }
-        };
-        request.post('/v1/login', options).then((response) => {
-          console.log(response.data.user);
-          localStorage.setItem('bookRecorderAuthenticationToken', response.data.user.authentication_token);
-          var self = this;
-          document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
-          self.login({
-            router: self.$router
+        this.showLoading();
+          this.login({
+            router: this.$router,
+            data: this.$data
           });
-        }, (error) => {
-          console.log(error);
-          document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
-          this.isError = true;
-        });
+        this.hideLoading();
       }
-    }
+    },
+    mixins: [loading]
   }
 </script>
 

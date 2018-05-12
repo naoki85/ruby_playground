@@ -12,7 +12,7 @@
         <li><a href="javascript:void(0)" @click="onLogout">ログアウト</a></li>
       </ul>
       <ul v-else class="right hide-on-med-and-down">
-        <li><router-link to="/users/sign_in">ログイン</router-link></li>
+        <li><router-link to="/sign_in">ログイン</router-link></li>
       </ul>
       <ul v-if="loggedIn" id="slide-out" class="side-nav">
         <li><router-link to="/users/edit">アカウント編集</router-link></li>
@@ -22,7 +22,7 @@
         <li><a href="javascript:void(0)" @click="hiddenSidenav">サイドバーを閉じる</a></li>
       </ul>
       <ul v-else id="slide-out" class="side-nav">
-        <li><router-link to="/users/sign_in">ログイン</router-link></li>
+        <li><router-link to="/sign_in">ログイン</router-link></li>
         <li><a href="javascript:void(0)" @click="hiddenSidenav">サイドバーを閉じる</a></li>
       </ul>
     </div>

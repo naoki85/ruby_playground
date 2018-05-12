@@ -2,7 +2,7 @@
   <div class="container">
     <h2>新規登録</h2>
     <p v-if="isError" class="alert alert-danger">登録に失敗しました。登録内容を確認してください。</p>
-    <p v-if="isError" class="alert alert-danger">登録が完了しました。</p>
+    <p v-if="isSuccess" class="alert alert-success">登録が完了しました。</p>
     <div class="row">
       <label for="email">メール</label>
       <input type="email" autofocus="true" autocomplete="email" class="validate" v-model="email">
@@ -22,6 +22,7 @@
 
 <script>
   import request from '../utils/requests'
+  import loading from './commons/loading'
 
   export default {
     data: function() {
@@ -34,7 +35,9 @@
     },
     methods: {
       onCreate: function () {
-        document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
+        this.showLoading();
+        this.isSuccess = false;
+        this.isError = false;
         var options = {
           params: {
             user: {
@@ -44,15 +47,16 @@
           }
         };
         request.post('/v1/users', options).then((response) => {
-          document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
           this.isSuccess = true;
+          this.email = null;
+          this.password = null;
         }, (error) => {
-          console.log(error);
-          document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
           this.isError = true;
         });
+        this.hideLoading();
       }
-    }
+    },
+    mixins: [loading]
   }
 </script>
 
