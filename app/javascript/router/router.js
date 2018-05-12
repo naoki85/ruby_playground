@@ -12,7 +12,8 @@ import UserBooksIndex from '../components/user_books_index'
 import Book from '../components/book'
 import PrivacyPolicy from '../components/privacy_policy'
 import UserPolicy from '../components/user_policy'
-import Search from '../components/search'
+// import Search from '../components/search'
+import NotFound from '../components/errors/not_found'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,8 @@ var router = new VueRouter({
     // { path: '/books/search', component: Search, meta: { requiresAuth: true } },
     { path: '/books/:id', component: Book },
     { path: '/privacy_policy', component: PrivacyPolicy },
-    { path: '/user_policy', component: UserPolicy }
+    { path: '/user_policy', component: UserPolicy },
+    { path: '/not_found', component: NotFound }
   ]
 });
 

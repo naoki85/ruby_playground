@@ -58,6 +58,7 @@
           this.user = response.data.user;
         }, (error) => {
           console.log(error);
+          this.$router.push('/not_found');
         });
       }
     },

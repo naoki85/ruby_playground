@@ -101,6 +101,7 @@
           this.book = response.data.book;
         }, (error) => {
           console.log(error);
+          this.$router.push('/not_found');
         });
       },
       // 編集可能にする
@@ -129,8 +130,7 @@
             .then((response) => {
           this.isCreateSuccess = true;
           this.newComment = '';
-          this.book = [];
-          this.fetchBook(bookId);
+          this.reloadBook(bookId);
         }, (error) => {
           this.isCreateFailure = true;
           console.log(error);
@@ -180,7 +180,6 @@
       },
       canControl: function(commentUserId) {
         if (this.loggedIn && this.userId) {
-          console.log(commentUserId);
           if (this.userId == commentUserId) {
             return true;
           }
