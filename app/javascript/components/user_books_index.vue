@@ -26,6 +26,8 @@
 
 <script>
   import request from '../utils/requests'
+  import { mapState } from 'vuex'
+  import loading from './commons/loading'
 
   export default {
     data: function() {
@@ -34,11 +36,15 @@
         isDeleted: false
       }
     },
+    computed: {
+      ...mapState('auth', [
+        'userId'
+      ])
+    },
     mounted: function() {
-      document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
-      var userId = this.getUserId();
-      this.fetchUser(userId);
-      document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
+      this.showLoading();
+      this.fetchUser(this.userId);
+      this.hideLoading();
     },
     methods: {
       fetchUser: function(userId) {
@@ -48,27 +54,21 @@
           console.log(error);
         });
       },
-      getUserId: function() {
-        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-        if (authenticateToken) {
-          return authenticateToken.split(':')[0];
-        } else {
-          location.href('/');
-        }
-      },
       deleteUserBook: function(bookId) {
-        document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
+        this.showLoading();
         var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-        request.delete('/v1/user_books', { params: { book_id: bookId }, headers: { Authorization: authenticateToken } }).then((response) => {
+        request.delete('/v1/user_books', { params: { book_id: bookId }, auth: true })
+            .then((response) => {
           this.isDeleted = true;
-          var userId = this.getUserId();
+          var userId = this.userId;
           this.fetchUser(userId);
         }, (error) => {
           console.log(error);
         });
-        document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active');
+        this.hideLoading();
       }
-    }
+    },
+    mixins: [loading]
   }
 </script>
 
