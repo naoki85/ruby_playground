@@ -9,12 +9,7 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#show'
   get 'books/search' => 'web#index'
   get 'books/:id' => 'books#show'
-
-  # UserBook
-  resources :user_books, only: [:index, :create]
-
-  # UserBookComment
-  resources :user_book_comments, except: [:show]
+  get 'user_books' => 'web#index'
 
   # Publisher
   # resources :publishers, only: [:show]
