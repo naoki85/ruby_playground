@@ -1,5 +1,4 @@
 class PublishersController < ApplicationController
-  skip_before_action :authenticate_user!
 
   def show
     @publisher = Publisher.includes([:books]).find(params[:id])
