@@ -2,7 +2,7 @@ module V1
   class UserBooksController < ApiApplicationController
 
     def create
-      if UserAddBookService.add(current_user.id, user_book_params)
+      if UserAddBookService.add(@user.id, user_book_params)
         render :create
       else
         render_400
@@ -18,7 +18,7 @@ module V1
 
     def set_user_book
       raise InvalidParameter unless params[:book_id]
-      @user_book = UserBook.where(book_id: params[:book_id], user_id: current_user.id).first
+      @user_book = UserBook.where(book_id: params[:book_id], user_id: @user.id).first
       raise InvalidParameter unless @user_book
     end
 

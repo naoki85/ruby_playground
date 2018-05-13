@@ -16,7 +16,7 @@ RSpec.describe V1::BooksController, type: :request do
       get request_url + book.id.to_s
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
-      expect(json['book']['id']).to eq user.id
+      expect(json['book']['id']).to eq book.id
       expect(json['book']['user_book_comments'].size).to eq 3
     end
 

@@ -15,7 +15,7 @@ describe UserDecorator do
       user.image_url = 'test'
       expect(user.avatar_image_path).to eq 'test'
       user.image_url = ''
-      expect(user.avatar_image_path).to eq ''
+      expect(user.avatar_image_path.present?).to eq true
     end
   end
 
