@@ -1,4 +1,4 @@
-FROM ruby:2.5.0
+FROM ruby:2.5.1
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
     apt-get update -qq && \
@@ -15,6 +15,6 @@ ADD Gemfile $ROOT_PATH/Gemfile
 ADD Gemfile.lock $ROOT_PATH/Gemfile.lock
 RUN bundle install -j4
 ADD . $ROOT_PATH
-RUN chmod 777 $ROOT_PATH/bin/server && yarn install
+RUN yarn install
 
 EXPOSE 3000
