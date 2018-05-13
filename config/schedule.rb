@@ -3,6 +3,10 @@ set :output, 'log/crontab.log'
 rails_env = ENV['RAILS_ENV'] || :development
 set :environment, rails_env
 
+every 1.day, :at => '4:00 am' do
+  runner "Tasks::DailyCrawl.execute", output: { error: 'log/cron_error.log' }
+end
+
 every 1.week, :at => '10:30 am' do
   rake "sitemap:refresh"
 end
