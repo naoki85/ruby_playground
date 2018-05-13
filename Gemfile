@@ -57,7 +57,6 @@ gem 'active_decorator'
 gem 'whenever', :require => false
 gem 'sitemap_generator'
 gem 'meta-tags'
-gem 'kaminari'
 gem 'webpacker'
 
 group :development, :test do

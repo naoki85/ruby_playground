@@ -10,9 +10,7 @@ Rails.application.routes.draw do
   # get 'books/search' => 'web#index'
   get 'books/:id' => 'books#show'
   get 'user_books' => 'web#index'
-
-  # Publisher
-  # resources :publishers, only: [:show]
+  get 'publishers/:id' => 'web#index'
 
   # API
   namespace :v1, format: 'json' do
