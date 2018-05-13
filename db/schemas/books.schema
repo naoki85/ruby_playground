@@ -5,9 +5,13 @@ create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :
   t.integer "book_category_id", default: 0, null: false
   t.string "asin", default: "", null: false
   t.string "title", default: "", null: false
+  t.string "author", default: "", null: false
   t.string "image_url", default: "", null: false
   t.string "detail_page_url", limit: 1020, default: "", null: false
+  t.date   "published_at", default: "1970-01-01", null: false
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
+
   t.index ["asin"], name: "index_books_on_asin"
+  t.index ["publisher_id"], name: "index_books_on_publisher_id"
 end
