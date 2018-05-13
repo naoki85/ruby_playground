@@ -6,13 +6,25 @@ class Crawler
   @@base_url = 'http://gihyo.jp'
   @@content_list_url = 'http://gihyo.jp/contentslist'
   @@content_xpath = '//*[@id="latestArticle"]/dl/dd/h3/a'
+  @@next_url_xpath = '//*[@id="latestArticle"]/div[4]/p[2]/a'
+  @@page_num = 2
+  @@sleep_time = 1
 
   # @return hash
   # { title: 'book', url: 'link', published_at: '2018-05-11',
   # image_url: 'xxxx', author: 'xxxxx' }
   def self.run
-    dom = read_html(@@content_list_url)
-    scrape_content_page(dom)
+    results = []
+    url = @@content_list_url
+    @@page_num.times do
+      dom = read_html(url)
+      tmp_result = scrape_content_page(dom)
+      results.concat(tmp_result)
+      url = get_next_url(dom)
+      break if url.nil?
+      sleep(@@sleep_time)
+    end
+    results
   end
 
   def self.read_html(url)
@@ -60,6 +72,13 @@ class Crawler
 
   def self.get_author(dom)
     raise 'abstract method'
+  end
+
+  def self.get_next_url(dom)
+    next_url = dom.xpath(@@next_url_xpath)[0].attribute('href').value
+    return URI.join(@@base_url, next_url).to_s
+  rescue
+    return nil
   end
 
   def self.parse_date(date_str)

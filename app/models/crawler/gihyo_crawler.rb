@@ -2,6 +2,7 @@ class Crawler::GihyoCrawler < Crawler
   @@base_url = 'http://gihyo.jp'
   @@content_list_url = 'http://gihyo.jp/book/list'
   @@content_xpath = '//ul[@class="magazineList01 bookList01"]/li[@class="clearfix"]'
+  @@next_url_xpath = '//p[@class="next"]/a'
 
   def self.get_title(dom)
     dom.xpath('.//h3').text
