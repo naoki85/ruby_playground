@@ -37,7 +37,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      - run: bundle exec rake db:create
+      - run: bundle exec rake db:create RAILS_ENV=test
       - run: bundle exec ridgepole -c config/database.yml -E test --apply -f db/schemas/Schemafile
 
       # run tests!
