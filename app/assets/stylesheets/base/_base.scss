@@ -49,39 +49,3 @@ pre{
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-
-/**
- * SMACSS Base
- * 全体の背景やフォントファミリー、リンクカラーなどサイト内での統一ルールを記述する（基本変更なし）
- */
-@font-face {
-}
-
-//noinspection SassScssResolvedByNameOnly
-body {
-  font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
-  background-color: $color-base-background;
-  font-color: $color-base-text;
-  font-size: 16px;
-}
-
-p {
-  margin: 0 0 10px;
-}
-
-input, textarea, button{
-  font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
-}
-
-//noinspection SassScssResolvedByNameOnly
-a {
-  font-size: 1.1em;
-  color: $color-base-link;
-}
-
-img, a{
-  touch-callout: none;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-}

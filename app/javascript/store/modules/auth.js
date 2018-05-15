@@ -39,6 +39,9 @@ export default {
       request.delete('/v1/logout', { auth: true }).then((response) => {
         commit('logout');
         location.href = '/';
+      }, (error) => {
+        commit('logout');
+        location.href = '/';
       });
     }
   }

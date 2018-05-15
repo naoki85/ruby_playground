@@ -1,0 +1,79 @@
+<template>
+  <div>
+    <v-navigation-drawer v-model="drawer" fixed app>
+      <v-list v-if="loggedIn" dense>
+        <v-list-tile to="/">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile to="/user_books">
+          <v-list-tile-action>
+            <v-icon>library_books</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>本棚</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="onLogout">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>ログアウト</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+      <v-list v-else dense>
+        <v-list-tile to="/sign_in">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>ログイン</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar color="teal" dark fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>BookRecorder</v-toolbar-title>
+    </v-toolbar>
+  </div>
+</template>
+
+<script>
+  import { mapState, mapActions } from 'vuex'
+
+  export default {
+    data: () => ({
+      drawer: null
+    }),
+    props: {
+      source: String
+    },
+    computed: {
+      ...mapState('auth', [
+        'loggedIn'
+      ])
+    },
+    methods: {
+      ...mapActions('auth', [
+        'logout'
+      ]),
+      onLogout: function() {
+        this.logout({
+          router: this.$router,
+          data: this.$data
+        });
+      }
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>
