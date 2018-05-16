@@ -1,7 +1,7 @@
 class Crawler::KodansyaCrawler < Crawler
   self.base_url = 'http://kc.kodansha.co.jp'
   self.content_list_url = 'http://kc.kodansha.co.jp/calendar'
-  self.title_xpath = '//div[@class="spaceSp"]/a'
+  self.content_xpath = '//div[@class="spaceSp"]/a'
 
   def self.get_title(dom)
     dom.xpath('.//div[@class="tit"]').text
