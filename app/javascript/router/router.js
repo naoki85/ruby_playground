@@ -3,15 +3,15 @@ import VueRouter from 'vue-router'
 
 import Auth from '../store/modules/auth'
 
-import Top from '../components/top'
+import Top from '../components/top/top'
 import SignUp from '../components/sessions/sign_up'
 import SignIn from '../components/sessions/sign_in'
 import User from '../components/user'
 // import UserEdit from '../components/user_edit'
 import UserBooksIndex from '../components/user_books_index'
 import Book from '../components/book'
-import PrivacyPolicy from '../components/privacy_policy'
-import UserPolicy from '../components/user_policy'
+import PrivacyPolicy from '../components/top/privacy_policy'
+import UserPolicy from '../components/top/user_policy'
 // import Search from '../components/search'
 import NotFound from '../components/errors/not_found'
 

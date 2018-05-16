@@ -26,7 +26,7 @@
 
 <script>
   import request from '../../utils/requests'
-  import { mapActions, mapState } from 'vuex'
+  import { mapActions } from 'vuex'
 
   export default {
     data: function() {
