@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import request from '../utils/requests'
+  import request from '../../utils/requests'
 
   export default {
     data: function() {

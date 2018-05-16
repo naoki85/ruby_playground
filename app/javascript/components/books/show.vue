@@ -69,9 +69,9 @@
 </template>
 
 <script>
-  import request from '../utils/requests'
+  import request from '../../utils/requests'
   import { mapState } from 'vuex'
-  import loading from './commons/loading'
+  import loading from '../commons/loading'
 
   export default {
     data: function() {

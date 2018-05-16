@@ -38,8 +38,8 @@
 </template>
 
 <script>
-  import request from '../utils/requests'
-  import loading from './commons/loading'
+  import request from '../../utils/requests'
+  import loading from '../commons/loading'
 
   export default {
     data: function() {
