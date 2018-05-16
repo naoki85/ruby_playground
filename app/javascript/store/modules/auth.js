@@ -32,7 +32,7 @@ export default {
         commit('login', response.data.user);
         payload.router.push('/');
       }, (error) => {
-        payload.data.isError = true;
+
       });
     },
     logout({ commit }, payload) {
