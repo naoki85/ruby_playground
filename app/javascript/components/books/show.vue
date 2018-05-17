@@ -1,88 +1,70 @@
 <template>
-  <div class="container">
-    <p v-if="isCreateSuccess" class="alert alert-success">作成完了しました。</p>
-    <p v-if="isCreateFailure" class="alert alert-danger">エラーが発生しました。</p>
-    <p v-if="isDeleteSuccess" class="alert alert-success">削除が完了しました。</p>
-    <p v-if="isDeleteFailure" class="alert alert-danger">エラーが発生しました。</p>
-    <h1>{{ book.title }}</h1>
+  <v-container fluid>
+    <div class="display-1">{{ book.title }}</div>
 
-    <div class="row">
+    <v-layout row>
       <img :src="book.image_url" :alt="book.title">
+    </v-layout>
+
+    <div v-if="loggedIn" class="new-comment-area">
+      <v-layout row>
+        <v-text-field v-model="editComment" label="コメント"></v-text-field>
+      </v-layout>
+
+      <v-btn @click="onCreateComment">コメント</v-btn>
     </div>
 
-    <div v-if="loggedIn">
-      <div class="row">
-        <div class="input-field">
-          <label>コメント</label>
-          <textarea v-model="newComment" class="materialize-textarea"></textarea>
-        </div>
-      </div>
-
-      <div class="row right-align">
-        <button @click="onCreateComment" class="waves-effect waves-light btn green accent-3">コメント</button>
-      </div>
-    </div>
-
-    <div v-for="user_book_comment in book.user_book_comments" class="col s12 m8 offset-m2 l6 offset-l3">
-      <div class="card-panel z-depth-1" :data-comment-number="user_book_comment.id">
-        <div class="row valign-wrapper">
-          <div class="col s2">
-            <router-link :to="'/users/' + user_book_comment.user.id">
-              <img :src="user_book_comment.user.avatar_image_path"
-                   :alt="user_book_comment.user.name"
-                   class="circle responsive-img">
-            </router-link>
+    <v-list two-line subheader>
+      <v-list-tile v-for="user_book_comment in book.user_book_comments"
+                   :key="user_book_comment.id"
+                   class="comment-list"
+                   avatar
+                   :data-comment-number="user_book_comment.id">
+        <v-list-tile-avatar>
+          <img :src="user_book_comment.user.avatar_image_path"
+               :alt="user_book_comment.user.name">
+        </v-list-tile-avatar>
+        <v-list-tile-content>
+          <div class="edit-comment-area hidden">
+              <v-text-field v-model="editComment" class="edit-field"></v-text-field>
+              <v-btn @click="onEditComment(user_book_comment.id)">修正</v-btn>
+              <v-btn @click="cancelEdit(user_book_comment.id)">キャンセル</v-btn>
           </div>
-          <div class="col s9 comment-area">
-            <div class="edit-comment-area hidden">
-              <div class="input-field">
-                <textarea v-model="editComment" class="materialize-textarea"></textarea>
-              </div>
-              <div class="row">
-                <button @click="onEditComment(user_book_comment.id)" class="waves-effect waves-light btn orange accent-3">修正</button>
-                <button @click="cancelEdit(user_book_comment.id)" class="waves-effect btn grey lighten-5 black-text">キャンセル</button>
-              </div>
-            </div>
-            <div class="show-comment-area">
-              <span class="black-text">{{ user_book_comment.comment }}</span>
-              <p class="right-align.grey-text">{{ user_book_comment.created_at }}</p>
+          <div class="show-comment-area">
+            <v-list-tile-title>{{ user_book_comment.comment }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ user_book_comment.created_at }}</v-list-tile-sub-title>
+          </div>
+        </v-list-tile-content>
+        <v-list-tile-action>
+          <div>
+            <div class="control-area" v-if="canControl(user_book_comment.user.id)">
+            <v-btn icon ripple
+                   @click="enableEdit(user_book_comment.id, user_book_comment.comment)">
+              <v-icon color="grey lighten-1">edit</v-icon>
+            </v-btn>
+            <v-btn icon ripple
+                   @click="onDeleteComment(user_book_comment.id)">
+              <v-icon color="grey lighten-1">delete</v-icon>
+            </v-btn>
             </div>
           </div>
-          <div class="col s1">
-            <div v-if="canControl(user_book_comment.user.id)">
-              <div class="row">
-                <a href="javascript:void(0)" @click="enableEdit(user_book_comment.id, user_book_comment.comment)">
-                  <i class="material-icons">edit</i>
-                </a>
-              </div>
-              <div class="row">
-                <a href="javascript:void(0)" @click="onDeleteComment(user_book_comment.id)">
-                  <i class="material-icons">delete</i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </v-list-tile-action>
+      </v-list-tile>
+      <v-divider></v-divider>
+    </v-list>
+  </v-container>
 </template>
 
 <script>
   import request from '../../utils/requests'
-  import { mapState } from 'vuex'
-  import loading from '../commons/loading'
+  import { mapState, mapActions } from 'vuex'
 
   export default {
     data: function() {
       return {
         book: [],
         newComment: '',
-        editComment: '',
-        isCreateSuccess: false,
-        isCreateFailure: false,
-        isDeleteSuccess: false,
-        isDeleteFailure: false
+        editComment: ''
       }
     },
     computed: {
@@ -91,11 +73,17 @@
       ])
     },
     mounted: function() {
-      this.showLoading();
+      this.loading();
       this.fetchBook(this.$route.params.id);
-      this.hideLoading();
+      this.finish();
     },
     methods: {
+      ...mapActions('loader', [
+        'loading', 'finish'
+      ]),
+      ...mapActions('alert', [
+        'showSuccessAlert', 'showErrorAlert'
+      ]),
       fetchBook: function(bookId) {
         request.get('/v1/books/' + bookId, {}).then((response) => {
           this.book = response.data.book;
@@ -108,70 +96,61 @@
       enableEdit: function(userBookCommentId, UserBookCommentComment) {
         var commentArea = document.querySelector('[data-comment-number="' + userBookCommentId + '"]');
         commentArea.querySelector('.show-comment-area').classList.add('hidden');
-        commentArea.querySelector('.s1.col').classList.add('hidden');
-        commentArea.querySelector('.edit-comment-area textarea').value = UserBookCommentComment;
+        commentArea.querySelector('.control-area').classList.add('hidden');
+        commentArea.querySelector('.edit-field').value = UserBookCommentComment;
         commentArea.querySelector('.edit-comment-area').classList.remove('hidden');
       },
       // 編集をキャンセルする
       cancelEdit: function(userBookCommentId) {
         var commentArea = document.querySelector('[data-comment-number="' + userBookCommentId + '"]');
         commentArea.querySelector('.show-comment-area').classList.remove('hidden');
-        commentArea.querySelector('.s1.col').classList.remove('hidden');
+        commentArea.querySelector('.control-area').classList.remove('hidden');
         commentArea.querySelector('.edit-comment-area').classList.add('hidden');
       },
       // コメントを新規作成する
       onCreateComment: function() {
-        this.initializeFlags();
-        this.showLoading();
+        this.loading();
         var bookId = this.$route.params.id;
         var newComment = this.newComment;
         var params = { book_id: bookId, comment: newComment };
         request.post('/v1/user_book_comments', { params: params, auth: true })
             .then((response) => {
-          this.isCreateSuccess = true;
           this.newComment = '';
+          this.showSuccessAlert({ message: '作成しました' });
           this.reloadBook(bookId);
         }, (error) => {
-          this.isCreateFailure = true;
+          this.showErrorAlert({ message: '作成に失敗しました' });
           console.log(error);
         });
-        this.hideLoading();
+        this.finish();
       },
       // コメントを編集する
       onEditComment: function(userBookCommentId) {
-        this.initializeFlags();
-        this.showLoading();
+        this.loading();
         var editComment = this.editComment;
         var params = { comment: editComment };
         request.patch('/v1/user_book_comments/' + userBookCommentId, { params: params, auth: true })
             .then((response) => {
-          this.isCreateSuccess = true;
+          this.showSuccessAlert({ message: '編集しました' });
           this.editComment = '';
           this.reloadBook();
         }, (error) => {
-          this.isCreateFailure = true;
+          this.showErrorAlert({ message: '編集失敗しました' });
           console.log(error);
         });
-        this.hideLoading();
+        this.finish();
       },
       onDeleteComment: function(userBookCommentId) {
-        this.initializeFlags();
-        this.showLoading();
+        this.loading();
         request.delete('/v1/user_book_comments/' + userBookCommentId, { auth: true })
             .then((response) => {
-          this.isDeleteSuccess = true;
+          this.showSuccessAlert({ message: '削除しました' });
           this.reloadBook();
         }, (error) => {
-          this.isDeleteFailure = true;
+          this.showErrorAlert({ message: '削除失敗しました' });
           console.log(error);
         });
-        this.hideLoading();
-      },
-      initializeFlags: function() {
-        this.isCreateSuccess = false;
-        this.isCreateFailure = false;
-        this.isDeleteSuccess = false;
-        this.isDeleteFailure = false;
+        this.finish();
       },
       reloadBook: function() {
         var bookId = this.$route.params.id;
@@ -186,17 +165,21 @@
         }
         return false;
       }
-    },
-    mixins: [loading]
+    }
   }
 </script>
 
-<style scoped>
-  .card-panel p {
-    margin-top: 18px;
-  }
-
+<style>
   .hidden {
     display: none;
+  }
+  .new-comment-area {
+    margin-top: 50px;
+  }
+  .edit-comment-area {
+    width: 100%;
+  }
+  .comment-list > div {
+    height: 150px !important;
   }
 </style>
