@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
-    <h1>Not Found</h1>
-  </div>
+  <v-container fluid>
+    <div class="display-1">Not Found</div>
+  </v-container>
 </template>

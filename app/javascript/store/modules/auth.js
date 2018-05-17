@@ -32,11 +32,14 @@ export default {
         commit('login', response.data.user);
         payload.router.push('/');
       }, (error) => {
-        payload.data.isError = true;
+
       });
     },
     logout({ commit }, payload) {
       request.delete('/v1/logout', { auth: true }).then((response) => {
+        commit('logout');
+        location.href = '/';
+      }, (error) => {
         commit('logout');
         location.href = '/';
       });

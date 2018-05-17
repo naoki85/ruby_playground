@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <v-container fluid>
     <h1>プライバシーポリシー</h1>
     <p>naoki85（以下、「運営者」といいます。）は、本ウェブサイト上で提供するサービス（以下、「本サービス」といいます。）におけるプライバシー情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。</p>
 
@@ -68,7 +68,7 @@
     <p>本ポリシーに関するお問い合わせは、<a href="https://twitter.com/tony_201612">naoki85</a>までお願いいたします。</p>
 
     <div class="row right-align">制定日:&nbsp;2018年2月17日</div>
-  </div>
+  </v-container>
 </template>
 
 <script>
