@@ -15,7 +15,7 @@ module V1
 
     def destroy
       authentication_token = request.headers['Authorization']
-      user = User.find_by_active_token(authentication_token)
+      user = User.find_by(authentication_token: authentication_token)
       return render_404 unless user
 
       user.reset_authentication_token!
