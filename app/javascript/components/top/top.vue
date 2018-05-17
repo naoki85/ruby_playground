@@ -11,7 +11,7 @@
       <router-link to="/sign_in" class="btn">ログイン</router-link>
     </div>
     <v-layout row wrap>
-      <v-flex xs12 sm6 lg4 v-for="comment in comments">
+      <v-flex xs12 sm6 lg4 v-for="comment in comments" :key="comment.id">
         <v-card>
           <v-container fluid grid-list-lg>
             <v-layout row>

@@ -3,6 +3,7 @@
     <v-layout row wrap justify-center>
       <v-btn
           v-for="link in links"
+          :key="link.title"
           :to="link.path"
           color="white"
           flat
