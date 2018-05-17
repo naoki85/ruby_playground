@@ -8,7 +8,7 @@
 
     <div v-if="loggedIn" class="new-comment-area">
       <v-layout row>
-        <v-text-field v-model="editComment" label="コメント"></v-text-field>
+        <v-text-field v-model="newComment" label="コメント"></v-text-field>
       </v-layout>
 
       <v-btn @click="onCreateComment">コメント</v-btn>
@@ -20,7 +20,7 @@
                    class="comment-list"
                    avatar
                    :data-comment-number="user_book_comment.id">
-        <v-list-tile-avatar>
+        <v-list-tile-avatar :to="'/users/' + user_book_comment.user.id">
           <img :src="user_book_comment.user.avatar_image_path"
                :alt="user_book_comment.user.name">
         </v-list-tile-avatar>

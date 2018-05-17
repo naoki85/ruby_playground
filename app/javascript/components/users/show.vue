@@ -1,45 +1,37 @@
 <template>
-  <div class="container">
-    <div class="row margin-default-top">
-      <div class="col s4">
+  <v-container fluid>
+    <v-layout row>
+      <v-flex xs4>
         <img :src="user.avatar_image_path" width="100%">
-      </div>
-      <div class="col s8">
-        <h1>{{ user.name }}</h1>
-      </div>
-    </div>
-    <div class="row" v-for="book in user.books">
-      <div class="row">
-        <div class="col s12">
-          <div class="card horizontal">
-            <div class="card-image">
-              <a :href="'/books/' + book.id">
-                <img :src="book.image_url" :alt="book.title">
-              </a>
+      </v-flex>
+      <v-flex xs8>
+        <div class="display-1">{{ user.name }}</div>
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex xs12 sm6 offset-sm3 v-for="book in user.books" :key="book.title">
+        <v-card>
+          <v-card-media :src="book.image_url" height="200px" :alt="book.title">
+          </v-card-media>
+          <v-card-title primary-title>
+            <div>
+              <h3 class="headline mb-0">{{ book.title }}</h3>
+              <div>{{ book.book_category }}</div>
             </div>
-            <div class="card-stacked">
-              <div class="card-content">
-                <p>{{ book.title }}</p>
-                <p>{{ book.book_category }}</p>
-              </div>
-              <div class="card-action">
-                <a :href="book.detail_page_url" v-if="book.detail_page_url.match(/www\.amazon\.co\.jp/)">
-                  <img src="https://s3-ap-northeast-1.amazonaws.com/bookrecorder-image/commons/btn_amazon.png">
-                </a>
-                <a class="waves-effect btn grey lighten-5 black-text"
-                   :href="book.detail_page_url" v-else>確認</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+          </v-card-title>
+          <v-card-actions>
+            <v-btn flat color="orange" @click="redirectDetailPage(book.detail_page_url)">公式ページへ</v-btn>
+            <!--<v-btn flat color="orange">Explore</v-btn>-->
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
   import request from '../../utils/requests'
-  import loading from '../commons/loading'
+  import { mapActions } from 'vuex'
 
   export default {
     data: function() {
@@ -48,11 +40,14 @@
       }
     },
     mounted: function() {
-      this.showLoading();
+      this.loading();
       this.fetchUser(this.$route.params.id);
-      this.hideLoading();
+      this.finish();
     },
     methods: {
+      ...mapActions('loader', [
+        'loading', 'finish'
+      ]),
       fetchUser: function(userId) {
         request.get('/v1/users/' + userId, {}).then((response) => {
           this.user = response.data.user;
@@ -60,9 +55,11 @@
           console.log(error);
           this.$router.push('/not_found');
         });
+      },
+      redirectDetailPage(url) {
+        location.href = url;
       }
-    },
-    mixins: [loading]
+    }
   }
 </script>
 
