@@ -5,6 +5,9 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - master
     docker:
       # specify the version you desire here
        - image: circleci/ruby:2.5.1-node-browsers
@@ -62,7 +65,6 @@ jobs:
 
             bundle exec rspec --format progress \
                             --out /tmp/test-results/rspec.xml \
-                            --format progress \
                             $TEST_FILES
 
       # collect reports
@@ -72,12 +74,6 @@ jobs:
           path: /tmp/test-results
           destination: test-results
 
-  deploy:
-    machine:
-      enabled: true
-    working_directory: ~/repo
-    steps:
-      - checkout
       - run:
           name: Add ssh-agent
           command: |
@@ -87,22 +83,6 @@ jobs:
               ssh-add ${_k} || true
             done
 
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-          name: Deploy Master to Heroku
+          name: Deploy Master
           command: |
             bundle exec cap production deploy
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
