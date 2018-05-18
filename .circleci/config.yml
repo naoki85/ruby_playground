@@ -27,8 +27,7 @@ jobs:
       - checkout
 
       - add_ssh_keys:
-        fingerprints:
-          - "33:4a:c0:0d:fb:63:3b:1c:16:13:48:dd:11:6d:a4:49"
+          fingerprints: "33:4a:c0:0d:fb:63:3b:1c:16:13:48:dd:11:6d:a4:49"
 
       # Download and cache dependencies
       - restore_cache:
@@ -80,17 +79,17 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Add ssh-agent
-        command: |
-          ssh-agent -s > ~/.ssh_agent_conf
-          source ~/.ssh_agent_conf
-          for _k in $(ls ${HOME}/.ssh/id_*); do
-            ssh-add ${_k} || true
-          done
+          name: Add ssh-agent
+          command: |
+            ssh-agent -s > ~/.ssh_agent_conf
+            source ~/.ssh_agent_conf
+            for _k in $(ls ${HOME}/.ssh/id_*); do
+              ssh-add ${_k} || true
+            done
 
-        name: Deploy Master to Heroku
-        command: |
-          bundle exec cap production deploy
+          name: Deploy Master to Heroku
+          command: |
+            bundle exec cap production deploy
 
 workflows:
   version: 2
