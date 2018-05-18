@@ -6,7 +6,7 @@ SitemapGenerator::Sitemap.create do
   # Static Pages
   add user_policy_path,    :priority => 0.8, :changefreq => 'monthly'
   add privacy_policy_path, :priority => 0.8, :changefreq => 'monthly'
-  User.find_each do |user|
-    add user_path(user), lastmod: user.updated_at
-  end
+  # User.find_each do |user|
+  #   add user_path(user), lastmod: user.updated_at
+  # end
 end
