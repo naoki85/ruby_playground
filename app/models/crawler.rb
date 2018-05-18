@@ -3,45 +3,56 @@ require 'open-uri'
 require 'nokogiri'
 
 class Crawler
-  @@base_url = 'http://gihyo.jp'
-  @@content_list_url = 'http://gihyo.jp/contentslist'
-  @@content_xpath = '//*[@id="latestArticle"]/dl/dd/h3/a'
-  @@next_url_xpath = '//*[@id="latestArticle"]/div[4]/p[2]/a'
-  @@page_num = 2
-  @@sleep_time = 1
+  class_attribute :base_url
+  class_attribute :content_list_url
+  class_attribute :content_xpath
+  class_attribute :next_url_xpath
+  class_attribute :page_num
+  class_attribute :sleep_time
+  self.base_url = 'http://gihyo.jp'
+  self.content_list_url = 'http://gihyo.jp/contentslist'
+  self.content_xpath = '//*[@id="latestArticle"]/dl/dd/h3/a'
+  self.next_url_xpath = '//*[@id="latestArticle"]/div[4]/p[2]/a'
+  self.page_num = 2
+  self.sleep_time = 1
 
   # @return hash
   # { title: 'book', url: 'link', published_at: '2018-05-11',
   # image_url: 'xxxx', author: 'xxxxx' }
   def self.run
     results = []
-    url = @@content_list_url
-    @@page_num.times do
+    url = self.content_list_url
+    self.page_num.times do
       dom = read_html(url)
       tmp_result = scrape_content_page(dom)
       results.concat(tmp_result)
       url = get_next_url(dom)
       break if url.nil?
-      sleep(@@sleep_time)
+      sleep(self.sleep_time)
     end
     results
   end
 
   def self.read_html(url)
-    charset = nil
-    user_agent = {"User-Agent" => "Gihyo Bot"}
-    html = open(url, user_agent) do |f|
-      charset = f.charset
-      f.read
-    end
+    user_agent = {"User-Agent" => "BookRecorder Bot"}
+    html, charset = get_html_and_charset(url, user_agent)
     Nokogiri::HTML.parse(html, nil, charset)
   rescue StandardError => e
     p "Error: #{e}"
   end
 
+  def self.get_html_and_charset(url, user_agent)
+    charset = nil
+    html = open(url, user_agent) do |f|
+      charset = f.charset
+      f.read
+    end
+    return html, charset
+  end
+
   def self.scrape_content_page(dom)
     ret_arr = []
-    dom.xpath(@@content_xpath).each do |dom_by_xpath|
+    dom.xpath(self.content_xpath).each do |dom_by_xpath|
       title = get_title(dom_by_xpath)
       url   = get_article_url(dom_by_xpath)
       published_at = get_published_at(dom_by_xpath)
@@ -59,7 +70,7 @@ class Crawler
 
   def self.get_article_url(dom)
     url = dom.attribute('href').value
-    URI.join(@@base_url, url).to_s
+    URI.join(self.base_url, url).to_s
   end
 
   def self.get_published_at(dom)
@@ -75,21 +86,21 @@ class Crawler
   end
 
   def self.get_next_url(dom)
-    next_url = dom.xpath(@@next_url_xpath)[0].attribute('href').value
-    return URI.join(@@base_url, next_url).to_s
+    next_url = dom.xpath(self.next_url_xpath)[0].attribute('href').value
+    return URI.join(self.base_url, next_url).to_s
   rescue
     return nil
   end
 
   def self.parse_date(date_str)
-    if date_str =~ /^(\d{4})[年](\d{1,2})[月](\d{1,2})[日]\s*/
+    if date_str =~ /(\d{4})[年\/]\s*(\d{1,2})[月|\/]\s*(\d{1,2})[日]?\s*/
       Date.new($1.to_i, $2.to_i, $3.to_i)
     else
-      raise "invalid date: #{str}"
+      raise "invalid date: #{date_str}"
     end
   end
 
   def self.parse_author(str)
-    str.gsub('著', '').gsub('　', '')
+    str.gsub('著者：', '').gsub('　', '')
   end
 end

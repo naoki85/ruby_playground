@@ -48,10 +48,7 @@ gem 'selenium-webdriver'
 gem 'chromedriver-helper'
 gem 'pkg-config', '~> 1.1.7'
 
-gem 'jquery-rails'
 gem 'slim-rails'
-gem 'materialize-sass'
-gem 'material_icons'
 gem 'active_decorator'
 
 gem 'whenever', :require => false

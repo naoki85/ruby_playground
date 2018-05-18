@@ -1,5 +1,6 @@
 class CrawlPublisherSiteService < BaseService
   def self.run
+    Rails.logger.info 'Start crawling...'
     publishers = Publisher.where(active: 1)
     publishers.each do |publisher|
       clazz = publisher.class_name.constantize
@@ -14,5 +15,6 @@ class CrawlPublisherSiteService < BaseService
         book.save!
       end
     end
+    Rails.logger.info 'Finish crawling'
   end
 end

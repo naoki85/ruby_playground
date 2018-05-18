@@ -1,8 +1,9 @@
-class Crawler::GihyoCrawler < Crawler
-  @@base_url = 'http://gihyo.jp'
-  @@content_list_url = 'http://gihyo.jp/book/list'
-  @@content_xpath = '//ul[@class="magazineList01 bookList01"]/li[@class="clearfix"]'
-  @@next_url_xpath = '//p[@class="next"]/a'
+class Crawler::Gihyo < Crawler
+  self.base_url = 'http://gihyo.jp'
+  self.content_list_url = 'http://gihyo.jp/book/list'
+  self.content_xpath = '//ul[@class="magazineList01 bookList01"]/li[@class="clearfix"]'
+  self.next_url_xpath = '//p[@class="next"]/a'
+  self.page_num = 5
 
   def self.get_title(dom)
     dom.xpath('.//h3').text
@@ -10,7 +11,7 @@ class Crawler::GihyoCrawler < Crawler
 
   def self.get_article_url(dom)
     url = dom.xpath('.//h3/a').attribute('href').value
-    URI.join(@@base_url, url).to_s
+    URI.join(self.base_url, url).to_s
   end
 
   def self.get_published_at(dom)
