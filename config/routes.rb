@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     delete 'user_books' => 'user_books#destroy'
     # get 'books/search' => 'books#search'
     resources :books, only: [:show]
+    resources :publishers, only: [:index, :show]
   end
 
   # View Routing Errors
