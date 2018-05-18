@@ -34,15 +34,20 @@ class Crawler
   end
 
   def self.read_html(url)
+    user_agent = {"User-Agent" => "BookRecorder Bot"}
+    html, charset = get_html_and_charset(url, user_agent)
+    Nokogiri::HTML.parse(html, nil, charset)
+  rescue StandardError => e
+    p "Error: #{e}"
+  end
+
+  def self.get_html_and_charset(url, user_agent)
     charset = nil
-    user_agent = {"User-Agent" => "Gihyo Bot"}
     html = open(url, user_agent) do |f|
       charset = f.charset
       f.read
     end
-    Nokogiri::HTML.parse(html, nil, charset)
-  rescue StandardError => e
-    p "Error: #{e}"
+    return html, charset
   end
 
   def self.scrape_content_page(dom)
@@ -88,14 +93,14 @@ class Crawler
   end
 
   def self.parse_date(date_str)
-    if date_str =~ /^(\d{4})[年](\d{1,2})[月](\d{1,2})[日]\s*/
+    if date_str =~ /(\d{4})[年\/]\s*(\d{1,2})[月|\/]\s*(\d{1,2})[日]?\s*/
       Date.new($1.to_i, $2.to_i, $3.to_i)
     else
-      raise "invalid date: #{str}"
+      raise "invalid date: #{date_str}"
     end
   end
 
   def self.parse_author(str)
-    str.gsub('著', '').gsub('　', '')
+    str.gsub('著者：', '').gsub('　', '')
   end
 end
