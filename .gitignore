@@ -28,8 +28,6 @@
 .env
 .idea
 config/database.yml
-config/deploy/staging.rb
-config/deploy/production.rb
 config/id_rsa
 config/secrets.yml
 config/storage.yml

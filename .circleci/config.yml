@@ -26,6 +26,10 @@ jobs:
     steps:
       - checkout
 
+      - add_ssh_keys:
+        fingerprints:
+          - "33:4a:c0:0d:fb:63:3b:1c:16:13:48:dd:11:6d:a4:49"
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -68,3 +72,34 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+        name: Add ssh-agent
+        command: |
+          ssh-agent -s > ~/.ssh_agent_conf
+          source ~/.ssh_agent_conf
+          for _k in $(ls ${HOME}/.ssh/id_*); do
+            ssh-add ${_k} || true
+          done
+
+        name: Deploy Master to Heroku
+        command: |
+          bundle exec cap production deploy
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
