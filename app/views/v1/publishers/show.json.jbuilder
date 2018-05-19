@@ -8,6 +8,7 @@ json.set! :publisher do
       json.title book.title
       json.image_url book.image_url
       json.detail_page_url book.detail_page_url
+      json.published_at book.published_at
       json.book_category book.book_category.name
     end
   end
