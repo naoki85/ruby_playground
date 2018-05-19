@@ -13,6 +13,7 @@ import Book from '../components/books/show'
 import PrivacyPolicy from '../components/top/privacy_policy'
 import UserPolicy from '../components/top/user_policy'
 // import Search from '../components/books/search'
+import PublisherShow from '../components/publishers/show'
 import NotFound from '../components/errors/not_found'
 
 Vue.use(VueRouter)
@@ -30,6 +31,7 @@ var router = new VueRouter({
     { path: '/books/:id', component: Book },
     { path: '/privacy_policy', component: PrivacyPolicy },
     { path: '/user_policy', component: UserPolicy },
+    { path: '/publishers/:id', component: PublisherShow },
     { path: '/not_found', component: NotFound }
   ]
 });

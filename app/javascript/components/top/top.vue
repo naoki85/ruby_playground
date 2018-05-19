@@ -1,67 +1,34 @@
 <template>
   <v-container fluid grid-list-lg>
-    <div class="display-1">最近追加された本</div>
-    <div>本を追加してコメントを残そう!!</div>
-    <div v-if="loggedIn">
-      <!--<router-link to="/books/search" class="waves-effect btn grey lighten-5 black-text">本を探す</router-link>-->
-      <router-link to="/user_books" class="btn">本棚</router-link>
+    <div class="display-1">新刊</div>
+    <div v-for="publisher in publishers" :key="publisher.id" class="publisher-area">
+      <v-layout row>
+        <router-link :to="'/publishers/' + publisher.id" class="headline">
+          <div class="headline">{{ publisher.name }}</div>
+        </router-link>
+      </v-layout>
+      <v-layout row class="book-list">
+        <div v-for="book in publisher.books" :key="book.id">
+          <img :src="book.image_url" :alt="book.title">
+        </div>
+      </v-layout>
     </div>
-    <div v-else>
-      <router-link to="/sign_up" class="btn">新規登録</router-link>
-      <router-link to="/sign_in" class="btn">ログイン</router-link>
-    </div>
-    <v-layout row wrap>
-      <v-flex xs12 sm6 lg4 v-for="comment in comments" :key="comment.id">
-        <v-card>
-          <v-container fluid grid-list-lg>
-            <v-layout row>
-              <v-flex xs7>
-                <div>
-                  <div class="headline">
-                    <router-link :to="'/users/' + comment.user.id">
-                      <img :src="comment.user.avatar_image_path" :alt="comment.user.name">
-                    </router-link>
-                    <span class="body-2 grey--text">{{ comment.created_at }}</span>
-                  </div>
-                  <div>{{ comment.comment }}</div>
-                </div>
-              </v-flex>
-              <v-flex xs5>
-                <router-link :to="'/books/' + comment.book.id">
-                  <v-card-media
-                      :src="comment.book.image_url"
-                      :alt="comment.book.title"
-                      height="125px"
-                      contain
-                  ></v-card-media>
-                </router-link>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card>
-      </v-flex>
-    </v-layout>
   </v-container>
 </template>
 
 <script>
   import request from '../../utils/requests'
-  import { mapState, mapActions } from 'vuex'
+  import { mapActions } from 'vuex'
 
   export default {
     data: function() {
       return {
-        comments: []
+        publishers: []
       }
-    },
-    computed: {
-      ...mapState('auth', [
-        'loggedIn'
-      ])
     },
     mounted: function() {
       this.loading();
-      this.fetchComments();
+      this.fetchPublishers();
       this.finish();
     },
     methods: {
@@ -74,15 +41,27 @@
         }, (error) => {
 
         });
+      },
+      fetchPublishers: function() {
+        request.get('/v1/publishers', {}).then((response) => {
+          this.publishers = response.data.publishers;
+        }, (error) => {
+
+        });
       }
     }
   }
 </script>
 
 <style scoped>
-  .headline img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+  .publisher-area {
+    margin-top: 30px;
+  }
+  .book-list {
+    margin-top: 15px !important;
+  }
+  .book-list img {
+    width: 100px;
+    max-height: 200px;
   }
 </style>
