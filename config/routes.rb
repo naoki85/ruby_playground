@@ -10,9 +10,7 @@ Rails.application.routes.draw do
   # get 'books/search' => 'web#index'
   get 'books/:id' => 'books#show'
   get 'user_books' => 'web#index'
-
-  # Publisher
-  # resources :publishers, only: [:show]
+  get 'publishers/:id' => 'web#index'
 
   # API
   namespace :v1, format: 'json' do
@@ -25,6 +23,7 @@ Rails.application.routes.draw do
     delete 'user_books' => 'user_books#destroy'
     # get 'books/search' => 'books#search'
     resources :books, only: [:show]
+    resources :publishers, only: [:index, :show]
   end
 
   # View Routing Errors

@@ -20,7 +20,7 @@ class Crawler::Gihyo < Crawler
   end
 
   def self.get_image_url(dom)
-    dom.xpath('.//div[@class="cover"]//img').attribute('src').value
+    dom.xpath('.//div[@class="cover"]//img').attribute('data-original').value
   end
 
   def self.get_author(dom)
