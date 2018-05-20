@@ -2,6 +2,7 @@ import Vue from 'vue/dist/vue.esm.js'
 import VueRouter from 'vue-router'
 
 import Auth from '../store/modules/auth'
+import Alert from '../store/modules/alert'
 
 import Top from '../components/top/top'
 import SignUp from '../components/sessions/sign_up'
@@ -37,6 +38,9 @@ var router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  Alert.state.isError = false;
+  Alert.state.isSuccess = false;
+
   var authentication_token = localStorage.getItem('bookRecorderAuthenticationToken');
   var user_id = localStorage.getItem('bookRecorderUserId');
   if (authentication_token) {

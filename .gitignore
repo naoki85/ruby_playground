@@ -36,3 +36,4 @@ config/storage.yml
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+google-chrome-stable_current_amd64.deb
