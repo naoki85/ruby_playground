@@ -1,4 +1,5 @@
 import request from '../../utils/requests'
+import Alert from './alert'
 
 export default {
   namespaced: true,
@@ -30,9 +31,14 @@ export default {
       };
       request.post('/v1/login', options).then((response) => {
         commit('login', response.data.user);
+        Alert.state.isSuccess = true;
+        Alert.state.isError = false;
+        Alert.state.successMessage = 'ログインしました';
         payload.router.push('/');
       }, (error) => {
-
+        Alert.state.isSuccess = false;
+        Alert.state.isError = true;
+        Alert.state.errorMessage = 'ログインに失敗しました';
       });
     },
     logout({ commit }, payload) {
@@ -43,6 +49,8 @@ export default {
         commit('logout');
         location.href = '/';
       });
+      Alert.state.isSuccess = true;
+      Alert.state.successMessage = 'ログアウトしました';
     }
   }
 }

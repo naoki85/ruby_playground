@@ -59,9 +59,6 @@
           router: this.$router,
           data: this.$data
         });
-        this.showErrorAlert({
-          message: 'ログインに失敗しました'
-        });
         this.finish();
       }
     }
