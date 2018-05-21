@@ -1,6 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe V1::BooksController, type: :request do
+  describe '#index' do
+    let(:request_url) { '/v1/books' }
+
+    before do
+      11.times do
+        create(:book)
+      end
+    end
+
+    it 'get book data' do
+      get request_url
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 10
+    end
+
+    it 'request with get params should return book data' do
+      get request_url, params: { mode: 'recent', limit: 11 }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 11
+    end
+
+    it 'request with invalid params should return no book' do
+      get request_url, params: { limit: 'hoge' }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 0
+    end
+  end
+
   describe '#show' do
     let(:request_url) { '/v1/books/' }
     let(:user) { create(:user) }

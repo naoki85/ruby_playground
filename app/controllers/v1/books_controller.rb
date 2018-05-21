@@ -1,6 +1,18 @@
 module V1
   class BooksController < ApiApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:show]
+    skip_before_action :authenticate_user_from_token!, only: [:index, :show]
+
+    def index
+      @books = Book.includes([:book_category])
+      if params['mode'].present? && params['mode'] == 'recent'
+        @books = @books.order('updated_at DESC')
+      end
+      if params['limit'].present?
+        @books = @books.limit(params['limit'].to_i)
+      else
+        @books = @books.limit(10)
+      end
+    end
 
     def show
       set_book

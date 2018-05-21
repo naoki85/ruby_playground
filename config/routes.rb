@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :user_books, only: [:create]
     delete 'user_books' => 'user_books#destroy'
     # get 'books/search' => 'books#search'
-    resources :books, only: [:show]
+    resources :books, only: [:index, :show]
     resources :publishers, only: [:index, :show]
   end
 
