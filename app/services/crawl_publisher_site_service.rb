@@ -6,6 +6,7 @@ class CrawlPublisherSiteService < BaseService
       Rails.logger.info "Start #{publisher.name}"
       clazz = publisher.class_name.constantize
       data = clazz.run
+      Rails.logger.info "data = #{data}"
       data.each do |record|
         book = Book.find_or_initialize_by(publisher_id: publisher.id, title: record[:title])
         book.title = record[:title]
