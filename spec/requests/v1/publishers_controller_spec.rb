@@ -19,9 +19,6 @@ RSpec.describe V1::PublishersController, type: :request do
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
       expect(json['publishers'].size).to eq 3
-      json['publishers'].each do |publisher|
-        expect(publisher['books'].size).to eq 5
-      end
     end
   end
 
