@@ -7,6 +7,7 @@ class Webdriver::NikkeiBP < Webdriver
 
     data = []
     now_page_count = nil
+    next_page_count = nil
     5.times do |j|
       if j > 0
         10.times do
@@ -50,6 +51,7 @@ class Webdriver::NikkeiBP < Webdriver
   rescue StandardError => e
     Rails.logger.error e
     driver.quit
+    data
   end
 
   def self.parse_date(date_str)
