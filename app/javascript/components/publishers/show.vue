@@ -29,6 +29,7 @@
           </v-flex>
           <v-flex xs8>
             <div class="title">{{ book.title }}</div>
+            <div class="subheading">{{ book.author }}</div>
             <div class="subheading">{{ '発売日：' + book.published_at }}</div>
           </v-flex>
         </v-layout>

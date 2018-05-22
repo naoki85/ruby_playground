@@ -1,18 +1,28 @@
 <template>
   <v-container fluid grid-list-lg>
-    <div class="display-1">新刊</div>
-    <div v-for="publisher in publishers" :key="publisher.id" class="publisher-area">
-      <v-layout row>
-        <router-link :to="'/publishers/' + publisher.id" class="headline">
-          <div class="headline">{{ publisher.name }}</div>
-        </router-link>
-      </v-layout>
-      <v-layout row class="book-list">
-        <div v-for="book in publisher.books" :key="book.id">
+    <div class="display-1">最近追加された本</div>
+    <v-layout row class="image-slide-box">
+      <div class="image-list">
+        <div v-for="book in books" class="image">
           <img :src="book.image_url" :alt="book.title">
         </div>
-      </v-layout>
-    </div>
+      </div>
+    </v-layout>
+    <v-list subheader>
+      <v-subheader>新刊情報</v-subheader>
+      <v-list-tile v-for="publisher in publishers" :key="publisher.id"
+                   :to="'publishers/' + publisher.id">
+        <v-list-tile-action>
+          <v-icon>book</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title v-html="publisher.name"></v-list-tile-title>
+        </v-list-tile-content>
+        <v-list-tile-action>
+          <v-icon>chevron_right</v-icon>
+        </v-list-tile-action>
+      </v-list-tile>
+    </v-list>
   </v-container>
 </template>
 
@@ -23,21 +33,24 @@
   export default {
     data: function() {
       return {
-        publishers: []
+        publishers: [],
+        books: []
       }
     },
     mounted: function() {
       this.loading();
       this.fetchPublishers();
+      this.fetchBooks();
       this.finish();
     },
     methods: {
       ...mapActions('loader', [
         'loading', 'finish'
       ]),
-      fetchComments: function() {
-        request.get('/v1/user_book_comments', {}).then((response) => {
-          this.comments = response.data.user_book_comments;
+      fetchBooks: function() {
+        request.get('/v1/books', { params: { mode: 'recent', limit: 10 } })
+            .then((response) => {
+          this.books = response.data.books;
         }, (error) => {
 
         });
@@ -54,14 +67,35 @@
 </script>
 
 <style scoped>
-  .publisher-area {
-    margin-top: 30px;
+  .image-slide-box {
+    margin-top: 20px;
+    height: 200px;
   }
-  .book-list {
-    margin-top: 15px !important;
+  .image-list {
+    position: absolute;
+    left: 0px;
+    width: 1200px;
+    height: 200px;
+    overflow: hidden;
+    animation: slide-image-list 20s linear 0s 1 normal none running;
   }
-  .book-list img {
+  .image-list > .image {
+    float: left;
+    padding: 10px;
+  }
+  .image > img {
     width: 100px;
     max-height: 200px;
+  }
+  @keyframes slide-image-list {
+    0% {
+      left: 0;
+    }
+    50% {
+      left: -600px;
+    }
+    100% {
+      left: -1200px;
+    }
   }
 </style>

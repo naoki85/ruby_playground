@@ -3,9 +3,7 @@ module V1
     skip_before_action :authenticate_user_from_token!, only: [:index, :show]
 
     def index
-      @publishers = Publisher.active
-      @books = Book.union_select_recent_each_publisher(@publishers.pluck(:id)).
-          group_by(&:publisher_id)
+      @publishers = Publisher.active.order('kana ASC')
     end
 
     def show

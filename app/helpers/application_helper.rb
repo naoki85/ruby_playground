@@ -48,7 +48,7 @@ module ApplicationHelper
             title: 'BookRecorder',
             type: 'website',
             url: request.original_url,
-            # image: image_url('top/banner.png'),
+            image: image_url('commons/favicon.png'),
             site_name: 'BookRecorder',
             description: I18n.t('top.index.description'),
             locale: 'ja_JP'
