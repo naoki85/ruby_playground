@@ -7,7 +7,7 @@ module V1
     end
 
     def show
-      @publisher = Publisher.includes([books: [:book_category]]).where(id: params[:id]).active.first
+      @publisher = Publisher.where(id: params[:id]).active.first
       render_404 unless @publisher
     end
   end

@@ -3,11 +3,13 @@ require 'rails_helper'
 RSpec.describe V1::BooksController, type: :request do
   describe '#index' do
     let(:request_url) { '/v1/books' }
+    let(:publisher) { create(:publisher) }
 
     before do
-      11.times do
-        create(:book)
+      3.times do
+        create(:book, publisher: publisher)
       end
+      create_list(:book, 8)
     end
 
     it 'get book data' do
@@ -22,6 +24,16 @@ RSpec.describe V1::BooksController, type: :request do
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
       expect(json['books'].size).to eq 11
+
+      get request_url, params: { publisher_id: publisher.id }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 3
+
+      get request_url, params: { limit: 11, offset: 8 }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 3
     end
 
     it 'request with invalid params should return no book' do

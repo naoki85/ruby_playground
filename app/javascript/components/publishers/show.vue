@@ -21,7 +21,7 @@
           :key="tab.name"
           class="mt-default"
       >
-        <v-layout row wrap v-for="book in getBooks" :key="book.title">
+        <v-layout row wrap v-for="book in getBooks" :key="book.id">
           <v-flex xs4>
             <router-link :to="'/books/' + book.id">
               <img :src="book.image_url" :alt="book.title" width="100%">
@@ -33,6 +33,9 @@
             <div class="subheading">{{ '発売日：' + book.published_at }}</div>
           </v-flex>
         </v-layout>
+        <div class="align-center" v-if="getFlg">
+          <v-btn @click="fetchBooks(active)">さらに読み込む</v-btn>
+        </div>
       </v-tab-item>
     </v-tabs>
   </v-container>
@@ -48,9 +51,12 @@
         active: null,
         tabList: [{name: '今月'}, {name: '来月'}],
         publisher: [],
-        books: [],
         thisMonthBooks: [],
-        nextMonthBooks: []
+        thisMonthOffset: 0,
+        thisMonthNextFlg: true,
+        nextMonthBooks: [],
+        nextMonthOffset: 0,
+        nextMonthNextFlg: true
       }
     },
     mounted: function () {
@@ -65,37 +71,96 @@
         } else {
           return this.thisMonthBooks;
         }
+      },
+      getFlg: function() {
+        if (this.active == 1) {
+          return this.thisMonthNextFlg;
+        } else {
+          return this.nextMonthNextFlg;
+        }
       }
+    },
+    watch: {
+
     },
     methods: {
       ...mapActions('loader', [
         'loading', 'finish'
       ]),
-      fetchPublisher: function (publisherId) {
+      fetchPublisher: function(publisherId) {
         request.get('/v1/publishers/' + publisherId, {}).then((response) => {
           this.publisher = response.data.publisher;
-          this.setPublishBooks(response.data.publisher.books)
+          this.fetchBooks(0);
+          this.fetchBooks(1);
         }, (error) => {
           console.log(error);
           this.$router.push('/not_found');
         });
       },
-      setPublishBooks: function(books) {
-        var today = new Date();
-        var beginningOfMonth = new Date();
-        beginningOfMonth.setDate(1);
-        var endOfMonth = new Date();
-        endOfMonth.setDate(0);
-        endOfMonth.setMonth(today.getMonth());
+      loadNextBooks: function(active) {
+        this.loading();
+        this.fetchBooks(active);
+        this.finish();
+      },
+      fetchBooks: function(active) {
+        if (active == 1) {
+          var offset = this.nextMonthOffset;
+          var date = this.getFormattedDate('next_month');
+        } else {
+          var offset = this.thisMonthOffset;
+          var date = this.getFormattedDate('this_month');
+          var end_date = this.getFormattedDate('end_of_this_month');
+        }
+        var params = '?publisher_id=' + this.publisher.id + '&start_date=' + date + '&offset=' + offset;
+        if (active == 0) {
+          params += '&end_date=' + end_date;
+        }
 
-        books.forEach((book) => {
-          var publishedAt = new Date(book.published_at);
-          if (publishedAt >= beginningOfMonth && publishedAt <= endOfMonth) {
-            this.thisMonthBooks.push(book);
-          } else if (publishedAt > endOfMonth) {
-            this.nextMonthBooks.push(book);
+        request.get('/v1/books' + params, {}).then((response) => {
+          if (response.data.books.length < 1) {
+            if (active == 1) {
+              this.nextMonthNextFlg = false;
+            } else {
+              this.thisMonthNextFlg = false;
+            }
           }
+          for(var i = 0; i < response.data.books.length; i++) {
+            if (active == 1) {
+              this.nextMonthBooks.push(response.data.books[i]);
+            } else {
+              this.thisMonthBooks.push(response.data.books[i]);
+            }
+          }
+          if (active == 1) {
+            this.nextMonthOffset += 10;
+          } else {
+            this.thisMonthOffset += 10;
+          }
+        }, (error) => {
+          console.log(error);
         });
+      },
+      // next_month
+      // end_of_this_month
+      getFormattedDate: function(mode) {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = today.getMonth() + 1;
+        if (mode == 'end_of_this_month') {
+          var day = new Date(year, month, 0).getDate();
+        } else {
+          var day = '01';
+        }
+        if (mode == 'next_month') {
+          month++;
+          if (month > 12) {
+            year++;
+          }
+        }
+        if (month < 10) {
+          month = '0' + month;
+        }
+        return year + '-' + month + '-' + day;
       }
     }
   }
@@ -104,5 +169,8 @@
 <style scoped>
   .mt-default {
     margin-top: 30px;
+  }
+  .align-center {
+    text-align: center !important;
   }
 </style>

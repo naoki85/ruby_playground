@@ -4,14 +4,21 @@ module V1
 
     def index
       @books = Book.includes([:book_category])
+      if params['publisher_id'].present?
+        @books = @books.where(publisher_id: params['publisher_id'])
+      end
+      if params['start_date'].present?
+        @books = @books.where('published_at >= ?', params['start_date'])
+      end
+      if params['end_date'].present?
+        @books = @books.where('published_at <= ?', params['end_date'])
+      end
       if params['mode'].present? && params['mode'] == 'recent'
         @books = @books.order('updated_at DESC')
       end
-      if params['limit'].present?
-        @books = @books.limit(params['limit'].to_i)
-      else
-        @books = @books.limit(10)
-      end
+      limit = params['limit'].present? ? params['limit'].to_i : 10
+      offset = params['offset'].present? ? params['offset'].to_i : 0
+      @books = @books.limit(limit).offset(offset)
     end
 
     def show
