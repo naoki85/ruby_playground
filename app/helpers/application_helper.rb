@@ -54,7 +54,7 @@ module ApplicationHelper
             locale: 'ja_JP'
         },
         twitter: {
-            card: 'summary',
+            card: 'summary_large_image',
             site: '@tony_201612',
             creator: '@tony_201612'
         }

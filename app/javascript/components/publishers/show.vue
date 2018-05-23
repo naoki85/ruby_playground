@@ -33,7 +33,10 @@
             <div class="subheading">{{ '発売日：' + book.published_at }}</div>
           </v-flex>
         </v-layout>
-        <div class="align-center" v-if="getFlg">
+        <div class="align-center" v-if="active == 1 && nextMonthNextFlg">
+          <v-btn @click="fetchBooks(active)">さらに読み込む</v-btn>
+        </div>
+        <div class="align-center" v-else-if="active == 0 && thisMonthNextFlg">
           <v-btn @click="fetchBooks(active)">さらに読み込む</v-btn>
         </div>
       </v-tab-item>
@@ -70,13 +73,6 @@
           return this.nextMonthBooks;
         } else {
           return this.thisMonthBooks;
-        }
-      },
-      getFlg: function() {
-        if (this.active == 1) {
-          return this.thisMonthNextFlg;
-        } else {
-          return this.nextMonthNextFlg;
         }
       }
     },
@@ -117,7 +113,7 @@
         }
 
         request.get('/v1/books' + params, {}).then((response) => {
-          if (response.data.books.length < 1) {
+          if (response.data.books.length < 10) {
             if (active == 1) {
               this.nextMonthNextFlg = false;
             } else {
