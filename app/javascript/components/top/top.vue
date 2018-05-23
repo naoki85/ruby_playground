@@ -48,7 +48,8 @@
         'loading', 'finish'
       ]),
       fetchBooks: function() {
-        request.get('/v1/books', { params: { mode: 'recent', limit: 10 } })
+        var params = 'mode=recent&limit=10';
+        request.get('/v1/books?' + params, { })
             .then((response) => {
           this.books = response.data.books;
         }, (error) => {

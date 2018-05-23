@@ -37,7 +37,6 @@ RSpec.describe V1::PublishersController, type: :request do
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
       expect(json['publisher']['id']).to eq publisher.id
-      expect(json['publisher']['books'].size).to eq 5
     end
 
     it 'when publisher is not found return 404 error' do
