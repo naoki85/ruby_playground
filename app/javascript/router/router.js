@@ -11,9 +11,9 @@ import User from '../components/users/show'
 // import UserEdit from '../components/users/edit'
 import UserBooksIndex from '../components/user_books/index'
 import Book from '../components/books/show'
+import Search from '../components/books/search'
 import PrivacyPolicy from '../components/top/privacy_policy'
 import UserPolicy from '../components/top/user_policy'
-// import Search from '../components/books/search'
 import PublisherShow from '../components/publishers/show'
 import NotFound from '../components/errors/not_found'
 
@@ -28,7 +28,7 @@ var router = new VueRouter({
     // { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
     { path: '/users/:id', component: User },
     { path: '/user_books', component: UserBooksIndex, meta: { requiresAuth: true } },
-    // { path: '/books/search', component: Search, meta: { requiresAuth: true } },
+    { path: '/books/search', component: Search, meta: { requiresAuth: true } },
     { path: '/books/:id', component: Book },
     { path: '/privacy_policy', component: PrivacyPolicy },
     { path: '/user_policy', component: UserPolicy },

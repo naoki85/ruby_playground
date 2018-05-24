@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'privacy_policy' => 'web#index'
 
   get 'users/:id' => 'users#show'
-  # get 'books/search' => 'web#index'
+  get 'books/search' => 'web#index'
   get 'books/:id' => 'books#show'
   get 'user_books' => 'web#index'
   get 'publishers/:id' => 'web#index'
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :user_book_comments, only: [:index, :create, :update, :destroy]
     resources :user_books, only: [:create]
     delete 'user_books' => 'user_books#destroy'
-    # get 'books/search' => 'books#search'
+    get 'books/search' => 'books#search'
     resources :books, only: [:index, :show]
     resources :publishers, only: [:index, :show]
   end

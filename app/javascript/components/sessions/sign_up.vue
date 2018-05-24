@@ -46,7 +46,7 @@
     },
     methods: {
       ...mapActions('loader', [
-        'loading'
+        'loading', 'finish'
       ]),
       ...mapActions('alert', [
         'showSuccessAlert', 'showErrorAlert'

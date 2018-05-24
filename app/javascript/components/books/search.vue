@@ -1,62 +1,76 @@
 <template>
-  <div class="container">
-    <p v-if="isError" class="alert alert-danger">エラーが発生しました。再度お試しください。</p>
-    <p v-if="isCreated" class="alert alert-success">本棚に追加しました。</p>
-    <h1>本を探す</h1>
-    <div class="row">
-      <div class="input-field">
-        <label>キーワード</label>
-        <input v-model="keyword" type="text" autofocus="sutofocus">
-      </div>
+  <v-container fluid>
+    <div class="display-1">本を探す</div>
+    <div>
+      <v-layout row>
+        <v-text-field v-model="keyword" label="キーワード"></v-text-field>
+      </v-layout>
+
+      <v-btn @click="onBookSearch">
+        探す
+        <v-icon>search</v-icon>
+      </v-btn>
     </div>
-    <div class="row">
-      <button @click="onBookSearch" class="waves-effect btn grey lighten-5 black-text">探す</button>
-    </div>
-    <div v-if="isLoading" class="progress"><div class="indeterminate"></div></div>
-    <div v-for="item in items" class="row">
-      <div class="col s12">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img :src="item.small_image_url" alt="item.title">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>{{ item.title }}</p>
-              <p>{{ item.author }}</p>
-            </div>
-            <div class="card-action">
-              <button @click="onAddBook(item)" class="waves-effect btn grey lighten-5 black-text">追加</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+    <v-layout row wrap class="mt-default">
+      <v-flex xs12 md6 v-for="item in items" :key="item.id">
+        <v-card color="" class="black--text" :to="'books/' + item.id">
+          <v-container fluid grid-list-lg>
+            <v-layout row>
+              <v-flex xs7>
+                <div>
+                  <div class="headline">{{ item.title }}</div>
+                  <div>{{ item.book_category }}</div>
+                </div>
+              </v-flex>
+              <v-flex xs5>
+                <v-card-media
+                    :src="item.image_url"
+                    height="125px"
+                    :alt="item.title"
+                    contain
+                ></v-card-media>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <v-card-actions>
+                <v-btn color="teal" @click="onAddBook(item)">
+                  追加
+                  <v-icon>add</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-layout>
+          </v-container>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
   import request from '../../utils/requests'
+  import { mapActions } from 'vuex'
 
   export default {
     data: function() {
       return {
-        isError: false,
-        isCreated: false,
-        isLoading: false,
         keyword: '',
         items: []
       }
     },
     methods: {
+      ...mapActions('loader', [
+        'loading', 'finish'
+      ]),
+      ...mapActions('alert', [
+        'showSuccessAlert', 'showErrorAlert'
+      ]),
       onBookSearch() {
         if (!this.keyword) {
           this.isError = true;
           return;
         }
         this.items = [];
-        this.isError = false;
-        this.isLoading = true;
-        this.isCreated = false;
 
         request.get('/v1/books/search',
             { params: { keyword: this.keyword }, auth: true }).
@@ -76,9 +90,7 @@
           this.isError = true;
           return;
         }
-        this.isError = false;
-        this.isCreated = false;
-        document.getElementsByClassName('turbolinks-loading')[0].classList.add('active');
+        this.loading();
         var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
         request.post('/v1/user_books',
             { params: { user_book: book }, headers: { Authorization: authenticateToken } }).
@@ -87,7 +99,7 @@
         }, (error) => {
           console.log(error);
         });
-        document.getElementsByClassName('turbolinks-loading')[0].classList.remove('active')
+        this.finish();
       }
     }
   }
