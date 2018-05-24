@@ -18,6 +18,14 @@
             <v-list-tile-title>本棚</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile to="/books/search">
+          <v-list-tile-action>
+            <v-icon>search</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>本を探す</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile @click="onLogout">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>

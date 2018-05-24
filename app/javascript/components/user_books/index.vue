@@ -1,21 +1,33 @@
 <template>
   <v-container fluid>
     <div class="display-1">本棚</div>
-    <v-layout row wrap>
-      <v-flex xs12 sm6 offset-sm3 v-for="book in user.books" :key="book.title">
-        <v-card>
-          <v-card-media :src="book.image_url" height="200px" :alt="book.title">
-          </v-card-media>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline mb-0">{{ book.title }}</h3>
-              <div>{{ book.book_category }}</div>
-            </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn flat color="orange" @click="redirectDetailPage(book.detail_page_url)">公式ページへ</v-btn>
-            <v-btn flat color="red" @click="deleteUserBook(book.id)">本棚から削除</v-btn>
-          </v-card-actions>
+    <v-layout row wrap class="mt-default">
+      <v-flex xs12 md6 v-for="book in user.books" :key="book.id">
+        <v-card color="" class="black--text" :to="'books/' + book.id">
+          <v-container fluid grid-list-lg>
+            <v-layout row>
+              <v-flex xs7>
+                <div>
+                  <div class="headline">{{ book.title }}</div>
+                  <div>{{ book.book_category }}</div>
+                </div>
+              </v-flex>
+              <v-flex xs5>
+                <v-card-media
+                    :src="book.image_url"
+                    height="125px"
+                    :alt="book.title"
+                    contain
+                ></v-card-media>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <v-card-actions>
+                <v-btn flat color="orange" @click="redirectDetailPage(book.detail_page_url)">公式ページへ</v-btn>
+                <v-btn flat color="red" @click="deleteUserBook(book.id)">本棚から削除</v-btn>
+              </v-card-actions>
+            </v-layout>
+          </v-container>
         </v-card>
       </v-flex>
     </v-layout>
@@ -81,5 +93,7 @@
 </script>
 
 <style scoped>
-
+  .mt-default {
+    margin-top: 20px;
+  }
 </style>
