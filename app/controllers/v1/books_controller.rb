@@ -26,8 +26,10 @@ module V1
     end
 
     def search
-      response = AmazonEcs.new.item_search(params[:keyword], {})
-      @items = get_items_from_response(response)
+      # response = AmazonEcs.new.item_search(params[:keyword], {})
+      # @items = get_items_from_response(response)
+      @books = Book.where('title LIKE ?', "%#{params['keyword']}%").
+          or(Book.where('author LIKE ?', "%#{params['keyword']}%"))
     end
 
     private
