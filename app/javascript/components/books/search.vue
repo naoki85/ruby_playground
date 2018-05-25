@@ -12,29 +12,36 @@
       </v-btn>
     </div>
 
-    <v-layout row wrap class="mt-default">
-      <v-flex xs12 md6 v-for="item in items" :key="item.id">
-        <v-card color="" class="black--text" :to="'books/' + item.id">
+    <v-layout v-if="isError" row wrap class="mt-default">
+      <v-alert :value="isError" outline color="error" icon="warning">
+        検索条件に当てはまる本が見つかりませんでした
+      </v-alert>
+    </v-layout>
+    <v-layout v-else row wrap class="mt-default">
+      <v-flex xs12 md6 v-for="book in books" :key="book.id">
+        <v-card color="" class="black--text">
           <v-container fluid grid-list-lg>
             <v-layout row>
               <v-flex xs7>
                 <div>
-                  <div class="headline">{{ item.title }}</div>
-                  <div>{{ item.book_category }}</div>
+                  <div class="headline">{{ book.title }}</div>
+                  <div>{{ book.book_category }}</div>
                 </div>
               </v-flex>
               <v-flex xs5>
-                <v-card-media
-                    :src="item.image_url"
-                    height="125px"
-                    :alt="item.title"
-                    contain
-                ></v-card-media>
+                <router-link :to="'/books/' + book.id">
+                  <v-card-media
+                      :src="book.image_url"
+                      height="125px"
+                      :alt="book.title"
+                      contain
+                  ></v-card-media>
+                </router-link>
               </v-flex>
             </v-layout>
             <v-layout row>
               <v-card-actions>
-                <v-btn color="teal" @click="onAddBook(item)">
+                <v-btn color="teal white--text" @click="onAddBook(book.id)">
                   追加
                   <v-icon>add</v-icon>
                 </v-btn>
@@ -55,7 +62,8 @@
     data: function() {
       return {
         keyword: '',
-        items: []
+        books: [],
+        isError: false
       }
     },
     methods: {
@@ -66,38 +74,45 @@
         'showSuccessAlert', 'showErrorAlert'
       ]),
       onBookSearch() {
+        this.isError = false;
         if (!this.keyword) {
           this.isError = true;
           return;
         }
-        this.items = [];
+        this.loading();
+        this.books = [];
 
-        request.get('/v1/books/search',
-            { params: { keyword: this.keyword }, auth: true }).
-        then((response) => {
-          if (response.data.results.length > 0) {
-            this.items = response.data.results;
+        request.get('/v1/books/search?keyword=' + this.keyword, { auth: true })
+            .then((response) => {
+          if (response.data.books.length > 0) {
+            this.books = response.data.books;
           } else {
             this.isError = true;
           }
-          this.isLoading = false;
         }, (error) => {
           console.log(error);
-        });
-      },
-      onAddBook(book) {
-        if (!book) {
           this.isError = true;
+        });
+        this.finish();
+      },
+      onAddBook(bookId) {
+        if (!bookId) {
+          this.showErrorAlert({
+            message: '追加失敗しました'
+          });
           return;
         }
         this.loading();
-        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-        request.post('/v1/user_books',
-            { params: { user_book: book }, headers: { Authorization: authenticateToken } }).
-        then((response) => {
-          this.isCreated = true;
+        request.post('/v1/user_books', { params: { user_book: { book_id: bookId } }, auth: true })
+            .then((response) => {
+          this.showSuccessAlert({
+            message: '追加しました'
+          });
         }, (error) => {
           console.log(error);
+          this.showErrorAlert({
+            message: '追加失敗しました'
+          });
         });
         this.finish();
       }
@@ -106,5 +121,7 @@
 </script>
 
 <style scoped>
-
+  .mt-default {
+    margin-top: 20px;
+  }
 </style>

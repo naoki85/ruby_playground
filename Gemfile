@@ -40,7 +40,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'dotenv-rails'
 gem 'therubyracer'
 
-gem 'amazon-ecs'
 gem 'omniauth-twitter'
 gem 'ridgepole', '>= 0.7.2.beta'
 gem 'selenium-webdriver'

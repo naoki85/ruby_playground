@@ -68,4 +68,38 @@ RSpec.describe V1::BooksController, type: :request do
       expect(response.status).to eq 404
     end
   end
+
+  describe '#search' do
+    let(:request_url) { '/v1/books/search' }
+
+    include_context 'user_authenticated'
+
+    before do
+      create(:book, title: 'テストA', author: '鈴木')
+      create(:book, title: 'テストB', author: '田中')
+      create(:book, title: 'テストC', author: '佐藤')
+    end
+
+    it 'should get books' do
+      get request_url, params: { keyword: 'テスト' }, headers: { 'Authorization' => 'aaaaaaa' }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 3
+
+      get request_url, params: { keyword: 'テストA' }, headers: { 'Authorization' => 'aaaaaaa' }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 1
+
+      get request_url, params: { keyword: '鈴木' }, headers: { 'Authorization' => 'aaaaaaa' }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 1
+    end
+
+    it 'with no params should get error' do
+      get request_url
+      expect(response.status).to eq 401
+    end
+  end
 end

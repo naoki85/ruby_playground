@@ -31,17 +31,9 @@ RSpec.describe V1::UserBooksController, type: :request do
     include_context 'user_authenticated'
 
     let(:request_url) { '/v1/user_books' }
-    let!(:book_category) { create(:book_category, id: 0, name: 'none') }
+    let(:book) { create(:book) }
     let(:params) {
-      {
-          'user_book' => {
-          'title' => 'test',
-          'asin' => '111',
-          'author' => 'test',
-          'publisher' => 'test',
-          'small_image_url' => 'test',
-          'detail_page_url' => 'test'
-      } }
+      { 'user_book' => { 'book_id' => book.id } }
     }
 
     context 'normal pattern' do
@@ -55,7 +47,6 @@ RSpec.describe V1::UserBooksController, type: :request do
 
     context 'user_book is already registered' do
       before do
-        book = create(:book, asin: '111')
         create(:user_book, user_id: user.id, book_id: book.id)
       end
 
