@@ -96,5 +96,10 @@ RSpec.describe V1::BooksController, type: :request do
       json = JSON.parse(response.body)
       expect(json['books'].size).to eq 1
     end
+
+    it 'with no params should get error' do
+      get request_url
+      expect(response.status).to eq 401
+    end
   end
 end

@@ -26,6 +26,7 @@ module V1
     end
 
     def search
+      render_401 unless params['keyword'].present?
       @books = Book.where('title LIKE ?', "%#{params['keyword']}%").
           or(Book.where('author LIKE ?', "%#{params['keyword']}%"))
     end
