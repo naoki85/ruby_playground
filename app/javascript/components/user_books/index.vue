@@ -3,7 +3,7 @@
     <div class="display-1">本棚</div>
     <v-layout row wrap class="mt-default">
       <v-flex xs12 md6 v-for="book in user.books" :key="book.id">
-        <v-card color="" class="black--text" :to="'books/' + book.id">
+        <v-card color="" class="black--text">
           <v-container fluid grid-list-lg>
             <v-layout row>
               <v-flex xs7>
@@ -13,12 +13,14 @@
                 </div>
               </v-flex>
               <v-flex xs5>
-                <v-card-media
-                    :src="book.image_url"
-                    height="125px"
-                    :alt="book.title"
-                    contain
-                ></v-card-media>
+                <router-link :to="'/books/' + book.id">
+                  <v-card-media
+                      :src="book.image_url"
+                      height="125px"
+                      :alt="book.title"
+                      contain
+                  ></v-card-media>
+                </router-link>
               </v-flex>
             </v-layout>
             <v-layout row>

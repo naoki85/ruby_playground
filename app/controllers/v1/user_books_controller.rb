@@ -2,7 +2,8 @@ module V1
   class UserBooksController < ApiApplicationController
 
     def create
-      if UserAddBookService.add(@user.id, user_book_params)
+      user_book = UserBook.find_or_initialize_by(user_id: @user.id, book_id: user_book_params[:book_id])
+      if user_book.new_record? && user_book.save
         render :create
       else
         render_400
@@ -23,14 +24,7 @@ module V1
     end
 
     def user_book_params
-      {
-          title: params['user_book']['title'],
-          asin: params['user_book']['asin'],
-          author: params['user_book']['author'],
-          publisher_name: params['user_book']['publisher'],
-          image_url: params['user_book']['small_image_url'],
-          detail_page_url: params['user_book']['detail_page_url']
-      }
+      params.require(:user_book).permit(:book_id)
     end
   end
 end

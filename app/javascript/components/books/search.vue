@@ -13,13 +13,13 @@
     </div>
 
     <v-layout v-if="isError" row wrap class="mt-default">
-      <v-alert outline color="error" icon="warning">
+      <v-alert :value="isError" outline color="error" icon="warning">
         検索条件に当てはまる本が見つかりませんでした
       </v-alert>
     </v-layout>
     <v-layout v-else row wrap class="mt-default">
       <v-flex xs12 md6 v-for="book in books" :key="book.id">
-        <v-card color="" class="black--text" :to="'books/' + book.id">
+        <v-card color="" class="black--text">
           <v-container fluid grid-list-lg>
             <v-layout row>
               <v-flex xs7>
@@ -29,17 +29,19 @@
                 </div>
               </v-flex>
               <v-flex xs5>
-                <v-card-media
-                    :src="book.image_url"
-                    height="125px"
-                    :alt="book.title"
-                    contain
-                ></v-card-media>
+                <router-link :to="'/books/' + book.id">
+                  <v-card-media
+                      :src="book.image_url"
+                      height="125px"
+                      :alt="book.title"
+                      contain
+                  ></v-card-media>
+                </router-link>
               </v-flex>
             </v-layout>
             <v-layout row>
               <v-card-actions>
-                <v-btn color="teal white--text" @click="onAddBook(book)">
+                <v-btn color="teal white--text" @click="onAddBook(book.id)">
                   追加
                   <v-icon>add</v-icon>
                 </v-btn>
@@ -93,19 +95,24 @@
         });
         this.finish();
       },
-      onAddBook(book) {
-        if (!book) {
-          this.isError = true;
+      onAddBook(bookId) {
+        if (!bookId) {
+          this.showErrorAlert({
+            message: '追加失敗しました'
+          });
           return;
         }
         this.loading();
-        var authenticateToken = localStorage.getItem('bookRecorderAuthenticationToken');
-        request.post('/v1/user_books',
-            { params: { user_book: book }, headers: { Authorization: authenticateToken } }).
-        then((response) => {
-
+        request.post('/v1/user_books', { params: { user_book: { book_id: bookId } }, auth: true })
+            .then((response) => {
+          this.showSuccessAlert({
+            message: '追加しました'
+          });
         }, (error) => {
           console.log(error);
+          this.showErrorAlert({
+            message: '追加失敗しました'
+          });
         });
         this.finish();
       }
