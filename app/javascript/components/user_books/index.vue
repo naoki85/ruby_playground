@@ -2,22 +2,22 @@
   <v-container fluid>
     <div class="display-1">本棚</div>
     <v-layout row wrap class="mt-default">
-      <v-flex xs12 md6 v-for="book in user.books" :key="book.id">
+      <v-flex xs12 md6 v-for="user_book in user_books" :key="user_book.id">
         <v-card color="" class="black--text">
           <v-container fluid grid-list-lg>
             <v-layout row>
               <v-flex xs7>
                 <div>
-                  <div class="headline">{{ book.title }}</div>
-                  <div>{{ book.book_category }}</div>
+                  <div class="headline">{{ user_book.book.title }}</div>
+                  <div>{{ user_book.book.book_category }}</div>
                 </div>
               </v-flex>
               <v-flex xs5>
-                <router-link :to="'/books/' + book.id">
+                <router-link :to="'/books/' + user_book.book.id">
                   <v-card-media
-                      :src="book.image_url"
+                      :src="user_book.book.image_url"
                       height="125px"
-                      :alt="book.title"
+                      :alt="user_book.book.title"
                       contain
                   ></v-card-media>
                 </router-link>
@@ -25,8 +25,8 @@
             </v-layout>
             <v-layout row>
               <v-card-actions>
-                <v-btn flat color="orange" @click="redirectDetailPage(book.detail_page_url)">公式ページへ</v-btn>
-                <v-btn flat color="red" @click="deleteUserBook(book.id)">本棚から削除</v-btn>
+                <v-btn flat color="orange" @click="redirectDetailPage(user_book.book.detail_page_url)">公式ページへ</v-btn>
+                <v-btn flat color="red" @click="deleteUserBook(user_book.book.id)">本棚から削除</v-btn>
               </v-card-actions>
             </v-layout>
           </v-container>
@@ -43,7 +43,7 @@
   export default {
     data: function() {
       return {
-        user: []
+        user_books: []
       }
     },
     computed: {
@@ -53,7 +53,7 @@
     },
     mounted: function() {
       this.loading();
-      this.fetchUser(this.userId);
+      this.fetchUserBooks();
       this.finish();
     },
     methods: {
@@ -63,9 +63,9 @@
       ...mapActions('alert', [
         'showSuccessAlert', 'showErrorAlert'
       ]),
-      fetchUser: function(userId) {
-        request.get('/v1/users/' + userId, {}).then((response) => {
-          this.user = response.data.user;
+      fetchUserBooks: function() {
+        request.get('/v1/user_books', { auth: true }).then((response) => {
+          this.user_books = response.data.user_books;
         }, (error) => {
           console.log(error);
         });
@@ -77,8 +77,7 @@
           this.showSuccessAlert({
             message: '削除が完了しました'
           });
-          var userId = this.userId;
-          this.fetchUser(userId);
+          this.fetchUserBooks();
         }, (error) => {
           this.showErrorAlert({
             message: '削除が失敗しました'

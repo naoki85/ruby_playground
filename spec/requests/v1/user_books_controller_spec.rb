@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe V1::UserBooksController, type: :request do
+
+  describe '#index' do
+    let(:request_url) { '/v1/user_books' }
+    let!(:user_book) { create(:user_book, user_id: user.id) }
+
+    include_context 'user_authenticated'
+
+    it 'delete a record has target id' do
+      get request_url, headers: { 'Authorization' => 'aaaaaaa' }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['user_books'].size).to eq 1
+    end
+  end
+
   describe '#destroy' do
     let(:request_url) { '/v1/user_books' }
     let(:user_book) { create(:user_book, user_id: user.id) }

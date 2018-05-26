@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     get 'me' => 'users#me'
     resources :users, only: [:show, :create, :update]
     resources :user_book_comments, only: [:index, :create, :update, :destroy]
-    resources :user_books, only: [:create]
+    resources :user_books, only: [:index, :create]
     delete 'user_books' => 'user_books#destroy'
     get 'books/search' => 'books#search'
     resources :books, only: [:index, :show]

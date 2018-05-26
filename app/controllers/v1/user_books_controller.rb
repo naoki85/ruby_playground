@@ -1,6 +1,10 @@
 module V1
   class UserBooksController < ApiApplicationController
 
+    def index
+      @user_books = UserBook.includes([book: [:book_category]]).where(user_id: @user.id).order('id DESC')
+    end
+
     def create
       user_book = UserBook.find_or_initialize_by(user_id: @user.id, book_id: user_book_params[:book_id])
       if user_book.new_record? && user_book.save
