@@ -26,14 +26,14 @@ RSpec.describe V1::UserBookCommentsController, type: :request do
     context 'normal pattern' do
       it 'create user_book_comment' do
         before_count = UserBookComment.count
-        post request_url, params: { book_id: book.id, comment: 'testtest' },
+        post request_url, params: { book_id: book.id, page: 10, comment: 'testtest' },
              headers: { 'Authorization' => 'aaaaaaa' }
         expect(response.status).to eq 200
         expect(UserBookComment.count).to eq before_count + 1
       end
 
       it 'return 404 when book is not found' do
-        post request_url, params: { book_id: book.id + 1, comment: 'testtest' },
+        post request_url, params: { book_id: book.id + 1, page: 10, comment: 'testtest' },
              headers: { 'Authorization' => 'aaaaaaa' }
         expect(response.status).to eq 404
       end
@@ -48,7 +48,7 @@ RSpec.describe V1::UserBookCommentsController, type: :request do
 
     context 'normal pattern' do
       it 'create user_book_comment' do
-        patch request_url + user_book_comment.id.to_s, params: { comment: 'testtest' },
+        patch request_url + user_book_comment.id.to_s, params: { page: 10, comment: 'testtest' },
               headers: { 'Authorization' => 'aaaaaaa' }
         expect(response.status).to eq 200
         after_user_book_comment = UserBookComment.find(user_book_comment.id)
@@ -56,7 +56,7 @@ RSpec.describe V1::UserBookCommentsController, type: :request do
       end
 
       it 'when user don\'t have target user_book_comment return 400' do
-        patch request_url + (user_book_comment.id + 1).to_s, params: { comment: 'testtest' },
+        patch request_url + (user_book_comment.id + 1).to_s, params: { page: 10, comment: 'testtest' },
               headers: { 'Authorization' => 'aaaaaaa' }
         expect(response.status).to eq 400
       end

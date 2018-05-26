@@ -3,6 +3,7 @@
 create_table "user_book_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
   t.integer "user_id", null: false
   t.integer "book_id", null: false
+  t.integer "page", null: false, default: 0
   t.string "comment", default: "", null: false
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false

@@ -6,52 +6,93 @@
       <img :src="book.image_url" :alt="book.title">
     </v-layout>
 
-    <div v-if="loggedIn" class="new-comment-area">
-      <v-layout row>
-        <v-text-field v-model="newComment" label="コメント"></v-text-field>
-      </v-layout>
+    <div v-if="loggedIn" class="mt-large">
+      <div v-if="editFlag">
+        <v-layout row wrap>
+          <v-flex xs10>
+            <v-slider :max="300" v-model="editPage" label="読んだページ"></v-slider>
+          </v-flex>
+          <v-flex xs2>
+            <v-text-field v-model="editPage" type="number"></v-text-field>
+          </v-flex>
+        </v-layout>
 
-      <v-btn @click="onCreateComment">コメント</v-btn>
+        <v-layout row>
+          <v-text-field v-model="editComment" label="コメント"></v-text-field>
+        </v-layout>
+
+        <v-btn color="orange white--text" @click="onEditComment">
+          編集
+          <v-icon color="white">edit</v-icon>
+        </v-btn>
+        <v-btn @click="cancelEdit">キャンセル</v-btn>
+      </div>
+      <div v-else>
+        <v-layout row wrap>
+          <v-flex xs10>
+            <v-slider :max="300" v-model="newPage" label="読んだページ"></v-slider>
+          </v-flex>
+          <v-flex xs2>
+            <v-text-field v-model="newPage" type="number"></v-text-field>
+          </v-flex>
+        </v-layout>
+
+        <v-layout row>
+          <v-text-field v-model="newComment" label="コメント"></v-text-field>
+        </v-layout>
+
+        <v-btn color="teal white--text" @click="onCreateComment">
+          新しいコメント
+          <v-icon color="white">add</v-icon>
+        </v-btn>
+      </div>
     </div>
 
-    <v-list two-line subheader>
-      <v-list-tile v-for="user_book_comment in book.user_book_comments"
-                   :key="user_book_comment.id"
-                   class="comment-list"
-                   avatar
-                   :data-comment-number="user_book_comment.id">
-        <v-list-tile-avatar :to="'/users/' + user_book_comment.user.id">
-          <img :src="user_book_comment.user.avatar_image_path"
-               :alt="user_book_comment.user.name">
-        </v-list-tile-avatar>
-        <v-list-tile-content>
-          <div class="edit-comment-area hidden">
-              <v-text-field v-model="editComment" class="edit-field"></v-text-field>
-              <v-btn @click="onEditComment(user_book_comment.id)">修正</v-btn>
-              <v-btn @click="cancelEdit(user_book_comment.id)">キャンセル</v-btn>
-          </div>
-          <div class="show-comment-area">
-            <v-list-tile-title>{{ user_book_comment.comment }}</v-list-tile-title>
-            <v-list-tile-sub-title>{{ user_book_comment.created_at }}</v-list-tile-sub-title>
-          </div>
-        </v-list-tile-content>
-        <v-list-tile-action>
-          <div>
-            <div class="control-area" v-if="canControl(user_book_comment.user.id)">
-            <v-btn icon ripple
-                   @click="enableEdit(user_book_comment.id, user_book_comment.comment)">
-              <v-icon color="grey lighten-1">edit</v-icon>
+    <v-expansion-panel class="mt-default">
+      <v-expansion-panel-content
+          v-for="user_book_comment in book.user_book_comments"
+          :key="user_book_comment.id"
+          avatar
+      >
+        <div slot="header">
+          <v-layout row>
+            <v-flex xs2>
+              <v-avatar
+                  slot="activator"
+                  size="36px"
+              >
+                <img
+                    :src="user_book_comment.user.avatar_image_path"
+                    alt="user_book_comment.user.name"
+                >
+              </v-avatar>
+            </v-flex>
+            <v-flex xs2>
+              {{ user_book_comment.page + ' p' }}
+            </v-flex>
+            <v-flex xs8>
+              <p>{{ user_book_comment.comment }}</p>
+              <p class="grey--text">{{ user_book_comment.created_at }}</p>
+            </v-flex>
+          </v-layout>
+        </div>
+        <v-card>
+          <v-card-text v-if="loggedIn">
+            <v-btn
+                color="orange white--text"
+                @click="enableEdit(user_book_comment.id, user_book_comment.page, user_book_comment.comment)"
+            >
+              修正
+              <v-icon color="white">edit</v-icon>
             </v-btn>
-            <v-btn icon ripple
-                   @click="onDeleteComment(user_book_comment.id)">
-              <v-icon color="grey lighten-1">delete</v-icon>
+            <v-btn color="red white--text" @click="onDeleteComment(user_book_comment.id)">
+              キャンセル
+              <v-icon color="white">delete</v-icon>
             </v-btn>
-            </div>
-          </div>
-        </v-list-tile-action>
-      </v-list-tile>
-      <v-divider></v-divider>
-    </v-list>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
   </v-container>
 </template>
 
@@ -63,7 +104,11 @@
     data: function() {
       return {
         book: [],
+        newPage: 0,
         newComment: '',
+        editFlag: false,
+        editUserBookCommentId: 0,
+        editPage: 0,
         editComment: ''
       }
     },
@@ -93,31 +138,26 @@
         });
       },
       // 編集可能にする
-      enableEdit: function(userBookCommentId, UserBookCommentComment) {
-        var commentArea = document.querySelector('[data-comment-number="' + userBookCommentId + '"]');
-        commentArea.querySelector('.show-comment-area').classList.add('hidden');
-        commentArea.querySelector('.control-area').classList.add('hidden');
-        commentArea.querySelector('.edit-field').value = UserBookCommentComment;
-        commentArea.querySelector('.edit-comment-area').classList.remove('hidden');
+      enableEdit: function(userBookCommentId, UserBookCommentPage, UserBookCommentComment) {
+        this.editFlag = true;
+        this.editUserBookCommentId = userBookCommentId;
+        this.editPage = UserBookCommentPage;
+        this.editComment = UserBookCommentComment;
       },
       // 編集をキャンセルする
-      cancelEdit: function(userBookCommentId) {
-        var commentArea = document.querySelector('[data-comment-number="' + userBookCommentId + '"]');
-        commentArea.querySelector('.show-comment-area').classList.remove('hidden');
-        commentArea.querySelector('.control-area').classList.remove('hidden');
-        commentArea.querySelector('.edit-comment-area').classList.add('hidden');
+      cancelEdit: function() {
+        this.editFlag = false;
       },
       // コメントを新規作成する
       onCreateComment: function() {
         this.loading();
-        var bookId = this.$route.params.id;
-        var newComment = this.newComment;
-        var params = { book_id: bookId, comment: newComment };
+        var params = { book_id: this.$route.params.id, comment: this.newComment, page: this.newPage };
         request.post('/v1/user_book_comments', { params: params, auth: true })
             .then((response) => {
           this.newComment = '';
+          this.newPage = 0;
           this.showSuccessAlert({ message: '作成しました' });
-          this.reloadBook(bookId);
+          this.reloadBook(this.$route.params.id);
         }, (error) => {
           this.showErrorAlert({ message: '作成に失敗しました' });
           console.log(error);
@@ -125,14 +165,13 @@
         this.finish();
       },
       // コメントを編集する
-      onEditComment: function(userBookCommentId) {
+      onEditComment: function() {
         this.loading();
-        var editComment = this.editComment;
-        var params = { comment: editComment };
-        request.patch('/v1/user_book_comments/' + userBookCommentId, { params: params, auth: true })
+        var params = { page: this.editPage, comment: this.editComment };
+        request.patch('/v1/user_book_comments/' + this.editUserBookCommentId, { params: params, auth: true })
             .then((response) => {
           this.showSuccessAlert({ message: '編集しました' });
-          this.editComment = '';
+          this.editFlag = false;
           this.reloadBook();
         }, (error) => {
           this.showErrorAlert({ message: '編集失敗しました' });
@@ -153,33 +192,18 @@
         this.finish();
       },
       reloadBook: function() {
-        var bookId = this.$route.params.id;
         this.book = [];
-        this.fetchBook(bookId);
-      },
-      canControl: function(commentUserId) {
-        if (this.loggedIn && this.userId) {
-          if (this.userId == commentUserId) {
-            return true;
-          }
-        }
-        return false;
+        this.fetchBook(this.$route.params.id);
       }
     }
   }
 </script>
 
 <style>
-  .hidden {
-    display: none;
-  }
-  .new-comment-area {
+  .mt-large {
     margin-top: 50px;
   }
-  .edit-comment-area {
-    width: 100%;
-  }
-  .comment-list > div {
-    height: 150px !important;
+  .mt-default {
+    margin-top: 20px;
   }
 </style>
