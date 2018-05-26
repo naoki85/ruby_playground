@@ -11,6 +11,7 @@ module V1
       book = Book.find(params[:book_id])
       @user_book_comment = @user.user_book_comments.new
       @user_book_comment.book_id = book.id
+      @user_book_comment.page = params[:page]
       @user_book_comment.comment = params[:comment]
 
       if @user_book_comment.save
@@ -21,6 +22,7 @@ module V1
     end
 
     def update
+      @user_book_comment.page = params[:page]
       @user_book_comment.comment = params[:comment]
       if @user_book_comment.save
         render :update
