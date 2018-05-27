@@ -4,7 +4,9 @@ module V1
     before_action :set_user_book_comment, only: [:update, :destroy]
 
     def index
-      @user_book_comments = UserBookComment.includes([:book, :user]).order('created_at desc').limit(10)
+      user_book_comment_book_ids = UserBookComment.select([:book_id]).group(:book_id).
+          order('book_id DESC').limit(10).pluck(:book_id)
+      @books = Book.where(id: user_book_comment_book_ids)
     end
 
     def create
