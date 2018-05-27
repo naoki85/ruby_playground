@@ -1,13 +1,33 @@
 <script>
 import {Line} from 'vue-chartjs'
+import request from '../../utils/requests'
 
 export default {
   extends: Line,
-  data () {
+  data: function() {
     return {
-      datacollection: {
-        //Data to be represented on x-axis
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      chartDate: [],
+      chartPages: []
+    }
+  },
+  mounted () {
+    this.fetchSummary(this.$route.params.id);
+  },
+  methods: {
+    fetchSummary: function(userId) {
+      request.get('/v1/users/summary?id=' + userId, {}).then((response) => {
+        this.chartDate = response.data.summary.date;
+        this.chartPages = response.data.summary.pages;
+        var dataCollection = this.buildDataCollection();
+        var options = this.buildOptions();
+        this.renderChart(dataCollection, options);
+      }, (error) => {
+        console.log(error);
+      });
+    },
+    buildDataCollection: function() {
+      return {
+        labels: this.chartDate,
         datasets: [
           {
             label: 'Data One',
@@ -15,13 +35,13 @@ export default {
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: '#004D40',
-            //Data to be represented on y-axis
-            data: [40, 20, 30, 50, 90, 10, 20, 40, 50, 70, 90, 100]
+            data: this.chartPages
           }
         ]
-      },
-      //Chart.js options that controls the appearance of the chart
-      options: {
+      }
+    },
+    buildOptions: function() {
+      return {
         scales: {
           yAxes: [{
             ticks: {
@@ -45,10 +65,6 @@ export default {
         maintainAspectRatio: false
       }
     }
-  },
-  mounted () {
-    //renderChart function renders the chart with the datacollection and options object.
-    this.renderChart(this.datacollection, this.options)
   }
 }
 </script>
