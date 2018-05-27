@@ -64,6 +64,7 @@
                 <img
                     :src="user_book_comment.user.avatar_image_path"
                     alt="user_book_comment.user.name"
+                    @click="pushUserShow(user_book_comment.user.id)"
                 >
               </v-avatar>
             </v-flex>
@@ -194,6 +195,9 @@
       reloadBook: function() {
         this.book = [];
         this.fetchBook(this.$route.params.id);
+      },
+      pushUserShow: function(userId) {
+        this.$router.push('/users/' + userId);
       }
     }
   }

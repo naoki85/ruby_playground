@@ -13,7 +13,8 @@ RSpec.describe V1::UserBookCommentsController, type: :request do
       json = JSON.parse(response.body)
       expect(json['return_code']).to eq 0
       expect(json['server_time']).to be_present
-      expect(json['user_book_comments'].size).to eq 10
+      expect(json['user_book_comments'].size).to eq 1
+      expect(json['user_book_comments']['books'].size).to eq 10
     end
   end
 
