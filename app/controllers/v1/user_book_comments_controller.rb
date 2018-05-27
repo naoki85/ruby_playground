@@ -5,8 +5,8 @@ module V1
 
     def index
       user_book_comment_book_ids = UserBookComment.select([:book_id]).group(:book_id).
-          order('book_id DESC').limit(10).pluck(:book_id)
-      @books = Book.where(id: user_book_comment_book_ids)
+          limit(10).pluck(:book_id)
+      @books = Book.where(id: user_book_comment_book_ids).order('id DESC')
     end
 
     def create
