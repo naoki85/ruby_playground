@@ -18,7 +18,7 @@
         </v-layout>
 
         <v-layout row>
-          <v-text-field v-model="editComment" label="コメント"></v-text-field>
+          <v-text-field v-model="editComment" label="コメント" multi-line></v-text-field>
         </v-layout>
 
         <v-btn color="orange white--text" @click="onEditComment">
@@ -38,7 +38,7 @@
         </v-layout>
 
         <v-layout row>
-          <v-text-field v-model="newComment" label="コメント"></v-text-field>
+          <v-text-field v-model="newComment" label="コメント" multi-line></v-text-field>
         </v-layout>
 
         <v-btn color="teal white--text" @click="onCreateComment">
