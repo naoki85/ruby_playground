@@ -46,7 +46,7 @@ class User < ApplicationRecord
   # @return [Bool]
   def update_authentication_token!
     self.authentication_token = generate_token(self.id)
-    self.authentication_token_expired_at = DateTime.tomorrow
+    self.authentication_token_expired_at = DateTime.now + 1.week
     save!
   end
 
