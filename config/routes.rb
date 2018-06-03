@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   get 'user_policy' => 'web#index'
   get 'privacy_policy' => 'web#index'
 
-  get 'users/:id' => 'users#show'
+  get 'users/edit' => 'web#index'
+  get 'users/:id' => 'web#index'
   get 'books/search' => 'web#index'
-  get 'books/:id' => 'books#show'
+  get 'books/:id' => 'web#index'
   get 'user_books' => 'web#index'
   get 'publishers/:id' => 'web#index'
 

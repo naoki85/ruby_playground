@@ -10,7 +10,7 @@ import Top from '../components/top/top'
 import SignUp from '../components/sessions/sign_up'
 import SignIn from '../components/sessions/sign_in'
 import User from '../components/users/show'
-// import UserEdit from '../components/users/edit'
+import UserEdit from '../components/users/edit'
 import UserBooksIndex from '../components/user_books/index'
 import Book from '../components/books/show'
 import Search from '../components/books/search'
@@ -27,7 +27,7 @@ var router = new VueRouter({
     { path: '/', component: Top },
     { path: '/sign_up', component: SignUp },
     { path: '/sign_in', component: SignIn },
-    // { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
+    { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
     { path: '/users/:id', component: User },
     { path: '/user_books', component: UserBooksIndex, meta: { requiresAuth: true } },
     { path: '/books/search', component: Search, meta: { requiresAuth: true } },

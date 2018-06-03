@@ -19,7 +19,11 @@ module V1
     end
 
     def update
-      @user = current_user
+      if @user.update_with_image(params)
+        render :update, status: :ok
+      else
+        render_400
+      end
     end
 
     def summary
