@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Auth from '../store/modules/auth'
 import Alert from '../store/modules/alert'
 
+import DateTime from '../utils/date_time'
+
 import Top from '../components/top/top'
 import SignUp from '../components/sessions/sign_up'
 import SignIn from '../components/sessions/sign_in'
@@ -43,7 +45,10 @@ router.beforeEach((to, from, next) => {
 
   var authentication_token = localStorage.getItem('bookRecorderAuthenticationToken');
   var user_id = localStorage.getItem('bookRecorderUserId');
-  if (authentication_token) {
+  var expired_at = localStorage.getItem('bookRecorderExpiredAt');
+  var today = DateTime.today();
+
+  if (authentication_token && expired_at > today) {
     Auth.state.loggedIn = true;
     Auth.state.userId = user_id;
   } else {

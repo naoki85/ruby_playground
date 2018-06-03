@@ -5,20 +5,25 @@ export default {
   namespaced: true,
   state: {
     loggedIn: false,
-    userId: null
+    userId: null,
+    expiredAt: null
   },
   mutations: {
     login(state, user) {
       localStorage.setItem('bookRecorderAuthenticationToken', user.authentication_token);
       localStorage.setItem('bookRecorderUserId', user.id);
+      localStorage.setItem('bookRecorderExpiredAt', user.authentication_token_expired_at);
       state.loggedIn = true;
       state.userId = user.id;
+      state.expiredAt = user.authentication_token_expired_at;
     },
     logout(state) {
       localStorage.removeItem('bookRecorderAuthenticationToken');
       localStorage.removeItem('bookRecorderUserId');
+      localStorage.removeItem('bookRecorderExpiredAt');
       state.loggedIn = false;
       state.userId = null;
+      state.expiredAt = null;
     }
   },
   actions: {
