@@ -43,6 +43,15 @@ class User < ApplicationRecord
     BCrypt::Password.new(encrypted_password).is_password?(password)
   end
 
+  # @param [Hash] params
+  # @return [Bool]
+  def update_with_image(params)
+    self.username = params[:username]
+    self.email = params[:email]
+    self.password = params[:new_password]
+    self.save && attach_image(params)
+  end
+
   # @return [Bool]
   def update_authentication_token!
     self.authentication_token = generate_token(self.id)
