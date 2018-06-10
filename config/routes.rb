@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get 'books/search' => 'books#search'
     resources :books, only: [:index, :show]
     resources :publishers, only: [:index, :show]
+    resources :posts
   end
 
   # View Routing Errors
