@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   validates :title,   presence: true, length: { maximum: 255 }
   validates :summary, presence: true, length: { maximum: 255 }
 
-  scope :published, -> {
+  scope :released, -> {
     where(active: 1).where('published_at <= ?', Time.zone.now)
   }
 
