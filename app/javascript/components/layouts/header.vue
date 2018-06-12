@@ -18,6 +18,14 @@
             <v-list-tile-title>アカウント編集</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile to="/posts/new">
+          <v-list-tile-action>
+            <v-icon>create</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>記事作成</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile to="/user_books">
           <v-list-tile-action>
             <v-icon>library_books</v-icon>

@@ -19,6 +19,8 @@ import UserPolicy from '../components/top/user_policy'
 import PublisherShow from '../components/publishers/show'
 import PostsIndex from '../components/posts/index'
 import PostsShow from '../components/posts/show'
+import PostsNew from '../components/posts/new'
+import PostsEdit from '../components/posts/edit'
 import NotFound from '../components/errors/not_found'
 
 Vue.use(VueRouter)
@@ -38,6 +40,8 @@ var router = new VueRouter({
     { path: '/user_policy', component: UserPolicy },
     { path: '/publishers/:id', component: PublisherShow },
     { path: '/posts', component: PostsIndex },
+    { path: '/posts/new', component: PostsNew, meta: { requiresAuth: true }  },
+    { path: '/posts/edit/:id', component: PostsEdit, meta: { requiresAuth: true }  },
     { path: '/posts/:id', component: PostsShow },
     { path: '/not_found', component: NotFound }
   ]
