@@ -13,7 +13,7 @@ Vue.use(Vuetify, {
   }
 })
 
-import 'vuetify/dist/vuetify.css'
+// import 'vuetify/dist/vuetify.css'
 
 document.addEventListener('turbolinks:load', () => {
   new Vue({

@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   get 'publishers/:id' => 'web#index'
 
   get 'posts' => 'posts#index'
-  get 'posts/:id' => 'posts#show'
   get 'posts/new' => 'web#index'
   get 'posts/edit/:id' => 'web#index'
+  get 'posts/:id' => 'posts#show'
 
   # API
   namespace :v1, format: 'json' do

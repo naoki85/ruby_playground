@@ -15,7 +15,6 @@
         <v-menu
             ref="menu"
             :close-on-content-click="false"
-            v-model="menu"
             :nudge-right="40"
             :return-value.sync="publishedAt"
             lazy
@@ -43,7 +42,14 @@
     </v-layout>
 
     <v-layout row>
-      <v-text-field v-model="content" label="本文" multi-line></v-text-field>
+      <v-flex xs12 sm6>
+        <v-text-field v-model="content" label="本文" multi-line></v-text-field>
+      </v-flex>
+      <v-flex xs12 sm6>
+        <div class="preview-area">
+          <div v-html="convertMarkdownToHtml"></div>
+        </div>
+      </v-flex>
     </v-layout>
 
     <v-btn color="teal white--text" @click="onCreatePost">
@@ -56,6 +62,7 @@
 <script>
   import request from '../../utils/requests'
   import { mapState, mapActions } from 'vuex'
+  import markedExtend from '../../utils/marked_extend';
 
   export default {
     data: function() {
@@ -70,7 +77,10 @@
     computed: {
       ...mapState('auth', [
         'loggedIn', 'userId'
-      ])
+      ]),
+      convertMarkdownToHtml: function() {
+        return markedExtend.extmarked(this.content);
+      }
     },
     methods: {
       ...mapActions('loader', [
