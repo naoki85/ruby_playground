@@ -1,6 +1,9 @@
 <template>
   <v-container fluid>
     <div class="display-1">記事一覧</div>
+    <div class="text-xs-center">
+      <v-pagination :length="totalPage" v-model="page" color="teal" circle></v-pagination>
+    </div>
     <v-layout row wrap>
       <v-flex xs12 md6 v-for="post in posts" :key="post.id">
         <v-card color="" class="black--text">
@@ -26,6 +29,9 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <div class="text-xs-center">
+      <v-pagination :length="totalPage" v-model="page" color="teal" circle></v-pagination>
+    </div>
   </v-container>
 </template>
 
@@ -36,24 +42,32 @@
   export default {
     data: function() {
       return {
-        posts: []
+        posts: [],
+        totalPage: 0,
+        page: 1
+      }
+    },
+    watch: {
+      page: function() {
+        this.fetchPosts(this.page);
       }
     },
     mounted: function() {
-      this.loading();
       this.fetchPosts();
-      this.finish();
     },
     methods: {
       ...mapActions('loader', [
         'loading', 'finish'
       ]),
-      fetchPosts: function() {
-        request.get('/v1/posts', { }).then((response) => {
+      fetchPosts: function(page) {
+        this.loading();
+        request.get('/v1/posts?page=' + page, { }).then((response) => {
+          this.totalPage = response.data.total_page;
           this.posts = response.data.posts;
         }, (error) => {
           console.log(error);
         });
+        this.finish();
       }
     }
   }

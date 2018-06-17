@@ -60,6 +60,14 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile to="/posts">
+          <v-list-tile-action>
+            <v-icon>library_books</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>ブログ</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile to="/sign_in">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>

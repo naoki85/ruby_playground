@@ -10,7 +10,7 @@
       >
         {{ link.title }}
       </v-btn>
-      <v-btn color="white" flat @click="redirectTwitter">
+      <v-btn color="white" flat @click="redirectTwitter" style="text-transform: inherit">
         Twitter
       </v-btn>
       <v-flex xs12 py-3 text-xs-center white--text>
@@ -24,8 +24,9 @@
   export default {
     data: () => ({
       links: [
+        { title: 'ブログ', path: '/posts' },
         { title: '利用規約', path: '/user_policy' },
-        { title: 'プライバシーポリシー', path: '/privacy_policy' },
+        { title: 'プライバシーポリシー', path: '/privacy_policy' }
       ]
     }),
     methods: {

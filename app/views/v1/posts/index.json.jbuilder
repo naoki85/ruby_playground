@@ -1,4 +1,5 @@
 json.partial! 'v1/shared/common'
+json.total_page @posts.total_pages
 json.set! :posts do
   json.array! @posts do |post|
     json.id post.id

@@ -2,10 +2,6 @@
   <v-container fluid>
     <div class="display-1">{{ post.title }}</div>
 
-    <v-layout row>
-      <img src="https://s3-ap-northeast-1.amazonaws.com/bookrecorder-image/commons/default_user_icon.png" :alt="post.title">
-    </v-layout>
-
     <v-layout row v-if="enableControl()">
       <v-btn
           color="orange white--text"
@@ -21,7 +17,9 @@
     </v-layout>
 
     <v-layout row wrap>
-      {{ post.content }}
+      <div class="preview-area">
+        <div v-html="convertMarkdownToHtml"></div>
+      </div>
     </v-layout>
   </v-container>
 </template>
@@ -29,6 +27,7 @@
 <script>
   import request from '../../utils/requests'
   import { mapState, mapActions } from 'vuex'
+  import markedExtend from '../../utils/marked_extend';
 
   export default {
     data: function() {
@@ -39,7 +38,10 @@
     computed: {
       ...mapState('auth', [
         'loggedIn', 'userId'
-      ])
+      ]),
+      convertMarkdownToHtml: function() {
+        return markedExtend.extmarked(this.post.content);
+      }
     },
     mounted: function() {
       this.loading();

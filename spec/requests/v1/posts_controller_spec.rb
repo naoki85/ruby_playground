@@ -17,6 +17,21 @@ RSpec.describe V1::PostsController, type: :request do
       json = JSON.parse(response.body)
       expect(json['posts'].size).to eq 3
     end
+
+    it do
+      8.times { create(:post, active: 1, published_at: Time.zone.now.yesterday) }
+      get request_url
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['posts'].size).to eq 10
+      p json
+      expect(json['total_page']).to eq 2
+
+      get request_url + '?page=2'
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['posts'].size).to eq 1
+    end
   end
 
   describe '#show' do

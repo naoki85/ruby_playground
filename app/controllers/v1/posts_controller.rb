@@ -4,7 +4,8 @@ module V1
     before_action :set_post, only: [:update, :destroy]
 
     def index
-      @posts = Post.select([:id, :user_id, :title, :summary, :published_at]).released
+      @posts = Post.select([:id, :user_id, :title, :summary, :published_at]).released.
+          order('published_at DESC').page(params[:page])
     end
 
     def show
