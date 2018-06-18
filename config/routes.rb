@@ -13,10 +13,9 @@ Rails.application.routes.draw do
   get 'user_books' => 'web#index'
   get 'publishers/:id' => 'web#index'
 
-  get 'posts' => 'posts#index'
   get 'posts/new' => 'web#index'
   get 'posts/edit/:id' => 'web#index'
-  get 'posts/:id' => 'posts#show'
+  resources :posts, only: [:index, :show]
 
   # API
   namespace :v1, format: 'json' do
