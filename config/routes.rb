@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get 'user_books' => 'web#index'
   get 'publishers/:id' => 'web#index'
 
+  get 'posts/new' => 'web#index'
+  get 'posts/edit/:id' => 'web#index'
+  resources :posts, only: [:index, :show]
+
   # API
   namespace :v1, format: 'json' do
     post 'login' => 'sessions#create'
@@ -26,6 +30,7 @@ Rails.application.routes.draw do
     get 'books/search' => 'books#search'
     resources :books, only: [:index, :show]
     resources :publishers, only: [:index, :show]
+    resources :posts, only: [:index, :show, :create, :update, :destroy]
   end
 
   # View Routing Errors
