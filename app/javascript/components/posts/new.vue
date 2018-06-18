@@ -10,6 +10,10 @@
       <v-text-field v-model="summary" label="要約" multi-line></v-text-field>
     </v-layout>
 
+    <v-layout row>
+      <input @change="selectedFile" type="file" name="image">
+    </v-layout>
+
     <v-layout row wrap>
       <v-flex xs12 sm6 md4>
         <v-menu
@@ -71,7 +75,8 @@
         summary: '',
         content: '',
         publishedAt: '',
-        active: 0
+        active: 0,
+        image: ''
       }
     },
     computed: {
@@ -91,9 +96,14 @@
       ]),
       onCreatePost: function() {
         this.loading();
-        var params = { post: { title: this.title, summary: this.summary, content: this.content,
-            active: this.active, published_at: this.publishedAt } };
-        request.post('/v1/posts', { params: params, auth: true })
+        let formData = new FormData();
+        formData.append('image', this.image);
+        formData.append('title', this.title);
+        formData.append('summary', this.summary);
+        formData.append('content', this.content);
+        formData.append('active', this.active);
+        formData.append('published_at', this.publishedAt);
+        request.post('/v1/posts', { params: formData, headers: { 'content-type': 'multipart/form-data' }, auth: true })
             .then((response) => {
           this.showSuccessAlert({ message: '作成しました' });
           this.$router.push('/posts');
@@ -102,6 +112,11 @@
           console.log(error);
         });
         this.finish();
+      },
+      selectedFile: function(e) {
+        e.preventDefault();
+        let files = e.target.files;
+        this.image = files[0];
       }
     }
   }

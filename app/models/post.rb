@@ -10,7 +10,21 @@ class Post < ApplicationRecord
     where(active: 1).where('published_at <= ?', Time.zone.now)
   }
 
+  has_one_attached :image
+
   def released?
     published? && published_at <= Time.zone.now
+  end
+
+  # @param hash { image: 'test_file' }
+  # @return bool | ActiveStorage
+  def attach_image(params)
+    if params.key?(:image) && params[:image].present?
+      logger.info params[:image]
+      image.attach(params[:image])
+      return true
+    else
+      return true
+    end
   end
 end

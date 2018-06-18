@@ -14,7 +14,7 @@ module V1
 
     def create
       post = @user.posts.build(post_params)
-      if post.save
+      if post.save && post.attach_image(params)
         render :create
       else
         render_400
@@ -22,7 +22,7 @@ module V1
     end
 
     def update
-      if @post.update(post_params)
+      if @post.update(post_params) && @post.attach_image(params)
         render :update
       else
         render_400
@@ -41,7 +41,13 @@ module V1
     end
 
     def post_params
-      params.require(:post).permit(:title, :summary, :content, :active, :published_at)
+      {
+          title: params['title'],
+          summary: params['summary'],
+          content: params['content'],
+          active: params['active'].to_i,
+          published_at: params['published_at']
+      }
     end
   end
 end

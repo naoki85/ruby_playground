@@ -24,7 +24,6 @@ RSpec.describe V1::PostsController, type: :request do
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
       expect(json['posts'].size).to eq 10
-      p json
       expect(json['total_page']).to eq 2
 
       get request_url + '?page=2'

@@ -10,6 +10,15 @@
       <v-text-field v-model="summary" label="要約" multi-line></v-text-field>
     </v-layout>
 
+    <v-layout row>
+      <v-flex xs4 md2>
+        <img :src="postImagePath" width="100%">
+      </v-flex>
+      <v-flex xs8 md10>
+        <input @change="selectedFile" type="file" name="image">
+      </v-flex>
+    </v-layout>
+
     <v-layout row wrap>
       <v-flex xs12 sm6 md4>
         <v-menu
@@ -72,7 +81,9 @@
         summary: '',
         content: '',
         publishedAt: '',
-        active: 0
+        active: 0,
+        image: '',
+        postImagePath: ''
       }
     },
     computed: {
@@ -103,6 +114,7 @@
           this.content = post.content;
           this.publishedAt = post.publishedAt;
           this.active = post.active;
+          this.postImagePath = post.post_image_path;
         }, (error) => {
           console.log(error);
           this.$router.push('/not_found');
@@ -111,9 +123,14 @@
       onUpdatePost: function() {
         this.loading();
         var postId = this.$route.params.id;
-        var params = { post: { title: this.title, summary: this.summary, content: this.content,
-            active: this.active, published_at: this.publishedAt } };
-        request.patch('/v1/posts/' + postId, { params: params, auth: true })
+        let formData = new FormData();
+        formData.append('image', this.image);
+        formData.append('title', this.title);
+        formData.append('summary', this.summary);
+        formData.append('content', this.content);
+        formData.append('active', this.active);
+        formData.append('published_at', this.publishedAt);
+        request.patch('/v1/posts/' + postId, { params: formData, auth: true })
             .then((response) => {
           this.showSuccessAlert({ message: '編集しました' });
           this.$router.push('/posts/' + postId);
@@ -122,6 +139,11 @@
           console.log(error);
         });
         this.finish();
+      },
+      selectedFile: function(e) {
+        e.preventDefault();
+        let files = e.target.files;
+        this.image = files[0];
       }
     }
   }

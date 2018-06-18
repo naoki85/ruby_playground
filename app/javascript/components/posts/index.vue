@@ -17,7 +17,7 @@
               <v-flex xs5>
                 <router-link :to="'/posts/' + post.id">
                   <v-card-media
-                      src="https://s3-ap-northeast-1.amazonaws.com/bookrecorder-image/commons/default_user_icon.png"
+                      :src="post.post_image_path"
                       height="125px"
                       :alt="post.title"
                       contain
