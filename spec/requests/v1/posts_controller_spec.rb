@@ -56,7 +56,7 @@ RSpec.describe V1::PostsController, type: :request do
     it 'create post' do
       before_count = Post.count
       post request_url,
-           params: { post: { title: 'new', summary: 'new', content: 'new', published_at: '2018-05-01 00:00:00' } },
+           params: { title: 'new', summary: 'new', content: 'new', published_at: '2018-05-01 00:00:00' },
            headers: { 'Authorization' => 'aaaaaaa' }
       expect(response.status).to eq 200
       expect(Post.count).to eq before_count + 1
@@ -78,7 +78,7 @@ RSpec.describe V1::PostsController, type: :request do
 
     it 'update post' do
       patch request_url + post.id.to_s,
-            params: { post: { title: 'new', summary: 'new', content: 'new', published_at: '2018-05-01 00:00:00' } },
+            params: { title: 'new', summary: 'new', content: 'new', published_at: '2018-05-01 00:00:00' },
             headers: { 'Authorization' => 'aaaaaaa' }
       expect(response.status).to eq 200
       after_post = Post.find(post.id)

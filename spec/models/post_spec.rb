@@ -10,7 +10,7 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  describe '#released??' do
+  describe '#released?' do
     let(:post) { create(:post) }
 
     it do

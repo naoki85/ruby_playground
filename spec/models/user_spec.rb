@@ -113,7 +113,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#attach_image' do
+  describe '#attach_image', skip: true do
     it 'when params do\'t contain image, should return true' do
       params = { }
       expect(user.attach_image(params)).to eq true
