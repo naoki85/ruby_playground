@@ -1,6 +1,8 @@
 <template>
   <v-container fluid>
+    <div class="body-1 grey--text">{{ post.published_at }}</div>
     <div class="display-1">{{ post.title }}</div>
+    <v-tweet-button :text="post.title" :path="path"></v-tweet-button>
 
     <v-layout row v-if="enableControl()">
       <v-btn
@@ -16,7 +18,7 @@
       </v-btn>
     </v-layout>
 
-    <v-layout row wrap>
+    <v-layout row wrap class="mt-large">
       <div class="preview-area">
         <div v-html="convertMarkdownToHtml"></div>
       </div>
@@ -28,11 +30,16 @@
   import request from '../../utils/requests'
   import { mapState, mapActions } from 'vuex'
   import markedExtend from '../../utils/marked_extend';
+  import tweetButton from '../commons/tweet_button';
 
   export default {
+    components: {
+      'v-tweet-button': tweetButton
+    },
     data: function() {
       return {
-        post: []
+        post: [],
+        path: ''
       }
     },
     computed: {
@@ -44,6 +51,7 @@
       }
     },
     mounted: function() {
+      this.path = this.$route.path;
       this.loading();
       this.fetchPost(this.$route.params.id);
       this.finish();
@@ -85,5 +93,7 @@
 </script>
 
 <style scoped>
-
+  .mt-large {
+    margin-top: 30px;
+  }
 </style>
