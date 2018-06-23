@@ -4,15 +4,15 @@
     <div class="text-xs-center" v-if="totalPage > 1">
       <v-pagination :length="totalPage" v-model="page" color="teal" circle></v-pagination>
     </div>
-    <v-layout row wrap>
+    <v-layout row wrap class="mt-large">
       <v-flex xs12 md6 v-for="post in posts" :key="post.id">
         <v-card color="" class="black--text" :to="'/posts/' + post.id">
           <v-container fluid grid-list-lg>
             <v-layout row>
               <v-flex xs7>
                 <div>
+                  <div class="body-2 grey--text">{{ post.published_at }}</div>
                   <div class="headline">{{ post.title }}</div>
-                  <div class="title">{{ post.summary }}</div>
                 </div>
               </v-flex>
               <v-flex xs5>
@@ -73,5 +73,7 @@
 </script>
 
 <style scoped>
-
+  .mt-large {
+    margin-top: 30px;
+  }
 </style>

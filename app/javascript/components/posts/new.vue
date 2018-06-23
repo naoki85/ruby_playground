@@ -47,7 +47,7 @@
 
     <v-layout row>
       <v-flex xs12 sm6>
-        <v-text-field v-model="content" label="本文" multi-line></v-text-field>
+        <v-text-field v-model="content" label="本文" multi-line rows="100"></v-text-field>
       </v-flex>
       <v-flex xs12 sm6>
         <div class="preview-area">

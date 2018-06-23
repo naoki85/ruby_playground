@@ -21,17 +21,14 @@
 
     <v-layout row wrap>
       <v-flex xs12 sm6 md4>
-        <v-menu
-            ref="menu"
-            :close-on-content-click="false"
-            v-model="menu"
-            :nudge-right="40"
+        <v-dialog
+            ref="dialog"
+            v-model="modal"
             :return-value.sync="publishedAt"
+            persistent
             lazy
-            transition="scale-transition"
-            offset-y
             full-width
-            min-width="290px"
+            width="290px"
         >
           <v-text-field
               slot="activator"
@@ -39,9 +36,14 @@
               label="Picker without buttons"
               prepend-icon="event"
               readonly
+              class="input-published-at"
           ></v-text-field>
-          <v-date-picker v-model="publishedAt" @input="$refs.menu.save(publishedAt)"></v-date-picker>
-        </v-menu>
+          <v-date-picker v-model="publishedAt" scrollable color="teal">
+            <v-spacer></v-spacer>
+            <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+            <v-btn flat color="primary" @click="$refs.dialog.save(publishedAt)">OK</v-btn>
+          </v-date-picker>
+        </v-dialog>
       </v-flex>
       <v-flex xs12 sm6 md4>
         <v-radio-group v-model="active">
@@ -53,7 +55,7 @@
 
     <v-layout row>
       <v-flex xs12 sm6>
-        <v-text-field v-model="content" label="本文" multi-line></v-text-field>
+        <v-text-field v-model="content" label="本文" multi-line rows="100"></v-text-field>
       </v-flex>
       <v-flex xs12 sm6>
         <div class="preview-area">
@@ -83,7 +85,8 @@
         publishedAt: '',
         active: 0,
         image: '',
-        postImagePath: ''
+        postImagePath: '',
+        modal: false
       }
     },
     computed: {
@@ -113,7 +116,11 @@
           this.summary = post.summary;
           this.content = post.content;
           this.publishedAt = post.publishedAt;
-          this.active = post.active;
+          if (post.active === 'published') {
+            this.active = 1;
+          } else {
+            this.active = 0;
+          }
           this.postImagePath = post.post_image_path;
         }, (error) => {
           console.log(error);
