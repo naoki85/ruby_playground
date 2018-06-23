@@ -21,17 +21,14 @@
 
     <v-layout row wrap>
       <v-flex xs12 sm6 md4>
-        <v-menu
-            ref="menu"
-            :close-on-content-click="false"
-            v-model="menu"
-            :nudge-right="40"
+        <v-dialog
+            ref="dialog"
+            v-model="modal"
             :return-value.sync="publishedAt"
+            persistent
             lazy
-            transition="scale-transition"
-            offset-y
             full-width
-            min-width="290px"
+            width="290px"
         >
           <v-text-field
               slot="activator"
@@ -39,9 +36,14 @@
               label="Picker without buttons"
               prepend-icon="event"
               readonly
+              class="input-published-at"
           ></v-text-field>
-          <v-date-picker v-model="publishedAt" @input="$refs.menu.save(publishedAt)"></v-date-picker>
-        </v-menu>
+          <v-date-picker v-model="publishedAt" scrollable color="teal">
+            <v-spacer></v-spacer>
+            <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+            <v-btn flat color="primary" @click="$refs.dialog.save(publishedAt)">OK</v-btn>
+          </v-date-picker>
+        </v-dialog>
       </v-flex>
       <v-flex xs12 sm6 md4>
         <v-radio-group v-model="active">
@@ -83,7 +85,8 @@
         publishedAt: '',
         active: 0,
         image: '',
-        postImagePath: ''
+        postImagePath: '',
+        modal: false
       }
     },
     computed: {

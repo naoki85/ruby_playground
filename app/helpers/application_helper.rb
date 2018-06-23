@@ -35,7 +35,11 @@ module ApplicationHelper
         description: post.summary,
         og: {
             title: "#{post.title} | BookRecorder",
-            description: post.summary
+            description: post.summary,
+            image: post.post_image_path,
+        },
+        twitter: {
+            card: 'summary',
         }
     }
   end
