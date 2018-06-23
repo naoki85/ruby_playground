@@ -2,6 +2,8 @@
   h1, h2 {
     font-weight:400;
     letter-spacing: normal !important;
+    margin-bottom: 20px;
+    border-bottom: solid 2px #4DB6AC;
   }
   h1 {
     font-size: 34px !important;
@@ -9,12 +11,41 @@
   }
   pre {
     margin-bottom: 16px;
-  }
-
-  code[class*="language-"] {
-    width: 100%;
-    padding: 20px 10px;
-    color: #212121;
+    code {
+      width: 100%;
+      padding: 20px 10px;
+      color: #212121;
+      span.hljs-comment {
+        color: #9E9E9E;
+      }
+    }
+    code.javascript, code.js {
+      span.hljs-keyword {
+        color: #E65100;
+      }
+      span.hljs-attr {
+        color: #311B92;
+      }
+      span.hljs-string {
+        color: #4CAF50;
+      }
+    }
+    code.html {
+      span.hljs-string {
+        color: #4CAF50;
+      }
+    }
+    code.css {
+      span.hljs-selector-class {
+        color: #FFAB00;
+      }
+      span.hljs-string {
+        color: #4CAF50;
+      }
+      span.hljs-attribute {
+        color: #311B92;
+      }
+    }
   }
 
   a {
