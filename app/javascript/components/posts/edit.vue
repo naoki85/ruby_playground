@@ -55,7 +55,7 @@
 
     <v-layout row>
       <v-flex xs12 sm6>
-        <v-text-field v-model="content" label="本文" multi-line></v-text-field>
+        <v-text-field v-model="content" label="本文" multi-line rows="100"></v-text-field>
       </v-flex>
       <v-flex xs12 sm6>
         <div class="preview-area">
@@ -116,7 +116,11 @@
           this.summary = post.summary;
           this.content = post.content;
           this.publishedAt = post.publishedAt;
-          this.active = post.active;
+          if (post.active === 'published') {
+            this.active = 1;
+          } else {
+            this.active = 0;
+          }
           this.postImagePath = post.post_image_path;
         }, (error) => {
           console.log(error);
