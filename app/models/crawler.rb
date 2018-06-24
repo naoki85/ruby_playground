@@ -101,6 +101,6 @@ class Crawler
   end
 
   def self.parse_author(str)
-    str.gsub('著者：', '').gsub('　', '')
+    str.gsub('著者：', '').gsub('　', '').gsub('著作者名：', '').gsub(' ', '')
   end
 end
