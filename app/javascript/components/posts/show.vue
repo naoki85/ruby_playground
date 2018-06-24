@@ -3,6 +3,7 @@
     <div class="body-1 grey--text">{{ post.published_at }}</div>
     <div class="display-1">{{ post.title }}</div>
     <v-tweet-button :text="post.title" :path="path"></v-tweet-button>
+    <v-hatebu-button :text="post.title" :path="path"></v-hatebu-button>
 
     <v-layout row v-if="enableControl()">
       <v-btn
@@ -31,10 +32,12 @@
   import { mapState, mapActions } from 'vuex'
   import markedExtend from '../../utils/marked_extend';
   import tweetButton from '../commons/tweet_button';
+  import hatebuButton from '../commons/hatebu_button';
 
   export default {
     components: {
-      'v-tweet-button': tweetButton
+      'v-tweet-button': tweetButton,
+      'v-hatebu-button': hatebuButton,
     },
     data: function() {
       return {

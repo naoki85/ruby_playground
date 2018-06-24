@@ -1,6 +1,6 @@
 <template>
-  <div class="btn-container" @click="tweet">
-    <button class="btn-twitter">Tweet</button>
+  <div class="btn-container" @click="bookmark">
+    <button class="btn-hatebu">ブックマーク</button>
   </div>
 </template>
 
@@ -17,11 +17,11 @@
       }
     },
     methods: {
-      tweet: function() {
+      bookmark: function() {
         var text = this.text;
         var url = "https://bookrecorder.net" + this.path;
-        var redirect_url = "https://twitter.com/share";
-        location.href = redirect_url + '?text=' + text + '&url=' + url;
+        var redirect_url = "http://b.hatena.ne.jp/add?mode=confirm";
+        location.href = redirect_url + '&title=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
       }
     }
   };
@@ -33,17 +33,18 @@
     margin: 10px 0;
     display: inline-block;
   }
-  .btn-twitter {
+  .btn-hatebu {
     margin: 0px;
-    padding-left: 15px;
-    background-color: #1da1f2;
+    padding-left: 20px;
+    background-color: rgb(0, 164, 222);
     color: #fff;
     height: 27px;
-    width: 80px;
-    font-size: 16px;
+    width: 120px;
+    font-size: 14px;
+    font-weight: 700;
     border-radius: 3px;
   }
-  .btn-twitter:before {
+  .btn-hatebu:before {
     content: '';
     display: block;
     position: absolute;
@@ -52,9 +53,9 @@
     width: 25px;
     height: 25px;
     background-size: 100%;
-    background-image: url("../../images/logo_twitter.png");
+    background-image: url("../../images/hatenabookmark-logomark.svg");
   }
-  .btn-twitter:hover {
-    background-color: #1da1f2;
+  .btn-hatebu:hover {
+    background-color: #0091c5;
   }
 </style>
