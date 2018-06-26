@@ -36,11 +36,24 @@ module ApplicationHelper
         og: {
             title: "#{post.title} | BookRecorder",
             description: post.summary,
-            image: post.post_image_path,
+            image: post_ogp_image(post.post_image_path),
         },
         twitter: {
             card: 'summary',
         }
     }
+  end
+
+  private
+
+  # ActiveStorageで生成したパスだとドメインがつかない
+  # @param [String] image_path
+  # @return [String]
+  def post_ogp_image(image_path)
+    if image_path !~ /^https/
+      "https://#{request.host}#{image_path}"
+    else
+      image_path
+    end
   end
 end
