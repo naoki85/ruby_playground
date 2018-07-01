@@ -43,12 +43,18 @@
         color: #4CAF50;
       }
       span.hljs-attribute {
-        color: #311B92;
+        color: #F50057;
       }
     }
   }
 
   a {
     color: #42b983;
+  }
+  ul {
+    margin-bottom: 20px;
+    li {
+      margin-left: 1.5em;
+    }
   }
 }
