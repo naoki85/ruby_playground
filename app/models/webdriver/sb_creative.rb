@@ -46,10 +46,6 @@ class Webdriver::SbCreative < Webdriver
     end
   end
 
-  def self.get_detail_page_url(str)
-    'https://shop.nikkeibp.co.jp' + str
-  end
-
   def self.parse_author(str)
     str.gsub('　', '').gsub('著', '').gsub(' ', '')
   end
