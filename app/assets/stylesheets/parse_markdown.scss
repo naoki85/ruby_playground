@@ -21,6 +21,9 @@
       span.hljs-comment {
         color: #9E9E9E;
       }
+      span.hljs-string {
+        color: #4CAF50;
+      }
     }
     code.javascript, code.js {
       span.hljs-keyword {
@@ -42,11 +45,27 @@
       span.hljs-selector-class {
         color: #FFAB00;
       }
-      span.hljs-string {
-        color: #4CAF50;
-      }
       span.hljs-attribute {
         color: #F50057;
+      }
+    }
+    code.ruby, code.rb {
+      span.hljs-keyword {
+        color: #DD2C00;
+      }
+      span.hljs-function {
+        span.hljs-keyword {
+          color: #DD2C00;
+        }
+        span.hljs-title {
+          color: #FFAB00;
+        }
+      }
+      span.hljs-symbol {
+        color: #00B0FF;
+      }
+      span.hljs-number {
+        color: #558B2F;
       }
     }
   }

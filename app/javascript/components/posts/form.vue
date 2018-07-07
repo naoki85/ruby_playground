@@ -5,10 +5,6 @@
     </v-layout>
 
     <v-layout row>
-      <v-text-field v-model="summary" label="要約" multi-line></v-text-field>
-    </v-layout>
-
-    <v-layout row>
       <v-flex v-if="postImagePath" xs4 md2>
         <img :src="postImagePath" width="100%">
       </v-flex>
@@ -84,7 +80,6 @@
     data: function() {
       return {
         title: '',
-        summary: '',
         content: '',
         publishedAt: '',
         active: 0,
@@ -117,19 +112,7 @@
       ]),
       fetchPost: function(postId) {
         request.get('/v1/posts/' + postId, {}).then((response) => {
-          var post = response.data.post;
-          this.title = post.title;
-          this.summary = post.summary;
-          this.content = post.content;
-          this.publishedAt = post.published_at;
-          console.log(this.publishedAt);
-          if (post.active === 'published') {
-            this.active = 1;
-          } else {
-            this.active = 0;
-          }
-          this.postImagePath = post.post_image_path;
-          console.log(this.postImagePath);
+          this.setPost(response.data.post);
         }, (error) => {
           console.log(error);
           this.$router.push('/not_found');
@@ -171,11 +154,21 @@
         let formData = new FormData();
         formData.append('image', this.image);
         formData.append('title', this.title);
-        formData.append('summary', this.summary);
         formData.append('content', this.content);
         formData.append('active', this.active);
         formData.append('published_at', this.publishedAt);
         return formData;
+      },
+      setPost: function(post) {
+        this.title = post.title;
+        this.content = post.content;
+        this.publishedAt = post.published_at;
+        if (post.active === 'published') {
+          this.active = 1;
+        } else {
+          this.active = 0;
+        }
+        this.postImagePath = post.post_image_path;
       }
     }
   }

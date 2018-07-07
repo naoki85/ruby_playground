@@ -3,7 +3,6 @@ json.set! :post do
   json.id @post.id
   json.user_id @post.user_id
   json.title @post.title
-  json.summary @post.summary
   json.content @post.content
   json.active @post.active
   json.published_at @post.published_at.strftime('%Y-%m-%d')

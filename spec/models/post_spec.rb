@@ -5,9 +5,6 @@ RSpec.describe Post, type: :model do
     context '#title' do
       it { should validate_length_of(:title).is_at_most(255) }
     end
-    context '#summary' do
-      it { should validate_length_of(:title).is_at_most(255) }
-    end
   end
 
   describe '#released?' do
