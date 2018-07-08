@@ -1,9 +1,9 @@
 <template>
   <v-container fluid grid-list-lg>
-    <div class="display-1">最近コメントされた本</div>
+    <div class="display-1">最近追加された本</div>
     <v-layout row class="image-slide-box">
       <div class="image-list">
-        <div v-for="book in user_book_comments.books" class="image">
+        <div v-for="book in books" class="image">
           <router-link :to="'/books/' + book.id">
             <img :src="book.image_url" :alt="book.title">
           </router-link>
@@ -36,23 +36,23 @@
     data: function() {
       return {
         publishers: [],
-        user_book_comments: []
+        books: []
       }
     },
     mounted: function() {
       this.loading();
       this.fetchPublishers();
-      this.fetchRecentCommentedBooks();
+      this.fetchRecentBooks();
       this.finish();
     },
     methods: {
       ...mapActions('loader', [
         'loading', 'finish'
       ]),
-      fetchRecentCommentedBooks: function() {
-        request.get('/v1/user_book_comments', { })
+      fetchRecentBooks: function() {
+        request.get('/v1/books?mode=recent', { })
             .then((response) => {
-          this.user_book_comments = response.data.user_book_comments;
+          this.books = response.data.books;
         }, (error) => {
 
         });

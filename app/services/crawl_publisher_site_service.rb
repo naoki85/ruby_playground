@@ -1,7 +1,7 @@
 class CrawlPublisherSiteService < BaseService
   def self.run
     Rails.logger.info 'Start crawling...'
-    publishers = Publisher.where(active: 1)
+    publishers = Publisher.where(active: 1).where('last_fetched_at < ?', DateTime.now - 3)
     publishers.each do |publisher|
       Rails.logger.info "Start #{publisher.name}"
       clazz = publisher.class_name.constantize
@@ -16,6 +16,8 @@ class CrawlPublisherSiteService < BaseService
         book.author = record[:author]
         book.save!
       end
+      publisher.last_fetched_at = DateTime.now
+      publisher.save
       Rails.logger.info "Finish #{publisher.name}"
     end
     Rails.logger.info 'Finish crawling'
