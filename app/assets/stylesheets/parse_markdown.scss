@@ -72,6 +72,14 @@
       background: black;
       color: white;
     }
+    code.yml {
+      span.hljs-attr {
+        color: #DD2C00;
+      }
+      span.hljs-string {
+        color: black;
+      }
+    }
   }
 
   a {
