@@ -35,7 +35,7 @@ RSpec.describe CrawlPublisherSiteService, type: :service do
         CrawlPublisherSiteService.run
         expect(Book.count).to eq 1
         publisher.reload
-        expect(publisher.last_fetched_at.strftime('%Y-%m-%d')).to eq Date.today.strftime('%Y-%m-%d')
+        expect(publisher.last_fetched_at.strftime('%Y-%m-%d')).to eq Time.zone.now.strftime('%Y-%m-%d')
       end
     end
   end
