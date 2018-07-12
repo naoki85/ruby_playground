@@ -99,4 +99,7 @@
   .mt-large {
     margin-top: 30px;
   }
+  .preview-area {
+    width: 100%;
+  }
 </style>

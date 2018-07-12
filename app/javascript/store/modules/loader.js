@@ -16,7 +16,9 @@ export default {
       commit('setLoader');
     },
     finish({ commit }) {
-      commit('hideLoader');
+      setTimeout(() => {
+        commit('hideLoader');
+      }, 1000);
     }
   }
 }
