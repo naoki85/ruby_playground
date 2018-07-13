@@ -93,7 +93,7 @@ class Crawler
   end
 
   def self.parse_date(date_str)
-    if date_str =~ /(\d{4})[年\/]\s*(\d{1,2})[月|\/]\s*(\d{1,2})[日]?\s*/
+    if date_str =~ /(\d{4})[年\/.]\s*(\d{1,2})[月|\/.]\s*(\d{1,2})[日]?\s*/
       Date.new($1.to_i, $2.to_i, $3.to_i)
     else
       raise "invalid date: #{date_str}"

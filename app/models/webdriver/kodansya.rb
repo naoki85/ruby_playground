@@ -56,12 +56,12 @@ class Webdriver::Kodansya < Webdriver
     self.base_url + str
   end
 
-  class Webdriver::Kodansya::Comic < Webdriver::Kodansya::Kodansya
+  class Webdriver::Kodansya::Comic < Webdriver::Kodansya
     self.base_url = 'http://kc.kodansha.co.jp/'
     self.content_url = 'http://kc.kodansha.co.jp/calendar'
   end
 
-  class Webdriver::Kodansya::Other < Webdriver::Kodansya::Kodansya
+  class Webdriver::Kodansya::Other < Webdriver::Kodansya
     self.base_url = 'http://bookclub.kodansha.co.jp/'
     self.content_url = 'http://bookclub.kodansha.co.jp/calendar'
   end
