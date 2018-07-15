@@ -67,7 +67,11 @@
         'showSuccessAlert', 'showErrorAlert'
       ]),
       fetchPost: function(postId) {
-        request.get('/v1/posts/' + postId, {}).then((response) => {
+        var get_params = '';
+        if (this.loggedIn) {
+          get_params += '?preview=true';
+        }
+        request.get('/v1/posts/' + postId + get_params, {}).then((response) => {
           this.post = response.data.post;
         }, (error) => {
           console.log(error);
