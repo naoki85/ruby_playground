@@ -35,16 +35,33 @@ RSpec.describe V1::PostsController, type: :request do
 
   describe '#show' do
     let(:request_url) { '/v1/posts/' }
-    let(:post) { create(:post) }
 
-    it do
-      get request_url + post.id.to_s
-      expect(response.status).to eq 200
-      json = JSON.parse(response.body)
-      expect(json['post']['id']).to eq post.id
+    context 'normal pattern' do
+      let(:post) { create(:post) }
 
-      get request_url + (post.id + 1).to_s
-      expect(response.status).to eq 404
+      it do
+        get request_url + post.id.to_s
+        expect(response.status).to eq 200
+        json = JSON.parse(response.body)
+        expect(json['post']['id']).to eq post.id
+
+        get request_url + (post.id + 1).to_s
+        expect(response.status).to eq 404
+      end
+    end
+
+    context 'case params have preview' do
+      let(:post) { create(:post, active: 0) }
+
+      it 'should get post before released ' do
+        get request_url + post.id.to_s + '?preview=true'
+        expect(response.status).to eq 200
+        json = JSON.parse(response.body)
+        expect(json['post']['id']).to eq post.id
+
+        get request_url + post.id.to_s
+        expect(response.status).to eq 404
+      end
     end
   end
 

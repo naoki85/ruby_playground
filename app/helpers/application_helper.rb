@@ -26,6 +26,20 @@ module ApplicationHelper
     }
   end
 
+  def posts_meta_tags(description='')
+    {
+        title: 'ブログ一覧 | BookRecorder',
+        description: description,
+        og: {
+            title: 'ブログ一覧 | BookRecorder',
+            description: description,
+        },
+        twitter: {
+            card: 'summary_large_image',
+        }
+    }
+  end
+
   # 記事詳細ページのmetaタグ
   # @param  [Post] post
   # @return [Hash]

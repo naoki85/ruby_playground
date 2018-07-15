@@ -17,7 +17,7 @@ class Crawler::Syogakukan < Crawler
   end
 
   def self.get_image_url(dom)
-    src_path = dom.xpath('.//div[@class="image01"]//img').attribute('src').value
+    src_path = dom.xpath('.//div[@class="image01"]//img').attribute('data-original').value
     URI.join(self.base_url, src_path).to_s
   end
 

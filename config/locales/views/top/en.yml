@@ -2,6 +2,6 @@ en:
   top:
     index:
       title: "Recently books"
-      description: "Add books and comment!!"
+      description: "BookRecorder is a site maintained by naoki85. I will summarize the blog mainly introducing books and studying."
       search_books: "Search books"
       your_books: "Bookshelf"

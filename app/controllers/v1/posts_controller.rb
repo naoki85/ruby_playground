@@ -9,7 +9,12 @@ module V1
     end
 
     def show
-      @post = Post.find(params[:id])
+      @post = Post.where(id: params[:id])
+      if !params['preview']
+        @post = @post.released
+      end
+      @post = @post.first
+      render_404 unless @post
     end
 
     def create

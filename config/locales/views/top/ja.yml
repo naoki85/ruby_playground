@@ -2,7 +2,7 @@ ja:
   top:
     index:
       title: "最近追加された本"
-      description: "本を追加してコメントを残そう!!"
+      description: "BookRecorder は naoki85 によりメンテナンスされているサイトです。主に本の紹介や勉強したことをブログにまとめていきます。"
       search_books: "本を探す"
       your_books: "本棚"
       signup: "新規登録"
