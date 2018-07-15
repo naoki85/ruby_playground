@@ -111,7 +111,7 @@
         'showSuccessAlert', 'showErrorAlert'
       ]),
       fetchPost: function(postId) {
-        request.get('/v1/posts/' + postId, {}).then((response) => {
+        request.get('/v1/posts/' + postId + '?preview=true', {}).then((response) => {
           this.setPost(response.data.post);
         }, (error) => {
           console.log(error);
