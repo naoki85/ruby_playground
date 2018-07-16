@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'web#index'
-  get 'sign_up' => 'web#index'
   get 'sign_in' => 'web#index'
 
   get 'user_policy' => 'web#index'
@@ -10,7 +9,6 @@ Rails.application.routes.draw do
   get 'users/:id' => 'web#index'
   get 'books/search' => 'web#index'
   get 'books/:id' => 'web#index'
-  get 'user_books' => 'web#index'
   get 'publishers/:id' => 'web#index'
 
   get 'posts/new' => 'web#index'
