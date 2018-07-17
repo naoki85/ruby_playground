@@ -4,12 +4,14 @@ RSpec.describe V1::BooksController, type: :request do
   describe '#index' do
     let(:request_url) { '/v1/books' }
     let(:publisher) { create(:publisher) }
+    let(:inactive_publisher) { create(:publisher, active: 0) }
 
     before do
       3.times do
         create(:book, publisher: publisher)
       end
       create_list(:book, 8)
+      create(:book, publisher: inactive_publisher)
     end
 
     it 'get book data' do
@@ -65,6 +67,14 @@ RSpec.describe V1::BooksController, type: :request do
 
     it 'when user is not found return 404 error' do
       get request_url + (book.id + 1).to_s
+      expect(response.status).to eq 404
+    end
+
+    it 'when publisher is not active return 404 error' do
+      publisher = Publisher.find(book.publisher_id)
+      publisher.active = 0
+      publisher.save
+      get request_url + book.id.to_s
       expect(response.status).to eq 404
     end
   end

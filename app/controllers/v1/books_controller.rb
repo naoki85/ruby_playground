@@ -4,8 +4,11 @@ module V1
 
     def index
       @books = Book.includes([:book_category])
-      if params['publisher_id'].present?
+      publisher_ids = Publisher.active.map { |publisher| publisher.id }
+      if params['publisher_id'].present? && publisher_ids.include?(params['publisher_id'].to_i)
         @books = @books.where(publisher_id: params['publisher_id'])
+      else
+        @books = @books.where(publisher_id: publisher_ids)
       end
       if params['start_date'].present?
         @books = @books.where('published_at >= ?', params['start_date'])
@@ -35,6 +38,8 @@ module V1
 
     def set_book
       @book = Book.includes([:book_category, user_book_comments: [:user]]).find(params[:id])
+      publisher_ids = Publisher.active.map { |publisher| publisher.id }
+      render_404 unless publisher_ids.include?(@book.publisher_id)
     end
   end
 end
