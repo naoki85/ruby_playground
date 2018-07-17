@@ -1,5 +1,13 @@
 <template>
   <v-container fluid>
+    <div class="mb-small">
+      <router-link to="/" class="link-back">
+        <span class="subheading group">
+          <v-icon>arrow_back_ios</v-icon>
+          一覧に戻る
+        </span>
+      </router-link>
+    </div>
     <div class="display-1">{{ publisher.name }}</div>
     <v-tabs
         v-model="active"
@@ -52,7 +60,7 @@
     data: function () {
       return {
         active: null,
-        tabList: [{name: '今月'}, {name: '来月'}],
+        tabList: [{name: '今月'}, {name: '既刊'}],
         publisher: [],
         thisMonthBooks: [],
         thisMonthOffset: 0,
@@ -99,18 +107,16 @@
         this.finish();
       },
       fetchBooks: function(active) {
+        var params = '?publisher_id=' + this.publisher.id + '&offset=' + offset;
+        var date = this.getFormattedDate('this_month');
         if (active == 1) {
           var offset = this.nextMonthOffset;
-          var date = this.getFormattedDate('next_month');
+          params += '&end_date=' + date;
         } else {
           var offset = this.thisMonthOffset;
-          var date = this.getFormattedDate('this_month');
-          var end_date = this.getFormattedDate('end_of_this_month');
+          params += '&start_date=' + date;
         }
-        var params = '?publisher_id=' + this.publisher.id + '&start_date=' + date + '&offset=' + offset;
-        if (active == 0) {
-          params += '&end_date=' + end_date;
-        }
+        params += '&offset=' + offset;
 
         request.get('/v1/books' + params, {}).then((response) => {
           if (response.data.books.length < 10) {
@@ -168,5 +174,12 @@
   }
   .align-center {
     text-align: center !important;
+  }
+  .mb-small {
+    margin-bottom: 20px;
+  }
+  .link-back {
+    text-decoration: none;
+    color: rgba(0,0,0,.54);
   }
 </style>
