@@ -8,9 +8,6 @@
         <div class="display-1">{{ user.name }}</div>
       </v-flex>
     </v-layout>
-
-    <line-chart></line-chart>
-
     <v-layout row wrap class="mt-default">
       <v-flex xs12 md6 v-for="book in user.books" :key="book.id">
         <v-card color="" class="black--text">
@@ -48,12 +45,8 @@
 <script>
   import request from '../../utils/requests'
   import { mapActions } from 'vuex'
-  import lineChart from '../commons/line_chart'
 
   export default {
-    components: {
-      'line-chart': lineChart
-    },
     data: function() {
       return {
         user: []
