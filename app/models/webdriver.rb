@@ -1,6 +1,7 @@
 require 'selenium-webdriver'
 
 class Webdriver
+  extend BookCategoryIdentifier
 
   # @return Selenium::WebDriver
   def self.set_driver
@@ -13,5 +14,9 @@ class Webdriver
 
   def self.run
     raise 'abstract method'
+  end
+
+  def self.get_book_category(title)
+    BookCategoryIdentifier.identify(title)
   end
 end

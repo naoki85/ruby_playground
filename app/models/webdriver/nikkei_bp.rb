@@ -34,8 +34,9 @@ class Webdriver::NikkeiBP < Webdriver
           published_at = self.parse_date(grid_cols[1].find_element(:xpath, './/dd').text)
           author = grid_cols[5].find_element(:xpath, './/dd').text
 
+          book_category = get_book_category(title)
           data << { title: title, detail_page_url: detail_page_url, image_url: image_url,
-                    author: author, published_at: published_at }
+                    author: author, published_at: published_at, book_category: book_category }
         rescue => e
           Rails.logger.warn e
         ensure

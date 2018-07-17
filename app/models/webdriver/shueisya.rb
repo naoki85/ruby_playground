@@ -14,8 +14,9 @@ class Webdriver::Shueisya < Webdriver
       paragraphes = elem.find_elements(:xpath, './/p')
       author = paragraphes[0].text
       published_at = parse_date(paragraphes[1].text)
+      book_category = get_book_category(title)
       data << { title: title, detail_page_url: detail_page_url, image_url: image_url,
-                author: author, published_at: published_at }
+                author: author, published_at: published_at, book_category: book_category }
     end
     driver.quit
     data
@@ -35,5 +36,9 @@ class Webdriver::Shueisya < Webdriver
   def self.get_detail_page_url(detail_page_path)
     detail_page_path = detail_page_path.gsub('..', '')
     'http://www.s-manga.net/' + detail_page_path
+  end
+
+  def self.get_book_category(title)
+    'Comic'
   end
 end

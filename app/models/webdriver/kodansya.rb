@@ -28,8 +28,9 @@ class Webdriver::Kodansya < Webdriver
                     else
                       ''
                     end
+        book_category = get_book_category(title)
         data << { title: title, detail_page_url: detail_page_url, image_url: image_url,
-                  author: author, published_at: published_at }
+                  author: author, published_at: published_at, book_category: book_category }
       rescue => e
         Rails.logger.warn e
       ensure
@@ -59,6 +60,10 @@ class Webdriver::Kodansya < Webdriver
   class Webdriver::Kodansya::Comic < Webdriver::Kodansya
     self.base_url = 'http://kc.kodansha.co.jp/'
     self.content_url = 'http://kc.kodansha.co.jp/calendar'
+
+    def self.get_book_category(title)
+      'Comic'
+    end
   end
 
   class Webdriver::Kodansya::Other < Webdriver::Kodansya

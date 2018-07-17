@@ -21,8 +21,9 @@ class Webdriver::SbCreative < Webdriver
 
         break if Date.today - 30 > published_at
 
+        book_category = get_book_category(title)
         data << { title: title, detail_page_url: detail_page_url, image_url: image_url,
-                  author: author, published_at: published_at }
+                  author: author, published_at: published_at, book_category: book_category }
       rescue => e
         Rails.logger.warn e
       ensure

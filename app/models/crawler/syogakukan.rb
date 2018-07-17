@@ -26,6 +26,10 @@ class Crawler::Syogakukan < Crawler
     parse_author(author)
   end
 
+  def self.get_book_category(title)
+    'Comic'
+  end
+
   def self.get_next_url(dom)
     self.now_page = self.now_page + 1
     self.content_list_url + '&page=' + self.now_page.to_s

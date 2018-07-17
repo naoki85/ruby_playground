@@ -10,7 +10,8 @@ RSpec.describe CrawlPublisherSiteService, type: :service do
                                                               author: 'test',
                                                               image_url: 'test',
                                                               published_at: Date.today,
-                                                              detail_page_url: 'test' }])
+                                                              detail_page_url: 'test',
+                                                              book_category: 'Ruby' }])
   end
 
   describe '.run' do
@@ -32,10 +33,12 @@ RSpec.describe CrawlPublisherSiteService, type: :service do
 
     describe 'まだ登録されていない本の場合' do
       it '新規登録される' do
+        before_count = BookCategory.count
         CrawlPublisherSiteService.run
         expect(Book.count).to eq 1
         publisher.reload
         expect(publisher.last_fetched_at.strftime('%Y-%m-%d')).to eq Time.zone.now.strftime('%Y-%m-%d')
+        expect(BookCategory.count).to eq before_count + 1
       end
     end
   end

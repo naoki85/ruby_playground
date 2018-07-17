@@ -9,12 +9,15 @@ class Crawler
   class_attribute :next_url_xpath
   class_attribute :page_num
   class_attribute :sleep_time
+  class_attribute :book_category
   self.base_url = 'http://gihyo.jp'
   self.content_list_url = 'http://gihyo.jp/contentslist'
   self.content_xpath = '//*[@id="latestArticle"]/dl/dd/h3/a'
   self.next_url_xpath = '//*[@id="latestArticle"]/div[4]/p[2]/a'
   self.page_num = 2
   self.sleep_time = 1
+
+  extend BookCategoryIdentifier
 
   # @return hash
   # { title: 'book', url: 'link', published_at: '2018-05-11',
@@ -58,8 +61,9 @@ class Crawler
       published_at = get_published_at(dom_by_xpath)
       image_url = get_image_url(dom_by_xpath)
       author = get_author(dom_by_xpath)
+      book_category = get_book_category(title)
       ret_arr << { title: title, detail_page_url: url, published_at: published_at,
-                   image_url: image_url, author: author }
+                   image_url: image_url, author: author, book_category: book_category }
     end
     ret_arr
   end
@@ -90,6 +94,10 @@ class Crawler
     return URI.join(self.base_url, next_url).to_s
   rescue
     return nil
+  end
+
+  def self.get_book_category(title)
+    BookCategoryIdentifier.identify(title)
   end
 
   def self.parse_date(date_str)

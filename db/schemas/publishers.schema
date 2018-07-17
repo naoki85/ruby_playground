@@ -5,6 +5,7 @@ create_table "publishers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", for
   t.string "kana",       limit: 64, default: "", null: false
   t.string "class_name", limit: 64, default: ""
   t.integer "active",    limit: 1,  default: 0,  null: false
+  t.integer "fetch_enable", limit: 1,  default: 0,  null: false
   t.datetime "last_fetched_at", null: false, default: "2000-01-01 00:00:00"
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
