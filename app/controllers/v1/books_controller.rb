@@ -28,12 +28,6 @@ module V1
       set_book
     end
 
-    def search
-      render_401 unless params['keyword'].present?
-      @books = Book.where('title LIKE ?', "%#{params['keyword']}%").
-          or(Book.where('author LIKE ?', "%#{params['keyword']}%"))
-    end
-
     private
 
     def set_book

@@ -17,7 +17,6 @@ import UserEdit from '../components/users/edit'
 
 // Book
 import Book from '../components/books/show'
-import Search from '../components/books/search'
 
 // Static pages
 import PrivacyPolicy from '../components/top/privacy_policy'
@@ -44,7 +43,6 @@ var router = new VueRouter({
     { path: '/sign_in', component: SignIn },
     { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
     { path: '/users/:id', component: User },
-    { path: '/books/search', component: Search, meta: { requiresAuth: true } },
     { path: '/books/:id', component: Book },
     { path: '/privacy_policy', component: PrivacyPolicy },
     { path: '/user_policy', component: UserPolicy },
