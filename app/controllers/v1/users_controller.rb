@@ -33,7 +33,7 @@ module V1
     end
 
     def set_user
-      @user = User.includes([books: [:book_category]]).find(params[:id])
+      @user = User.find(params[:id])
     end
   end
 end

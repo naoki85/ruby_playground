@@ -31,16 +31,11 @@ RSpec.describe V1::UsersController, type: :request do
     let(:user) { create(:user) }
     let(:book) { create(:book) }
 
-    before do
-      create(:user_book, user_id: user.id, book_id: book.id)
-    end
-
     it 'get user data' do
       get request_url + user.id.to_s
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
       expect(json['user']['id']).to eq user.id
-      expect(json['user']['books'].size).to eq 1
     end
 
     it 'when user is not found return 404 error' do

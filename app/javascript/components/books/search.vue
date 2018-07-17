@@ -39,14 +39,6 @@
                 </router-link>
               </v-flex>
             </v-layout>
-            <v-layout row>
-              <v-card-actions>
-                <v-btn color="teal white--text" @click="onAddBook(book.id)">
-                  追加
-                  <v-icon>add</v-icon>
-                </v-btn>
-              </v-card-actions>
-            </v-layout>
           </v-container>
         </v-card>
       </v-flex>
@@ -92,27 +84,6 @@
         }, (error) => {
           console.log(error);
           this.isError = true;
-        });
-        this.finish();
-      },
-      onAddBook(bookId) {
-        if (!bookId) {
-          this.showErrorAlert({
-            message: '追加失敗しました'
-          });
-          return;
-        }
-        this.loading();
-        request.post('/v1/user_books', { params: { user_book: { book_id: bookId } }, auth: true })
-            .then((response) => {
-          this.showSuccessAlert({
-            message: '追加しました'
-          });
-        }, (error) => {
-          console.log(error);
-          this.showErrorAlert({
-            message: '追加失敗しました'
-          });
         });
         this.finish();
       }

@@ -21,8 +21,6 @@ Rails.application.routes.draw do
     delete 'logout' => 'sessions#destroy'
     get 'me' => 'users#me'
     resources :users, only: [:show, :create, :update]
-    resources :user_books, only: [:index, :create]
-    delete 'user_books' => 'user_books#destroy'
     get 'books/search' => 'books#search'
     resources :books, only: [:index, :show]
     resources :publishers, only: [:index, :show]
