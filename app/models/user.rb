@@ -2,7 +2,6 @@ class User < ApplicationRecord
 
   has_many :user_books, dependent: :destroy
   has_many :books, through: :user_books
-  has_many :user_book_comments
   has_many :posts
 
   has_one_attached :image

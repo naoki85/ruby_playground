@@ -37,7 +37,7 @@ module V1
     private
 
     def set_book
-      @book = Book.includes([:book_category, user_book_comments: [:user]]).find(params[:id])
+      @book = Book.includes([:book_category]).find(params[:id])
       publisher_ids = Publisher.active.map { |publisher| publisher.id }
       render_404 unless publisher_ids.include?(@book.publisher_id)
     end

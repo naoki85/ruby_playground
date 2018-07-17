@@ -51,18 +51,11 @@ RSpec.describe V1::BooksController, type: :request do
     let(:user) { create(:user) }
     let(:book) { create(:book) }
 
-    before do
-      3.times do
-        create(:user_book_comment, user_id: user.id, book_id: book.id)
-      end
-    end
-
     it 'get book data' do
       get request_url + book.id.to_s
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
       expect(json['book']['id']).to eq book.id
-      expect(json['book']['user_book_comments'].size).to eq 3
     end
 
     it 'when user is not found return 404 error' do

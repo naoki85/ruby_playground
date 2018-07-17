@@ -20,9 +20,7 @@ Rails.application.routes.draw do
     post 'login' => 'sessions#create'
     delete 'logout' => 'sessions#destroy'
     get 'me' => 'users#me'
-    get 'users/summary' => 'users#summary'
     resources :users, only: [:show, :create, :update]
-    resources :user_book_comments, only: [:index, :create, :update, :destroy]
     resources :user_books, only: [:index, :create]
     delete 'user_books' => 'user_books#destroy'
     get 'books/search' => 'books#search'

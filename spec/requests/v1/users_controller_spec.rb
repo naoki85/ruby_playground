@@ -60,24 +60,4 @@ RSpec.describe V1::UsersController, type: :request do
       end
     end
   end
-
-  describe '#summary' do
-    let(:request_url) { '/v1/users/summary' }
-    let(:user) { create(:user) }
-
-    before do
-      10.times do
-        create(:user_book_comment, user_id: user.id, page: 10)
-      end
-    end
-
-    context 'normal pattern' do
-      it 'get summary for line chart' do
-        get request_url, params: { id: user.id }
-        expect(response.status).to eq 200
-        json = JSON.parse(response.body)
-        expect(json['summary']['pages'].last).to eq 100
-      end
-    end
-  end
 end
