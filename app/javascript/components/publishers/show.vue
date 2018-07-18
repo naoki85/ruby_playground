@@ -29,34 +29,41 @@
           :key="tab.name"
           class="mt-default"
       >
-        <v-layout row wrap v-for="book in getBooks" :key="book.id">
-          <v-flex xs4>
-            <router-link :to="'/books/' + book.id">
-              <img :src="book.image_url" :alt="book.title" width="100%">
-            </router-link>
-          </v-flex>
-          <v-flex xs8>
-            <div class="title">{{ book.title }}</div>
-            <div class="subheading">{{ book.author }}</div>
-            <div class="subheading">{{ '発売日：' + book.published_at }}</div>
+        <v-layout row wrap>
+          <v-flex xs6 md4 lg3 v-for="book in getBooks" :key="book.id" class="text-xs-center" @click="openDialog(book)">
+            <v-card>
+              <v-container fluid grid-list-lg>
+                <img :src="book.image_url" :alt="book.title" class="book-image">
+              </v-container>
+            </v-card>
           </v-flex>
         </v-layout>
-        <div class="align-center" v-if="active == 1 && nextMonthNextFlg">
+        <div class="text-xs-center" v-if="active == 1 && nextMonthNextFlg">
           <v-btn @click="fetchBooks(active)">さらに読み込む</v-btn>
         </div>
-        <div class="align-center" v-else-if="active == 0 && thisMonthNextFlg">
+        <div class="text-xs-center" v-else-if="active == 0 && thisMonthNextFlg">
           <v-btn @click="fetchBooks(active)">さらに読み込む</v-btn>
         </div>
       </v-tab-item>
     </v-tabs>
+
+    <book-dialog :dialog="dialog"
+                 :title="dialogBook.title"
+                 :detailPageUrl="dialogBook.detail_page_url"
+                 :imageUrl="dialogBook.image_url"
+                 v-on:close-dialog="resetDialogParams"
+    >
+    </book-dialog>
   </v-container>
 </template>
 
 <script>
   import request from '../../utils/requests'
   import { mapActions } from 'vuex'
+  import dialogMixin from '../books/dialog_mixin'
 
   export default {
+    mixins: [dialogMixin],
     data: function () {
       return {
         active: null,
@@ -83,9 +90,6 @@
           return this.thisMonthBooks;
         }
       }
-    },
-    watch: {
-
     },
     methods: {
       ...mapActions('loader', [
@@ -172,14 +176,15 @@
   .mt-default {
     margin-top: 30px;
   }
-  .align-center {
-    text-align: center !important;
-  }
   .mb-small {
     margin-bottom: 20px;
   }
   .link-back {
     text-decoration: none;
     color: rgba(0,0,0,.54);
+  }
+  .book-image {
+    max-width: 100%;
+    max-height: 260px;
   }
 </style>

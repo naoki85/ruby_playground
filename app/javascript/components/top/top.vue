@@ -3,10 +3,8 @@
     <div class="display-1">最近追加された本</div>
     <v-layout row class="image-slide-box">
       <div class="image-list">
-        <div v-for="book in books" class="image">
-          <router-link :to="'/books/' + book.id">
-            <img :src="book.image_url" :alt="book.title">
-          </router-link>
+        <div v-for="book in books" class="image" @click="openDialog(book)">
+          <img :src="book.image_url" :alt="book.title">
         </div>
       </div>
     </v-layout>
@@ -25,14 +23,23 @@
         </v-list-tile-action>
       </v-list-tile>
     </v-list>
+    <book-dialog :dialog="dialog"
+                 :title="dialogBook.title"
+                 :detailPageUrl="dialogBook.detail_page_url"
+                 :imageUrl="dialogBook.image_url"
+                 v-on:close-dialog="resetDialogParams"
+    >
+    </book-dialog>
   </v-container>
 </template>
 
 <script>
   import request from '../../utils/requests'
   import { mapActions } from 'vuex'
+  import dialogMixin from '../books/dialog_mixin'
 
   export default {
+    mixins: [dialogMixin],
     data: function() {
       return {
         publishers: [],
@@ -94,10 +101,10 @@
       left: 0;
     }
     50% {
-      left: -600px;
+      left: -400px;
     }
     100% {
-      left: -1200px;
+      left: -800px;
     }
   }
 </style>

@@ -12,11 +12,7 @@ import Top from '../components/top/top'
 import SignIn from '../components/sessions/sign_in'
 
 // User
-import User from '../components/users/show'
 import UserEdit from '../components/users/edit'
-
-// Book
-import Book from '../components/books/show'
 
 // Static pages
 import PrivacyPolicy from '../components/top/privacy_policy'
@@ -42,8 +38,6 @@ var router = new VueRouter({
     { path: '/', component: Top },
     { path: '/sign_in', component: SignIn },
     { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
-    { path: '/users/:id', component: User },
-    { path: '/books/:id', component: Book },
     { path: '/privacy_policy', component: PrivacyPolicy },
     { path: '/user_policy', component: UserPolicy },
     { path: '/publishers/:id', component: PublisherShow },
