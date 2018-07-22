@@ -8,7 +8,6 @@ SitemapGenerator::Sitemap.create do
   add privacy_policy_path, :priority => 0.8, :changefreq => 'monthly'
 
   # Posts
-  add posts_path, :priority => 0.9, :changefreq => 'weekly'
   Post.released.find_each do |post|
     add post_path(post), lastmod: post.updated_at
   end

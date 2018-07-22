@@ -8,7 +8,6 @@ import Alert from '../store/modules/alert'
 // Utils
 import DateTime from '../utils/date_time'
 
-import Top from '../components/top/top'
 import SignIn from '../components/sessions/sign_in'
 
 // User
@@ -17,9 +16,6 @@ import UserEdit from '../components/users/edit'
 // Static pages
 import PrivacyPolicy from '../components/top/privacy_policy'
 import UserPolicy from '../components/top/user_policy'
-
-// Publisher
-import PublisherShow from '../components/publishers/show'
 
 // Post
 import PostsIndex from '../components/posts/index'
@@ -35,12 +31,11 @@ Vue.use(VueRouter)
 var router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: Top },
+    { path: '/', component: PostsIndex },
     { path: '/sign_in', component: SignIn },
     { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
     { path: '/privacy_policy', component: PrivacyPolicy },
     { path: '/user_policy', component: UserPolicy },
-    { path: '/publishers/:id', component: PublisherShow },
     { path: '/posts', component: PostsIndex },
     { path: '/posts/new', component: PostsNew, meta: { requiresAuth: true }  },
     { path: '/posts/edit/:id', component: PostsEdit, meta: { requiresAuth: true }  },

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'web#index'
+  root 'posts#index'
   get 'sign_in' => 'web#index'
 
   get 'user_policy' => 'web#index'
@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   get 'users/edit' => 'web#index'
   get 'publishers/:id' => 'web#index'
 
+  get '/posts', to: redirect('/')
   get 'posts/new' => 'web#index'
   get 'posts/edit/:id' => 'web#index'
-  resources :posts, only: [:index, :show]
+  resources :posts, only: [:show]
 
   # API
   namespace :v1, format: 'json' do

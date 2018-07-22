@@ -10,14 +10,6 @@ html[lang='ja']
     = favicon_link_tag('commons/favicon.ico')
     = display_meta_tags(default_meta_tags)
     = javascript_pack_tag 'main'
-    - if Rails.env.production?
-      script(async src="https://www.googletagmanager.com/gtag/js?id=UA-119760378-1")
-      javascript:
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-119760378-1');
 
   body
     == yield
