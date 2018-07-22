@@ -32,6 +32,7 @@
     position: relative;
     margin: 10px 0;
     display: inline-block;
+    font-family: Roboto,sans-serif;
   }
   .btn-twitter {
     margin: 0px;

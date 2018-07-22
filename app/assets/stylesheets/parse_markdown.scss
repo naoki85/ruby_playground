@@ -1,4 +1,7 @@
 .preview-area {
+  * {
+    line-height: 180% !important;
+  }
   h1, h2 {
     font-weight:400;
     letter-spacing: normal !important;
@@ -16,10 +19,15 @@
   }
   pre {
     margin-bottom: 16px;
+    font-family: "source-han-sans-japanese", "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
     code {
       width: 100%;
       padding: 20px 10px;
       color: #212121;
+      &:before {
+        content: '';
+        letter-spacing: 0px;
+      }
       span.hljs-comment {
         color: #9E9E9E;
       }

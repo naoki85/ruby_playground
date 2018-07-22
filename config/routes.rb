@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get 'privacy_policy' => 'web#index'
 
   get 'users/edit' => 'web#index'
-  get 'publishers/:id' => 'web#index'
 
   get '/posts', to: redirect('/')
   get 'posts/new' => 'web#index'
