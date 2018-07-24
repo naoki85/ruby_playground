@@ -13,10 +13,6 @@ import SignIn from '../components/sessions/sign_in'
 // User
 import UserEdit from '../components/users/edit'
 
-// Static pages
-import PrivacyPolicy from '../components/top/privacy_policy'
-import UserPolicy from '../components/top/user_policy'
-
 // Post
 import PostsIndex from '../components/posts/index'
 import PostsShow from '../components/posts/show'
@@ -34,8 +30,6 @@ var router = new VueRouter({
     { path: '/', component: PostsIndex },
     { path: '/sign_in', component: SignIn },
     { path: '/users/edit', component: UserEdit, meta: { requiresAuth: true } },
-    { path: '/privacy_policy', component: PrivacyPolicy },
-    { path: '/user_policy', component: UserPolicy },
     { path: '/posts', component: PostsIndex },
     { path: '/posts/new', component: PostsNew, meta: { requiresAuth: true }  },
     { path: '/posts/edit/:id', component: PostsEdit, meta: { requiresAuth: true }  },

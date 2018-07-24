@@ -44,12 +44,12 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile to="/posts">
+        <v-list-tile href="https://bookrecorder.net">
           <v-list-tile-action>
             <v-icon>library_books</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>ブログ</v-list-tile-title>
+            <v-list-tile-title>BookRecorder</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile to="/sign_in">
@@ -64,7 +64,7 @@
     </v-navigation-drawer>
     <v-toolbar color="teal" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>BookRecorder</v-toolbar-title>
+      <v-toolbar-title>BookRecorder のブログ</v-toolbar-title>
     </v-toolbar>
   </div>
 </template>
@@ -74,7 +74,7 @@
 
   export default {
     data: () => ({
-      drawer: null
+      drawer: false
     }),
     props: {
       source: String

@@ -1,42 +1,26 @@
 <template>
-  <v-footer height="auto" class="teal">
-    <v-layout row wrap justify-center>
-      <v-btn
-          v-for="link in links"
-          :key="link.title"
-          :to="link.path"
-          color="white"
-          flat
-      >
-        {{ link.title }}
-      </v-btn>
-      <v-btn color="white" flat @click="redirectTwitter" style="text-transform: inherit">
-        Twitter
-      </v-btn>
-      <v-flex xs12 py-3 text-xs-center white--text>
+  <v-footer
+      dark
+      height="auto"
+  >
+    <v-card
+        class="flex"
+        flat
+        tile
+    >
+      <v-card-title class="teal">
+        <div class="body-2">本ブログは naoki85 によってメンテナンスされています。<br>Twitter などでご意見いただけると嬉しいです。</div>
+
+        <v-spacer></v-spacer>
+
+        <v-btn class="mx-3" dark icon href="https://twitter.com/tony_201612">
+          <v-icon size="24px">fab fa-twitter</v-icon>
+        </v-btn>
+      </v-card-title>
+
+      <v-card-actions class="grey darken-3 justify-center">
         &copy;2018 — <strong>naoki85</strong> — All Rights Reserved.
-      </v-flex>
-    </v-layout>
+      </v-card-actions>
+    </v-card>
   </v-footer>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      links: [
-        { title: 'ブログ', path: '/posts' },
-        { title: '利用規約', path: '/user_policy' },
-        { title: 'プライバシーポリシー', path: '/privacy_policy' }
-      ]
-    }),
-    methods: {
-      redirectTwitter() {
-        location.href = 'https://twitter.com/tony_201612';
-      }
-    }
-  }
-</script>
-
-<style scoped>
-
-</style>

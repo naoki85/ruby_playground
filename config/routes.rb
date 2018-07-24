@@ -2,9 +2,6 @@ Rails.application.routes.draw do
   root 'posts#index'
   get 'sign_in' => 'web#index'
 
-  get 'user_policy' => 'web#index'
-  get 'privacy_policy' => 'web#index'
-
   get 'users/edit' => 'web#index'
 
   get '/posts', to: redirect('/')
