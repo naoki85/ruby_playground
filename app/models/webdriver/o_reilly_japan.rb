@@ -17,7 +17,7 @@ class Webdriver::OReillyJapan < Webdriver
         list_tags = driver.find_elements(:xpath, '//ul[@class="biblio"]/li')
         author = self.parse_author(list_tags[0].text)
         published_at = self.parse_date(list_tags[1].text)
-        break if Date.today > published_at
+        # break if Date.today > published_at
 
         book_category = get_book_category(title)
         data << { title: title, detail_page_url: detail_page_url, image_url: image_url,
