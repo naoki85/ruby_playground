@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Crawler::Gihyo, type: :model do
+RSpec.describe Crawler::Gihyo, type: :model, skip: true do
   subject { Crawler::Gihyo }
 
   before do
