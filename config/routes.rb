@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :books, only: [:index, :show]
     resources :publishers, only: [:index, :show]
     resources :posts, only: [:index, :show, :create, :update, :destroy]
+    resources :book_categories, only: [:index]
   end
 
   # View Routing Errors

@@ -4,6 +4,7 @@ RSpec.describe V1::BooksController, type: :request do
   describe '#index' do
     let(:request_url) { '/v1/books' }
     let(:publisher) { create(:publisher) }
+    let(:book_category) { create(:book_category) }
     let(:inactive_publisher) { create(:publisher, active: 0) }
 
     before do
@@ -12,6 +13,7 @@ RSpec.describe V1::BooksController, type: :request do
       end
       create_list(:book, 8)
       create(:book, publisher: inactive_publisher)
+      create(:book, book_category: book_category)
     end
 
     it 'get book data' do
@@ -35,7 +37,12 @@ RSpec.describe V1::BooksController, type: :request do
       get request_url, params: { limit: 11, offset: 8 }
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
-      expect(json['books'].size).to eq 3
+      expect(json['books'].size).to eq 4
+
+      get request_url, params: { book_category_id: book_category.id }
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['books'].size).to eq 1
     end
 
     it 'request with invalid params should return no book' do

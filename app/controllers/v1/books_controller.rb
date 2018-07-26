@@ -10,6 +10,9 @@ module V1
       else
         @books = @books.where(publisher_id: publisher_ids)
       end
+      if params['book_category_id'].present?
+        @books = @books.where(book_category_id: params['book_category_id'])
+      end
       if params['start_date'].present?
         @books = @books.where('published_at >= ?', params['start_date'])
       end
