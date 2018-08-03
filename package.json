@@ -2,7 +2,7 @@
   "name": "book_recorder",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.4",
+    "@rails/webpacker": "3.5",
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
     "highlight.js": "^9.12.0",
