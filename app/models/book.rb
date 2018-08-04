@@ -8,15 +8,10 @@ class Book < ApplicationRecord
   validates :image_url,       length: { maximum: 255 }
   validates :detail_page_url, length: { maximum: 1020 }
 
-  def self.union_select_recent_each_publisher(publisher_ids)
-    arr_sql = []
-    publisher_ids.each do |publisher_id|
-      tmp_sql = self.select('id, publisher_id, title, image_url, detail_page_url, published_at').
-          where(publisher_id: publisher_id).
-          limit(10).to_sql
-      arr_sql.push(tmp_sql)
-    end
-    sql = arr_sql.join(') UNION ALL (').insert(0, '(').insert(-1, ')')
-    self.find_by_sql(sql)
+  # book_category_id の多い順に 5件返却する
+  # @return array
+  def self.pickup_categories
+    self.where('book_category_id > 0').group(:book_category_id).
+        order('count_all DESC').limit(5).count.keys
   end
 end

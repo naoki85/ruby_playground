@@ -16,17 +16,17 @@ RSpec.describe Book, type: :model do
     end
   end
 
-  describe '.union_select_recent_each_publisher' do
+  describe '.pickup_categories' do
     before do
-      ['Kodansya', 'Shueisya'].each do |publisher_name|
-        publisher = FactoryBot.create(:publisher, name: publisher_name)
-        10.times { FactoryBot.create(:book, publisher: publisher) }
+      5.times do |i|
+        create(:book_category, id: i + 1)
+        (i + 1).times do
+          create(:book, book_category_id: i + 1)
+        end
       end
     end
+    subject { Book.pickup_categories }
 
-    let(:publisher_ids) { Publisher.all.pluck(:id) }
-    subject { Book.union_select_recent_each_publisher(publisher_ids) }
-
-    it { expect(subject.count).to eq 20 }
+    it { expect(subject).to eq [5, 4, 3, 2, 1] }
   end
 end
