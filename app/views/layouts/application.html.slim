@@ -10,8 +10,16 @@ html[lang='ja']
     meta(name="turbolinks-cache-control" content="no-cache")
     = favicon_link_tag('commons/favicon.ico')
     = display_meta_tags(default_meta_tags)
-    = auto_discovery_link_tag :rss, feed_url(:format => :rss)
+    = auto_discovery_link_tag :rss, feed_url(:format => :rss), :title => 'BookRecorder のブログ'
     = javascript_pack_tag 'main'
+    - if Rails.env.production?
+      script(async src="https://www.googletagmanager.com/gtag/js?id=UA-123372116-1")
+      javascript:
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-123372116-1');
 
   body
     == yield
