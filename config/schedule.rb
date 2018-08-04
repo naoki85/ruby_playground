@@ -11,10 +11,6 @@ every 1.day, :at => '6:00 am' do
   rake "sitemap:refresh"
 end
 
-every 1.day, :at => '9:00 am' do
-  runner "Tasks::Rss.dump", output: { error: 'log/cron_error.log' }
-end
-
 every 1.month, :at => '5:00 am' do
   rake "mysql:dump"
   command "~/certbot-auto renew && sudo systemctl restart nginx"

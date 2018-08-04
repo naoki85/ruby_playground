@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'posts/new' => 'web#index'
   get 'posts/edit/:id' => 'web#index'
   resources :posts, only: [:show]
+  get :feed, to: 'rss#index', defaults: { format: :rss }
 
   # API
   namespace :v1, format: 'json' do
