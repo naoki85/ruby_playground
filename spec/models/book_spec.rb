@@ -18,7 +18,7 @@ RSpec.describe Book, type: :model do
 
   describe '.pickup_categories' do
     before do
-      5.times do |i|
+      6.times do |i|
         create(:book_category, id: i + 1)
         (i + 1).times do
           create(:book, book_category_id: i + 1)
@@ -27,6 +27,6 @@ RSpec.describe Book, type: :model do
     end
     subject { Book.pickup_categories }
 
-    it { expect(subject).to eq [5, 4, 3, 2, 1] }
+    it { expect(subject).to eq [6, 5, 4, 3, 2] }
   end
 end
