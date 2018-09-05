@@ -11,7 +11,10 @@
             <v-layout row>
               <v-flex xs7>
                 <div>
-                  <div class="body-2 grey--text">{{ post.published_at }}</div>
+                  <div class="body-2 grey--text">
+                    {{ post.published_at }}
+                    <v-chip text-color="white" :style="{backgroundColor: post.post_category.color}">{{ post.post_category.name }}</v-chip>
+                  </div>
                   <div class="headline">{{ post.title }}</div>
                 </div>
               </v-flex>

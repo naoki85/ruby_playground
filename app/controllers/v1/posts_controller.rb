@@ -4,12 +4,12 @@ module V1
     before_action :set_post, only: [:update, :destroy]
 
     def index
-      @posts = Post.select([:id, :user_id, :title, :published_at]).released.
-          order('published_at DESC').page(params[:page])
+      @posts = Post.includes([:post_category]).select([:id, :post_category_id, :user_id, :title, :published_at]).
+          released.order('published_at DESC').page(params[:page])
     end
 
     def show
-      @post = Post.where(id: params[:id])
+      @post = Post.includes([:post_category]).where(id: params[:id])
       if !params['preview']
         @post = @post.released
       end

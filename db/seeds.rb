@@ -12,3 +12,6 @@ FactoryBot.create(:book_category, id: 3, name: 'Business')
 FactoryBot.create(:book_category, id: 4, name: 'Hobby')
 FactoryBot.create(:book_category, id: 5, name: 'Education')
 FactoryBot.create(:book_category, id: 6, name: 'Other')
+
+PostCategory.delete_all
+FactoryBot.create(:post_category, id: 0, name: 'None')

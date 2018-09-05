@@ -7,5 +7,10 @@ json.set! :posts do
     json.title post.title
     json.published_at post.published_at.strftime('%Y-%m-%d')
     json.post_image_path post.post_image_path(resize: '100x100')
+    json.post_category do |category|
+      category.id post.post_category.id
+      category.name post.post_category.name
+      category.color post.post_category.color
+    end
   end
 end

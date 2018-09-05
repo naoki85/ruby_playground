@@ -24,6 +24,7 @@ RSpec.describe V1::PostsController, type: :request do
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
       expect(json['posts'].size).to eq 10
+      expect(json['posts'][0]['post_category'].size).to eq 3
       expect(json['total_page']).to eq 2
 
       get request_url + '?page=2'
@@ -44,6 +45,7 @@ RSpec.describe V1::PostsController, type: :request do
         expect(response.status).to eq 200
         json = JSON.parse(response.body)
         expect(json['post']['id']).to eq post.id
+        expect(json['post']['post_category']['name']).to eq 'Ruby'
 
         get request_url + (post.id + 1).to_s
         expect(response.status).to eq 404
