@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
   t.integer  "user_id",      null: false
+  t.integer  "post_category_id", null: false, default: 0
   t.string   "title",        null: false
   t.text     "content",      null: false,             limit: 65535
   t.integer  "active",       null: false, default: 0, limit: 1

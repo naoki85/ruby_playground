@@ -68,6 +68,10 @@ RSpec.describe V1::PostsController, type: :request do
   describe '#create' do
     let(:request_url) { '/v1/posts' }
 
+    before do
+      create(:post_category, id: 0, name: 'test')
+    end
+
     include_context 'user_authenticated'
 
     it 'create post' do

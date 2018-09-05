@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :post do
     association :user
+    association :post_category
     title 'test'
     content 'test'
     active 1

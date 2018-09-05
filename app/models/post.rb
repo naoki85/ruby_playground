@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
+  belongs_to :post_category
 
   enum active: { draft: 0, published: 1 }
 
