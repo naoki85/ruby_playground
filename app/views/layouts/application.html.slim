@@ -22,4 +22,8 @@ html[lang='ja']
         gtag('config', 'UA-123372116-1');
 
   body
-    == yield
+    #app
+      == render 'layouts/header'
+      .siimple-content.siimple-content--fluid
+        == yield
+      == render 'layouts/footer'

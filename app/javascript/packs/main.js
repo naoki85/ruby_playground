@@ -1,5 +1,4 @@
 import Vue from 'vue/dist/vue.esm'
-import Default from '../components/layouts/default'
 import router from '../router/router'
 import store from '../store/store'
 import Vuetify from 'vuetify'
@@ -19,7 +18,6 @@ document.addEventListener('turbolinks:load', () => {
   new Vue({
     el: '#app',
     router,
-    store,
-    render: h => h(Default)
+    store
   })
 });

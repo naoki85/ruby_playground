@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-    <div class="display-1">記事一覧</div>
     <div class="text-xs-center" v-if="totalPage > 1">
       <v-pagination :length="totalPage" v-model="page" color="teal" circle></v-pagination>
     </div>
