@@ -1,0 +1,21 @@
+h1.siimple-h1 Posts
+
+= link_to '新規', new_admin_post_path, class: 'siimple-btn siimple-btn--green'
+
+.siimple-table.siimple-table--hover
+  .siimple-table-header
+    .siimple-table-row
+      .siimple-table-cell ID
+      .siimple-table-cell.siimple-table-cell Title
+      .siimple-table-cell Published At
+      .siimple-table-cell
+  .siimple-table-body
+    - @posts.each do |post|
+      .siimple-table-row
+        .siimple-table-cell = post.id
+        .siimple-table-cell = post.title
+        .siimple-table-cell = post.published_at.strftime('%Y-%m-%d')
+        .siimple-table-cell
+          = link_to '詳細', admin_post_path(post), class: 'siimple-btn siimple-btn--blue'
+          = link_to '編集', edit_admin_post_path(post), class: 'siimple-btn siimple-btn--yellow'
+          = link_to '削除', admin_post_path(post), method: :delete, class: 'siimple-btn siimple-btn--red'

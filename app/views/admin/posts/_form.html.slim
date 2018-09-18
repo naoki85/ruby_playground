@@ -1,0 +1,32 @@
+= form_for [:admin, @post] do |f|
+  = render 'admin/shared/error_messages', object: f.object
+
+  .siimple-content
+    = f.label :title, class: 'siimple-label'
+    = f.text_field :title, class: 'siimple-input siimple-input--fluid'
+
+  .siimple-content
+    = f.label :image, class: 'siimple-label'
+    = f.file_field :image, accept: 'image/jpeg,image/gif,image/png'
+
+  .siimple-content
+    = f.label :post_category_id, class: 'siimple-label'
+    = f.collection_select :post_category_id, @post_categories,
+            :id, :name, {}, class: 'siimple-select'
+
+  .siimple-content
+    = f.label :published_at, class: 'siimple-label'
+    = f.datetime_select :published_at, {date_separator: '/', datetime_separator: '　', use_month_numbers: true}
+
+  .siimple-content.siimple-content
+    = f.radio_button :active, :draft, class: 'siimple-radio'
+    = f.label :active, '下書き'
+    = f.radio_button :active, :published, class: 'siimple-radio'
+    = f.label :active, '公開'
+
+  .siimple-content
+    = f.label :content, class: 'siimple-label'
+    = f.text_area :content, class: 'siimple-textarea siimple-textarea--fluid', rows: '100'
+
+  .siimple-content
+    = f.submit '登録', class: 'siimple-btn siimple-btn--primary'

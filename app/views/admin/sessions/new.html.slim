@@ -1,0 +1,12 @@
+h1.siimple-h1 Login
+
+= form_for(:session, url: sign_in_path, class: 'siimple-form') do |f|
+
+  div
+    = f.label :email, class: 'siimple-label'
+    = f.email_field :email, class: 'siimple-input siimple-input--fluid'
+  div
+    = f.label :password, class: 'siimple-label'
+    = f.password_field :password, class: 'siimple-input siimple-input--fluid'
+  .siimple--text-right
+    = f.submit 'Log in', class: 'siimple-btn siimple-btn--primary'
