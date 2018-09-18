@@ -1,41 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer v-model="drawer" fixed app>
-      <v-list v-if="loggedIn" dense>
-        <v-list-tile to="/">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile to="/users/edit">
-          <v-list-tile-action>
-            <v-icon>account_circle</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>アカウント編集</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile to="/posts/new">
-          <v-list-tile-action>
-            <v-icon>create</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>記事作成</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile @click="onLogout">
-          <v-list-tile-action>
-            <v-icon>exit_to_app</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>ログアウト</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-      <v-list v-else dense>
+      <v-list dense>
         <v-list-tile to="/">
           <v-list-tile-action>
             <v-icon>home</v-icon>
@@ -52,12 +18,12 @@
             <v-list-tile-title>BookRecorder</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile to="/sign_in">
+        <v-list-tile href="/sign_in">
           <v-list-tile-action>
             <v-icon>exit_to_app</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>ログイン</v-list-tile-title>
+            <v-list-tile-title>Sign in</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -70,30 +36,12 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-
   export default {
     data: () => ({
       drawer: false
     }),
     props: {
       source: String
-    },
-    computed: {
-      ...mapState('auth', [
-        'loggedIn'
-      ])
-    },
-    methods: {
-      ...mapActions('auth', [
-        'logout'
-      ]),
-      onLogout: function() {
-        this.logout({
-          router: this.$router,
-          data: this.$data
-        });
-      }
     }
   }
 </script>
