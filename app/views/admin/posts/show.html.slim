@@ -1,0 +1,19 @@
+.siimple-breadcrumb
+  .siimple-breadcrumb-item
+    = link_to 'Posts', admin_posts_path
+  .siimple-breadcrumb-item = @post.title
+
+h1.siimple-h1 = @post.title
+
+.siimple-table
+  .siimple-table-body
+    .siimple-table-row
+      .siimple-table-cell Category
+      .siimple-table-cell =@post.post_category.name
+    .siimple-table-row
+      .siimple-table-cell Published At
+      .siimple-table-cell =@post.published_at.strftime('%Y-%m-%d')
+    .siimple-table-row
+      .siimple-table-cell Content
+      .siimple-table-cell =@post.content
+

@@ -1,0 +1,8 @@
+.siimple-navbar.siimple-navbar--teal.siimple-navbar--fluid
+  = link_to 'BookRecorder のブログ', sign_in_path, class: 'siimple-navbar-title'
+  .siimple--float-right
+    - if logged_in?
+      = link_to 'カテゴリー', admin_post_categories_path, class: 'siimple-navbar-item'
+      = link_to 'ログアウト', sign_out_path, method: 'delete', class: 'siimple-navbar-item'
+    - else
+      = link_to 'ログイン', sign_in_path, class: 'siimple-navbar-item'

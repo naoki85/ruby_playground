@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  get 'sign_in' => 'web#index'
+  get 'sign_in' => 'admin/sessions#new'
+  post 'sign_in' => 'admin/sessions#create'
+  delete 'sign_out' => 'admin/sessions#destroy'
 
   get 'users/edit' => 'web#index'
 
@@ -20,6 +22,12 @@ Rails.application.routes.draw do
     resources :publishers, only: [:index, :show]
     resources :posts, only: [:index, :show, :create, :update, :destroy]
     resources :book_categories, only: [:index]
+  end
+
+  # Admin
+  namespace :admin do
+    resources :posts
+    resources :post_categories, except: [:show]
   end
 
   # View Routing Errors

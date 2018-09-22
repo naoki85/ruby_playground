@@ -1,35 +1,23 @@
 <template>
-  <v-container fluid>
+  <div>
     <div class="body-1 grey--text">{{ post.published_at }}</div>
-    <div class="display-1">{{ post.title }}</div>
-    <v-tweet-button :text="post.title" :path="path"></v-tweet-button>
-    <v-hatebu-button :text="post.title" :path="path"></v-hatebu-button>
-
-    <v-layout row v-if="enableControl()">
-      <v-btn
-          color="orange white--text"
-          :to="'/posts/edit/' + post.id"
-      >
-        編集
-        <v-icon color="white">edit</v-icon>
-      </v-btn>
-      <v-btn color="red white--text" @click="onDeletePost(post.id)">
-        削除
-        <v-icon color="white">delete</v-icon>
-      </v-btn>
-    </v-layout>
-
-    <v-layout row wrap class="mt-large">
-      <div class="preview-area">
-        <div v-html="convertMarkdownToHtml"></div>
+    <h1 class="siimple-h1">{{ post.title }}</h1>
+    <div class="siimple-grid">
+      <div class="siimple-grid-row">
+        <v-tweet-button :text="post.title" :path="path"></v-tweet-button>
+        <v-hatebu-button :text="post.title" :path="path"></v-hatebu-button>
       </div>
-    </v-layout>
-  </v-container>
+    </div>
+
+    <div class="preview-area">
+      <div v-html="convertMarkdownToHtml"></div>
+    </div>
+  </div>
 </template>
 
 <script>
   import request from '../../utils/requests'
-  import { mapState, mapActions } from 'vuex'
+  import { mapActions } from 'vuex'
   import markedExtend from '../../utils/marked_extend';
   import tweetButton from '../commons/tweet_button';
   import hatebuButton from '../commons/hatebu_button';
@@ -46,9 +34,6 @@
       }
     },
     computed: {
-      ...mapState('auth', [
-        'loggedIn', 'userId'
-      ]),
       convertMarkdownToHtml: function() {
         return markedExtend.extmarked(this.post.content);
       }
@@ -63,36 +48,12 @@
       ...mapActions('loader', [
         'loading', 'finish'
       ]),
-      ...mapActions('alert', [
-        'showSuccessAlert', 'showErrorAlert'
-      ]),
       fetchPost: function(postId) {
-        var get_params = '';
-        if (this.loggedIn) {
-          get_params += '?preview=true';
-        }
-        request.get('/v1/posts/' + postId + get_params, {}).then((response) => {
+        request.get('/v1/posts/' + postId, {}).then((response) => {
           this.post = response.data.post;
         }, (error) => {
           console.log(error);
           this.$router.push('/not_found');
-        });
-      },
-      enableControl: function() {
-        if (this.loggedIn) {
-          if (this.userId == this.post.user_id) {
-            return true;
-          }
-        }
-        return false;
-      },
-      onDeletePost: function(postId) {
-        request.delete('/v1/posts/' + postId, { auth: true }).then((response) => {
-          this.showSuccessAlert({ message: '削除しました' });
-          this.$router.push('/posts');
-        }, (error) => {
-          this.showErrorAlert({ message: '削除に失敗しました' });
-          console.log(error);
         });
       }
     }
@@ -100,8 +61,8 @@
 </script>
 
 <style scoped>
-  .mt-large {
-    margin-top: 30px;
+  .siimple-h1 {
+    font-size: 34px;
   }
   .preview-area {
     width: 100%;

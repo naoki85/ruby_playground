@@ -1,25 +1,17 @@
 import Vue from 'vue/dist/vue.esm'
-import Default from '../components/layouts/default'
 import router from '../router/router'
 import store from '../store/store'
-import Vuetify from 'vuetify'
-Vue.use(Vuetify);
-import colors from 'vuetify/es5/util/colors'
-Vue.use(Vuetify, {
-  theme: {
-    primary: colors.teal.base,
-    secondary: colors.red.lighten4,
-    accent: colors.indigo.base
-  }
-})
-
-// import 'vuetify/dist/vuetify.css'
+import loader from '../components/commons/loading'
+import previewTextarea from '../components/posts/_preview_textarea'
 
 document.addEventListener('turbolinks:load', () => {
   new Vue({
     el: '#app',
+    components: {
+      'my-loader': loader,
+      'preview-textarea': previewTextarea
+    },
     router,
-    store,
-    render: h => h(Default)
+    store
   })
 });

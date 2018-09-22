@@ -35,13 +35,13 @@
     font-family: Roboto,sans-serif;
   }
   .btn-twitter {
-    margin: 0px;
-    padding-left: 15px;
+    margin: 0;
+    padding-left: 25px;
     background-color: #1da1f2;
     color: #fff;
     height: 27px;
     width: 80px;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 3px;
   }
   .btn-twitter:before {

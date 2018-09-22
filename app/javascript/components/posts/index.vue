@@ -1,43 +1,42 @@
 <template>
-  <v-container fluid>
-    <div class="display-1">記事一覧</div>
-    <div class="text-xs-center" v-if="totalPage > 1">
-      <v-pagination :length="totalPage" v-model="page" color="teal" circle></v-pagination>
-    </div>
-    <v-layout row wrap class="mt-large">
-      <v-flex xs12 md6 v-for="post in posts" :key="post.id">
-        <v-card color="" class="black--text" :to="'/posts/' + post.id">
-          <v-container fluid grid-list-lg>
-            <v-layout row>
-              <v-flex xs7>
-                <div>
-                  <div class="body-2 grey--text">
+  <div>
+    <v-paginate :current-page="page" :total-page="totalPage"
+                @click-page="fetchPosts" ref="paginate"></v-paginate>
+    <div class="siimple-grid">
+      <div class="siimple-grid-row">
+        <div class="siimple-box siimple-grid-col siimple-grid-col--6 siimple-grid-col--sm-12"
+             v-for="post in posts" :key="post.id">
+          <router-link :to="'/posts/' + post.id">
+            <div class="siimple-grid">
+              <div class="siimple-grid-row">
+                <div class="siimple-grid-col siimple-grid-col--9">
+                  <div class="siimple-box-subtitle">
                     {{ post.published_at }}
-                    <v-chip text-color="white" :style="{backgroundColor: post.post_category.color}">{{ post.post_category.name }}</v-chip>
+                    <span class="siimple-tag siimple-tag-default siimple-tag--rounded"
+                          :style="{backgroundColor: post.post_category.color}">
+                      {{ post.post_category.name }}
+                    </span>
                   </div>
-                  <div class="headline">{{ post.title }}</div>
+                  <div class="siimple-box-title">{{ post.title }}</div>
                 </div>
-              </v-flex>
-              <v-flex xs5>
-                <v-card-media
-                    :src="post.post_image_path"
-                    height="125px"
-                    :alt="post.title"
-                    contain
-                ></v-card-media>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card>
-      </v-flex>
-    </v-layout>
-    <div class="text-xs-center" v-if="totalPage > 1">
-      <v-pagination :length="totalPage" v-model="page" color="teal" circle></v-pagination>
+                <div class="siimple-grid-col siimple-grid-col--3">
+                  <div class="siimple-box-detail">
+                    <img :src="post.post_image_path" height="125px" :alt="post.title"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </router-link>
+        </div>
+      </div>
     </div>
-  </v-container>
+    <v-paginate :current-page="page" :total-page="totalPage"
+                @click-page="fetchPosts" ref="paginate"></v-paginate>
+  </div>
 </template>
 
 <script>
+  import Paginate from '../commons/paginate'
   import request from '../../utils/requests'
   import { mapActions } from 'vuex'
 
@@ -49,9 +48,12 @@
         page: 1
       }
     },
+    components: {
+      'v-paginate': Paginate
+    },
     watch: {
       page: function() {
-        this.fetchPosts(this.page);
+        this.$refs.paginate.updateCurrent(this.page)
       }
     },
     mounted: function() {
@@ -66,6 +68,7 @@
         request.get('/v1/posts?page=' + page, { }).then((response) => {
           this.totalPage = response.data.total_page;
           this.posts = response.data.posts;
+          this.page = page;
         }, (error) => {
           console.log(error);
         });
@@ -76,7 +79,25 @@
 </script>
 
 <style scoped>
-  .mt-large {
-    margin-top: 30px;
+  .siimple-box {
+    margin-bottom: 0;
+    background-color: white;
+  }
+  .siimple-box-title {
+    font-size: 24px;
+    color: #000000;
+  }
+  .siimple-box-title:hover {
+    text-decoration: underline;
+  }
+  .siimple-box-subtitle {
+    font-size: 13px;
+    color: #9e9e9e;
+  }
+  .siimple-tag-default {
+    color: white;
+  }
+  .siimple-box-detail {
+    opacity: 1.0;
   }
 </style>

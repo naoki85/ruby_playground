@@ -1,0 +1,22 @@
+h1.siimple-h1 Post Categories
+
+= link_to '新規', new_admin_post_category_path, class: 'siimple-btn siimple-btn--green'
+
+.siimple-table.siimple-table--hover
+  .siimple-table-header
+    .siimple-table-row
+      .siimple-table-cell ID
+      .siimple-table-cell.siimple-table-cell Name
+      .siimple-table-cell Color
+      .siimple-table-cell
+  .siimple-table-body
+    - @post_categories.each do |post_category|
+      .siimple-table-row
+        .siimple-table-cell = post_category.id
+        .siimple-table-cell = post_category.name
+        .siimple-table-cell
+          span[style="color: #{post_category.color}"] ■&nbsp;
+          = post_category.color
+        .siimple-table-cell
+          = link_to '編集', edit_admin_post_category_path(post_category), class: 'siimple-btn siimple-btn--yellow'
+          = link_to '削除', admin_post_category_path(post_category), method: :delete, class: 'siimple-btn siimple-btn--red'

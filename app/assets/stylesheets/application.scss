@@ -14,9 +14,25 @@
  *= require_self
  */
 
-/* Icons */
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons);
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import url(https://cdn.jsdelivr.net/npm/siimple@3.1.1/dist/siimple.min.css);
 
 * {
   font-family: "source-han-serif-japanese", "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+}
+
+.siimple-navbar.siimple-navbar--teal {
+  background-color: #009688;
+}
+.siimple-footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.siimple-footer.siimple-footer--teal {
+  background-color: #009688;
+}
+.fa-large {
+  font-size: 36px;
+  color: white;
 }
