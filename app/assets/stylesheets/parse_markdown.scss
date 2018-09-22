@@ -47,6 +47,12 @@
       span.hljs-string {
         color: #4CAF50;
       }
+      span.hljs-keyword {
+        color: #E65100;
+      }
+      span.hljs-attr {
+        color: #F50057;
+      }
     }
     code.javascript, code.js {
       span.hljs-keyword {

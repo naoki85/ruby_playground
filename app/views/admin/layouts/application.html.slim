@@ -8,10 +8,12 @@ html[lang='ja']
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
     meta(name="turbolinks-cache-control" content="no-cache")
     = favicon_link_tag('commons/favicon.ico')
+    = javascript_pack_tag 'main'
 
   body
-    == render 'admin/layouts/header'
-    .siimple-content.siimple-content--fluid
-      - flash.each do |message_type, message|
-        = content_tag(:div, message, class: "siimple-alert siimple-alert--#{message_type == 'success' ? message_type : 'error'}")
-      == yield
+    #app
+      == render 'admin/layouts/header'
+      .siimple-content.siimple-content--fluid
+        - flash.each do |message_type, message|
+          = content_tag(:div, message, class: "siimple-alert siimple-alert--#{message_type == 'success' ? message_type : 'error'}")
+        == yield

@@ -1,13 +1,15 @@
 import Vue from 'vue/dist/vue.esm'
 import router from '../router/router'
 import store from '../store/store'
-import Loader from '../components/commons/loading'
+import loader from '../components/commons/loading'
+import previewTextarea from '../components/posts/_preview_textarea'
 
 document.addEventListener('turbolinks:load', () => {
   new Vue({
     el: '#app',
     components: {
-      'my-loader': Loader
+      'my-loader': loader,
+      'preview-textarea': previewTextarea
     },
     router,
     store

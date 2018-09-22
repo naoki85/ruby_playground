@@ -16,7 +16,7 @@ class Admin::PostsController < Admin::ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if @post.save! && @post.attach_image(post_params)
+    if @post.save && @post.attach_image(post_params)
       flash[:success] = '記事の登録が完了しました！'
       redirect_to admin_posts_url
     else
