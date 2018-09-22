@@ -1,16 +1,18 @@
 <template>
-  <v-container fluid>
+  <div>
     <div class="body-1 grey--text">{{ post.published_at }}</div>
-    <div class="display-1">{{ post.title }}</div>
-    <v-tweet-button :text="post.title" :path="path"></v-tweet-button>
-    <v-hatebu-button :text="post.title" :path="path"></v-hatebu-button>
-
-    <v-layout row wrap class="mt-large">
-      <div class="preview-area">
-        <div v-html="convertMarkdownToHtml"></div>
+    <h1 class="siimple-h1">{{ post.title }}</h1>
+    <div class="siimple-grid">
+      <div class="siimple-grid-row">
+        <v-tweet-button :text="post.title" :path="path"></v-tweet-button>
+        <v-hatebu-button :text="post.title" :path="path"></v-hatebu-button>
       </div>
-    </v-layout>
-  </v-container>
+    </div>
+
+    <div class="preview-area">
+      <div v-html="convertMarkdownToHtml"></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -47,11 +49,7 @@
         'loading', 'finish'
       ]),
       fetchPost: function(postId) {
-        var get_params = '';
-        if (this.loggedIn) {
-          get_params += '?preview=true';
-        }
-        request.get('/v1/posts/' + postId + get_params, {}).then((response) => {
+        request.get('/v1/posts/' + postId, {}).then((response) => {
           this.post = response.data.post;
         }, (error) => {
           console.log(error);
@@ -63,8 +61,8 @@
 </script>
 
 <style scoped>
-  .mt-large {
-    margin-top: 30px;
+  .siimple-h1 {
+    font-size: 34px;
   }
   .preview-area {
     width: 100%;

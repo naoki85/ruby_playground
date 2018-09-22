@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-progress-circular v-if="isLoading" indeterminate color="teal" class="loading"></v-progress-circular>
+    <div v-if="isLoading" class="siimple-spinner siimple-spinner--teal loading"></div>
   </div>
 </template>
 
