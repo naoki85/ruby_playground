@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # Admin
   namespace :admin do
     resources :posts
+    resources :post_categories, except: [:show]
   end
 
   # View Routing Errors

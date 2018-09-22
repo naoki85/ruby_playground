@@ -5,6 +5,9 @@ class Admin::PostsController < Admin::ApplicationController
     @posts = Post.includes([:post_category]).where(user_id: current_user.id).order('id DESC')
   end
 
+  def show
+  end
+
   def new
     @post = Post.new
     set_post_categories

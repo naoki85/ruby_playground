@@ -19,12 +19,8 @@
 
   export default {
     props: {
-      name: String
-    },
-    data: function() {
-      return {
-        content: ''
-      }
+      name: String,
+      content: String
     },
     computed: {
       convertMarkdownToHtml: function() {
