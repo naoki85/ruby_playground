@@ -1,8 +1,7 @@
 <template>
   <div>
-    <!--<div class="siimple&#45;&#45;text-center" v-if="totalPage > 1">-->
-      <!--<v-pagination :length="totalPage" v-model="page" color="teal" circle></v-pagination>-->
-    <!--</div>-->
+    <v-paginate :current-page="page" :total-page="totalPage"
+                @click-page="fetchPosts" ref="paginate"></v-paginate>
     <div class="siimple-grid">
       <div class="siimple-grid-row">
         <div class="siimple-box siimple-grid-col siimple-grid-col--6 siimple-grid-col--sm-12"
@@ -31,13 +30,13 @@
         </div>
       </div>
     </div>
-    <!--<div class="siimple&#45;&#45;text-center" v-if="totalPage > 1">-->
-      <!--<v-pagination :length="totalPage" v-model="page" color="teal" circle></v-pagination>-->
-    <!--</div>-->
+    <v-paginate :current-page="page" :total-page="totalPage"
+                @click-page="fetchPosts" ref="paginate"></v-paginate>
   </div>
 </template>
 
 <script>
+  import Paginate from '../commons/paginate'
   import request from '../../utils/requests'
   import { mapActions } from 'vuex'
 
@@ -49,9 +48,12 @@
         page: 1
       }
     },
+    components: {
+      'v-paginate': Paginate
+    },
     watch: {
       page: function() {
-        this.fetchPosts(this.page);
+        this.$refs.paginate.updateCurrent(this.page)
       }
     },
     mounted: function() {
@@ -66,6 +68,7 @@
         request.get('/v1/posts?page=' + page, { }).then((response) => {
           this.totalPage = response.data.total_page;
           this.posts = response.data.posts;
+          this.page = page;
         }, (error) => {
           console.log(error);
         });
@@ -93,5 +96,8 @@
   }
   .siimple-tag-default {
     color: white;
+  }
+  .siimple-box-detail {
+    opacity: 1.0;
   }
 </style>
