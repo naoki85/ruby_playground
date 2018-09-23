@@ -28,7 +28,7 @@ namespace :deploy do
 
   task :make_env do
     on roles(:app) do
-      execute "/home/naoki_yoneyama/book_recorder/current/bin/rails runner 'Tasks::WriteSecretsInEnv.execute' > .test"
+      execute "#{rbenv_prefix} rails runner 'Tasks::WriteSecretsInEnv.execute' > .test"
     end
   end
 
