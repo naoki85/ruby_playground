@@ -37,7 +37,7 @@ namespace :deploy do
   end
 
   before :starting,     :check_revision
-  after  :updated,      :make_env
+  after  :updated,      :upload_env
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
