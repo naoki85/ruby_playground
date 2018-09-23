@@ -78,6 +78,10 @@ jobs:
               ssh-add ${_k} || true
             done
 
+          name: Add env
+          command: |
+            bundle exec rails runner "Tasks::WriteSecretsInEnv.execute" > .test
+
           name: Deploy Master
           command: |
             bundle exec cap production deploy

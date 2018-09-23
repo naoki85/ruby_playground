@@ -26,15 +26,19 @@ namespace :deploy do
     end
   end
 
-  task :make_env do
+  task :upload_env do
     on roles(:app) do
-      execute "#{rbenv_prefix} rails runner 'Tasks::WriteSecretsInEnv.execute' > .test"
+      if File.exist?(".test")
+        upload! ".test", "#{current_path}/.test"
+      else
+        p "file does not exist: .test"
+      end
     end
   end
 
   before :starting,     :check_revision
+  after  :updated,      :make_env
   after  :finishing,    :compile_assets
-  after  :finishing,    :make_env
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
