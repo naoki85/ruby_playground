@@ -69,6 +69,8 @@ group :development, :test do
   gem 'capistrano3-ridgepole'
   gem 'factory_bot_rails'
   gem 'foreman'
+  gem 'aws-sdk-rails'
+  gem 'aws-sdk-secretsmanager'
 end
 
 group :development do

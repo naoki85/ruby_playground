@@ -26,8 +26,15 @@ namespace :deploy do
     end
   end
 
+  task :make_env do
+    on roles(:app) do
+      execute "rails runner 'Tasks::WriteSecretsInEnv.execute' > .test"
+    end
+  end
+
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
+  after  :finishing,    :make_env
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
