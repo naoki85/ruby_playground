@@ -28,8 +28,8 @@ namespace :deploy do
 
   task :upload_env do
     on roles(:app) do
-      if File.exist?(".test")
-        upload! ".test", "#{current_path}/.test"
+      if File.exist?(".env")
+        upload! ".env", "#{shared_path}/.env"
       else
         p "file does not exist: .test"
       end
@@ -37,7 +37,7 @@ namespace :deploy do
   end
 
   before :starting,     :check_revision
-  after  :updated,      :upload_env
+  after  :started,      :upload_env
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart

@@ -81,7 +81,7 @@ jobs:
       - run:
           name: Add env
           command: |
-            bundle exec rails runner "Tasks::WriteSecretsInEnv.execute" > .test
+            bundle exec rails runner "Tasks::WriteSecretsInEnv.execute" > .env
 
       - run:
           name: Deploy Master
