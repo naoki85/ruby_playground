@@ -36,11 +36,11 @@
   }
   .btn-hatebu {
     margin: 0px;
-    padding-left: 20px;
+    padding-left: 25px;
     background-color: rgb(0, 164, 222);
     color: #fff;
     height: 27px;
-    width: 120px;
+    width: 125px;
     font-size: 14px;
     font-weight: 700;
     border-radius: 3px;

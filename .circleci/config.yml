@@ -84,11 +84,6 @@ jobs:
             bundle exec rails runner "Tasks::WriteSecretsInEnv.execute" > .test
 
       - run:
-          name: test
-          command: |
-            ls -a
-
-      - run:
           name: Deploy Master
           command: |
             bundle exec cap production deploy
