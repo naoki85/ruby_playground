@@ -31,9 +31,11 @@
         this.$emit('click-page', page)
       },
       updateCurrent(page) {
-        console.log(page);
-        document.getElementsByClassName('current')[0].classList.remove('current');
-        document.getElementsByClassName('page-' + page)[0].classList.add('current');
+        let current_class_elements = document.getElementsByClassName('current');
+        if (current_class_elements.length > 0) {
+          current_class_elements[0].classList.remove('current');
+          document.getElementsByClassName('page-' + page)[0].classList.add('current');
+        }
       }
     }
   }
