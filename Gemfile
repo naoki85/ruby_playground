@@ -40,6 +40,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'dotenv-rails'
 gem 'therubyracer'
 gem 'rack-cors', require: 'rack/cors'
+gem 'aws-sdk-rails'
+gem 'aws-sdk-secretsmanager'
 
 gem 'omniauth-twitter'
 gem 'ridgepole', '>= 0.7.2.beta'
@@ -69,8 +71,6 @@ group :development, :test do
   gem 'capistrano3-ridgepole'
   gem 'factory_bot_rails'
   gem 'foreman'
-  gem 'aws-sdk-rails'
-  gem 'aws-sdk-secretsmanager'
 end
 
 group :development do

@@ -5,7 +5,6 @@ require 'json'
 class AwsSecretManager
 
   def self.get_secret(secret_name)
-    #secret_name = "prod/bookRecorder/Mysql"
     endpoint_url = "https://secretsmanager.ap-northeast-1.amazonaws.com"
     region_name = "ap-northeast-1"
 
