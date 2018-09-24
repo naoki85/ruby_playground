@@ -19,7 +19,7 @@ set :deploy_to, '/home/naoki_yoneyama/book_recorder'
 # These are the defaults.
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 set :format, :pretty
-set :log_level, :info
+set :log_level, :debug
 
 # Default value for :pty is false
 set :pty, true
