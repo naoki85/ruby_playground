@@ -4,12 +4,12 @@
                 @click-page="fetchPosts" ref="paginate"></v-paginate>
     <div class="siimple-grid">
       <div class="siimple-grid-row">
-        <div class="siimple-box siimple-grid-col siimple-grid-col--6 siimple-grid-col--sm-12"
+        <div class="siimple-box siimple-grid-col siimple-grid-col--6 siimple-grid-col--md-12"
              v-for="post in posts" :key="post.id">
           <router-link :to="'/posts/' + post.id">
             <div class="siimple-grid">
               <div class="siimple-grid-row">
-                <div class="siimple-grid-col siimple-grid-col--9">
+                <div class="siimple-grid-col siimple-grid-col--8">
                   <div class="siimple-box-subtitle">
                     {{ post.published_at }}
                     <span class="siimple-tag siimple-tag-default siimple-tag--rounded"
@@ -19,7 +19,7 @@
                   </div>
                   <div class="siimple-box-title">{{ post.title }}</div>
                 </div>
-                <div class="siimple-grid-col siimple-grid-col--3">
+                <div class="siimple-grid-col siimple-grid-col--4">
                   <div class="siimple-box-detail">
                     <img :src="post.post_image_path" height="125px" :alt="post.title"/>
                   </div>

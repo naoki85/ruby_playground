@@ -1,11 +1,11 @@
 <template>
   <div v-if="totalPage > 0" class="siimple--text-center">
     <ul class="paginate">
-      <li><i class="fas fa-chevron-left"></i></li>
+      <li @click="emitClickPage(currentPage - 1)"><i class="fas fa-chevron-left"></i></li>
       <li :class="isCurrent(page)" v-for="page in totalPage" :key="page" @click="emitClickPage(page)">
         {{ page }}
       </li>
-      <li><i class="fas fa-chevron-right"></i></li>
+      <li @click="emitClickPage(currentPage + 1)"><i class="fas fa-chevron-right"></i></li>
     </ul>
   </div>
 </template>
