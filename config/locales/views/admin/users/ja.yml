@@ -1,0 +1,9 @@
+ja:
+  admin:
+    users:
+      show:
+        username: 'ユーザーネーム'
+        image: '画像'
+        email: 'メールアドレス'
+      edit:
+        subtitle: 'あなた'

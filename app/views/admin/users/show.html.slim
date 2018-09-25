@@ -1,0 +1,22 @@
+h1.siimple-h1 = @user.name
+
+.siimple-row
+  = link_to t('button.edit'), admin_me_edit_path, class: 'siimple-btn siimple-btn--warning'
+
+.siimple-table
+  .siimple-table-body
+    .siimple-table-row
+      .siimple-table-cell
+        = t('admin.users.show.image')
+      .siimple-table-cell
+        = image_tag @user.avatar_image_path, width: '100px', height: '100px'
+    .siimple-table-row
+      .siimple-table-cell
+        = t('admin.users.show.username')
+      .siimple-table-cell
+        = @user.name
+    .siimple-table-row
+      .siimple-table-cell
+        = t('admin.users.show.email')
+      .siimple-table-cell
+        = @user.email

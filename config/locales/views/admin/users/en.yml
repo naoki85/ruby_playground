@@ -1,0 +1,9 @@
+en:
+  admin:
+    users:
+      show:
+        username: 'Username'
+        image: 'Image'
+        email: 'Email'
+      edit:
+        subtitle: 'You'

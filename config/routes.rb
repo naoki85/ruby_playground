@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :posts
     resources :post_categories, except: [:show]
+    get 'me' => 'users#show'
+    get 'me/edit' => 'users#edit'
+    patch 'me' => 'users#update'
   end
 
   # View Routing Errors

@@ -1,0 +1,7 @@
+.siimple-breadcrumb
+  .siimple-breadcrumb-item
+    = link_to t('admin.users.edit.subtitle'), admin_me_path
+  .siimple-breadcrumb-item
+    = @user.name
+
+== render 'form'
