@@ -21,7 +21,7 @@
                 </div>
                 <div class="siimple-grid-col siimple-grid-col--4">
                   <div class="siimple-box-detail">
-                    <img :src="post.post_image_path" height="125px" :alt="post.title"/>
+                    <img :src="post.post_image_path" :alt="post.title"/>
                   </div>
                 </div>
               </div>
@@ -99,5 +99,10 @@
   }
   .siimple-box-detail {
     opacity: 1.0;
+    height: 125px;
+  }
+  .siimple-box-detail img {
+    width: 100%;
+    height: auto;
   }
 </style>
