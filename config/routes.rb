@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :create, :update]
     resources :books, only: [:index, :show]
     resources :publishers, only: [:index, :show]
+    post 'posts/upload' => 'posts#upload'
     resources :posts, only: [:index, :show, :create, :update, :destroy]
     resources :book_categories, only: [:index]
   end

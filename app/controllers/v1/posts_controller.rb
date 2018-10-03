@@ -1,6 +1,6 @@
 module V1
   class PostsController < ApiApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:index, :show]
+    skip_before_action :authenticate_user_from_token!, only: [:index, :show, :upload]
     before_action :set_post, only: [:update, :destroy]
 
     def index
@@ -36,6 +36,10 @@ module V1
 
     def destroy
       @post.destroy!
+    end
+
+    def upload
+
     end
 
     private
