@@ -135,4 +135,32 @@ RSpec.describe V1::PostsController, type: :request do
       expect(response.status).to eq 400
     end
   end
+
+  describe '#upload' do
+    let(:request_url) { '/v1/posts/upload' }
+
+    context 'success to upload' do
+      before do
+        allow_any_instance_of(AwsS3::Resource).to receive(:upload).and_return('test.txt')
+      end
+
+      it do
+        post request_url, params: { file: fixture_file_upload('test.png', 'image/png', true) }
+        expect(response.status).to eq 200
+        json = JSON.parse(response.body)
+        expect(json['image_url'].include?('test.txt')).to eq true
+      end
+    end
+
+    context 'fail to upload' do
+      before do
+        allow_any_instance_of(AwsS3::Resource).to receive(:upload).and_return(nil)
+      end
+
+      it do
+        post request_url, params: { file: fixture_file_upload('test.png', 'image/png', true) }
+        expect(response.status).to eq 400
+      end
+    end
+  end
 end

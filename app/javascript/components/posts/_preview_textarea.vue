@@ -58,12 +58,14 @@
 
         request.post('/v1/posts/upload', { params: formData })
         .then((response) => {
+          let image_url = response.data.image_url;
+          let img_tag = '<img src="' + image_url + '">';
+          document.getElementsByClassName('edit-text')[0].value += img_tag;
         }, (error) => {
           console.log(error);
-        }).then(()=> {
-          console.log('fugafuga');
+          alert('画像のアップロードに失敗しました。再度お試しください。')
         });
-        this.finish();
+        this.toggleDragOver('leave');
         this.uploading = false;
       }
     }

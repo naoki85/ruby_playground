@@ -4,7 +4,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/web/Dockerfile
-    command: foreman start
+    command: >
+      bash -c "if [ -e tmp/pids/server.pid ]; then rm tmp/pids/server.pid ;fi && foreman start"
     ports:
       - 3000:3000
       - 8080:8080
