@@ -3,7 +3,7 @@
     <div class="siimple-grid-row">
       <div @dragleave.prevent="onDragLeave" @dragover.prevent="onDragEnter" @drop.prevent="uploadImage"
            class="siimple-grid-col siimple-grid-col--6 siimple-grid-col--xs-12">
-        <textarea v-model="content" class="edit-text siimple-textarea siimple-textarea--fluid"
+        <textarea v-model="input_text" class="edit-text siimple-textarea siimple-textarea--fluid"
                   rows="100" :name="name" id="post_content"></textarea>
       </div>
       <div class="siimple-grid-col siimple-grid-col--6 siimple-grid-col--xs-12">
@@ -18,6 +18,7 @@
 <script>
   import markedExtend from '../../utils/marked_extend';
   import request from '../../utils/requests';
+  import { mapActions } from 'vuex'
 
   export default {
     props: {
@@ -26,15 +27,22 @@
     },
     data: function() {
       return {
-        uploading: false
+        uploading: false,
+        input_text: ''
       }
+    },
+    mounted: function() {
+      this.input_text = this.content;
     },
     computed: {
       convertMarkdownToHtml: function() {
-        return markedExtend.extmarked(this.content);
+        return markedExtend.extmarked(this.input_text);
       }
     },
     methods: {
+      ...mapActions('loader', [
+        'loading', 'finish'
+      ]),
       onDragEnter() {
         this.toggleDragOver('enter');
       },
@@ -53,17 +61,20 @@
       uploadImage(event) {
         if (this.uploading) { return; }
         this.uploading = true;
+        this.loading();
         let formData = new FormData();
         formData.append('file', event.dataTransfer.files[0]);
 
         request.post('/v1/posts/upload', { params: formData })
         .then((response) => {
           let image_url = response.data.image_url;
-          let img_tag = '<img src="' + image_url + '">';
-          document.getElementsByClassName('edit-text')[0].value += img_tag;
+          let img_tag = '<img src="' + image_url + '" width="100%">';
+          this.input_text += img_tag;
         }, (error) => {
           console.log(error);
           alert('画像のアップロードに失敗しました。再度お試しください。')
+        }).then(() => {
+          this.finish();
         });
         this.toggleDragOver('leave');
         this.uploading = false;
