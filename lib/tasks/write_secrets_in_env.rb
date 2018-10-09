@@ -9,6 +9,10 @@ class Tasks::WriteSecretsInEnv
     key_secrets = AwsSecretManager.get_secret("prod/bookRecorder/keys")
     envstr += "S3_ACCESS_KEY_ID=" + key_secrets['s3_access_key_id'] + "\n"
     envstr += "S3_SECRET_KEY=" + key_secrets['s3_secret_key'] + "\n"
+    envstr += "TWITTER_CONSUMER_KEY=" + key_secrets['twitter_consumer_key'] + "\n"
+    envstr += "TWITTER_CONSUMER_SECRET=" + key_secrets['twitter_consumer_secret'] + "\n"
+    envstr += "TWITTER_ACCESS_TOKEN=" + key_secrets['twitter_access_token'] + "\n"
+    envstr += "TWITTER_ACCESS_TOKEN_SECRET=" + key_secrets['twitter_access_token_secret'] + "\n"
 
     print envstr
   end
