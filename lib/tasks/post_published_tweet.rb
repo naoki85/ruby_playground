@@ -3,7 +3,10 @@ require 'twitter'
 class Tasks::PostPublishedTweet
 
   def self.execute
-    posts = Post.select([:id, :title]).where(published_at: Date.today, active: :published)
+    posts = Post.select([:id, :title])
+                .where('published_at >= ?', Time.zone.now.beginning_of_day)
+                .where('published_at <= ?', Time.zone.now)
+                .where(active: 1)
     return if posts.empty?
     posts.each do |post|
       tweet_text = post.title + ' '

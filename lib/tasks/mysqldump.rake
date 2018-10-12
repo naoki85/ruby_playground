@@ -9,7 +9,7 @@ namespace :mysql do
                       username: ENV['PRODUCTION_DB_USER'],
                       password: ENV['PRODUCTION_DB_PASSWORD'] }
 
-    db_esc_path = '/tmp/mysqldump'
+    db_esc_path = '/var/log/mysqldump'
     timestamp = Time.now.strftime("%Y_%m_%d_%H_%M_%S")
     backup_file = "#{db_esc_path}/#{timestamp}.sql"
 
