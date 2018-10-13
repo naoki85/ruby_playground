@@ -12,6 +12,7 @@
     <div class="preview-area">
       <div v-html="convertMarkdownToHtml"></div>
     </div>
+    <recommend-books></recommend-books>
   </div>
 </template>
 
@@ -21,11 +22,13 @@
   import markedExtend from '../../utils/marked_extend';
   import tweetButton from '../commons/tweet_button';
   import hatebuButton from '../commons/hatebu_button';
+  import recommendBooks from '../commons/recommend_books';
 
   export default {
     components: {
       'v-tweet-button': tweetButton,
       'v-hatebu-button': hatebuButton,
+      'recommend-books': recommendBooks
     },
     data: function() {
       return {
