@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :posts, only: [:show]
   get :feed, to: 'rss#index', defaults: { format: :rss }
 
+  get 'user_policy' => 'policies#user_policy'
+  get 'privacy_policy' => 'policies#privacy_policy'
+
   # API
   namespace :v1, format: 'json' do
     post 'login' => 'sessions#create'
