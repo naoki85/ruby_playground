@@ -22,6 +22,7 @@ module BookRecorder
     config.autoload_paths << "#{config.root}/app/services"
     config.enable_dependency_loading = true
     config.autoload_paths += Dir["#{config.root}/lib"]
+    config.host_name = 'https://blog.bookrecorder.net'
 
     # RSpec
     config.generators do |g|

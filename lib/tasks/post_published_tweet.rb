@@ -9,8 +9,8 @@ class Tasks::PostPublishedTweet
                 .where(active: 1)
     return if posts.empty?
     posts.each do |post|
-      tweet_text = post.title + ' '
-      tweet_text = tweet_text + 'https://blog.bookrecorder/posts/' + post.id.to_s
+      tweet_text = post.title + "\n"
+      tweet_text = tweet_text + BookRecorder::Application.config.host_name + '/posts/' + post.id.to_s
       twitter_client.update(tweet_text)
     end
   end
