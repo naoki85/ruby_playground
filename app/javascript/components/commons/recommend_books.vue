@@ -23,6 +23,11 @@
       return {
         recommendBooks: [
           {
+            bookLink: 'https://www.amazon.co.jp/gp/product/4094065369/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4094065369&linkCode=as2&tag=naoki850c-22&linkId=f91ee3c1bbbdaf66b9e4152e615451d6',
+            bookImg: '//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4094065369&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=naoki850c-22',
+            btnImg: '//ir-jp.amazon-adsystem.com/e/ir?t=naoki850c-22&l=am2&o=9&a=4094065369'
+          },
+          {
             bookLink: 'https://www.amazon.co.jp/gp/product/4309227368/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4309227368&linkCode=as2&tag=naoki850c-22&linkId=13df1c7f982d28530f989515303aab97',
             bookImg: '//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4309227368&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=naoki850c-22',
             btnImg: '//ir-jp.amazon-adsystem.com/e/ir?t=naoki850c-22&l=am2&o=9&a=4309227368'
@@ -36,11 +41,6 @@
             bookLink: 'https://www.amazon.co.jp/gp/product/4344427300/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4344427300&linkCode=as2&tag=naoki850c-22&linkId=c3f75af775a105efeff1eea95c354eb4',
             bookImg: '//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4344427300&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=naoki850c-22',
             btnImg: '//ir-jp.amazon-adsystem.com/e/ir?t=naoki850c-22&l=am2&o=9&a=4344427300'
-          },
-          {
-            bookLink: 'https://www.amazon.co.jp/gp/product/479739580X/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=479739580X&linkCode=as2&tag=naoki850c-22&linkId=6428a83e925d4ff1642aff76185ec1d8',
-            bookImg: '//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=479739580X&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=naoki850c-22',
-            btnImg: '//ir-jp.amazon-adsystem.com/e/ir?t=naoki850c-22&l=am2&o=9&a=479739580X'
           }
         ]
       }
