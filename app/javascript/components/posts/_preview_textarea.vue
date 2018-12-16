@@ -1,14 +1,31 @@
 <template>
-  <div class="siimple-grid">
-    <div class="siimple-grid-row">
-      <div @dragleave.prevent="onDragLeave" @dragover.prevent="onDragEnter" @drop.prevent="uploadImage"
-           class="siimple-grid-col siimple-grid-col--6 siimple-grid-col--xs-12">
-        <textarea v-model="input_text" class="edit-text siimple-textarea siimple-textarea--fluid"
-                  rows="100" :name="name" id="post_content"></textarea>
+  <div>
+    <div class="siimple-modal siimple-modal--medium" id="modal" style="display:none;">
+      <div class="siimple-modal-content">
+        <div class="siimple-modal-header">
+          <div class="siimple-modal-header-title">Enter URL</div>
+          <div class="siimple-modal-header-close" id="modal-close" @click="modalClose"></div>
+        </div>
+        <div class="siimple-modal-body">
+          <input v-model="insert_link" type="text" class="siimple-input siimple-input--fluid">
+        </div>
+        <div class="siimple-modal-footer">
+          <button type="button" @click="getOGP" class="siimple-btn siimple-btn--primary">Add</button>
+        </div>
       </div>
-      <div class="siimple-grid-col siimple-grid-col--6 siimple-grid-col--xs-12">
-        <div class="preview-area">
-          <div v-html="convertMarkdownToHtml" class="input-content-area"></div>
+    </div>
+    <div class="siimple-btn siimple-btn--primary" id="modal-open" @click="modalOpen">Open modal</div>
+    <div class="siimple-grid">
+      <div class="siimple-grid-row">
+        <div @dragleave.prevent="onDragLeave" @dragover.prevent="onDragEnter" @drop.prevent="uploadImage"
+             class="siimple-grid-col siimple-grid-col--6 siimple-grid-col--xs-12">
+          <textarea v-model="input_text" class="edit-text siimple-textarea siimple-textarea--fluid"
+                    rows="100" :name="name" id="post_content"></textarea>
+        </div>
+        <div class="siimple-grid-col siimple-grid-col--6 siimple-grid-col--xs-12">
+          <div class="preview-area">
+            <div v-html="convertMarkdownToHtml" class="input-content-area"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -28,7 +45,8 @@
     data: function() {
       return {
         uploading: false,
-        input_text: ''
+        input_text: '',
+        insert_link: ''
       }
     },
     mounted: function() {
@@ -78,6 +96,18 @@
         });
         this.toggleDragOver('leave');
         this.uploading = false;
+      },
+      modalOpen() {
+        document.getElementById("modal").style.display = "";
+      },
+      modalClose() {
+        document.getElementById("modal").style.display = "none";
+      },
+      getOGP() {
+        this.modalClose();
+        this.insert_link = '';
+        let insert_tag = '<a href="' + 'http://google.com' + '" class="">';
+        this.input_text += insert_tag;
       }
     }
   }
