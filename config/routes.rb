@@ -17,15 +17,8 @@ Rails.application.routes.draw do
 
   # API
   namespace :v1, format: 'json' do
-    post 'login' => 'sessions#create'
-    delete 'logout' => 'sessions#destroy'
-    get 'me' => 'users#me'
-    resources :users, only: [:show, :create, :update]
-    resources :books, only: [:index, :show]
-    resources :publishers, only: [:index, :show]
     post 'posts/upload' => 'posts#upload'
-    resources :posts, only: [:index, :show, :create, :update, :destroy]
-    resources :book_categories, only: [:index]
+    resources :posts, only: [:index, :show]
   end
 
   # Admin
