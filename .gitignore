@@ -29,6 +29,7 @@
 
 .env
 .env.development
+.env.test
 .idea
 config/database.yml
 config/id_rsa

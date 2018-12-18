@@ -1,6 +1,6 @@
 module V1
   class PostsController < ApiApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:index, :show, :upload]
+    skip_before_action :authenticate_user_from_token!, only: [:index, :show, :upload, :ogp]
     before_action :set_post, only: [:update, :destroy]
 
     def index
@@ -50,6 +50,15 @@ module V1
       end
     end
 
+    def ogp
+      url = CGI.unescape(params[:url])
+      html = read_html(url)
+      @title = html.at('//meta[@property="og:title"]/@content').value
+      @description = html.at('//meta[@property="og:description"]/@content').value
+      @image_url = html.at('//meta[@property="og:image"]/@content').value
+      @link = html.at('//meta[@property="og:url"]/@content').value
+    end
+
     private
 
     def set_post
@@ -64,6 +73,18 @@ module V1
           active: params['active'].to_i,
           published_at: params['published_at']
       }
+    end
+
+    def read_html(url)
+      user_agent = {"User-Agent" => "BookRecorder Bot"}
+      charset = nil
+      html = open(url, user_agent) do |f|
+        charset = f.charset
+        f.read
+      end
+      Nokogiri::HTML.parse(html, nil, charset)
+    rescue StandardError => e
+      p "Error: #{e}"
     end
   end
 end

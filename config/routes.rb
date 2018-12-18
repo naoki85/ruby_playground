@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :books, only: [:index, :show]
     resources :publishers, only: [:index, :show]
     post 'posts/upload' => 'posts#upload'
+    get 'posts/ogp' => 'posts#ogp'
     resources :posts, only: [:index, :show, :create, :update, :destroy]
     resources :book_categories, only: [:index]
   end
