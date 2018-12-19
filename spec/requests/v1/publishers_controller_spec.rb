@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe V1::PublishersController, type: :request do
+RSpec.describe V1::PublishersController, type: :request, skip: true do
 
   describe '#index' do
     let(:request_url) { '/v1/publishers' }

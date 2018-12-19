@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe V1::UsersController, type: :request do
+RSpec.describe V1::UsersController, type: :request, skip: true do
 
   describe '#create' do
     let(:request_url) { '/v1/users/' }

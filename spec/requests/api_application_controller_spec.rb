@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ApiApplicationController, type: :request do
+RSpec.describe ApiApplicationController, type: :request, skip: true do
   describe '#authenticate_user_from_token!' do
     let(:request_url) { '/v1/me' }
     let(:user_book) { create(:user_book, user_id: user.id) }

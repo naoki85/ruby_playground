@@ -67,7 +67,7 @@ RSpec.describe V1::PostsController, type: :request do
     end
   end
 
-  describe '#create' do
+  describe '#create', skip: true do
     let(:request_url) { '/v1/posts' }
 
     before do
@@ -93,7 +93,7 @@ RSpec.describe V1::PostsController, type: :request do
     end
   end
 
-  describe '#update' do
+  describe '#update', skip: true do
     let(:request_url) { '/v1/posts/' }
     let(:post) { create(:post, user_id: user.id) }
 
@@ -116,7 +116,7 @@ RSpec.describe V1::PostsController, type: :request do
     end
   end
 
-  describe '#destroy' do
+  describe '#destroy', skip: true do
     let(:request_url) { '/v1/posts/' }
     let(:post) { create(:post, user_id: user.id) }
 
