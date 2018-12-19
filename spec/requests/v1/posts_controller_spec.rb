@@ -163,4 +163,26 @@ RSpec.describe V1::PostsController, type: :request do
       end
     end
   end
+
+  describe '#ogp' do
+    let(:request_url) { '/v1/posts/ogp' }
+    let(:params_url) { CGI.escape('https://blog.bookrecorder.net') }
+
+    before do
+      file_path = Rails.root.join('spec/fixtures/test_pages/ogp/sample_page.html').to_s
+      html = File.read(file_path)
+      html = Nokogiri::HTML.parse(html, nil, 'utf-8')
+      allow(controller).to receive(:read_html).and_return(html)
+    end
+
+    it do
+      get request_url + '?url=' + params_url
+      expect(response.status).to eq 200
+      json = JSON.parse(response.body)
+      expect(json['url']).to eq 'https://blog.bookrecorder.net/'
+      expect(json['title']).to eq 'ブログ一覧 | BookRecorder'
+      expect(json['description'].present?).to eq true
+      expect(json['image_url'].present?).to eq true
+    end
+  end
 end

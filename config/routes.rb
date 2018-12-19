@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # API
   namespace :v1, format: 'json' do
     post 'posts/upload' => 'posts#upload'
+    get 'posts/ogp' => 'posts#ogp'
     resources :posts, only: [:index, :show]
   end
 
