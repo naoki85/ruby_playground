@@ -28,5 +28,5 @@
     = f.label :content, class: 'siimple-label'
     preview-textarea[name='post[content]' content="#{@post.content}"]
 
-  .siimple-row
+  .siimple-row.fixed-footer
     = f.submit '登録', class: 'siimple-btn siimple-btn--primary'
