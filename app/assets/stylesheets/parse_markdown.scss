@@ -127,4 +127,14 @@
     padding: 0.5em 1em;
     margin-left: 0.5em;
   }
+  .ogp-card {
+    border: 2px solid #eef2f7;
+    a {
+      text-decoration: none;
+      color: #546778;
+    }
+    .siimple-card {
+      margin-bottom: 0;
+    }
+  }
 }

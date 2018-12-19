@@ -104,10 +104,28 @@
         document.getElementById("modal").style.display = "none";
       },
       getOGP() {
+        let param = encodeURI(this.insert_link);
         this.modalClose();
         this.insert_link = '';
-        let insert_tag = '<a href="' + 'http://google.com' + '" class="">';
-        this.input_text += insert_tag;
+        request.get('/v1/posts/ogp?url=' + param, {})
+        .then((response) => {
+          var insert_tag = '<a href="' + response.data.url + '">';
+          insert_tag += '<div class="siimple-grid-row ogp-card">';
+          insert_tag += '<div class="siimple-card siimple-grid-col siimple-grid-col--4">';
+          insert_tag += '<img src="' + response.data.image_url + '" width="100%">';
+          insert_tag += '</div>';
+          insert_tag += '<div class="siimple-card siimple-grid-col siimple-grid-col--8">';
+          insert_tag += '<div class="siimple-card-">';
+          insert_tag += '<div class="siimple-card-title">' + response.data.title + '</div>';
+          insert_tag += response.data.description;
+          insert_tag += '</div>';
+          insert_tag += '</div>';
+          insert_tag += '</div>';
+          insert_tag += '</a>';
+          this.input_text += insert_tag;
+        }, (error) => {
+          console.log(error);
+        });
       }
     }
   }

@@ -53,10 +53,26 @@ module V1
     def ogp
       url = CGI.unescape(params[:url])
       html = read_html(url)
-      @title = html.at('//meta[@property="og:title"]/@content').value
-      @description = html.at('//meta[@property="og:description"]/@content').value
-      @image_url = html.at('//meta[@property="og:image"]/@content').value
-      @link = html.at('//meta[@property="og:url"]/@content').value
+      @title = if html.at('//meta[@property="og:title"]/@content')
+                 html.at('//meta[@property="og:title"]/@content').value
+               else
+                 ''
+               end
+      @description = if html.at('//meta[@property="og:description"]/@content')
+                       html.at('//meta[@property="og:description"]/@content').value
+                     else
+                       ''
+                     end
+      @image_url = if html.at('//meta[@property="og:image"]/@content')
+                     html.at('//meta[@property="og:image"]/@content').value
+                   else
+                     ''
+                   end
+      @link = if html.at('//meta[@property="og:url"]/@content')
+                html.at('//meta[@property="og:url"]/@content').value
+              else
+                url
+              end
     end
 
     private
