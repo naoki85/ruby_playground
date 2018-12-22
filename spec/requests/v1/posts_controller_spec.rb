@@ -169,10 +169,12 @@ RSpec.describe V1::PostsController, type: :request do
     let(:params_url) { CGI.escape('https://blog.bookrecorder.net') }
 
     before do
-      file_path = Rails.root.join('spec/fixtures/test_pages/ogp/sample_page.html').to_s
-      html = File.read(file_path)
-      html = Nokogiri::HTML.parse(html, nil, 'utf-8')
-      allow(controller).to receive(:read_html).and_return(html)
+      allow(OgpParser).to receive(:parse).and_return({
+                                                         :title => "ブログ一覧 | BookRecorder",
+                                                         :description=>"カンファレンスで登壇して良かったことと反省 Zabbix で Nginx + PHP を監視するサンプルを作ってみた Real World HTTP を読みました PHP-FPM のプロセス",
+                                                         :image => "https://blog.bookrecorder.net/assets/commons/ogp-8c266fd8a086f156b935aa228f3771859b638cc5ef505c489b9f383510994364.png",
+                                                         :url=>"https://blog.bookrecorder.net/"
+                                                     })
     end
 
     it do
