@@ -52,27 +52,7 @@ module V1
 
     def ogp
       url = CGI.unescape(params[:url])
-      html = read_html(url)
-      @title = if html.at('//meta[@property="og:title"]/@content')
-                 html.at('//meta[@property="og:title"]/@content').value
-               else
-                 ''
-               end
-      @description = if html.at('//meta[@property="og:description"]/@content')
-                       html.at('//meta[@property="og:description"]/@content').value
-                     else
-                       ''
-                     end
-      @image_url = if html.at('//meta[@property="og:image"]/@content')
-                     html.at('//meta[@property="og:image"]/@content').value
-                   else
-                     ''
-                   end
-      @link = if html.at('//meta[@property="og:url"]/@content')
-                html.at('//meta[@property="og:url"]/@content').value
-              else
-                url
-              end
+      @ogp_params = OgpParser.parse(url)
     end
 
     private
@@ -89,18 +69,6 @@ module V1
           active: params['active'].to_i,
           published_at: params['published_at']
       }
-    end
-
-    def read_html(url)
-      user_agent = {"User-Agent" => "BookRecorder Bot"}
-      charset = nil
-      html = open(url, user_agent) do |f|
-        charset = f.charset
-        f.read
-      end
-      Nokogiri::HTML.parse(html, nil, charset)
-    rescue StandardError => e
-      p "Error: #{e}"
     end
   end
 end

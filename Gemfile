@@ -50,6 +50,7 @@ gem 'selenium-webdriver'
 # Easy installation and use of chromedriver to run system tests with Chrome
 gem 'chromedriver-helper'
 gem 'pkg-config', '~> 1.1.7'
+gem 'ogp_parser', :git => 'https://github.com/naoki85/ogp_parser', :branch => 'master'
 
 gem 'slim-rails'
 gem 'active_decorator'

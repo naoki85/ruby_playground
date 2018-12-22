@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/naoki85/ogp_parser
+  revision: 0327567abdc2ef1751f96969abaf56e1476d540b
+  branch: master
+  specs:
+    ogp_parser (0.2.0)
+      nokogiri (>= 1.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -403,6 +411,7 @@ DEPENDENCIES
   meta-tags
   mini_magick (~> 4.8)
   mysql2 (~> 0.4.4)
+  ogp_parser!
   pkg-config (~> 1.1.7)
   rack-cors
   rails (~> 5.2.0)
