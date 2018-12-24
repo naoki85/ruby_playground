@@ -6,13 +6,14 @@
 image: ruby:2.5.1
 
 pipelines:
-  default:
-    - step:
-        caches:
-          - bundler
-        script: # Modify the commands below to build your repository.
-          - bundle install
-          - bundle exec rubocop
+  branches:
+    rubocop:
+      - step:
+          caches:
+            - bundler
+          script: # Modify the commands below to build your repository.
+            - bundle install
+            - bundle exec rubocop
 
 definitions:
   caches:
