@@ -5,7 +5,7 @@ RSpec.describe ApiApplicationController, type: :request, skip: true do
     let(:request_url) { '/v1/me' }
     let(:user_book) { create(:user_book, user_id: user.id) }
 
-    include_context 'user_authenticated'
+    # include_context 'user_authenticated'
 
     it 'normal' do
       get request_url, headers: { 'Authorization' => 'aaaaaaa' }

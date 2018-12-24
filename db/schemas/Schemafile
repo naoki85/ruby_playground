@@ -2,9 +2,6 @@
 # vi: set ft=ruby :
 require 'active_storage_attachments.schema'
 require 'active_storage_blobs.schema'
-require 'book_categories.schema'
-require 'books.schema'
 require 'post_categories.schema'
 require 'posts.schema'
-require 'publishers.schema'
 require 'users.schema'

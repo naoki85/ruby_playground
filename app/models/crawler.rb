@@ -17,7 +17,7 @@ class Crawler
   self.page_num = 2
   self.sleep_time = 1
 
-  extend BookCategoryIdentifier
+  # extend BookCategoryIdentifier
 
   # @return hash
   # { title: 'book', url: 'link', published_at: '2018-05-11',
@@ -97,7 +97,7 @@ class Crawler
   end
 
   def self.get_book_category(title)
-    BookCategoryIdentifier.identify(title)
+    # BookCategoryIdentifier.identify(title)
   end
 
   def self.parse_date(date_str)

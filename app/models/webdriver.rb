@@ -1,7 +1,7 @@
 require 'selenium-webdriver'
 
 class Webdriver
-  extend BookCategoryIdentifier
+  # extend BookCategoryIdentifier
 
   # @return Selenium::WebDriver
   def self.set_driver
@@ -17,6 +17,6 @@ class Webdriver
   end
 
   def self.get_book_category(title)
-    BookCategoryIdentifier.identify(title)
+    # BookCategoryIdentifier.identify(title)
   end
 end
