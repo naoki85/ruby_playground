@@ -54,7 +54,7 @@ if defined?(AssetSync)
     # config.cache_asset_regexp = /\.[a-f0-9]{8}$/i
     config.add_local_file_paths do
       Dir.chdir(Rails.root.join('public')) do
-        Dir[File.join(Webpacker::Configuration.fetch(:public_output_path), '/**/**')]
+        Dir[File.join(Webpacker.config.public_output_path, '/**/**')]
       end
     end
   end
