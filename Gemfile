@@ -42,6 +42,8 @@ gem 'therubyracer'
 gem 'rack-cors', require: 'rack/cors'
 gem 'aws-sdk-rails'
 gem 'aws-sdk-secretsmanager'
+gem "asset_sync"
+gem "fog-aws"
 
 gem 'twitter'
 # gem 'omniauth-twitter'
