@@ -2,7 +2,7 @@ Rails:
   Enabled: true
 
 AllCops:
-  TargetRubyVersion: 2.5.0
+  TargetRubyVersion: 2.5.1
   Exclude:
     - vendor/bundle/**/*
     - bin/*
@@ -10,6 +10,9 @@ AllCops:
     - config/**/*
     - Gemfile
     - tmp/**/*
+    - node_modules/**/*
+    - log/*
+    - docker/*
 
 # 日本語でのコメントを許可
 AsciiComments:
@@ -37,4 +40,8 @@ Style/DoubleNegation:
 
 # 文字列リテラルに対し、マジックコメントを使用していること
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# 文字列リテラルであればシングルクォートを推奨する
+Style/StringLiterals:
   Enabled: false
