@@ -36,7 +36,7 @@ if defined?(AssetSync)
     #
     # Use the Rails generated 'manifest.yml' file to produce the list of files to
     # upload instead of searching the assets directory.
-    # config.manifest = true
+    config.manifest = true
     #
     # Upload the manifest file also.
     # config.include_manifest = false
@@ -52,5 +52,10 @@ if defined?(AssetSync)
     # If you have an asset with name `app.0ba4d3.js`, only `app.0ba4d3` will need to be matched
     # config.cache_asset_regexps = [ /\.[a-f0-9]{8}$/i, /\.[a-f0-9]{20}$/i ]
     # config.cache_asset_regexp = /\.[a-f0-9]{8}$/i
+    config.add_local_file_paths do
+      Dir.chdir(Rails.root.join('public')) do
+        Dir[File.join(Webpacker::Configuration.fetch(:public_output_path), '/**/**')]
+      end
+    end
   end
 end
