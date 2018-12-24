@@ -13,9 +13,3 @@ set :ridgepole_env, fetch(:rails_env)
 set :ridgepole_roles, :db
 set :ridgepole_schema_file, File.join(current_path, 'db/schemas', 'Schemafile')
 set :ridgepole_config_file, File.join(current_path, 'config', 'database.yml')
-
-if Rake::Task.task_defined?("webpacker:compile")
-  Rake::Task['webpacker:compile'].enhance do
-    Rake::Task["assets:sync"].invoke
-  end
-end
