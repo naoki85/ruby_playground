@@ -1,6 +1,10 @@
 h1.siimple-h1 Posts
 
-= link_to '新規', new_admin_post_path, class: 'siimple-btn siimple-btn--green'
+.siimple-row.mb-10
+  = link_to '新規', new_admin_post_path, class: 'siimple-btn siimple-btn--green'
+
+.siimple-row.mb-10
+  = paginate @posts
 
 .siimple-table.siimple-table--hover
   .siimple-table-header
@@ -19,3 +23,6 @@ h1.siimple-h1 Posts
           = link_to '詳細', admin_post_path(post), class: 'siimple-btn siimple-btn--blue'
           = link_to '編集', edit_admin_post_path(post), class: 'siimple-btn siimple-btn--yellow'
           = link_to '削除', admin_post_path(post), method: :delete, class: 'siimple-btn siimple-btn--red'
+
+.siimple-row.mb-10
+  = paginate @posts
