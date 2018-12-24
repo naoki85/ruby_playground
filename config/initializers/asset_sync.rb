@@ -52,6 +52,8 @@ if defined?(AssetSync)
     # If you have an asset with name `app.0ba4d3.js`, only `app.0ba4d3` will need to be matched
     # config.cache_asset_regexps = [ /\.[a-f0-9]{8}$/i, /\.[a-f0-9]{20}$/i ]
     # config.cache_asset_regexp = /\.[a-f0-9]{8}$/i
+    config.run_on_precompile = false
+
     config.add_local_file_paths do
       Dir.chdir(Rails.root.join('public')) do
         Dir[File.join(Webpacker.config.public_output_path, '/**/**')]

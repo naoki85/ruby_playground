@@ -13,3 +13,5 @@ set :ridgepole_env, fetch(:rails_env)
 set :ridgepole_roles, :db
 set :ridgepole_schema_file, File.join(current_path, 'db/schemas', 'Schemafile')
 set :ridgepole_config_file, File.join(current_path, 'config', 'database.yml')
+
+after 'webpacker:compile', 'assets:sync'
