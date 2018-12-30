@@ -51,6 +51,9 @@ jobs:
       - run: bundle exec rake db:create RAILS_ENV=test
       - run: bundle exec ridgepole -c config/database.yml -E test --apply -f db/schemas/Schemafile
 
+      - run:
+          name: webpacker compile
+          command: NODE_ENV=test bundle exec rails webpacker:compile
       # run tests!
       - run:
           name: run tests
