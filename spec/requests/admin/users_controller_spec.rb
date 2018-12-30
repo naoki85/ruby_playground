@@ -13,7 +13,6 @@ RSpec.describe Admin::UsersController, type: :request do
       before_count = User.count
       post sign_up_path, params: { user: { email: "user@gmail.com", password: "foobar" } }
       expect(User.count).to eq before_count + 1
-      p response.body
       expect(response.status).to eq 302
     end
   end

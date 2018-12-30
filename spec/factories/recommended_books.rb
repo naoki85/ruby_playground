@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :recommended_book do
-    post_category_id 1
+    association :post_category, factory: :post_category
     link 'https://sample.com'
     image_url 'https://sample.com'
     button_url 'https://sample.com'
