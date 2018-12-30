@@ -14,7 +14,12 @@ module V1
         @post = @post.released
       end
       @post = @post.first
-      render_404 unless @post
+      if @post
+        @recommended_books = RecommendedBook.get_four(@post.post_category_id)
+        Rails.logger.info @recommended_books.size
+      else
+        render_404
+      end
     end
 
     def upload

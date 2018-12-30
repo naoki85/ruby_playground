@@ -4,6 +4,7 @@
     - if logged_in?
       = link_to 'ユーザー', admin_me_path, class: 'siimple-navbar-item'
       = link_to 'カテゴリー', admin_post_categories_path, class: 'siimple-navbar-item'
+      = link_to '最近読んだ本', admin_recommended_books_path, class: 'siimple-navbar-item'
       = link_to 'ログアウト', sign_out_path, method: 'delete', class: 'siimple-navbar-item'
     - else
       = link_to 'ログイン', sign_in_path, class: 'siimple-navbar-item'

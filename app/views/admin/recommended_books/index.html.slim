@@ -1,0 +1,26 @@
+h1.siimple-h1 Post Categories
+
+.siimple-row.mb-10
+  = link_to '新規', new_admin_recommended_book_path, class: 'siimple-btn siimple-btn--green'
+
+.siimple-row.mb-10
+  = paginate @recommended_books
+
+.siimple-table.siimple-table--hover
+  .siimple-table-header
+    .siimple-table-row
+      .siimple-table-cell ID
+      .siimple-table-cell.siimple-table-cell PostCategory
+      .siimple-table-cell Image
+      .siimple-table-cell
+  .siimple-table-body
+    - @recommended_books.each do |recommended_book|
+      .siimple-table-row
+        .siimple-table-cell = recommended_book.id
+        .siimple-table-cell = recommended_book.post_category.name
+        .siimple-table-cell
+          = image_tag recommended_book.image_url, width: '100px'
+        .siimple-table-cell
+          = link_to '詳細', admin_recommended_book_path(recommended_book), class: 'siimple-btn siimple-btn--blue'
+          = link_to '編集', edit_admin_recommended_book_path(recommended_book), class: 'siimple-btn siimple-btn--yellow'
+          = link_to '削除', admin_recommended_book_path(recommended_book), method: :delete, class: 'siimple-btn siimple-btn--red'

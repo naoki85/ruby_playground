@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :posts
     resources :post_categories, except: [:show]
+    resources :recommended_books
     get 'me' => 'users#show'
     get 'me/edit' => 'users#edit'
     patch 'me' => 'users#update'

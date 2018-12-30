@@ -12,7 +12,7 @@
     <div class="preview-area">
       <div v-html="convertMarkdownToHtml"></div>
     </div>
-    <recommend-books></recommend-books>
+    <recommend-books :recommend-books="recommendBooks"></recommend-books>
   </div>
 </template>
 
@@ -33,7 +33,8 @@
     data: function() {
       return {
         post: [],
-        path: ''
+        path: '',
+        recommendBooks: []
       }
     },
     computed: {
@@ -43,20 +44,24 @@
     },
     mounted: function() {
       this.path = this.$route.path;
-      this.loading();
       this.fetchPost(this.$route.params.id);
-      this.finish();
     },
     methods: {
       ...mapActions('loader', [
         'loading', 'finish'
       ]),
       fetchPost: function(postId) {
+        this.loading();
         request.get('/v1/posts/' + postId, {}).then((response) => {
           this.post = response.data.post;
+          this.recommendBooks = response.data.recommended_books;
+          console.log(this.recommended_books);
+          console.log(this.recommendBooks);
         }, (error) => {
           console.log(error);
           this.$router.push('/not_found');
+        }).then(() => {
+          this.finish();
         });
       }
     }

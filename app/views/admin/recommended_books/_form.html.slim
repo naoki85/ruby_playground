@@ -1,0 +1,22 @@
+= form_for [:admin, @recommended_book] do |f|
+  = render 'admin/shared/error_messages', object: f.object
+
+  .siimple-row
+    = f.label :post_category_id, class: 'siimple-label'
+    = f.collection_select :post_category_id, @post_categories,
+            :id, :name, {}, class: 'siimple-select'
+
+  .siimple-row
+    = f.label :link, class: 'siimple-label'
+    = f.text_field :link, class: 'siimple-input siimple-input--fluid'
+
+  .siimple-row
+    = f.label :image_url, class: 'siimple-label'
+    = f.text_field :image_url, class: 'siimple-input siimple-input--fluid'
+
+  .siimple-row
+    = f.label :button_url, class: 'siimple-label'
+    = f.text_field :button_url, class: 'siimple-input siimple-input--fluid'
+
+  .siimple-row
+    = f.submit '登録', class: 'siimple-btn siimple-btn--primary'

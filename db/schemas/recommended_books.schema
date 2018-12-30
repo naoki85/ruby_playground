@@ -1,0 +1,13 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "recommended_books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  t.integer  "post_category_id", null: false, default: 0
+  t.text     "link",             null: false,             limit: 65535
+  t.text     "image_url",        null: false,             limit: 65535
+  t.text     "button_url",       null: false,             limit: 65535
+  t.integer  "active",           null: false, default: 0, limit: 1
+  t.datetime "created_at",       null: false
+  t.datetime "updated_at",       null: false
+
+  t.index ["post_category_id"], name: "index_recommended_books_on_post_category_id"
+end

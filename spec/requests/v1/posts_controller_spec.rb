@@ -40,12 +40,19 @@ RSpec.describe V1::PostsController, type: :request do
     context 'normal pattern' do
       let(:post) { create(:post) }
 
+      before do
+        4.times do
+          create(:recommended_book, post_category_id: post.post_category_id)
+        end
+      end
+
       it do
         get request_url + post.id.to_s
         expect(response.status).to eq 200
         json = JSON.parse(response.body)
         expect(json['post']['id']).to eq post.id
         expect(json['post']['post_category']['name']).to eq 'Ruby'
+        expect(json['recommended_books'].size).to eq 4
 
         get request_url + (post.id + 1).to_s
         expect(response.status).to eq 404

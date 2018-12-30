@@ -12,3 +12,10 @@ json.set! :post do
     category.color @post.post_category.color
   end
 end
+json.set! :recommended_books do
+  json.array! @recommended_books do |recommended_book|
+    json.url recommended_book.link
+    json.image_url recommended_book.image_url
+    json.button_url recommended_book.button_url
+  end
+end
