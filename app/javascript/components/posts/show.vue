@@ -55,8 +55,6 @@
         request.get('/v1/posts/' + postId, {}).then((response) => {
           this.post = response.data.post;
           this.recommendBooks = response.data.recommended_books;
-          console.log(this.recommended_books);
-          console.log(this.recommendBooks);
         }, (error) => {
           console.log(error);
           this.$router.push('/not_found');

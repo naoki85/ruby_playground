@@ -42,7 +42,7 @@ gem 'therubyracer'
 gem 'rack-cors', require: 'rack/cors'
 gem 'aws-sdk-rails'
 gem 'aws-sdk-secretsmanager'
-
+gem 'twitter'
 gem 'ridgepole', '>= 0.7.2.beta'
 gem 'selenium-webdriver'
 # Easy installation and use of chromedriver to run system tests with Chrome
