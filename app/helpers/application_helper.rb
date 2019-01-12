@@ -1,7 +1,7 @@
 module ApplicationHelper
   def default_meta_tags
     {
-        title:       'BookRecorder',
+        title:       'naoki85 のブログ',
         description: I18n.t('top.index.description'),
         keywords:    'Book,本',
         charset:     'utf-8',
@@ -10,11 +10,11 @@ module ApplicationHelper
         # 'viewport' => 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"]',
         # OGPの設定
         og: {
-            title: 'BookRecorder',
+            title: 'naoki85 のブログ',
             type: 'website',
             url: request.original_url,
             image: image_url('commons/ogp.png'),
-            site_name: 'BookRecorder',
+            site_name: 'naoki85 のブログ',
             description: I18n.t('top.index.description'),
             locale: 'ja_JP'
         },
@@ -28,10 +28,10 @@ module ApplicationHelper
 
   def posts_meta_tags(description='')
     {
-        title: 'ブログ一覧 | BookRecorder',
+        title: 'ブログ一覧',
         description: description,
         og: {
-            title: 'ブログ一覧 | BookRecorder',
+            title: 'ブログ一覧',
             description: description,
         },
         twitter: {
@@ -45,10 +45,10 @@ module ApplicationHelper
   # @return [Hash]
   def post_meta_tags(post)
     {
-        title: "#{post.title} | BookRecorder",
+        title: post.title,
         description: post.summary,
         og: {
-            title: "#{post.title} | BookRecorder",
+            title: post.title,
             description: post.summary,
             image: post_ogp_image(post.post_image_path),
         },

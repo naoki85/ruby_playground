@@ -17,7 +17,7 @@
                       {{ post.post_category.name }}
                     </span>
                   </div>
-                  <div class="siimple-box-title">{{ post.title }}</div>
+                  <div class="siimple-box-title box-title">{{ post.title }}</div>
                 </div>
                 <div class="siimple-grid-col siimple-grid-col--4">
                   <div class="siimple-box-detail">

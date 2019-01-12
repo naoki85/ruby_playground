@@ -1,8 +1,8 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title "BookRecorder のブログ"
-    xml.description "BookRecorder は naoki85 によりメンテナンスされているサイトです。主に本の紹介や勉強したことをブログにまとめていきます。"
+    xml.title "naoki85 のブログ"
+    xml.description "本ブログは naoki85 によりメンテナンスされているサイトです。主に本の紹介や勉強したことをブログにまとめていきます。"
     xml.link root_url
     xml.pubDate Time.zone.now.rfc822
     xml.language "ja-ja"

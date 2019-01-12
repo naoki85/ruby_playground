@@ -19,7 +19,7 @@
     methods: {
       tweet: function() {
         var text = this.text;
-        var url = "https://bookrecorder.net" + this.path;
+        var url = "https://naoki85.me" + this.path;
         var redirect_url = "https://twitter.com/share";
         location.href = redirect_url + '?text=' + text + '&url=' + url;
       }

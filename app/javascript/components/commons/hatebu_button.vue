@@ -19,7 +19,7 @@
     methods: {
       bookmark: function() {
         var text = this.text;
-        var url = "https://bookrecorder.net" + this.path;
+        var url = "https://naoki85.me" + this.path;
         var redirect_url = "http://b.hatena.ne.jp/add?mode=confirm";
         location.href = redirect_url + '&title=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
       }
