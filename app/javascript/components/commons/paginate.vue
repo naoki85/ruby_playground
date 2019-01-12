@@ -2,7 +2,7 @@
   <div v-if="totalPage > 0" class="siimple--text-center">
     <ul class="paginate">
       <li @click="emitClickPage(currentPage - 1)"><i class="fas fa-chevron-left"></i></li>
-      <li :class="isCurrent(page)" v-for="page in totalPage" :key="page" @click="emitClickPage(page)">
+      <li :class="isCurrent(page)" v-for="page in displayPages" :key="page" @click="emitClickPage(page)">
         {{ page }}
       </li>
       <li @click="emitClickPage(currentPage + 1)"><i class="fas fa-chevron-right"></i></li>
@@ -20,6 +20,19 @@
       totalPage: {
         type: Number,
         default: 0
+      }
+    },
+    computed: {
+      displayPages: function() {
+        if (this.totalPage && this.totalPage <= 5) { return this.totalPage; }
+        if (this.currentPage - 3 <= 0) { return 5; }
+        let tmpPages = [];
+        [-2, -1, 0, 1, 2].forEach((i) => {
+          const tmpPage = this.currentPage + i;
+          if (tmpPage > this.totalPage) { return true; }
+          tmpPages.push(tmpPage);
+        });
+        return tmpPages;
       }
     },
     methods: {
