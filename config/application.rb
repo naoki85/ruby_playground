@@ -21,7 +21,7 @@ module BookRecorder
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.enable_dependency_loading = true
     config.autoload_paths += Dir["#{config.root}/lib"]
-    config.base_url = 'https://naoki85.net'
+    config.base_url = 'https://naoki85.me'
 
     # RSpec
     config.generators do |g|
