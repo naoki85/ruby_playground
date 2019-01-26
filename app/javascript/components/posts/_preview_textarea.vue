@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="siimple-btn siimple-btn--primary" id="modal-open" @click="modalOpen">Open modal</div>
+    <div class="siimple-btn siimple-btn--primary" id="modal-open" @click="modalOpen">Insert OGP Card</div>
     <div class="siimple-grid">
       <div class="siimple-grid-row">
         <div @dragleave.prevent="onDragLeave" @dragover.prevent="onDragEnter" @drop.prevent="uploadImage"

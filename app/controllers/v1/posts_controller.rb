@@ -35,7 +35,7 @@ module V1
     end
 
     def ogp
-      url = CGI.unescape(params[:url])
+      url = URI.encode(CGI.unescape(params[:url]))
       @ogp_params = OgpParser.parse(url)
     end
 
