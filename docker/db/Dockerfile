@@ -1,4 +1,4 @@
-FROM mysql:latest
+FROM mysql:5.7
  
 RUN apt-get update && \
     apt-get install -y apt-utils locales && \
@@ -8,3 +8,4 @@ RUN apt-get update && \
 ENV LC_ALL ja_JP.UTF-8
 
 ADD ./docker/db/charset.cnf /etc/mysql/conf.d/charset.cnf
+ADD ./docker/db/log.cnf /etc/mysql/conf.d/log.cnf
