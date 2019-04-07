@@ -22,6 +22,7 @@ module BookRecorder
     config.enable_dependency_loading = true
     config.autoload_paths += Dir["#{config.root}/lib"]
     config.base_url = 'https://naoki85.me'
+    config.image_base_url = 'http://d29xhtkvbwm2ne.cloudfront.net/posts/'
 
     # RSpec
     config.generators do |g|
