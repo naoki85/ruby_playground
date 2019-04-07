@@ -5,7 +5,7 @@ create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :
   t.integer  "post_category_id", null: false, default: 0
   t.string   "title",        null: false
   t.text     "content",      null: false,             limit: 65535
-  t.string   "image_file_name", null: false
+  t.string   "image_file_name", null: false, default: ''
   t.integer  "active",       null: false, default: 0, limit: 1
   t.datetime "published_at", null: false, default: -> { "CURRENT_TIMESTAMP" }
   t.datetime "created_at",   null: false
