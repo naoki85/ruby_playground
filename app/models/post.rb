@@ -27,11 +27,11 @@ class Post < ApplicationRecord
     super
   end
 
-  def update
+  def update(attributes)
     if image.present?
       self.image_file_name = get_image_file_name
     end
-    super
+    super(attributes)
   end
 
   # @param [Integer] id

@@ -10,7 +10,8 @@ h1.siimple-h1 Posts
   .siimple-table-header
     .siimple-table-row
       .siimple-table-cell ID
-      .siimple-table-cell.siimple-table-cell Title
+      .siimple-table-cell Title
+      .siimple-table-cell Image
       .siimple-table-cell Published At
       .siimple-table-cell
   .siimple-table-body
@@ -18,6 +19,7 @@ h1.siimple-h1 Posts
       .siimple-table-row
         .siimple-table-cell = post.id
         .siimple-table-cell = post.title
+        .siimple-table-cell = image_tag post.post_image_path, width: '100px'
         .siimple-table-cell = post.published_at.strftime('%Y-%m-%d')
         .siimple-table-cell
           = link_to '詳細', admin_post_path(post), class: 'siimple-btn siimple-btn--blue'
