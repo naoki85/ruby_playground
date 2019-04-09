@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.6.2
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh && \
     apt-get update -qq && \
