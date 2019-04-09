@@ -6,7 +6,7 @@ RSpec.describe V1::PostsController, type: :request do
 
     before do
       3.times do
-        create(:post, active: 1, published_at: Time.zone.now.yesterday)
+        create(:post, active: 1, published_at: Time.zone.now.yesterday, image_file_name: 'hoge.jpg')
         create(:post, active: 0, published_at: Time.zone.now.tomorrow)
       end
     end
@@ -16,6 +16,9 @@ RSpec.describe V1::PostsController, type: :request do
       expect(response.status).to eq 200
       json = JSON.parse(response.body)
       expect(json['posts'].size).to eq 3
+      json['posts'].each do |json_post|
+        expect(json_post['post_image_path'].present?).to eq true
+      end
     end
 
     it do

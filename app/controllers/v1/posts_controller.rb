@@ -4,7 +4,7 @@ module V1
     before_action :set_post, only: [:update, :destroy]
 
     def index
-      @posts = Post.includes([:post_category]).select([:id, :post_category_id, :user_id, :title, :published_at]).
+      @posts = Post.includes([:post_category]).select([:id, :post_category_id, :user_id, :title, :published_at, :image_file_name]).
           released.order('published_at DESC').page(params[:page])
     end
 

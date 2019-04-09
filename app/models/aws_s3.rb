@@ -16,7 +16,7 @@ class AwsS3
     # @return [String]
     def upload(tempfile, original_filename)
       file_name = "#{Time.now.to_i}_#{original_filename}"
-      s3_obj = @resource.bucket('bookrecorder-image').object("posts/#{file_name}")
+      s3_obj = @resource.bucket('bookrecorder-image').object("#{file_name}")
       s3_obj.upload_file(tempfile)
       file_name
     rescue

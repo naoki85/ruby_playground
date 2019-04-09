@@ -3,14 +3,13 @@ class Post < ApplicationRecord
   belongs_to :post_category
 
   enum active: { draft: 0, published: 1 }
+  attr_accessor :image
 
   validates :title,   presence: true, length: { maximum: 255 }
 
   scope :released, -> {
     where(active: 1).where('published_at <= ?', Time.zone.now)
   }
-
-  has_one_attached :image
 
   after_update -> {
     Rails.cache.delete("posts/#{self.id}")
@@ -21,16 +20,18 @@ class Post < ApplicationRecord
     published? && published_at <= Time.zone.now
   end
 
-  # @param [Hash] { image: 'test_file' }
-  # @return [Boolean] | ActiveStorage
-  def attach_image(params)
-    if params.key?(:image) && params[:image].present?
-      logger.info params[:image]
-      image.attach(params[:image])
-      return true
-    else
-      return true
+  def save
+    if image.present?
+      self.image_file_name = get_image_file_name
     end
+    super
+  end
+
+  def update(attributes)
+    if image.present?
+      self.image_file_name = get_image_file_name
+    end
+    super(attributes)
   end
 
   # @param [Integer] id
@@ -39,5 +40,15 @@ class Post < ApplicationRecord
     Rails.cache.fetch("posts/#{id}", expired_in: 1.days) do
       super(id)
     end
+  end
+
+  private
+
+  def get_image_file_name
+    upload_klass.upload(image.tempfile, image.original_filename)
+  end
+
+  def upload_klass
+    @upload_klass ||= AwsS3::Resource.new
   end
 end
