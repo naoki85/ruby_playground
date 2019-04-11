@@ -64,7 +64,7 @@ module ApplicationHelper
   # @param [String] image_path
   # @return [String]
   def post_ogp_image(image_path)
-    if image_path !~ /^https/
+    if image_path !~ /^http(s)?/
       "https://#{request.host}#{image_path}"
     else
       image_path
