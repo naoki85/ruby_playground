@@ -45,7 +45,7 @@ class Post < ApplicationRecord
   private
 
   def get_image_file_name
-    upload_klass.upload(image.tempfile, image.original_filename)
+    upload_klass.upload(image.tempfile, image.original_filename, {})
   end
 
   def upload_klass

@@ -14,9 +14,14 @@ class AwsS3
     # @param [Tempfile] tempfile
     # @param [String] original_filename
     # @return [String]
-    def upload(tempfile, original_filename)
+    def upload(tempfile, original_filename, **options)
       file_name = "#{Time.now.to_i}_#{original_filename}"
-      s3_obj = @resource.bucket('bookrecorder-image').object("#{file_name}")
+      file_path = file_name
+      if options[:prefix].present?
+        file_path = "#{options[:prefix]}/#{file_name}"
+      end
+
+      s3_obj = @resource.bucket('bookrecorder-image').object(file_path)
       s3_obj.upload_file(tempfile)
       file_name
     rescue
