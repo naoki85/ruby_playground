@@ -1,80 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe V1::PostsController, type: :request do
-  describe '#index' do
-    let(:request_url) { '/v1/posts' }
-
-    before do
-      3.times do
-        create(:post, active: 1, published_at: Time.zone.now.yesterday, image_file_name: 'hoge.jpg')
-        create(:post, active: 0, published_at: Time.zone.now.tomorrow)
-      end
-    end
-
-    it do
-      get request_url
-      expect(response.status).to eq 200
-      json = JSON.parse(response.body)
-      expect(json['posts'].size).to eq 3
-      json['posts'].each do |json_post|
-        expect(json_post['post_image_path'].present?).to eq true
-      end
-    end
-
-    it do
-      8.times { create(:post, active: 1, published_at: Time.zone.now.yesterday) }
-      get request_url
-      expect(response.status).to eq 200
-      json = JSON.parse(response.body)
-      expect(json['posts'].size).to eq 10
-      expect(json['posts'][0]['post_category'].size).to eq 3
-      expect(json['total_page']).to eq 2
-
-      get request_url + '?page=2'
-      expect(response.status).to eq 200
-      json = JSON.parse(response.body)
-      expect(json['posts'].size).to eq 1
-    end
-  end
-
-  describe '#show' do
-    let(:request_url) { '/v1/posts/' }
-
-    context 'normal pattern' do
-      let(:post) { create(:post) }
-
-      before do
-        4.times do
-          create(:recommended_book, post_category_id: post.post_category_id)
-        end
-      end
-
-      it do
-        get request_url + post.id.to_s
-        expect(response.status).to eq 200
-        json = JSON.parse(response.body)
-        expect(json['post']['id']).to eq post.id
-        expect(json['post']['post_category']['name']).to eq 'Ruby'
-        expect(json['recommended_books'].size).to eq 4
-
-        get request_url + (post.id + 1).to_s
-        expect(response.status).to eq 404
-      end
-    end
-
-    context 'case params have preview' do
-      let(:post) { create(:post, active: 0) }
-
-      it 'should get post before released ' do
-        get request_url + post.id.to_s + '?preview=true'
-        expect(response.status).to eq 200
-        json = JSON.parse(response.body)
-        expect(json['post']['id']).to eq post.id
-
-        get request_url + post.id.to_s
-        expect(response.status).to eq 404
-      end
-    end
+  before do
+    allow_any_instance_of(V1::PostsController).to receive(:logged_in?).and_return(true)
   end
 
   describe '#upload' do
@@ -101,6 +29,17 @@ RSpec.describe V1::PostsController, type: :request do
       it do
         post request_url, params: { file: fixture_file_upload('test.png', 'image/png', true) }
         expect(response.status).to eq 400
+      end
+    end
+
+    context 'unless logged in' do
+      before do
+        allow_any_instance_of(V1::PostsController).to receive(:logged_in?).and_return(false)
+      end
+
+      it do
+        post request_url, params: { file: fixture_file_upload('test.png', 'image/png', true) }
+        expect(response.status).to eq 401
       end
     end
   end
