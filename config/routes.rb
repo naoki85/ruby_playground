@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
-  root 'posts#index'
+  root 'admin/sessions#new'
   get 'sign_up' => 'admin/users#new'
   post 'sign_up' => 'admin/users#create'
   get 'sign_in' => 'admin/sessions#new'
   post 'sign_in' => 'admin/sessions#create'
   delete 'sign_out' => 'admin/sessions#destroy'
 
-  get '/posts', to: redirect('/')
-  get 'posts/new' => 'web#index'
-  resources :posts, only: [:show]
   get :feed, to: 'rss#index', defaults: { format: :rss }
 
   get 'user_policy' => 'policies#user_policy'

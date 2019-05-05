@@ -25,49 +25,4 @@ module ApplicationHelper
         }
     }
   end
-
-  def posts_meta_tags(description='')
-    {
-        title: 'ブログ一覧',
-        description: description,
-        og: {
-            title: 'ブログ一覧',
-            description: description,
-        },
-        twitter: {
-            card: 'summary_large_image',
-        }
-    }
-  end
-
-  # 記事詳細ページのmetaタグ
-  # @param  [Post] post
-  # @return [Hash]
-  def post_meta_tags(post)
-    {
-        title: post.title,
-        description: post.summary,
-        og: {
-            title: post.title,
-            description: post.summary,
-            image: post_ogp_image(post.post_image_path),
-        },
-        twitter: {
-            card: 'summary',
-        }
-    }
-  end
-
-  private
-
-  # ActiveStorageで生成したパスだとドメインがつかない
-  # @param [String] image_path
-  # @return [String]
-  def post_ogp_image(image_path)
-    if image_path !~ /^http(s)?/
-      "https://#{request.host}#{image_path}"
-    else
-      image_path
-    end
-  end
 end
