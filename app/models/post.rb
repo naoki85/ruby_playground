@@ -11,35 +11,18 @@ class Post < ApplicationRecord
     where(active: 1).where('published_at <= ?', Time.zone.now)
   }
 
-  after_update -> {
-    Rails.cache.delete("posts/#{self.id}")
-    Rails.cache.delete("posts/#{self.id}/image_path")
-  }
-
   def released?
     published? && published_at <= Time.zone.now
   end
 
   def save
-    if image.present?
-      self.image_file_name = get_image_file_name
-    end
+    self.image_file_name = get_image_file_name if image.present?
     super
   end
 
   def update(attributes)
-    if image.present?
-      self.image_file_name = get_image_file_name
-    end
+    self.image_file_name = get_image_file_name if image.present?
     super(attributes)
-  end
-
-  # @param [Integer] id
-  # @return [Post]
-  def self.find(id)
-    Rails.cache.fetch("posts/#{id}", expired_in: 1.days) do
-      super(id)
-    end
   end
 
   private

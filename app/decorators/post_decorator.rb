@@ -1,7 +1,6 @@
 module PostDecorator
-
   # @return string
-  def post_image_path(**options)
+  def post_image_path
     if image_file_name.present?
       BookRecorder::Application.config.image_base_url + image_file_name
     else

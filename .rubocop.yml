@@ -2,7 +2,7 @@ Rails:
   Enabled: true
 
 AllCops:
-  TargetRubyVersion: 2.5.0
+  TargetRubyVersion: 2.5.1
   Exclude:
     - vendor/bundle/**/*
     - bin/*
@@ -10,9 +10,35 @@ AllCops:
     - config/**/*
     - Gemfile
     - tmp/**/*
+    - node_modules/**/*
+    - log/*
+    - docker/*
 
 # 日本語でのコメントを許可
 AsciiComments:
+  Enabled: false
+
+Layout/AlignHash:
+  Exclude:
+    - spec/models/user_spec.rb
+Layout/CommentIndentation:
+  Exclude:
+    - spec/spec_helper.rb
+
+Lint/IneffectiveAccessModifier:
+  Exclude:
+    - lib/tasks/post_published_tweet.rb
+Lint/UriEscapeUnescape:
+  Exclude:
+    - app/controllers/v1/posts_controller.rb
+
+Metrics/AbcSize:
+  Max: 25
+  Exclude:
+    - lib/tasks/write_secrets_in_env.rb
+
+# ブロック内の長さ
+Metrics/BlockLength:
   Enabled: false
 
 # 一行の長さ
@@ -21,7 +47,33 @@ Metrics/LineLength:
 
 # メソッド名の長さ
 Metrics/MethodLength:
-  Max: 20
+  Max: 30
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
+# find_by でカラムを指定して使用する
+Rails/DynamicFindBy:
+  Enabled: false
+Rails/FilePath:
+  Exclude:
+    - spec/rails_helper.rb
+Rails/FindBy:
+  Enabled: false
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/TimeZone:
+  Enabled: false
+
+# 出力の指定
+Rails/Output:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
 
 # DateTime の使用
 Style/DateTime:
@@ -37,4 +89,15 @@ Style/DoubleNegation:
 
 # 文字列リテラルに対し、マジックコメントを使用していること
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/GuardClause:
+  Exclude:
+    - app/helpers/sessions_helper.rb
+
+Style/Lambda:
+  Enabled: false
+
+# 文字列リテラルであればシングルクォートを推奨する
+Style/StringLiterals:
   Enabled: false

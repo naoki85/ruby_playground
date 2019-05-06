@@ -6,7 +6,6 @@ namespace :deploy do
       unless `git rev-parse HEAD` == `git rev-parse #{branch}`
         puts "WARNING: HEAD is not the same as origin/#{branch}"
         puts "Run `git push` to sync changes."
-        exit
       end
     end
   end

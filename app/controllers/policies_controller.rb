@@ -1,5 +1,4 @@
 class PoliciesController < ApplicationController
-
   def user_policy
     # ビューファイルでlocale出し分け
   end

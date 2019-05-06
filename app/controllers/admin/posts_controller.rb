@@ -1,13 +1,12 @@
 class Admin::PostsController < Admin::ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.includes([:post_category]).where(user_id: current_user.id).
-        order('id DESC').page(params[:page]).per(10)
+    @posts = Post.includes([:post_category]).where(user_id: current_user.id)
+                 .order('id DESC').page(params[:page]).per(10)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @post = Post.new
