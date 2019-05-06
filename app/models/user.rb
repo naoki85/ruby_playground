@@ -15,18 +15,20 @@ class User < ApplicationRecord
   before_save :downcase_email
 
   def self.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-               BCrypt::Engine.cost
+    cost = if ActiveModel::SecurePassword.min_cost
+             BCrypt::Engine::MIN_COST
+           else
+             BCrypt::Engine.cost
+           end
     BCrypt::Password.create(string, cost: cost)
   end
 
   def self.find_by_email_and_password(email, password)
     return nil unless email.present? && password.present?
     user = find_by(email: email)
-    if user && correct_password?(user.encrypted_password, password)
-      user.password = password
-      user
-    end
+    return nil unless user && correct_password?(user.encrypted_password, password)
+    user.password = password
+    user
   end
 
   def self.find_by_active_token(authentication_token)
