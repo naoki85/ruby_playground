@@ -1,5 +1,4 @@
 module UserDecorator
-
   # @return boolean
   def avatar_image?
     image.attached? || image_url.present?
@@ -21,10 +20,6 @@ module UserDecorator
   end
 
   def name
-    if username.present?
-      username
-    else
-      'No name'
-    end
+    username || 'No name'
   end
 end

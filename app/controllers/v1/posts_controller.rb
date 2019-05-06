@@ -1,26 +1,6 @@
 module V1
   class PostsController < ApiApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:index, :show, :upload, :ogp]
-    before_action :set_post, only: [:update, :destroy]
-
-    def index
-      @posts = Post.includes([:post_category]).select([:id, :post_category_id, :user_id, :title, :published_at, :image_file_name]).
-          released.order('published_at DESC').page(params[:page])
-    end
-
-    def show
-      @post = Post.includes([:post_category]).where(id: params[:id])
-      if !params['preview']
-        @post = @post.released
-      end
-      @post = @post.first
-      if @post
-        @recommended_books = RecommendedBook.get_four(@post.post_category_id)
-        Rails.logger.info @recommended_books.size
-      else
-        render_404
-      end
-    end
+    skip_before_action :authenticate_user_from_token!
 
     def upload
       file = params[:file]
@@ -37,13 +17,6 @@ module V1
     def ogp
       url = URI.encode(CGI.unescape(params[:url]))
       @ogp_params = OgpParser.parse(url)
-    end
-
-    private
-
-    def set_post
-      @post = Post.where(id: params[:id], user_id: @user.id).first
-      raise InvalidParameter unless @post
     end
   end
 end

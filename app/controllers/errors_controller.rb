@@ -4,23 +4,23 @@ class ErrorsController < ActionController::Base
   def render_404(e = nil)
     if e
       logger.error "Rendering 404 with exception: #{e.message}"
-      logger.error "#{e.backtrace[0]}" if e.backtrace.present? and e.backtrace.length > 0
+      logger.error e.backtrace[0].to_s if e.backtrace.present? && !e.backtrace.empty?
     end
 
     if request.xhr?
-      render json: { error: '404 errors' }, status: 404
+      render json: { error: '404 errors' }, status: :not_found
     else
       respond_to do |format|
-        format.html {
-          render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'
-        }
-        format.json {
+        format.html do
+          render template: 'errors/error_404', status: :not_found, layout: 'application', content_type: 'text/html'
+        end
+        format.json do
           @return_code = 404
-          render 'api/errors/error', status: 404
-        }
-        format.all {
-          render :text => 'Not Acceptable', status: 406
-        }
+          render 'api/errors/error', status: :not_found
+        end
+        format.all do
+          render text: 'Not Acceptable', status: :not_acceptable
+        end
       end
     end
   end

@@ -1,9 +1,8 @@
 require 'twitter'
 
 class Tasks::PostPublishedTweet
-
   def self.execute
-    posts = Post.select([:id, :title])
+    posts = Post.select(%i[id title])
                 .where('published_at >= ?', Time.zone.now.beginning_of_day)
                 .where('published_at <= ?', Time.zone.now)
                 .where(active: 1)
@@ -14,8 +13,6 @@ class Tasks::PostPublishedTweet
       twitter_client.update(tweet_text)
     end
   end
-
-  private
 
   def self.twitter_client
     Twitter::REST::Client.new do |config|

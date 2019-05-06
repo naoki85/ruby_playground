@@ -1,10 +1,9 @@
 module Admin
   class UsersController < ApplicationController
-    skip_before_action :require_login, only: [:new, :create]
-    before_action :set_user, only: [:show, :edit, :update]
+    skip_before_action :require_login, only: %i[new create]
+    before_action :set_user, only: %i[show edit update]
 
-    def show
-    end
+    def show; end
 
     def new
       @user = User.new
@@ -21,8 +20,7 @@ module Admin
       end
     end
 
-    def edit
-    end
+    def edit; end
 
     def update
       if @user.update_with_image(user_params)

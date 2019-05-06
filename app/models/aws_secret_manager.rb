@@ -3,7 +3,6 @@ require 'base64'
 require 'json'
 
 class AwsSecretManager
-
   def self.get_secret(secret_name)
     endpoint_url = "https://secretsmanager.ap-northeast-1.amazonaws.com"
     region_name = "ap-northeast-1"
@@ -16,23 +15,23 @@ class AwsSecretManager
     # We rethrow the exception by default.
     begin
       get_secret_value_response = client.get_secret_value(secret_id: secret_name)
-    rescue Aws::SecretsManager::Errors::DecryptionFailure => e
+    rescue Aws::SecretsManager::Errors::DecryptionFailure
       # Secrets Manager can't decrypt the protected secret text using the provided KMS key.
       # Deal with the exception here, and/or rethrow at your discretion.
       raise
-    rescue Aws::SecretsManager::Errors::InternalServiceError => e
+    rescue Aws::SecretsManager::Errors::InternalServiceError
       # An error occurred on the server side.
       # Deal with the exception here, and/or rethrow at your discretion.
       raise
-    rescue Aws::SecretsManager::Errors::InvalidParameterException => e
+    rescue Aws::SecretsManager::Errors::InvalidParameterException
       # You provided an invalid value for a parameter.
       # Deal with the exception here, and/or rethrow at your discretion.
       raise
-    rescue Aws::SecretsManager::Errors::InvalidRequestException => e
+    rescue Aws::SecretsManager::Errors::InvalidRequestException
       # You provided a parameter value that is not valid for the current state of the resource.
       # Deal with the exception here, and/or rethrow at your discretion.
       raise
-    rescue Aws::SecretsManager::Errors::ResourceNotFoundException => e
+    rescue Aws::SecretsManager::Errors::ResourceNotFoundException
       # We can't find the resource that you asked for.
       # Deal with the exception here, and/or rethrow at your discretion.
       raise

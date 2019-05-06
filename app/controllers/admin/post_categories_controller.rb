@@ -1,5 +1,5 @@
 class Admin::PostCategoriesController < Admin::ApplicationController
-  before_action :set_post_category, only: [:edit, :update, :destroy]
+  before_action :set_post_category, only: %i[edit update destroy]
 
   def index
     @post_categories = PostCategory.all
@@ -9,8 +9,7 @@ class Admin::PostCategoriesController < Admin::ApplicationController
     @post_category = PostCategory.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @post_category = PostCategory.new(post_category_params)
