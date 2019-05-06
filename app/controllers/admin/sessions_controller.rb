@@ -30,9 +30,8 @@ class Admin::SessionsController < Admin::ApplicationController
   end
 
   def logged_in_user_redirect
-    if logged_in?
-      redirect_to admin_posts_path
-      flash[:success] = "Already logged in"
-    end
+    return unless logged_in?
+    redirect_to admin_posts_path
+    flash[:success] = "Already logged in"
   end
 end

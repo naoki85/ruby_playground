@@ -18,12 +18,24 @@ AllCops:
 AsciiComments:
   Enabled: false
 
+Layout/AlignHash:
+  Exclude:
+    - spec/models/user_spec.rb
+Layout/CommentIndentation:
+  Exclude:
+    - spec/spec_helper.rb
+
+Lint/IneffectiveAccessModifier:
+  Exclude:
+    - lib/tasks/post_published_tweet.rb
 Lint/UriEscapeUnescape:
   Exclude:
     - app/controllers/v1/posts_controller.rb
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 25
+  Exclude:
+    - lib/tasks/write_secrets_in_env.rb
 
 # ブロック内の長さ
 Metrics/BlockLength:
@@ -40,9 +52,15 @@ Metrics/MethodLength:
 Naming/AccessorMethodName:
   Enabled: false
 
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
 # find_by でカラムを指定して使用する
 Rails/DynamicFindBy:
   Enabled: false
+Rails/FilePath:
+  Exclude:
+    - spec/rails_helper.rb
 Rails/FindBy:
   Enabled: false
 Rails/HasManyOrHasOneDependent:
@@ -52,6 +70,9 @@ Rails/TimeZone:
 
 # 出力の指定
 Rails/Output:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
   Enabled: false
 
 # DateTime の使用
@@ -69,6 +90,10 @@ Style/DoubleNegation:
 # 文字列リテラルに対し、マジックコメントを使用していること
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/GuardClause:
+  Exclude:
+    - app/helpers/sessions_helper.rb
 
 Style/Lambda:
   Enabled: false

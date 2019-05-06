@@ -5,6 +5,8 @@ class Admin::RecommendedBooksController < Admin::ApplicationController
     @recommended_books = RecommendedBook.page(params[:page]).per(10)
   end
 
+  def show; end
+
   def new
     @recommended_book = RecommendedBook.new
     set_post_categories
