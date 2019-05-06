@@ -1,5 +1,5 @@
 class Admin::RecommendedBooksController < Admin::ApplicationController
-  before_action :set_recommended_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_recommended_book, only: %i[show edit update destroy]
 
   def index
     @recommended_books = RecommendedBook.page(params[:page]).per(10)

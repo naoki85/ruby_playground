@@ -6,7 +6,7 @@ describe UserDecorator do
   it { should be_a User }
 
   describe '#avatar_image?' do
-    before {user.image_url = 'test' }
+    before { user.image_url = 'test' }
     it { expect(user.avatar_image?).to eq true }
   end
 
@@ -23,7 +23,7 @@ describe UserDecorator do
     it do
       user.username = 'test'
       expect(user.name).to eq 'test'
-      user.username = ''
+      user.username = nil
       expect(user.name).to eq 'No name'
     end
   end

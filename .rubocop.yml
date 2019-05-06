@@ -24,7 +24,7 @@ Metrics/LineLength:
 
 # メソッド名の長さ
 Metrics/MethodLength:
-  Max: 20
+  Max: 30
 
 # DateTime の使用
 Style/DateTime:

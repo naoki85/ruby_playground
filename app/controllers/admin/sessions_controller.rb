@@ -1,9 +1,8 @@
 class Admin::SessionsController < Admin::ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
-  before_action :logged_in_user_redirect, only: [:new, :create]
+  skip_before_action :require_login, only: %i[new create]
+  before_action :logged_in_user_redirect, only: %i[new create]
 
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by_email_and_password(session_params[:email],

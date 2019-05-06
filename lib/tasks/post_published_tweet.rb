@@ -1,9 +1,8 @@
 require 'twitter'
 
 class Tasks::PostPublishedTweet
-
   def self.execute
-    posts = Post.select([:id, :title])
+    posts = Post.select(%i[id title])
                 .where('published_at >= ?', Time.zone.now.beginning_of_day)
                 .where('published_at <= ?', Time.zone.now)
                 .where(active: 1)

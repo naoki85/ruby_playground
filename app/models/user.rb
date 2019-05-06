@@ -1,18 +1,17 @@
 class User < ApplicationRecord
-
   has_many :posts
 
   has_one_attached :image
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
-            format: { with: VALID_EMAIL_REGEX },
-            uniqueness: { case_sensitive: false }
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
   validate :valid_password
 
   attr_accessor :password
 
-  #after_create :update_authentication_token!
+  # after_create :update_authentication_token!
   before_save :downcase_email
 
   def self.digest(string)
@@ -27,14 +26,12 @@ class User < ApplicationRecord
     if user && correct_password?(user.encrypted_password, password)
       user.password = password
       user
-    else
-      nil
     end
   end
 
   def self.find_by_active_token(authentication_token)
-    where(authentication_token: authentication_token).
-        where("authentication_token_expired_at > ?", DateTime.now).first
+    where(authentication_token: authentication_token)
+      .where("authentication_token_expired_at > ?", DateTime.now).first
   end
 
   def self.correct_password?(encrypted_password, password)
@@ -47,12 +44,12 @@ class User < ApplicationRecord
     self.username = params[:username]
     self.email = params[:email]
     self.password = params[:new_password]
-    self.save && attach_image(params)
+    save && attach_image(params)
   end
 
   # @return [Bool]
   def update_authentication_token!
-    self.authentication_token = generate_token(self.id)
+    self.authentication_token = generate_token(id)
     self.authentication_token_expired_at = DateTime.now + 1.week
     save!
   end
@@ -76,7 +73,7 @@ class User < ApplicationRecord
       logger.info params[:image]
       image.attach(params[:image])
     else
-      return true
+      true
     end
   end
 
@@ -87,7 +84,7 @@ class User < ApplicationRecord
   end
 
   def valid_password
-    return if !new_record? && !password.present?
+    return if !new_record? && password.blank?
     if password.present? && password.length >= 6
       self.encrypted_password = self.class.digest(password)
     else
@@ -98,7 +95,7 @@ class User < ApplicationRecord
   # @param [Integer]
   # @return [String]
   def generate_token(user_id)
-    user_id = user_id || 0
+    user_id ||= 0
     SecureRandom.alphanumeric(10) + format('%07d', user_id) + SecureRandom.alphanumeric(10)
   end
 end

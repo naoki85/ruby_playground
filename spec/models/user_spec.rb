@@ -5,11 +5,11 @@ RSpec.describe User, type: :model do
     context 'email' do
       it do
         user = build(:user)
-        %w(test@example.com).each do |test_mail|
+        %w[test@example.com].each do |test_mail|
           user.email = test_mail
           expect(user.valid?).to eq true
         end
-        %w(testtest).each do |test_mail|
+        %w[testtest].each do |test_mail|
           user.email = test_mail
           expect(user.valid?).to eq false
         end
@@ -85,8 +85,10 @@ RSpec.describe User, type: :model do
   end
 
   describe 'reset_authentication_token!' do
-    let(:user) { create(:user, email: 'test@example.com', password: 'testtest',
-                        authentication_token: 'aaaa', authentication_token_expired_at: DateTime.tomorrow) }
+    let(:user) do
+      create(:user, email: 'test@example.com', password: 'testtest',
+                    authentication_token: 'aaaa', authentication_token_expired_at: DateTime.tomorrow)
+    end
 
     it 'should update' do
       expect(user.authentication_token.present?).to eq true
@@ -115,7 +117,7 @@ RSpec.describe User, type: :model do
 
   describe '#attach_image', skip: true do
     it 'when params do\'t contain image, should return true' do
-      params = { }
+      params = {}
       expect(user.attach_image(params)).to eq true
     end
 
