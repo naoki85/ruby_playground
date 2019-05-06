@@ -54,7 +54,6 @@ gem 'slim-rails'
 gem 'active_decorator'
 
 gem 'whenever', :require => false
-gem 'sitemap_generator'
 gem 'meta-tags'
 gem 'webpacker'
 gem 'kaminari'

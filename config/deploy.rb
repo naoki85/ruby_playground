@@ -30,7 +30,7 @@ set :linked_files, %w{ .env config/database.yml config/secrets.yml config/storag
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-set :linked_dirs, %w{ log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sitemaps }
+set :linked_dirs, %w{ log tmp/pids tmp/cache tmp/sockets vendor/bundle }
 set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 
 # Default value for default_env is {}
