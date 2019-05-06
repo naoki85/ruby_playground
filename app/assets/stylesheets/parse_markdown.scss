@@ -33,9 +33,10 @@
     box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
     padding: 10px;
     border-radius: 3px;
-    overflow: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    overflow: scroll;
+    font-size: 14px;
+    //white-space: pre-wrap;
+    //word-wrap: break-word;
     code {
       width: 100%;
       color: #212121;
@@ -129,12 +130,33 @@
   }
   .ogp-card {
     border: 2px solid #eef2f7;
+    border-radius: 4px;
+    max-width: 600px;
     a {
       text-decoration: none;
       color: #546778;
     }
     .siimple-card {
       margin-bottom: 0;
+    }
+    .bottom-description {
+      display: none;
+      padding: 0 10px 10px;
+    }
+  }
+}
+
+@media screen and (max-width:480px) {
+  .preview-area {
+    .ogp-card {
+      .right {
+        .siimple-card-description {
+          display: none;
+        }
+      }
+      .bottom-description {
+        display: block;
+      }
     }
   }
 }

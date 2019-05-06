@@ -1,0 +1,15 @@
+h1.siimple-h1 Sign Up
+
+= form_with model: @user, url: sign_up_path, local: true do |f|
+  = render 'admin/shared/error_messages', object: f.object
+
+  .siimple-row
+    = f.label :email, class: 'siimple-label'
+    = f.email_field :email, class: 'siimple-input siimple-input--fluid'
+
+  .siimple-row
+    = f.label :password, class: 'siimple-label'
+    = f.password_field :password, class: 'siimple-input siimple-input--fluid'
+
+  .siimple-row
+    = f.submit t('button.create'), class: 'siimple-btn siimple-btn--primary'

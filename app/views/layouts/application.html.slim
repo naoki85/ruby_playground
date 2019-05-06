@@ -1,7 +1,7 @@
 doctype html
 html[lang='ja']
   head
-    title BookRecorder
+    title naoki85 のブログ
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
@@ -9,21 +9,12 @@ html[lang='ja']
     meta(name="turbolinks-cache-control" content="no-cache")
     = favicon_link_tag('commons/favicon.ico')
     = display_meta_tags(default_meta_tags)
-    = auto_discovery_link_tag :rss, feed_url(:format => :rss), :title => 'BookRecorder のブログ'
+    = auto_discovery_link_tag :rss, feed_url(:format => :rss), :title => 'naoki85 のブログ'
     = javascript_pack_tag 'main'
-    - if Rails.env.production?
-      script(async src="https://www.googletagmanager.com/gtag/js?id=UA-123372116-1")
-      javascript:
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-123372116-1');
 
   body
-    #app
-      == render 'layouts/header'
-      .siimple-content.siimple-content--fluid
-        == yield
-      my-loader
-      == render 'layouts/footer'
+    == render 'layouts/header'
+    .siimple-content.siimple-content--fluid
+      == yield
+    my-loader
+    == render 'layouts/footer'

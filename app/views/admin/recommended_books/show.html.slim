@@ -1,0 +1,20 @@
+.siimple-breadcrumb
+  .siimple-breadcrumb-item
+    = link_to 'RecommendedBook', admin_recommended_books_path
+  .siimple-breadcrumb-item
+    = @recommended_book.id
+
+.siimple-table
+  .siimple-table-body
+    .siimple-table-row
+      .siimple-table-cell PostCategory
+      .siimple-table-cell = @recommended_book.post_category.name
+    .siimple-table-row
+      .siimple-table-cell Link
+      .siimple-table-cell = link_to @recommended_book.link, @recommended_book.link
+    .siimple-table-row
+      .siimple-table-cell Image
+      .siimple-table-cell = image_tag @recommended_book.image_url
+    .siimple-table-row
+      .siimple-table-cell ButtonUrl
+      .siimple-table-cell = image_tag @recommended_book.button_url

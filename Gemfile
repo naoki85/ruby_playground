@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.6.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 5.2.3'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.4.4'
 # Use Puma as the app server
@@ -42,9 +42,7 @@ gem 'therubyracer'
 gem 'rack-cors', require: 'rack/cors'
 gem 'aws-sdk-rails'
 gem 'aws-sdk-secretsmanager'
-
 gem 'twitter'
-# gem 'omniauth-twitter'
 gem 'ridgepole', '>= 0.7.2.beta'
 gem 'selenium-webdriver'
 # Easy installation and use of chromedriver to run system tests with Chrome

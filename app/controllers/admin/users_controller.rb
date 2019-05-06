@@ -1,8 +1,24 @@
 module Admin
   class UsersController < ApplicationController
-    before_action :set_user
+    skip_before_action :require_login, only: [:new, :create]
+    before_action :set_user, only: [:show, :edit, :update]
 
     def show
+    end
+
+    def new
+      @user = User.new
+    end
+
+    def create
+      @user = User.new(user_params)
+      if @user.save
+        flash[:success] = t('messages.created')
+        redirect_to sign_in_path
+      else
+        flash[:error] = t('messages.created')
+        render :new
+      end
     end
 
     def edit
@@ -21,7 +37,7 @@ module Admin
     private
 
     def user_params
-      params.require(:user).permit(:email, :new_password, :username, :image)
+      params.require(:user).permit(:email, :password, :new_password, :username, :image)
     end
 
     def set_user

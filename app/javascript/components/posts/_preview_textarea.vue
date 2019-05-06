@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="siimple-btn siimple-btn--primary" id="modal-open" @click="modalOpen">Open modal</div>
+    <div class="siimple-btn siimple-btn--primary" id="modal-open" @click="modalOpen">Insert OGP Card</div>
     <div class="siimple-grid">
       <div class="siimple-grid-row">
         <div @dragleave.prevent="onDragLeave" @dragover.prevent="onDragEnter" @drop.prevent="uploadImage"
@@ -110,15 +110,20 @@
         request.get('/v1/posts/ogp?url=' + param, {})
         .then((response) => {
           var insert_tag = '<a href="' + response.data.url + '">';
-          insert_tag += '<div class="siimple-grid-row ogp-card">';
-          insert_tag += '<div class="siimple-card siimple-grid-col siimple-grid-col--4">';
+          insert_tag += '<div class="ogp-card">';
+          insert_tag += '<div class="siimple-grid-row">';
+          insert_tag += '<div class="siimple-card siimple-grid-col siimple-grid-col--4 left">';
           insert_tag += '<img src="' + response.data.image_url + '" width="100%">';
           insert_tag += '</div>';
-          insert_tag += '<div class="siimple-card siimple-grid-col siimple-grid-col--8">';
-          insert_tag += '<div class="siimple-card-">';
+          insert_tag += '<div class="siimple-card siimple-grid-col siimple-grid-col--8 right">';
           insert_tag += '<div class="siimple-card-title">' + response.data.title + '</div>';
+          insert_tag += '<div class="siimple-card-description">';
           insert_tag += response.data.description;
           insert_tag += '</div>';
+          insert_tag += '</div>';
+          insert_tag += '</div>';
+          insert_tag += '<div class="siimple-grid-row bottom-description">';
+          insert_tag += response.data.description;
           insert_tag += '</div>';
           insert_tag += '</div>';
           insert_tag += '</a>';
