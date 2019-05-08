@@ -5,9 +5,6 @@ Rails.application.routes.draw do
   get 'sign_in' => 'admin/sessions#new'
   post 'sign_in' => 'admin/sessions#create'
   delete 'sign_out' => 'admin/sessions#destroy'
-
-  get :feed, to: 'rss#index', defaults: { format: :rss }
-
   get 'user_policy' => 'policies#user_policy'
   get 'privacy_policy' => 'policies#privacy_policy'
   get 'health_check' => 'api_application#health_check'
