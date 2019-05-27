@@ -115,16 +115,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#attach_image', skip: true do
-    it 'when params do\'t contain image, should return true' do
-      params = {}
-      expect(user.attach_image(params)).to eq true
+  describe 'update_with_image' do
+    let(:test_image_url) { 'http://d29xhtkvbwm2ne.cloudfront.net/test.png' }
+    before do
+      allow(user).to receive(:get_image_url).and_return(test_image_url)
     end
 
-    # TODO: test 環境だと戻り値が nil になる件を確認
-    it 'when params contain image, should return ActiveStorage::Attachment' do
-      params = { image: fixture_file_upload('test.png', 'image/png', true) }
-      expect(user.attach_image(params)).to eq nil
+    it 'should update user image' do
+      params = { username: "Naoki", image: fixture_file_upload('test.png', 'image/png', true) }
+      user.update_with_image(params)
+      expect(User.find(user.id).image_url).to eq test_image_url
+      expect(User.find(user.id).username).to eq "Naoki"
     end
   end
 end

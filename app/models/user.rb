@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   has_many :posts
 
-  has_one_attached :image
-
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -43,10 +41,11 @@ class User < ApplicationRecord
   # @param [Hash] params
   # @return [Bool]
   def update_with_image(params)
-    self.username = params[:username]
-    self.email = params[:email]
-    self.password = params[:new_password]
-    save && attach_image(params)
+    self.username = params[:username] if params[:username]
+    self.email = params[:email] if params[:email]
+    self.password = params[:new_password] if params[:new_password]
+    self.image_url = get_image_url(params[:image]) if params[:image]
+    save
   end
 
   # @return [Bool]
@@ -66,17 +65,6 @@ class User < ApplicationRecord
   # @return bool
   def from_social?
     provider.present? && uid.present?
-  end
-
-  # @param hash { image: 'test_file' }
-  # @return bool | ActiveStorage
-  def attach_image(params)
-    if params.key?(:image) && params[:image].present?
-      logger.info params[:image]
-      image.attach(params[:image])
-    else
-      true
-    end
   end
 
   private
@@ -99,5 +87,15 @@ class User < ApplicationRecord
   def generate_token(user_id)
     user_id ||= 0
     SecureRandom.alphanumeric(10) + format('%07d', user_id) + SecureRandom.alphanumeric(10)
+  end
+
+  def get_image_url(image)
+    return image_url unless image.present?
+    image_file_name = upload_klass.upload(image.tempfile, image.original_filename, {})
+    BookRecorder::Application.config.image_base_url + image_file_name
+  end
+
+  def upload_klass
+    @upload_klass ||= AwsS3::Resource.new
   end
 end
