@@ -1,6 +1,8 @@
 module SessionsHelper
   def log_in(user)
     session[:user_id] = user.id
+    user.locked_at = nil
+    user.save!
   end
 
   def current_user

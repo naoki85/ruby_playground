@@ -24,7 +24,7 @@ class User < ApplicationRecord
   def self.find_by_email_and_password(email, password)
     return nil unless email.present? && password.present?
     user = find_by(email: email)
-    return nil unless user && correct_password?(user.encrypted_password, password)
+    return nil unless user && !user.locked? && correct_password?(user.encrypted_password, password)
     user.password = password
     user
   end
@@ -67,6 +67,10 @@ class User < ApplicationRecord
     provider.present? && uid.present?
   end
 
+  def locked?
+    locked_at && locked_at + 1.hour > DateTime.now
+  end
+
   private
 
   def downcase_email
@@ -90,7 +94,7 @@ class User < ApplicationRecord
   end
 
   def get_image_url(image)
-    return image_url unless image.present?
+    return image_url if image.blank?
     image_file_name = upload_klass.upload(image.tempfile, image.original_filename, {})
     BookRecorder::Application.config.image_base_url + image_file_name
   end

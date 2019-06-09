@@ -33,7 +33,7 @@ Lint/UriEscapeUnescape:
     - app/controllers/v1/posts_controller.rb
 
 Metrics/AbcSize:
-  Max: 25
+  Max: 26
   Exclude:
     - lib/tasks/write_secrets_in_env.rb
 

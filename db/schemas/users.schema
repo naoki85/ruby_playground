@@ -11,6 +11,7 @@ create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :
   t.string "provider", default: ""
   t.string "uid", default: ""
   t.string "image_url", default: ""
+  t.datetime "locked_at"
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
 
