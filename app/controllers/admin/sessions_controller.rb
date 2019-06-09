@@ -12,11 +12,18 @@ class Admin::SessionsController < Admin::ApplicationController
       flash[:success] = "Login Successful"
       redirect_to admin_posts_path
     else
-      # TODO: メールアドレスのハッシュを作成して redis に保存する
+      redis = Redis.new(BookRecorder::Application.config.redis_config)
+      key = Digest::SHA256.hexdigest(session_params[:email])
+      failed_count = redis.get(key)
+      failed_count = failed_count ? failed_count.to_i + 1 : 1
+      redis.set(key, failed_count.to_s, ex: 900, nx: false, xx: false)
+      redis.quit
       user = User.find_by(email: session_params[:email])
       if user&.locked?
-        # TODO: ユーザーがいれば redis を確認する
-        # TODO: redis に保存されている同一メールアドレスのハッシュを確認して、 3 個を超えたらアカウントをロックする
+        flash.now[:danger] = "Your account is locked. Please try in 1 hour"
+      elsif user && failed_count.to_i >= 3
+        user.locked_at = DateTime.now
+        user.save
         flash.now[:danger] = "Your account is locked. Please try in 1 hour"
       else
         flash.now[:danger] = "Invalid email/password combination"

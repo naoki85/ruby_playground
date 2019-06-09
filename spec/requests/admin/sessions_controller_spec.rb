@@ -44,5 +44,34 @@ RSpec.describe Admin::SessionsController, type: :request do
         expect(response.body.include?('Your account is locked')).to eq true
       end
     end
+
+    context 'already failed login twice times' do
+      before do
+        redis = Redis.new(BookRecorder::Application.config.redis_config)
+        key = Digest::SHA256.hexdigest("test@gmail.com")
+        redis.set(key, '2', ex: 60, nx: false, xx: false)
+        redis.quit
+      end
+
+      after do
+        redis = Redis.new(BookRecorder::Application.config.redis_config)
+        key = Digest::SHA256.hexdigest("test@gmail.com")
+        redis.del(key)
+        redis.quit
+      end
+
+      let(:params) { { session: { email: "test@gmail.com", password: "hogehoge" } } }
+      let(:incorrect_params) { { session: { email: "test@gmail.com", password: "fugafuga" } } }
+
+      it 'should login' do
+        post sign_in_path, params: params
+        expect(response.status).to eq 302
+      end
+
+      it 'should not login' do
+        post sign_in_path, params: incorrect_params
+        expect(response.body.include?('Your account is locked')).to eq true
+      end
+    end
   end
 end

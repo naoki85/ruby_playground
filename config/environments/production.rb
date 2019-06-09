@@ -95,4 +95,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.redis_config = { url: 'redis://127.0.0.1:6379' }
 end
