@@ -284,6 +284,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    redis (4.1.2)
     ref (2.0.0)
     ridgepole (0.7.2.beta)
       activerecord (>= 5.0.1, < 6)
@@ -442,6 +443,7 @@ DEPENDENCIES
   pkg-config (~> 1.1.7)
   rack-cors
   rails (~> 5.2.3)
+  redis
   ridgepole (>= 0.7.2.beta)
   rspec-rails
   rubocop

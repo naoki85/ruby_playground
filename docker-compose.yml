@@ -29,12 +29,5 @@ services:
       - ./tmp/share:/share
       - ./tmp/mysql:/var/lib/mysql
     env_file: ./docker/db/.mysql_env
-#  nginx:
-#    build:
-#      context: .
-#      dockerfile: ./docker/nginx/Dockerfile
-#    ports:
-#      - 80:80
-#    volumes:
-#      - ./tmp/share:/share
-#      - ./tmp/mysql:/var/lib/mysql
+  redis:
+    image: redis
