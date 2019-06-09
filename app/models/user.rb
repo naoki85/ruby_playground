@@ -24,7 +24,7 @@ class User < ApplicationRecord
   def self.find_by_email_and_password(email, password)
     return nil unless email.present? && password.present?
     user = find_by(email: email)
-    return nil unless user && correct_password?(user.encrypted_password, password)
+    return nil unless user && !user.locked? && correct_password?(user.encrypted_password, password)
     user.password = password
     user
   end
@@ -65,6 +65,10 @@ class User < ApplicationRecord
   # @return bool
   def from_social?
     provider.present? && uid.present?
+  end
+
+  def locked?
+    locked_at && locked_at + 1.hour > DateTime.now
   end
 
   private

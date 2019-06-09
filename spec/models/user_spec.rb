@@ -62,6 +62,17 @@ RSpec.describe User, type: :model do
     it 'email or password is empty' do
       expect(User.find_by_email_and_password('', '')).to eq nil
     end
+
+    context 'user is locked' do
+      before do
+        create(:user, email: 'test@example.com', password: 'testtest', locked_at: DateTime.now)
+      end
+
+      it 'got nil' do
+        user = User.find_by_email_and_password('test@example.com', 'test')
+        expect(user).to eq nil
+      end
+    end
   end
 
   describe '#find_by_active_token' do
@@ -126,6 +137,19 @@ RSpec.describe User, type: :model do
       user.update_with_image(params)
       expect(User.find(user.id).image_url).to eq test_image_url
       expect(User.find(user.id).username).to eq "Naoki"
+    end
+  end
+
+  describe 'locked?' do
+    it 'should locked when it is locked within one hour' do
+      user.locked_at = DateTime.now - 59.minutes
+      expect(user.locked?).to be_truthy
+    end
+
+    it 'should locked when it is locked before one hour' do
+      expect(user.locked?).to be_falsey
+      user.locked_at = DateTime.now - 1.hour
+      expect(user.locked?).to be_falsey
     end
   end
 end
