@@ -8,16 +8,19 @@ class Admin::SessionsController < Admin::ApplicationController
     user = User.find_by_email_and_password(session_params[:email],
                                            session_params[:password])
     if user&.update_authentication_token!
-      # TODO: locked_at を nil に戻す
       log_in user
       flash[:success] = "Login Successful"
       redirect_to admin_posts_path
     else
       # TODO: メールアドレスのハッシュを作成して redis に保存する
-      # TODO: メールアドレスでユーザーを引く
-      # TODO: ユーザーがいれば redis を確認する
-      # TODO: redis に保存されている同一メールアドレスのハッシュを確認して、 3 個を超えたらアカウントをロックする
-      flash.now[:danger] = "Invalid email/password combination"
+      user = User.find_by(email: session_params[:email])
+      if user&.locked?
+        # TODO: ユーザーがいれば redis を確認する
+        # TODO: redis に保存されている同一メールアドレスのハッシュを確認して、 3 個を超えたらアカウントをロックする
+        flash.now[:danger] = "Your account is locked. Please try in 1 hour"
+      else
+        flash.now[:danger] = "Invalid email/password combination"
+      end
       render 'new'
     end
   end
