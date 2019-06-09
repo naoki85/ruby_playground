@@ -19,7 +19,7 @@ RSpec.describe Admin::SessionsController, type: :request do
 
       it 'redirect to home' do
         user = User.find_by(email: "test@gmail.com")
-        user.locked_at = DateTime.now - 2.hour
+        user.locked_at = DateTime.now - 2.hours
         user.save
 
         post sign_in_path, params: params

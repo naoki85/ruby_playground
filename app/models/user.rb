@@ -94,7 +94,7 @@ class User < ApplicationRecord
   end
 
   def get_image_url(image)
-    return image_url unless image.present?
+    return image_url if image.blank?
     image_file_name = upload_klass.upload(image.tempfile, image.original_filename, {})
     BookRecorder::Application.config.image_base_url + image_file_name
   end
