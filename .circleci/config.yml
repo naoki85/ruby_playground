@@ -16,8 +16,10 @@ jobs:
            DB_HOST: 127.0.0.1
            DB_USERNAME: 'root'
            DB_PASSWORD: ''
+           REDIS_URL: redis://redis:6379
 
        - image: circleci/mysql:5.7
+       - image: redis
 
     working_directory: ~/repo
 

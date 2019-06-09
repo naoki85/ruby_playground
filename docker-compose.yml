@@ -19,6 +19,7 @@ services:
       - db
       - db:database
       - db:mysql
+    env_file: ./docker/web/.web_env
   db:
     build:
       context: .

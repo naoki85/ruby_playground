@@ -45,5 +45,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.cache_store = :null_store
-  config.redis_config = { url: 'redis://redis:6379' }
+  config.redis_config = { url: ENV['REDIS_URL'] }
 end
