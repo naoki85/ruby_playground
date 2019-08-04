@@ -9,5 +9,6 @@ end
 
 every 1.month, :at => '5:00 am' do
   rake "mysql:dump"
-  command "~/certbot-auto renew && sudo systemctl restart nginx"
+  command "sudo /home/naoki_yoneyama/certbot-auto renew && sudo systemctl restart nginx"
 end
+
