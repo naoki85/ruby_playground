@@ -31,16 +31,16 @@ module ApplicationHelper
   # @return [Hash]
   def post_meta_tags(post)
     {
+      title: post.title,
+      description: post.summary,
+      og: {
         title: post.title,
         description: post.summary,
-        og: {
-            title: post.title,
-            description: post.summary,
-            image: BookRecorder::Application.config.image_base_url + post.image_file_name,
-        },
-        twitter: {
-            card: 'summary',
-        }
+        image: BookRecorder::Application.config.image_base_url + post.image_file_name
+      },
+      twitter: {
+        card: 'summary'
+      }
     }
   end
 end

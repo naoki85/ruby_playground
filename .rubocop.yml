@@ -41,6 +41,9 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Enabled: false
 
+Metrics/ClassLength:
+  Max: 105
+
 # 一行の長さ
 Metrics/LineLength:
   Max: 160
@@ -93,7 +96,14 @@ Style/FrozenStringLiteralComment:
 
 Style/GuardClause:
   Exclude:
+    - app/controllers/application_controller.rb
+    - app/controllers/posts_controller.rb
     - app/helpers/sessions_helper.rb
+
+Style/IfUnlessModifier:
+  Exclude:
+    - app/controllers/application_controller.rb
+    - app/controllers/posts_controller.rb
 
 Style/Lambda:
   Enabled: false

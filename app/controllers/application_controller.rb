@@ -114,7 +114,7 @@ class ApplicationController < ActionController::Base
 
   def check_host_name
     if Rails.env.production? && request.host == 'naoki85.me'
-      render template: 'errors/error_404', status: 404, layout: false, content_type: 'text/html'
+      render template: 'errors/error_404', status: :not_found, layout: false, content_type: 'text/html'
     end
   end
 end
