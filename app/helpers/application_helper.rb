@@ -36,7 +36,8 @@ module ApplicationHelper
       og: {
         title: post.title,
         description: post.summary,
-        image: BookRecorder::Application.config.image_base_url + post.image_file_name
+        image: BookRecorder::Application.config.image_base_url + post.image_file_name,
+        url: "#{BookRecorder::Application.config.blog_url}/posts/#{post.id}"
       },
       twitter: {
         card: 'summary'

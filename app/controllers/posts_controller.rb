@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
-    render layout: 'ogp', status: :found, location: "https://blog.naoki85.me/posts/#{@post.id}", content_type: 'text/html'
+    render layout: 'ogp', status: :ok
   end
 
   def check_host_name
