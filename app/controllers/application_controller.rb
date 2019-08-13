@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :check_host_name
+
   concerning :CommonExceptionHandling do
     class Forbidden < ActionController::ActionControllerError; end
     class Locked < ActionController::ActionControllerError; end
@@ -107,6 +109,12 @@ class ApplicationController < ActionController::Base
           end
         end
       end
+    end
+  end
+
+  def check_host_name
+    if Rails.env.production? && request.host == 'naoki85.me'
+      render template: 'errors/error_404', status: 404, layout: false, content_type: 'text/html'
     end
   end
 end

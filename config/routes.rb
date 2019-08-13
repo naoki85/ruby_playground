@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'user_policy' => 'policies#user_policy'
   get 'privacy_policy' => 'policies#privacy_policy'
   get 'health_check' => 'api_application#health_check'
+  resources :posts, only: [:show]
 
   # API
   namespace :v1, format: 'json' do
