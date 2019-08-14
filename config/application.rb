@@ -24,6 +24,7 @@ module BookRecorder
     config.base_url = 'https://admin.naoki85.me'
     config.image_base_url = 'http://d29xhtkvbwm2ne.cloudfront.net/'
     config.blog_url = 'https://blog.naoki85.me'
+    config.ogp_url = 'https://naoki85.me'
 
     # RSpec
     config.generators do |g|
