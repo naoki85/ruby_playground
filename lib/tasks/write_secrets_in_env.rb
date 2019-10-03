@@ -14,6 +14,7 @@ class Tasks::WriteSecretsInEnv
     envstr += "TWITTER_CONSUMER_SECRET=" + key_secrets['twitter_consumer_secret'] + "\n"
     envstr += "TWITTER_ACCESS_TOKEN=" + key_secrets['twitter_access_token'] + "\n"
     envstr += "TWITTER_ACCESS_TOKEN_SECRET=" + key_secrets['twitter_access_token_secret'] + "\n"
+    envstr += "RECOMMENDED_BOOKS_DYNAMODB_TABLE=" + key_secrets['recommended_books_dynamodb_table'] + "\n"
 
     print envstr
   end

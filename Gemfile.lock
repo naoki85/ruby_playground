@@ -71,6 +71,9 @@ GEM
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
+    aws-sdk-dynamodb (1.16.0)
+      aws-sdk-core (~> 3, >= 3.26.0)
+      aws-sigv4 (~> 1.0)
     aws-sdk-kms (1.9.0)
       aws-sdk-core (~> 3, >= 3.26.0)
       aws-sigv4 (~> 1.0)
@@ -413,6 +416,7 @@ PLATFORMS
 DEPENDENCIES
   active_decorator
   asset_sync
+  aws-sdk-dynamodb
   aws-sdk-rails
   aws-sdk-s3
   aws-sdk-secretsmanager
