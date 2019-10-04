@@ -32,10 +32,3 @@ services:
     env_file: ./docker/db/.mysql_env
   redis:
     image: redis
-  dynamodb:
-    image: amazon/dynamodb-local
-    ports:
-      - 3307:8000
-    command: -jar DynamoDBLocal.jar -dbPath /data
-    volumes:
-      - $PWD/docker/dynamodb/data:/data
