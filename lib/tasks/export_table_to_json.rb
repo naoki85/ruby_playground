@@ -8,7 +8,7 @@ class Tasks::ExportTableToJson
     recommended_books.each do |book|
       item = {
           PutRequest: {
-              Id: { N: book.id },
+              Id: { N: book.id.to_s },
               Link: { S: book.link },
               ImageUrl: { S: book.image_url },
               ButtonUrl: { S: book.button_url },
