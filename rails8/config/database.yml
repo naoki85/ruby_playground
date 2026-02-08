@@ -18,15 +18,38 @@ default: &default
   host: <%= ENV.fetch("DB_HOST") { "127.0.0.1" } %>
 
 development:
-  <<: *default
-  database: rails_development
+  primary:
+    <<: *default
+    database: rails_development
+  cache:
+    <<: *default
+    database: rails_cache_development
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    database: rails_queue_development
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    database: rails_cable_development
+    migrations_paths: db/cable_migrate
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: app_test
+  primary:
+    <<: *default
+    database: app_test
+  cache:
+    <<: *default
+    database: app_cache_test
+  queue:
+    <<: *default
+    database: app_queue_test
+  cable:
+    <<: *default
+    database: app_cable_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

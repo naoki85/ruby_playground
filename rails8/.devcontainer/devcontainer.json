@@ -1,0 +1,34 @@
+{
+  "name": "Rails (Docker Compose)",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.devcontainer.yml"
+  ],
+  "service": "web",
+  "workspaceFolder": "/app",
+
+  "shutdownAction": "stopCompose",
+
+  "remoteUser": "root",
+
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": { "label": "Rails", "onAutoForward": "openBrowserOnce" }
+  },
+
+  "postCreateCommand": "bundle install",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp",
+        "ms-azuretools.vscode-docker",
+        "EditorConfig.EditorConfig"
+      ],
+      "settings": {
+        "rubyLsp.bundleGemfile": "Gemfile",
+        "rubyLsp.enableExperimentalFeatures": true
+      }
+    }
+  }
+}
